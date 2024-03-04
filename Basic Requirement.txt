@@ -1,0 +1,10 @@
+Basic Requirement
+
+1. Add Subject in Database
+2. Add Question Under Subjects
+3. Create Exam Time Table
+4. Add Question Under Exam
+5. Add New Student in Database & Provide Login
+6. Student Should Login To System 
+7. Attempt Exam By Students
+8. Show The Result Of Students
