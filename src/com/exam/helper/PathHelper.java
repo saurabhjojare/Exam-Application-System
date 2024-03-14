@@ -6,19 +6,24 @@ import java.nio.file.Path;
 import java.util.Properties;
 
 public class PathHelper {
-    public static String completePath =  "";
+    public static String completePath = "";
     public static Properties properties = new Properties();
 
-    public PathHelper() {
+    static {
+        loadProperties();
+    }
+
+    private static void loadProperties() {
         try {
             Path currentDirectoryPath = FileSystems.getDefault().getPath("");
             String currentDirectoryName = currentDirectoryPath.toAbsolutePath().toString();
-            completePath = currentDirectoryName + "\\src\\resources\\db.properties";
+            completePath = currentDirectoryName + FileSystems.getDefault().getSeparator() + "src"
+                    + FileSystems.getDefault().getSeparator() + "resources" + FileSystems.getDefault().getSeparator()
+                    + "db.properties";
             FileInputStream finf = new FileInputStream(completePath);
             properties.load(finf);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Error In PathHelper " + e);
         }
-       
     }
 }
