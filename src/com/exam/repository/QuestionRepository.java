@@ -1,5 +1,7 @@
 package com.exam.repository;
 
+import java.sql.PreparedStatement;
+
 import com.exam.model.QuestionModel;
 
 public class QuestionRepository extends DBConfig {
@@ -58,6 +60,48 @@ public class QuestionRepository extends DBConfig {
                         stmt.setInt(1, sid);
                         stmt.setInt(2, qid);
                         return stmt.executeUpdate() > 0 ? true : false;
+                    } else if (sid == -1) {
+                        System.out.println("Subject Not Found");
+                        return false;
+                    } else {
+                        System.out.println("Something Wrong");
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean uploadBulkQuestion(String question[], String subName) {
+        try {
+            int qid = this.getQuestionId() + 1;
+            if (qid != 0) {
+                stmt = conn.prepareStatement(
+                        "insert into question (qid, question, op1, op2, op3, op4, answer) values (?,?,?,?,?,?,?)");
+                stmt.setInt(1, qid);
+                stmt.setString(2, question[0]);
+                stmt.setString(3, question[1]);
+                stmt.setString(4, question[2]);
+                stmt.setString(5, question[3]);
+                stmt.setString(6, question[4]);
+                stmt.setInt(7, Integer.parseInt(question[5].trim()));
+                int value = stmt.executeUpdate();
+                if (value > 0) {
+                    int sid = this.getSubjectIdByName(subName);
+                    if (sid != -1) {
+                        PreparedStatement subjectStmt = conn.prepareStatement("insert into subjectquestionjoin (qid, sid) values (?, ?)");
+                        subjectStmt.setInt(1, qid);
+                        subjectStmt.setInt(2, sid);
+                        int result = subjectStmt.executeUpdate();
+                        subjectStmt.close(); // Close the statement after execution
+                        return result > 0;
+
                     } else if (sid == -1) {
                         System.out.println("Subject Not Found");
                         return false;

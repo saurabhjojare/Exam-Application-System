@@ -1,0 +1,5 @@
+What is the default value of the local variables?, a) null, b) 0, c) Depends upon the type of variable, d) Not initialized, 4
+Which of the following is not a keyword in Java?, a) class, b) interface, c) extends, d) friend, 4
+Which package contains the Random class?, a) java.lang, b) java.util, c) java.io, d) java.awt, 2
+What is the range of short data type in Java?, a) -128 to 127, b) -32768 to 32767, c) -2147483648 to 2147483647, d) None of the mentioned, 2
+What is the return type of the main method in Java?, a) void, b) int, c) float, d) double, 1

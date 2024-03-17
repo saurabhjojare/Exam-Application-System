@@ -8,6 +8,7 @@ import java.util.Properties;
 public class PathHelper {
     public static String completePath = "";
     public static Properties properties = new Properties();
+    public static final String filePath = "C:\\Users\\Saurabh\\Downloads\\Tech Hub\\Java\\Project\\Exam-Application-System\\src\\com\\exam\\csv\\QuestionBank";
 
     static {
         loadProperties();

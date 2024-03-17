@@ -2,6 +2,8 @@ package com.exam.service;
 
 import com.exam.model.SubjectModel;
 import com.exam.repository.SubjectRepository;
+import java.io.*;
+import java.util.*;
 
 public class SubjectService {
     SubjectRepository subRepo = new SubjectRepository();
@@ -17,5 +19,10 @@ public class SubjectService {
                 return 0;
             }
         }
+    } 
+
+    public List<String> getAllSubjects() {
+        return this.subRepo.getAllSubjects();
     }
+
 }

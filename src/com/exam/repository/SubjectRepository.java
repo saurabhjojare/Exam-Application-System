@@ -1,9 +1,10 @@
 package com.exam.repository;
 
 import com.exam.model.SubjectModel;
+import java.util.*;
 
 public class SubjectRepository extends DBConfig {
-
+    List<String> list = new ArrayList<>();
     public boolean isAddSubject(SubjectModel model) {
         try {
             stmt = conn.prepareStatement("insert into subject values('0',?)");
@@ -31,4 +32,18 @@ public class SubjectRepository extends DBConfig {
             return false;
         }
     }
+
+    public List<String> getAllSubjects() {
+        try {
+            stmt = conn.prepareStatement("select subjectname from subject");
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                list.add(rs.getString(1));
+            }
+            return list.size() > 0 ? list : null;
+        } catch (Exception e) {
+            System.out.println("Error is "+e);
+            return null; 
+        }
+    } 
 }
