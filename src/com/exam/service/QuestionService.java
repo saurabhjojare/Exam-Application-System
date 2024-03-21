@@ -23,15 +23,14 @@ public class QuestionService {
                 f.mkdir();
             }
             List<String> subList = ss.getAllSubjects();
-            if (subList!=null) {
-                for(String subName:subList) {
-                    f = new File(path +"\\"+subName+".csv");
+            if (subList != null) {
+                for (String subName : subList) {
+                    f = new File(path + "\\" + subName + ".csv");
                     if (!f.exists()) {
                         f.createNewFile();
-                    } 
+                    }
                 }
-            } else 
-            {
+            } else {
                 System.out.println("Subject Not Found");
             }
         } catch (Exception e) {
@@ -43,27 +42,28 @@ public class QuestionService {
     public boolean uploadBulkQuestion(String subName) {
         boolean b = this.createFiles();
         if (b) {
-            File f = new File("C:\\Users\\Saurabh\\Downloads\\Tech Hub\\Java\\Project\\Exam-Application-System\\src\\com\\exam\\csv\\QuestionBank");
-            File[]fileList = f.listFiles();
+            File f = new File(
+                    "C:\\Users\\Saurabh\\Downloads\\Tech Hub\\Java\\Project\\Exam-Application-System\\src\\com\\exam\\csv\\QuestionBank");
+            File[] fileList = f.listFiles();
             boolean flag = false;
-            for(File file:fileList) {
+            for (File file : fileList) {
                 if (file.isFile()) {
                     int index = file.toString().indexOf(subName);
-                    if(index != -1) {
+                    if (index != -1) {
                         flag = true;
                         break;
                     }
                 }
-            } 
+            }
             if (flag) {
                 try {
-                    FileReader fr = new FileReader(PathHelper.filePath+"\\"+subName+".csv");
+                    FileReader fr = new FileReader(PathHelper.filePath + "\\" + subName + ".csv");
                     BufferedReader br = new BufferedReader(fr);
                     String question;
                     flag = false;
-                    while ((question = br.readLine())!=null) {
-                       String qwithop[] = question.split(",");
-                       flag = qRepo.uploadBulkQuestion(qwithop, subName);
+                    while ((question = br.readLine()) != null) {
+                        String qwithop[] = question.split(",");
+                        flag = qRepo.uploadBulkQuestion(qwithop, subName);
                     }
                 } catch (Exception e) {
                     System.out.println(e);

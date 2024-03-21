@@ -4,9 +4,11 @@ import java.sql.PreparedStatement;
 
 import com.exam.model.QuestionModel;
 
+// Repository class for managing questions in the database
 public class QuestionRepository extends DBConfig {
-    private int questionId;
+    private int questionId; // Field to store the current question ID
 
+    // Method to get the latest question ID from the database
     private int getQuestionId() {
         try {
             stmt = conn.prepareStatement("Select max(qid) from question");
@@ -17,28 +19,30 @@ public class QuestionRepository extends DBConfig {
             }
         } catch (Exception e) {
             System.out.println(e);
-            return 0;
+            return 0; // Return 0 if an exception occurs
         }
-        return questionId;
+        return questionId; // Return the retrieved question ID
     }
 
+    // Method to retrieve subject ID by subject name from the database
     public int getSubjectIdByName(String name) {
         try {
             stmt = conn.prepareStatement("select sid from subject where subjectname = ?");
             stmt.setString(1, name);
             rs = stmt.executeQuery();
             if (rs.next()) {
-                return rs.getInt(1);
+                return rs.getInt(1); // Return the retrieved subject ID
             } else {
-                return -1;
+                return -1; // Return -1 if subject is not found
             }
 
         } catch (Exception e) {
             System.out.println(e);
-            return 0;
+            return 0; // Return 0 if an exception occurs
         }
     }
 
+    // Method to add a single question to the database
     public boolean isAddQuestion(QuestionModel qModel, String subName) {
         try {
             int qid = this.getQuestionId() + 1;
@@ -59,12 +63,12 @@ public class QuestionRepository extends DBConfig {
                         stmt = conn.prepareStatement("insert into subjectquestionjoin (qid, sid) values (?, ?)");
                         stmt.setInt(1, sid);
                         stmt.setInt(2, qid);
-                        return stmt.executeUpdate() > 0 ? true : false;
+                        return stmt.executeUpdate() > 0 ? true : false; // Return true if insertion is successful
                     } else if (sid == -1) {
-                        System.out.println("Subject Not Found");
+                        System.out.println("Subject Not Found"); // Print error message if subject is not found
                         return false;
                     } else {
-                        System.out.println("Something Wrong");
+                        System.out.println("Something Wrong"); // Print error message if something goes wrong
                         return false;
                     }
                 } else {
@@ -74,10 +78,11 @@ public class QuestionRepository extends DBConfig {
                 return false;
             }
         } catch (Exception e) {
-            return false;
+            return false; // Return false if an exception occurs
         }
     }
 
+    // Method to upload bulk questions to the database
     public boolean uploadBulkQuestion(String question[], String subName) {
         try {
             int qid = this.getQuestionId() + 1;
@@ -95,18 +100,18 @@ public class QuestionRepository extends DBConfig {
                 if (value > 0) {
                     int sid = this.getSubjectIdByName(subName);
                     if (sid != -1) {
-                        PreparedStatement subjectStmt = conn.prepareStatement("insert into subjectquestionjoin (qid, sid) values (?, ?)");
+                        PreparedStatement subjectStmt = conn
+                                .prepareStatement("insert into subjectquestionjoin (qid, sid) values (?, ?)");
                         subjectStmt.setInt(1, qid);
                         subjectStmt.setInt(2, sid);
                         int result = subjectStmt.executeUpdate();
                         subjectStmt.close(); // Close the statement after execution
-                        return result > 0;
-
+                        return result > 0; // Return true if insertion is successful
                     } else if (sid == -1) {
-                        System.out.println("Subject Not Found");
+                        System.out.println("Subject Not Found"); // Print error message if subject is not found
                         return false;
                     } else {
-                        System.out.println("Something Wrong");
+                        System.out.println("Something Wrong"); // Print error message if something goes wrong
                         return false;
                     }
                 } else {
@@ -116,7 +121,7 @@ public class QuestionRepository extends DBConfig {
                 return false;
             }
         } catch (Exception e) {
-            return false;
+            return false; // Return false if an exception occurs
         }
     }
 }
