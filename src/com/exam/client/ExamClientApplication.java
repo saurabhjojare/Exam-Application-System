@@ -63,6 +63,16 @@ public class ExamClientApplication {
                     System.out.println("Enter Option 1");
                     String op1 = sc.nextLine();
 
+                    System.out.println("Enter Option 2");
+                    String op2 = sc.nextLine();
+
+                    System.out.println("Enter Option 3");
+                    String op3 = sc.nextLine();
+
+                    System.out.println("Enter Option 4");
+                    String op4 = sc.nextLine();
+
+
                     // Similar inputs for options 2, 3, and 4...
 
                     System.out.println("Enter Option As Answer");
