@@ -65,10 +65,11 @@ public class QuestionService {
                         String qwithop[] = question.split(",");
                         flag = qRepo.uploadBulkQuestion(qwithop, subName);
                     }
+                    br.close(); 
                 } catch (Exception e) {
                     System.out.println(e);
                     e.printStackTrace();
-                }
+                } 
             } else {
                 System.out.println("Subject File Not Found");
             }
@@ -77,4 +78,5 @@ public class QuestionService {
             return false;
         }
     }
+  
 }

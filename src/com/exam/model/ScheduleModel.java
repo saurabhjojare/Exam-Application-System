@@ -2,7 +2,6 @@ package com.exam.model;
 
 import java.util.Date;
 
-// Model class for representing exam schedules
 public class ScheduleModel {
     private int schid; // Unique identifier for the schedule
     private int examid; // Identifier for the exam associated with this schedule
