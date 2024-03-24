@@ -101,58 +101,15 @@ public class ExamRepository extends DBConfig {
             //int subId = qRepo.getSubjectIdByName(subName);
             //ScheduleModel sModel = model.getScheduleModel();
 
-            examDate = sModel.getExamDate().toString();
-            String d[] = examDate.split(",");
+            examDate = sModel.getExamDate();
+            String[] dateSplit = examDate.split("/");
+
+            int year = Integer.parseInt(dateSplit[0]);
+            int month = Integer.parseInt(dateSplit[1]) - 1; // Subtracting 1 to match Java's month indexing (starts from 0)
+            int day = Integer.parseInt(dateSplit[2]);
     
-            String[] dateSplit = d[0].split("-");
-
-            // System.out.println("Printing "+dateSplit[0] + "\t" + dateSplit[1] + "\t" + dateSplit[2]);
-            int months[] = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
-            int m = 1;
-            switch (dateSplit[1]) { // Mapping month string to integer
-                case "Jan":
-                    m = 1;
-                    break;
-                case "Feb":
-                    m = 2;
-                    break;
-                case "Mar":
-                    m = 3;
-                    break;
-                case "Apr":
-                    m = 4;
-                    break;
-                case "May":
-                    m = 5;
-                    break;
-                case "Jun":
-                    m = 6;
-                    break;
-                case "Jul":
-                    m = 7;
-                    break;
-                case "Aug":
-                    m = 8;
-                    break;
-                case "Sep":
-                    m = 9;
-                    break;
-                case "Oct":
-                    m = 10;
-                    break;
-                case "Nov":
-                    m = 11;
-                    break;
-                case "Dec":
-                    m = 12;
-                    break;
-                default:
-                    System.out.println("Wrong Input Date");
-                    break;
-            }
-            // String newYear = dateSplit[2].substring(2, dateSplit[2].length());
-
-           sqlDate = new Date(Integer.parseInt(dateSplit[2]) - 1900, m - 1, Integer.parseInt(dateSplit[0]));
+            sqlDate = new Date(year - 1900, month, day);
+    
 
             System.out.println("SQL Date "+sqlDate);
 

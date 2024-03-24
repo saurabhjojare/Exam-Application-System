@@ -20,6 +20,7 @@ public class ExamClientApplication {
         SubjectService sv = new SubjectService();
         QuestionService qService = new QuestionService();
         ExamService examService = new ExamService();
+        
 
         // Main menu loop
         do {
@@ -29,6 +30,7 @@ public class ExamClientApplication {
             System.out.println("3: Import Bulk Questions ");
             System.out.println("4: Create New Exam ");
             System.out.println("5: Create Exam Schedule ");
+            
             // System.out.println("6: Attempt Exam");
             // System.out.println("7: Show The Result");
 
@@ -147,8 +149,8 @@ public class ExamClientApplication {
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
                         // Format the date using the SimpleDateFormat object
-                        String formattedDate = sdf.format(d1);                       
-
+                        String formattedDate = sdf.format(d1);
+                        
                         System.out.println("Enter Start Time");
                         String startTime = sc.nextLine();
                         
