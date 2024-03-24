@@ -1,5 +1,6 @@
 package com.exam.client;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -8,6 +9,7 @@ import com.exam.model.ExamModel;
 import com.exam.model.QuestionModel;
 import com.exam.model.ScheduleModel;
 import com.exam.model.SubjectModel;
+import com.exam.repository.ExamRepository;
 import com.exam.service.ExamService;
 import com.exam.service.QuestionService;
 import com.exam.service.SubjectService;
@@ -72,7 +74,6 @@ public class ExamClientApplication {
                     System.out.println("Enter Option 4");
                     String op4 = sc.nextLine();
 
-
                     // Similar inputs for options 2, 3, and 4...
 
                     System.out.println("Enter Option As Answer");
@@ -135,26 +136,37 @@ public class ExamClientApplication {
                     System.out.println("Enter Exam Name For Schedule");
                     examName = sc.nextLine();
                     ExamModel eModel = examService.getExamIdByName(examName);
+                    System.out.println(eModel.getName());
 
                     if (eModel != null) {
                         System.out.println("Enter Exam Date (dd-MMMM-yyyy)");
-                        String dateFormat = sc.nextLine(); //
+                        String dateFormat = sc.nextLine();
 
                         // Parse date
                         Date d1 = new Date(dateFormat);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+
+                        // Format the date using the SimpleDateFormat object
+                        String formattedDate = sdf.format(d1);                       
 
                         System.out.println("Enter Start Time");
                         String startTime = sc.nextLine();
+                        
 
                         System.out.println("Enter End Time");
                         String endTime = sc.nextLine();
+                        
+                        System.out.println("ID is "+eModel.getId());
+                        System.out.println("Date is "+formattedDate);
+                        System.out.println("Start Time is "+startTime);
+                        System.out.println("End Time is "+endTime);
+                        
 
                         ScheduleModel sModel = new ScheduleModel();
-                        System.out.println(d1);
-                        sModel.setExamDate(d1);
+                        sModel.setExamid(eModel.getId());
+                        sModel.setExamDate(formattedDate);
                         sModel.setStartTime(startTime);
                         sModel.setEndTime(endTime);
-                        sModel.setExamid(eModel.getId());
                         eModel.setScheduleModel(sModel);
                         System.out.println("Enter Subject Name");
                         subName = sc.nextLine();

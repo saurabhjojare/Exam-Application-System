@@ -35,23 +35,41 @@ public class ExamService {
 
     public boolean isSetSchedule(ExamModel model, String subName) {
         Date d = new Date();
+        // Get the current date
+        LocalDate currentDate = LocalDate.now();
+
         String[] s = d.toLocaleString().split(",");
-        String dsplit[] = s[0].split("-");
+        String dsplit[] = currentDate.toString().split("-");
+
+        //System.out.println("DSplit " + Arrays.toString(dsplit));
+
         ScheduleModel sModel = model.getScheduleModel();
 
-        Date userDate = sModel.getExamDate();
-        String userDateArr[] = userDate.toLocaleString().split(",");
+        String userDate = sModel.getExamDate();
+        System.out.println("User Date is " + userDate);
+        String userDateArr[] = userDate.split("/");
+        //System.out.println("DateArr Year: " + userDateArr[0] + ", DateArr Month: " + userDateArr[1] + ", DateArr Day: "+ userDateArr[2]);
+
         String userDates[] = userDateArr[0].split("-");
-        if (Integer.parseInt(userDates[2]) >= Integer.parseInt(dsplit[2]) && userDates[1].equals(dsplit[1])) {
-            if (Integer.parseInt(userDates[0]) >= Integer.parseInt(dsplit[0])) {
-                System.out.println("You Can Schedule Exam");
-                return examRepo.isSetSchedule(model, subName) ? true : false;
-            } else {
-                System.out.println("Enter Valid Date");
-            }
+        //System.out.println("Year: " + userDates[0] + ", Month: " + userDates[1] + ", Day: " + userDates[2]);
+
+        int currentYear = Integer.parseInt(dsplit[0]);
+        int currentMonth = Integer.parseInt(dsplit[1]);
+        int currentDay = Integer.parseInt(dsplit[2]);
+
+        int examYear = Integer.parseInt(userDateArr[0]);
+        int examMonth = Integer.parseInt(userDateArr[1]);
+        int examDay = Integer.parseInt(userDateArr[2]);
+
+        if (examYear > currentYear ||
+                (examYear == currentYear && examMonth > currentMonth) ||
+                (examYear == currentYear && examMonth == currentMonth && examDay > currentDay)) {
+            System.out.println("You Can Schedule Exam");
+            return examRepo.isSetSchedule(model, subName) ? true : false;
         } else {
-            System.out.println("Previous Year Or Month");
+            System.out.println("Cannot Schedule Exam");
         }
+
         return false;
     }
 

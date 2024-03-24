@@ -7,6 +7,9 @@ import java.util.List;
 
 import com.exam.model.ExamModel;
 import com.exam.model.ScheduleModel;
+import java.text.SimpleDateFormat;
+
+
 
 public class ExamRepository extends DBConfig {
 
@@ -68,14 +71,16 @@ public class ExamRepository extends DBConfig {
             stmt = conn.prepareStatement("select * from exam where examname = '" + name + "'");
             rs = stmt.executeQuery();
             ExamModel model = null;
+            System.out.println("Name From ExamRepo " + name);
+
             if (rs.next()) {
                 model = new ExamModel();
-                if (rs.next()) {
+                
                     model.setId(rs.getInt(1));
                     model.setName(rs.getString(2));
                     model.setTotalMarks(rs.getInt(3));
                     model.setPassingMarks(rs.getInt(4));
-                }
+                
                 return model != null ? model : null;
             }
         } catch (Exception e) {
@@ -85,77 +90,90 @@ public class ExamRepository extends DBConfig {
         return null;
     }
 
+
     // Method to set schedule for an exam
-    public boolean isSetSchedule(ExamModel model, String subName) {
-
+    public boolean isSetSchedule(ExamModel model, String subName) {    
+       String examDate = null;
+       Date sqlDate = null;
+       ScheduleModel sModel = model.getScheduleModel();
+       int subId = qRepo.getSubjectIdByName(subName);
         try {
-            int subId = qRepo.getSubjectIdByName(subName);
-            ScheduleModel sModel = model.getScheduleModel();
+            //int subId = qRepo.getSubjectIdByName(subName);
+            //ScheduleModel sModel = model.getScheduleModel();
 
-            String examDate = sModel.getExamDate().toLocaleString();
+            examDate = sModel.getExamDate().toString();
             String d[] = examDate.split(",");
+    
             String[] dateSplit = d[0].split("-");
-            System.out.println(dateSplit[0] + "\t" + dateSplit[1] + "\t" + dateSplit[2]);
+
+            // System.out.println("Printing "+dateSplit[0] + "\t" + dateSplit[1] + "\t" + dateSplit[2]);
             int months[] = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
-            int m = 0;
+            int m = 1;
             switch (dateSplit[1]) { // Mapping month string to integer
                 case "Jan":
-                    m = 0;
-                    break;
-                case "Feb":
                     m = 1;
                     break;
-                case "Mar":
+                case "Feb":
                     m = 2;
                     break;
-                case "Apr":
+                case "Mar":
                     m = 3;
                     break;
-                case "May":
+                case "Apr":
                     m = 4;
                     break;
-                case "Jun":
+                case "May":
                     m = 5;
                     break;
-                case "Jul":
+                case "Jun":
                     m = 6;
                     break;
-                case "Aug":
+                case "Jul":
                     m = 7;
                     break;
-                case "Sep":
+                case "Aug":
                     m = 8;
                     break;
-                case "Oct":
+                case "Sep":
                     m = 9;
                     break;
-                case "Nov":
+                case "Oct":
                     m = 10;
                     break;
-                case "Dec":
+                case "Nov":
                     m = 11;
+                    break;
+                case "Dec":
+                    m = 12;
                     break;
                 default:
                     System.out.println("Wrong Input Date");
                     break;
             }
-            String newYear = dateSplit[2].substring(2, dateSplit[2].length());
-            Date sqlDate = new Date((Integer.parseInt(newYear) + 100), m, Integer.parseInt(dateSplit[0]));
+            // String newYear = dateSplit[2].substring(2, dateSplit[2].length());
 
-            stmt = conn.prepareStatement(
-                    "insert into schedule (examid, date, starttime, endtime, sid) values (?, ?, ?, ?, ?)");
+           sqlDate = new Date(Integer.parseInt(dateSplit[2]) - 1900, m - 1, Integer.parseInt(dateSplit[0]));
 
-            stmt.setInt(1, model.getId()); // Setting exam ID
-            stmt.setDate(2, sqlDate); // Setting exam date
-            stmt.setString(3, sModel.startTime); // Setting start time
-            stmt.setString(4, sModel.endTime); // Setting end time
-            stmt.setInt(5, subId); // Setting subject ID
+            System.out.println("SQL Date "+sqlDate);
 
+            stmt = conn.prepareStatement("INSERT INTO schedule (examid, date, starttime, endtime, sid) VALUES (?, ?, ?, ?, ?)");
+
+                    stmt.setInt(1, model.getId()); // Setting exam ID
+                    stmt.setDate(2, sqlDate); // Setting exam date
+                    stmt.setString(3, sModel.startTime); // Setting start time
+                    stmt.setString(4, sModel.endTime); // Setting end time
+                    stmt.setInt(5, subId); // Setting subject ID
+                    
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0; // Returns true if insertion successful, else false
 
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("isSetSchedule Error " + e);
+            System.out.println("ID Repo "+ model.getId());    
+            System.out.println("SQL Date Repo "+sqlDate);
+            System.out.println("sModel.startTime: " + sModel.startTime);
+            System.out.println("sModel.startTime: " + sModel.endTime);
+            System.out.println("Subject ID "+subId);
             return false;
         }
     }

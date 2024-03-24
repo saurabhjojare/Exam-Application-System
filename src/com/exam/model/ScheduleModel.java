@@ -5,7 +5,7 @@ import java.util.Date;
 public class ScheduleModel {
     private int schid; // Unique identifier for the schedule
     private int examid; // Identifier for the exam associated with this schedule
-    private Date examDate; // Date of the exam
+    private String examDate; // Date of the exam
     public String startTime; // Start time of the exam
     public String endTime; // End time of the exam
 
@@ -15,7 +15,7 @@ public class ScheduleModel {
     }
 
     // Parameterized constructor
-    public ScheduleModel(int schid, Date examDate, String startTime, String endTime, int examid) {
+    public ScheduleModel(int schid, String examDate, String startTime, String endTime, int examid) {
         this.examDate = examDate;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -43,13 +43,13 @@ public class ScheduleModel {
     }
 
     // Getter method for examDate
-    public Date getExamDate() {
+    public String getExamDate() {
         return examDate;
     }
 
     // Setter method for examDate
-    public void setExamDate(Date examDate) {
-        this.examDate = examDate;
+    public void setExamDate(String d1) {
+        this.examDate = d1;
     }
 
     // Getter method for startTime
