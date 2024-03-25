@@ -1,12 +1,17 @@
 package com.exam.repository;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 //import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.exam.model.ExamModel;
 import com.exam.model.ScheduleModel;
+import com.exam.model.StudentModel;
+
 import java.text.SimpleDateFormat;
 
 
@@ -134,4 +139,47 @@ public class ExamRepository extends DBConfig {
             return false;
         }
     }
+
+    // Method to check login 
+
+    public boolean checkUsernameAndPassword(String username, String password) {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        boolean userExists = false;
+
+        try {
+            // Prepare and execute the SQL query
+            stmt = conn.prepareStatement("SELECT * FROM student WHERE username=? AND password=?");
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            rs = stmt.executeQuery();
+
+            // Check if a record with the provided username and password exists
+            if (rs.next()) {
+                userExists = true;
+                System.out.println("Login successful!");
+            } else {
+                System.out.println("Invalid username or password.");
+            }
+        } catch (SQLException e) {
+            // Handle any SQL exceptions
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            // Close the PreparedStatement and ResultSet
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error closing resources: " + e.getMessage());
+            }
+        }
+
+        return userExists;
+    }
+
+
 }

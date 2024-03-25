@@ -8,6 +8,7 @@ import java.util.Scanner;
 import com.exam.model.ExamModel;
 import com.exam.model.QuestionModel;
 import com.exam.model.ScheduleModel;
+import com.exam.model.StudentModel;
 import com.exam.model.SubjectModel;
 import com.exam.repository.ExamRepository;
 import com.exam.service.ExamService;
@@ -25,14 +26,15 @@ public class ExamClientApplication {
         // Main menu loop
         do {
             // Display menu options
-            System.out.println("1: Register New Subject ");
-            System.out.println("2: Create New Question ");
+            System.out.println("1: Register Subject ");
+            System.out.println("2: Create Question ");
             System.out.println("3: Import Bulk Questions ");
             System.out.println("4: Create New Exam ");
             System.out.println("5: Create Exam Schedule ");
-            
-            // System.out.println("6: Attempt Exam");
-            // System.out.println("7: Show The Result");
+            System.out.println("6. Student Login");
+            System.out.println("7. Register Student");
+            // System.out.println("Attempt Exam");
+            // System.out.println("Show The Result");
 
             System.out.print("Enter Your Choice ");
             Scanner sc = new Scanner(System.in);
@@ -179,11 +181,38 @@ public class ExamClientApplication {
                         } else {
                             System.out.println("Not Added Exam");
                         }
-
-                    } else {
-                        System.out.println("Enter Correct Exam");
-                    }
+                    } 
                     break;
+                case 6: 
+                ExamRepository examRepo = new ExamRepository();
+                sc.nextLine();
+                System.out.println("Enter Username");
+                String username = sc.nextLine();
+
+                System.out.println("Enter Password");
+                String password = sc.nextLine();
+
+                // Creating a StudentModel object with the entered username and password
+                StudentModel studentModel = new StudentModel();
+                studentModel.setUsername(username);
+                studentModel.setPassword(password);
+
+                // Call the isUserPresent method from ExamService
+                result = examService.isUserPresent(studentModel);
+                
+                if (result == 1) {
+                    System.out.println("User exists!");
+                    // You may want to perform further actions here for a successful login
+                } else {
+                    System.out.println("User does not exist or invalid credentials!");
+                    // You may want to handle this case differently
+                }
+
+                break;
+
+                case 7:
+
+                break;
 
                 default:
                     System.out.println("Wrong Choice");

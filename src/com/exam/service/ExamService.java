@@ -3,6 +3,7 @@ package com.exam.service;
 import com.exam.repository.ExamRepository;
 import com.exam.model.ExamModel;
 import com.exam.model.ScheduleModel;
+import com.exam.model.StudentModel;
 
 import java.util.*;
 import java.text.DateFormatSymbols;
@@ -72,5 +73,14 @@ public class ExamService {
 
         return false;
     }
+
+    public int isUserPresent(StudentModel model) {
+        if (examRepo.checkUsernameAndPassword(model.getUsername(), model.getPassword())) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
 
 }
