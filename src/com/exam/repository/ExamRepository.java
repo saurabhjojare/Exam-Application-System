@@ -68,6 +68,37 @@ public class ExamRepository extends DBConfig {
         }
     }
 
+    public List<ScheduleModel> getExamSchedule(int examId) throws SQLException {
+        List<ScheduleModel> listSchedules = new ArrayList<>();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = conn.prepareStatement("SELECT * FROM schedule WHERE examid = ?");
+            stmt.setInt(1, examId);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                ScheduleModel model = new ScheduleModel();
+                model.setSchid(rs.getInt("schid")); 
+                model.setExamid(rs.getInt("examid")); 
+                model.setExamDate(rs.getString("date")); 
+                model.setStartTime(rs.getString("starttime")); 
+                model.setEndTime(rs.getString("endtime")); 
+                model.setSid(rs.getInt("sid")); 
+                listSchedules.add(model);
+            }
+        } finally {
+            // Close ResultSet and PreparedStatement in a finally block
+            if (rs != null) {
+                rs.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+        return listSchedules;
+    }
+
+
     // Method to get exam by name
     public ExamModel getExamIdByName(String name) {
         try {
@@ -150,7 +181,7 @@ public class ExamRepository extends DBConfig {
             stmt = conn.prepareStatement("SELECT * FROM student WHERE username=? AND password =?");
             stmt.setString(1, username);
             stmt.setString(2, password);
-           
+
             rs = stmt.executeQuery();
 
             // Check if a record with the provided username and password exists
@@ -188,7 +219,6 @@ public class ExamRepository extends DBConfig {
         try {
             stmt = conn.prepareStatement("Select max(stid) as max_stid from student");
             rs = stmt.executeQuery();
-            
 
             if (rs.next()) {
                 int maxStid = rs.getInt("max_stid");

@@ -8,6 +8,7 @@ public class ScheduleModel {
     private String examDate; // Date of the exam
     public String startTime; // Start time of the exam
     public String endTime; // End time of the exam
+    public int sid; 
 
     // Default constructor
     public ScheduleModel() {
@@ -16,6 +17,14 @@ public class ScheduleModel {
 
     // Parameterized constructor
     public ScheduleModel(int schid, String examDate, String startTime, String endTime, int examid) {
+        this.examDate = examDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.examid = examid;
+    }
+
+    public ScheduleModel(int schid, String examDate, String startTime, String endTime, int examid, int sid) {
+        this.sid = sid;
         this.examDate = examDate;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -71,4 +80,14 @@ public class ScheduleModel {
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
+
+    
+    public int getSid() {
+        return sid;
+    }
+
+    public void setSid(int sid) {
+        this.sid = sid;
+    }
+
 }

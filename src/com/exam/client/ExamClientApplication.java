@@ -1,5 +1,6 @@
 package com.exam.client;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,7 @@ import com.exam.model.ScheduleModel;
 import com.exam.model.StudentModel;
 import com.exam.model.SubjectModel;
 import com.exam.repository.ExamRepository;
+import com.exam.repository.QuestionRepository;
 import com.exam.service.ExamService;
 import com.exam.service.QuestionService;
 import com.exam.service.SubjectService;
@@ -31,7 +33,7 @@ public class ExamClientApplication {
             System.out.println("4: Create New Exam ");
             System.out.println("5: Create Exam Schedule ");
             System.out.println("6. Student Login");
-            // System.out.println("Attempt Exam");
+            System.out.println("7. Attempt Exam");
             // System.out.println("Show The Result");
 
             System.out.print("Enter Your Choice ");
@@ -231,6 +233,97 @@ public class ExamClientApplication {
                             System.out.println("Okay");
                         }
 
+                    }
+
+                    break;
+
+                case 7:
+                    sc.nextLine();
+                    ExamRepository examRepository = new ExamRepository();
+                    // Listing Exam
+                    List<ExamModel> qlist = examService.getAllExam();
+                    System.out.println("List Of Exams \nSelect Exam For Schedule\n");
+                    for (ExamModel m : qlist) {
+                        System.out.println(String.format("%-5s %-12s  %-5s  %s", m.getId(), m.getName(),
+                                m.getTotalMarks(), m.getPassingMarks()));
+                    }
+                    System.out.println();
+
+                    System.out.println("Enter Exam ID For Schedule");
+                    examName = sc.nextLine();
+
+                    eModel = examService.getExamIdByName(examName);
+                    System.out.println("Exam ID " + examName);
+
+                    int selectedExamId = Integer.parseInt(examName);
+                    System.out.println("Selected Exam " + selectedExamId);
+
+                    boolean validInput = false;
+
+                    // Display the schedule for the selected exam
+                    try {
+                        List<ScheduleModel> sModel = examRepository.getExamSchedule(selectedExamId);
+                        System.out.println("Exam Schedule:");
+                        for (ScheduleModel s : sModel) {
+                            System.out.println();
+                            System.out.println(String.format(
+                                    "Schedule ID: %-5s  ExamID: %-5s  Subject ID: %-5s  Start Time: %-12s End Time: %-12s Exam Date: %s",
+                                    s.getSchid(), s.getExamid(), s.getSid(), s.getStartTime(), s.getEndTime(),
+                                    s.getExamDate()));
+                            System.out.println();
+
+                        }
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                    System.out.println("Do You Want To Attempt Exam? Y or N");
+                    String y = sc.nextLine();
+                    if (y.equalsIgnoreCase("y")) {
+                        QuestionRepository questionRepository = new QuestionRepository();
+                        String subjectId = "" + selectedExamId;
+                        System.out.println(subjectId);
+
+                        List<QuestionModel> questionsRepo = questionRepository.getQuestionsBySubjectId(subjectId);
+
+                        totalMarks = 0; // Variable to store the total marks
+
+                        if (questionsRepo.isEmpty()) {
+                            System.out.println("No questions found for the provided subject ID.");
+                        } else {
+                            System.out.println("Questions for Subject ID " + subjectId + ":\n");
+                            for (QuestionModel questionModel : questionsRepo) {
+                                System.out.println("Question: " + questionModel.getName());
+                                System.out.println("Option 1: " + questionModel.getOp1());
+                                System.out.println("Option 2: " + questionModel.getOp2());
+                                System.out.println("Option 3: " + questionModel.getOp3());
+                                System.out.println("Option 4: " + questionModel.getOp4());
+
+                                // Prompt the user for input
+                                System.out.println("Enter your answer (1, 2, 3, or 4): ");
+                                String userAnswerString = sc.nextLine();
+
+                                // Convert user's answer to int
+                                int userAnswer = Integer.parseInt(userAnswerString);
+
+                                // Compare user's answer with the correct answer
+                                if (userAnswer == questionModel.getAnswer()) {
+                                    System.out.println("Correct!");
+                                    totalMarks++; // Increment total marks for correct answer
+
+                                } else {
+                                    System.out
+                                            .println("Incorrect. The correct answer is: " + questionModel.getAnswer());
+                                }
+
+                                System.out.println(); // Add a new line for spacing
+                            }
+                        }
+                        System.out.println("Total Marks: " + totalMarks);
+
+                    } else {
+                        System.out.println("You Press N");
                     }
 
                     break;

@@ -78,5 +78,12 @@ public class QuestionService {
             return false;
         }
     }
+
+    public List<QuestionModel> getQuestionsBySubjectId(String subjectId) {
+        // You can include additional logic here if needed
+        return qRepo.getQuestionsBySubjectId(subjectId);
+    }
+    
+
   
 }

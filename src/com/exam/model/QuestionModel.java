@@ -24,6 +24,16 @@ public class QuestionModel {
         this.answer = answer;
     }
 
+    public QuestionModel(int id, String name, String op1, String op2, String op3, String op4, int answer) {
+        this.id = id;
+        this.name = name;
+        this.op1 = op1;
+        this.op2 = op2;
+        this.op3 = op3;
+        this.op4 = op4;
+        this.answer = answer;
+    }
+
     // Getter method for retrieving the question ID
     public int getId() {
         return id;
@@ -92,5 +102,19 @@ public class QuestionModel {
     // Setter method for setting the correct answer option number
     public void setAnswer(int answer) {
         this.answer = answer;
+    }
+
+    // toString method
+    @Override
+    public String toString() {
+        return "Question{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", op1='" + op1 + '\'' +
+                ", op2='" + op2 + '\'' +
+                ", op3='" + op3 + '\'' +
+                ", op4='" + op4 + '\'' +
+                ", answer=" + answer +
+                '}';
     }
 }
