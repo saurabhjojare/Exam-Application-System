@@ -82,5 +82,14 @@ public class ExamService {
         }
     }
 
+    public boolean addUser(StudentModel model) {
+        // Check if the user already exists
+        if (isUserPresent(model) == 1) {
+            return false;
+        } else {
+            // Call the method in ExamRepository to add the new user
+            return examRepo.addUser(model);
+        }
+    }
 
 }

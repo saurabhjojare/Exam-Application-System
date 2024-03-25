@@ -21,7 +21,6 @@ public class ExamClientApplication {
         SubjectService sv = new SubjectService();
         QuestionService qService = new QuestionService();
         ExamService examService = new ExamService();
-        
 
         // Main menu loop
         do {
@@ -32,7 +31,6 @@ public class ExamClientApplication {
             System.out.println("4: Create New Exam ");
             System.out.println("5: Create Exam Schedule ");
             System.out.println("6. Student Login");
-            System.out.println("7. Register Student");
             // System.out.println("Attempt Exam");
             // System.out.println("Show The Result");
 
@@ -152,19 +150,17 @@ public class ExamClientApplication {
 
                         // Format the date using the SimpleDateFormat object
                         String formattedDate = sdf.format(d1);
-                        
+
                         System.out.println("Enter Start Time");
                         String startTime = sc.nextLine();
-                        
 
                         System.out.println("Enter End Time");
                         String endTime = sc.nextLine();
-                        
-                        System.out.println("ID is "+eModel.getId());
-                        System.out.println("Date is "+formattedDate);
-                        System.out.println("Start Time is "+startTime);
-                        System.out.println("End Time is "+endTime);
-                        
+
+                        System.out.println("ID is " + eModel.getId());
+                        System.out.println("Date is " + formattedDate);
+                        System.out.println("Start Time is " + startTime);
+                        System.out.println("End Time is " + endTime);
 
                         ScheduleModel sModel = new ScheduleModel();
                         sModel.setExamid(eModel.getId());
@@ -181,38 +177,63 @@ public class ExamClientApplication {
                         } else {
                             System.out.println("Not Added Exam");
                         }
-                    } 
+                    }
                     break;
-                case 6: 
-                ExamRepository examRepo = new ExamRepository();
-                sc.nextLine();
-                System.out.println("Enter Username");
-                String username = sc.nextLine();
 
-                System.out.println("Enter Password");
-                String password = sc.nextLine();
+                case 6:
+                    ExamRepository examRepo = new ExamRepository();
+                    sc.nextLine();
+                    System.out.println("Enter Username (Lowercase Letters)");
+                    String username = sc.nextLine();
 
-                // Creating a StudentModel object with the entered username and password
-                StudentModel studentModel = new StudentModel();
-                studentModel.setUsername(username);
-                studentModel.setPassword(password);
+                    System.out.println("\nEnter Password");
+                    String password = sc.nextLine();
 
-                // Call the isUserPresent method from ExamService
-                result = examService.isUserPresent(studentModel);
-                
-                if (result == 1) {
-                    System.out.println("User exists!");
-                    // You may want to perform further actions here for a successful login
-                } else {
-                    System.out.println("User does not exist or invalid credentials!");
-                    // You may want to handle this case differently
-                }
+                    // Creating a StudentModel object with the entered username and password
+                    StudentModel studentModel = new StudentModel();
+                    studentModel.setUsername(username);
+                    studentModel.setPassword(password);
 
-                break;
+                    // Call the isUserPresent method from ExamService
+                    result = examService.isUserPresent(studentModel);
 
-                case 7:
+                    if (result == 1) {
+                        System.out.println("\nLogin successful");
+                        // You may want to perform further actions here for a successful login
+                    } else {
+                        System.out.println("\nUser does not exist");
+                        System.out.println("Create New Account? Press Y or N");
+                        String y = sc.nextLine();
+                        if (y.equalsIgnoreCase("y")) {
+                            System.out.println("Enter Full Name");
+                            String name = sc.nextLine();
+                            System.out.println("\nEnter Email");
+                            String email = sc.nextLine();
+                            System.out.println("\nEnter Contact");
+                            String contact = sc.nextLine();
+                            // System.out.println("Enter Username");
+                            // String userName = sc.nextLine();
+                            // System.out.println("Enter Password");
+                            // String passWord = sc.nextLine();
 
-                break;
+                            studentModel.setName(name);
+                            studentModel.setEmail(email);
+                            studentModel.setContact(contact);
+                            studentModel.setUsername(username);
+                            studentModel.setPassword(password);
+
+                            if (examService.addUser(studentModel)) {
+                                System.out.println("User added successfully!");
+                            } else {
+                                System.out.println("Failed to add user!");
+                            }
+                        } else {
+                            System.out.println("Okay");
+                        }
+
+                    }
+
+                    break;
 
                 default:
                     System.out.println("Wrong Choice");

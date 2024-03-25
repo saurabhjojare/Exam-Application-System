@@ -14,8 +14,6 @@ import com.exam.model.StudentModel;
 
 import java.text.SimpleDateFormat;
 
-
-
 public class ExamRepository extends DBConfig {
 
     List<ExamModel> listExams = new ArrayList<ExamModel>(); // List to store ExamModels
@@ -80,12 +78,12 @@ public class ExamRepository extends DBConfig {
 
             if (rs.next()) {
                 model = new ExamModel();
-                
-                    model.setId(rs.getInt(1));
-                    model.setName(rs.getString(2));
-                    model.setTotalMarks(rs.getInt(3));
-                    model.setPassingMarks(rs.getInt(4));
-                
+
+                model.setId(rs.getInt(1));
+                model.setName(rs.getString(2));
+                model.setTotalMarks(rs.getInt(3));
+                model.setPassingMarks(rs.getInt(4));
+
                 return model != null ? model : null;
             }
         } catch (Exception e) {
@@ -95,52 +93,52 @@ public class ExamRepository extends DBConfig {
         return null;
     }
 
-
     // Method to set schedule for an exam
-    public boolean isSetSchedule(ExamModel model, String subName) {    
-       String examDate = null;
-       Date sqlDate = null;
-       ScheduleModel sModel = model.getScheduleModel();
-       int subId = qRepo.getSubjectIdByName(subName);
+    public boolean isSetSchedule(ExamModel model, String subName) {
+        String examDate = null;
+        Date sqlDate = null;
+        ScheduleModel sModel = model.getScheduleModel();
+        int subId = qRepo.getSubjectIdByName(subName);
         try {
-            //int subId = qRepo.getSubjectIdByName(subName);
-            //ScheduleModel sModel = model.getScheduleModel();
+            // int subId = qRepo.getSubjectIdByName(subName);
+            // ScheduleModel sModel = model.getScheduleModel();
 
             examDate = sModel.getExamDate();
             String[] dateSplit = examDate.split("/");
 
             int year = Integer.parseInt(dateSplit[0]);
-            int month = Integer.parseInt(dateSplit[1]) - 1; // Subtracting 1 to match Java's month indexing (starts from 0)
+            int month = Integer.parseInt(dateSplit[1]) - 1; // Subtracting 1 to match Java's month indexing (starts from
+                                                            // 0)
             int day = Integer.parseInt(dateSplit[2]);
-    
+
             sqlDate = new Date(year - 1900, month, day);
-    
 
-            System.out.println("SQL Date "+sqlDate);
+            System.out.println("SQL Date " + sqlDate);
 
-            stmt = conn.prepareStatement("INSERT INTO schedule (examid, date, starttime, endtime, sid) VALUES (?, ?, ?, ?, ?)");
+            stmt = conn.prepareStatement(
+                    "INSERT INTO schedule (examid, date, starttime, endtime, sid) VALUES (?, ?, ?, ?, ?)");
 
-                    stmt.setInt(1, model.getId()); // Setting exam ID
-                    stmt.setDate(2, sqlDate); // Setting exam date
-                    stmt.setString(3, sModel.startTime); // Setting start time
-                    stmt.setString(4, sModel.endTime); // Setting end time
-                    stmt.setInt(5, subId); // Setting subject ID
-                    
+            stmt.setInt(1, model.getId()); // Setting exam ID
+            stmt.setDate(2, sqlDate); // Setting exam date
+            stmt.setString(3, sModel.startTime); // Setting start time
+            stmt.setString(4, sModel.endTime); // Setting end time
+            stmt.setInt(5, subId); // Setting subject ID
+
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0; // Returns true if insertion successful, else false
 
         } catch (Exception e) {
             System.out.println("isSetSchedule Error " + e);
-            System.out.println("ID Repo "+ model.getId());    
-            System.out.println("SQL Date Repo "+sqlDate);
+            System.out.println("ID Repo " + model.getId());
+            System.out.println("SQL Date Repo " + sqlDate);
             System.out.println("sModel.startTime: " + sModel.startTime);
             System.out.println("sModel.startTime: " + sModel.endTime);
-            System.out.println("Subject ID "+subId);
+            System.out.println("Subject ID " + subId);
             return false;
         }
     }
 
-    // Method to check login 
+    // Method to check login
 
     public boolean checkUsernameAndPassword(String username, String password) {
         PreparedStatement stmt = null;
@@ -149,17 +147,18 @@ public class ExamRepository extends DBConfig {
 
         try {
             // Prepare and execute the SQL query
-            stmt = conn.prepareStatement("SELECT * FROM student WHERE username=? AND password=?");
+            stmt = conn.prepareStatement("SELECT * FROM student WHERE username=? AND password =?");
             stmt.setString(1, username);
             stmt.setString(2, password);
+           
             rs = stmt.executeQuery();
 
             // Check if a record with the provided username and password exists
             if (rs.next()) {
                 userExists = true;
-                System.out.println("Login successful!");
+                // System.out.println("Login successful!");
             } else {
-                System.out.println("Invalid username or password.");
+                userExists = false;
             }
         } catch (SQLException e) {
             // Handle any SQL exceptions
@@ -181,5 +180,55 @@ public class ExamRepository extends DBConfig {
         return userExists;
     }
 
+    public boolean addUser(StudentModel model) {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int nextStid = 1;
+
+        try {
+            stmt = conn.prepareStatement("Select max(stid) as max_stid from student");
+            rs = stmt.executeQuery();
+            
+
+            if (rs.next()) {
+                int maxStid = rs.getInt("max_stid");
+                nextStid = maxStid + 1;
+            }
+
+            stmt = conn.prepareStatement(
+                    "insert into student (stid, name, email, contact, username, password) values (?,?,?,?,?,?)");
+            stmt.setInt(1, nextStid);
+            stmt.setString(2, model.getName());
+            stmt.setString(3, model.getEmail());
+            stmt.setString(4, model.getContact());
+            stmt.setString(5, model.getUsername());
+            stmt.setString(6, model.getPassword());
+
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected > 0) {
+                return true;
+            } else {
+                System.out.println("Failed to add user!");
+                return false;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+            System.out.println(nextStid);
+            return false;
+
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error closing resources: " + e.getMessage());
+            }
+        }
+    }
 
 }
