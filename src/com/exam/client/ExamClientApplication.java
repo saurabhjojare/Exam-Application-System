@@ -243,8 +243,11 @@ public class ExamClientApplication {
                     // Listing Exam
                     List<ExamModel> qlist = examService.getAllExam();
                     System.out.println("List Of Exams \nSelect Exam For Schedule\n");
+                    System.out.println(
+                            String.format("%-5s %-13s %-13s %-12s", "ID", "Name", "Total Marks", "Passing Marks"));
+
                     for (ExamModel m : qlist) {
-                        System.out.println(String.format("%-5s %-12s  %-5s  %s", m.getId(), m.getName(),
+                        System.out.println(String.format("%-5s %-12s  %-12s  %s", m.getId(), m.getName(),
                                 m.getTotalMarks(), m.getPassingMarks()));
                     }
                     System.out.println();
@@ -258,72 +261,112 @@ public class ExamClientApplication {
                     int selectedExamId = Integer.parseInt(examName);
                     System.out.println("Selected Exam " + selectedExamId);
 
-                    boolean validInput = false;
+                    boolean isExamIdAvailable = false; // Flag to track if the exam ID is available
 
-                    // Display the schedule for the selected exam
-                    try {
-                        List<ScheduleModel> sModel = examRepository.getExamSchedule(selectedExamId);
-                        System.out.println("Exam Schedule:");
-                        for (ScheduleModel s : sModel) {
-                            System.out.println();
-                            System.out.println(String.format(
-                                    "Schedule ID: %-5s  ExamID: %-5s  Subject ID: %-5s  Start Time: %-12s End Time: %-12s Exam Date: %s",
-                                    s.getSchid(), s.getExamid(), s.getSid(), s.getStartTime(), s.getEndTime(),
-                                    s.getExamDate()));
-                            System.out.println();
-
+                    // Check if the selected exam ID is available in the list
+                    for (ExamModel m : qlist) {
+                        if (selectedExamId == m.getId()) {
+                            isExamIdAvailable = true;
+                            break;
                         }
-
-                    } catch (SQLException e) {
-                        e.printStackTrace();
                     }
 
-                    System.out.println("Do You Want To Attempt Exam? Y or N");
-                    String y = sc.nextLine();
-                    if (y.equalsIgnoreCase("y")) {
-                        QuestionRepository questionRepository = new QuestionRepository();
-                        String subjectId = "" + selectedExamId;
-                        System.out.println(subjectId);
+                    if (isExamIdAvailable) {
+                        System.out.println("Selected Exam ID is available.");
 
-                        List<QuestionModel> questionsRepo = questionRepository.getQuestionsBySubjectId(subjectId);
+                        int selectedScheduleId = 0;
+                        boolean isScheduleIdAvailable = false;
 
-                        totalMarks = 0; // Variable to store the total marks
+                        // Display the schedule for the selected exam
+                        try {
+                            List<ScheduleModel> sModel = examRepository.getExamSchedule(selectedExamId);
+                            System.out.println("Exam Schedule");
+                            for (ScheduleModel s : sModel) {
+                                System.out.println();
+                                System.out.println(String.format(
+                                        "Schedule ID: %-5s  ExamID: %-5s  Subject ID: %-5s  Start Time: %-12s End Time: %-12s Exam Date: %s",
+                                        s.getSchid(), s.getExamid(), s.getSid(), s.getStartTime(), s.getEndTime(),
+                                        s.getExamDate()));
+                                System.out.println();
 
-                        if (questionsRepo.isEmpty()) {
-                            System.out.println("No questions found for the provided subject ID.");
-                        } else {
-                            System.out.println("Questions for Subject ID " + subjectId + ":\n");
-                            for (QuestionModel questionModel : questionsRepo) {
-                                System.out.println("Question: " + questionModel.getName());
-                                System.out.println("Option 1: " + questionModel.getOp1());
-                                System.out.println("Option 2: " + questionModel.getOp2());
-                                System.out.println("Option 3: " + questionModel.getOp3());
-                                System.out.println("Option 4: " + questionModel.getOp4());
+                                System.out.println("Select Schedule ID");
+                                selectedScheduleId = sc.nextInt();
 
-                                // Prompt the user for input
-                                System.out.println("Enter your answer (1, 2, 3, or 4): ");
-                                String userAnswerString = sc.nextLine();
-
-                                // Convert user's answer to int
-                                int userAnswer = Integer.parseInt(userAnswerString);
-
-                                // Compare user's answer with the correct answer
-                                if (userAnswer == questionModel.getAnswer()) {
-                                    System.out.println("Correct!");
-                                    totalMarks++; // Increment total marks for correct answer
-
-                                } else {
-                                    System.out
-                                            .println("Incorrect. The correct answer is: " + questionModel.getAnswer());
+                                // Check if the selected schedule ID is available in the list
+                                for (ScheduleModel s2 : sModel) {
+                                    if (selectedScheduleId == s2.getSchid()) {
+                                        isScheduleIdAvailable = true;
+                                        break;
+                                    }
                                 }
 
-                                System.out.println(); // Add a new line for spacing
                             }
+
+                        } catch (SQLException e) {
+                            e.printStackTrace();
                         }
-                        System.out.println("Total Marks: " + totalMarks);
+
+                        if (isScheduleIdAvailable) {
+                            sc.nextLine();
+                            System.out
+                                    .println("Do You Want To Attempt Exam For Schedule ID " + selectedScheduleId
+                                            + " ? Y or N");
+                            String y = sc.nextLine();
+                            if (y.equalsIgnoreCase("y")) {
+                                QuestionRepository questionRepository = new QuestionRepository();
+                                String subjectId = "" + selectedExamId;
+                                System.out.println(subjectId);
+
+                                List<QuestionModel> questionsRepo = questionRepository
+                                        .getQuestionsBySubjectId(subjectId);
+
+                                totalMarks = 0; // Variable to store the total marks
+
+                                if (questionsRepo.isEmpty()) {
+                                    System.out.println("No questions found for the provided subject ID.");
+                                } else {
+                                    System.out.println("Questions for Subject ID " + subjectId + ":\n");
+                                    for (QuestionModel questionModel : questionsRepo) {
+                                        System.out.println("Question: " + questionModel.getName());
+                                        System.out.println("Option 1: " + questionModel.getOp1());
+                                        System.out.println("Option 2: " + questionModel.getOp2());
+                                        System.out.println("Option 3: " + questionModel.getOp3());
+                                        System.out.println("Option 4: " + questionModel.getOp4());
+
+                                        // Prompt the user for input
+                                        System.out.println("Enter your answer (1, 2, 3, or 4): ");
+                                        String userAnswerString = sc.nextLine();
+
+                                        // Convert user's answer to int
+                                        int userAnswer = Integer.parseInt(userAnswerString);
+
+                                        // Compare user's answer with the correct answer
+                                        if (userAnswer == questionModel.getAnswer()) {
+                                            System.out.println("Correct!");
+                                            totalMarks++; // Increment total marks for correct answer
+
+                                        } else {
+                                            System.out
+                                                    .println("Incorrect. The correct answer is: "
+                                                            + questionModel.getAnswer());
+                                        }
+
+                                        System.out.println(); // Add a new line for spacing
+                                    }
+                                }
+                                System.out.println("Total Marks: " + totalMarks);
+
+                            } else {
+                                System.out.println("No Exam Attempted");
+                            }
+
+                        } else {
+                            System.out.println("Selected Schedule is not available.");
+                        }
 
                     } else {
-                        System.out.println("You Press N");
+                        System.out.println("Selected Exam ID is not available.");
+                        // Handle the case where the selected exam ID is not available
                     }
 
                     break;
