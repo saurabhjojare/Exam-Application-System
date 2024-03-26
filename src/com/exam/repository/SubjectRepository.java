@@ -60,4 +60,22 @@ public class SubjectRepository extends DBConfig {
             return null;
         }
     }
+
+    // Method to retrieve subject name by subject ID from the database
+    public String getSubjectNameById(int id) {
+        try {
+            stmt = conn.prepareStatement("select subjectname from subject where sid = ?");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1); // Return the retrieved subject name
+            } else {
+                return null; // Return null if subject is not found
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return null; // Return null if an exception occurs
+        }
+    }
 }

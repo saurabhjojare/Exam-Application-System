@@ -46,6 +46,7 @@ public class QuestionRepository extends DBConfig {
         }
     }
 
+
     // Method to add a single question to the database
     public boolean isAddQuestion(QuestionModel qModel, String subName) {
         try {
@@ -130,32 +131,32 @@ public class QuestionRepository extends DBConfig {
     }
 
     public List<QuestionModel> getQuestionsBySubjectId(String sid) {
-    List<QuestionModel> questions = new ArrayList<>();
+        List<QuestionModel> questions = new ArrayList<>();
 
-    try {
-        stmt = conn.prepareStatement("SELECT * FROM question JOIN subjectquestionjoin ON question.qid = subjectquestionjoin.qid WHERE sid = ?");
-        stmt.setString(1, sid);
-        ResultSet rs = stmt.executeQuery();
-        
-        while (rs.next()) {
-            int id = rs.getInt("qid");
-            String name = rs.getString("question");
-            String op1 = rs.getString("op1");
-            String op2 = rs.getString("op2");
-            String op3 = rs.getString("op3");
-            String op4 = rs.getString("op4");
-            int answer = rs.getInt("answer");
+        try {
+            stmt = conn.prepareStatement(
+                    "SELECT * FROM question JOIN subjectquestionjoin ON question.qid = subjectquestionjoin.qid WHERE sid = ?");
+            stmt.setString(1, sid);
+            ResultSet rs = stmt.executeQuery();
 
-            // Create a QuestionModel object and add it to the list
-            QuestionModel question = new QuestionModel(id, name, op1, op2, op3, op4, answer);
-            questions.add(question);
+            while (rs.next()) {
+                int id = rs.getInt("qid");
+                String name = rs.getString("question");
+                String op1 = rs.getString("op1");
+                String op2 = rs.getString("op2");
+                String op3 = rs.getString("op3");
+                String op4 = rs.getString("op4");
+                int answer = rs.getInt("answer");
+
+                // Create a QuestionModel object and add it to the list
+                QuestionModel question = new QuestionModel(id, name, op1, op2, op3, op4, answer);
+                questions.add(question);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error Retrieving Questions: " + e);
         }
-    } catch (SQLException e) {
-        System.out.println("Error Retrieving Questions: " + e);
+
+        return questions;
     }
-
-    return questions;
-}
-
 
 }

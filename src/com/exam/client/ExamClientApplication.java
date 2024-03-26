@@ -280,12 +280,20 @@ public class ExamClientApplication {
                         // Display the schedule for the selected exam
                         try {
                             List<ScheduleModel> sModel = examRepository.getExamSchedule(selectedExamId);
-                            System.out.println("Exam Schedule");
+                            SubjectService subjectService = new SubjectService(); // Assuming you have an instance of SubjectService
+
+                            System.out.println("Exam Schedule\n");
+                            System.out.println(String.format(
+                                
+                                "%-12s %-7s %-12s %-12s %-12s %s", "Schedule ID", "ExamID", "Subject", "Start Time", "End Time", "Exam Date"));
                             for (ScheduleModel s : sModel) {
-                                System.out.println();
+                                //System.out.println();
+                         
+                                String subjectName = subjectService.getSubjectNameById(s.getSid());
+
                                 System.out.println(String.format(
-                                        "Schedule ID: %-5s  ExamID: %-5s  Subject ID: %-5s  Start Time: %-12s End Time: %-12s Exam Date: %s",
-                                        s.getSchid(), s.getExamid(), s.getSid(), s.getStartTime(), s.getEndTime(),
+                                        "%-12s %-7s %-12s %-12s %-12s %s",
+                                        s.getSchid(), s.getExamid(), subjectName, s.getStartTime(), s.getEndTime(),
                                         s.getExamDate()));
                                 System.out.println();
 

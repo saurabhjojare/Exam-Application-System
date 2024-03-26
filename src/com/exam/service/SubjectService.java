@@ -42,4 +42,9 @@ public class SubjectService {
         return this.subRepo.getAllSubjects();
     }
 
+    public String getSubjectNameById(int id) {
+        return this.subRepo.getSubjectNameById(id);
+    }
+
+
 }
