@@ -70,10 +70,10 @@ public class QuestionRepository extends DBConfig {
                         stmt.setInt(2, qid);
                         return stmt.executeUpdate() > 0 ? true : false; // Return true if insertion is successful
                     } else if (sid == -1) {
-                        System.out.println("Subject Not Found"); // Print error message if subject is not found
+                        //System.out.println("Subject Not Found"); // Print error message if subject is not found
                         return false;
                     } else {
-                        System.out.println("Something Wrong"); // Print error message if something goes wrong
+                        //System.out.println("Something Wrong"); // Print error message if something goes wrong
                         return false;
                     }
                 } else {

@@ -60,6 +60,27 @@ public class SubjectRepository extends DBConfig {
             return null;
         }
     }
+    
+    public int getSidFromSchid(int schid) {
+        int sid = -1; // Default value if no record is found
+
+        try {
+            stmt = conn.prepareStatement("SELECT sid FROM schedule WHERE schid = ?");
+    
+            stmt.setInt(1, schid);
+
+            rs = stmt.executeQuery();
+                    if (rs.next()) {
+                        sid = rs.getInt("sid");
+                    }
+            } catch (Exception e) {
+            e.printStackTrace();
+            // Handle SQLException properly
+        }
+
+        return sid;
+    }
+
 
     // Method to retrieve subject name by subject ID from the database
     public String getSubjectNameById(int id) {
