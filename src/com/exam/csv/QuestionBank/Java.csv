@@ -3,3 +3,8 @@ Which of the following is not a keyword in Java?, a) class, b) interface, c) ext
 Which package contains the Random class?, a) java.lang, b) java.util, c) java.io, d) java.awt, 2
 What is the range of short data type in Java?, a) -128 to 127, b) -32768 to 32767, c) -2147483648 to 2147483647, d) None of the mentioned, 2
 What is the return type of the main method in Java?, a) void, b) int, c) float, d) double, 1
+Which of the following is not a primitive data type in Java?,a) int,b) double,c) string,d) boolean,3
+What is the parent class of all classes in Java?,a) Object,b) Class,c) Super,d) Main,1
+What does JVM stand for?,a) Java Variable Manager,b) Java Virtual Machine,c) Just Virtual Machine,d) Java Variable Memory,2
+Which of the following is not a valid Java identifier?,a) _variableName,b) $variableName,c) 2variableName,d) variableName,3
+What is the maximum number of dimensions that an array in Java can have?,a) 1,b) 2,c) 3,d) There is no limit,4

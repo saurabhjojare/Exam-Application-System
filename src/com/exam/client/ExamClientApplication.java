@@ -30,11 +30,10 @@ public class ExamClientApplication {
             // Display menu options
             System.out.println("1: Register Subject ");
             System.out.println("2: Create Question ");
-            System.out.println("3: Import Bulk Questions ");
-            System.out.println("4: Create New Exam ");
-            System.out.println("5: Create Exam Schedule ");
-            System.out.println("6. Student Login");
-            System.out.println("7. Attempt Exam");
+            System.out.println("3: Create New Exam ");
+            System.out.println("4: Create Exam Schedule ");
+            System.out.println("5. Add New Student");
+            System.out.println("6. Attempt Exam");
             // System.out.println("Show The Result");
 
             System.out.print("Enter Your Choice ");
@@ -62,54 +61,66 @@ public class ExamClientApplication {
                     break;
 
                 case 2:
-                    sc.nextLine();
-                    System.out.println("Enter Question");
-                    String question = sc.nextLine();
+                    System.out.println("\t1: Add One Question ");
+                    System.out.println("\t2: Import Bulk Questions ");
+                    System.out.println("Enter your choice:");
+                    int choice2 = sc.nextInt();
 
-                    System.out.println("Enter Option 1");
-                    String op1 = sc.nextLine();
+                    switch (choice2) {
+                        case 1:
+                            sc.nextLine();
+                            System.out.println("Enter Question");
+                            String question = sc.nextLine();
 
-                    System.out.println("Enter Option 2");
-                    String op2 = sc.nextLine();
+                            System.out.println("Enter Option 1");
+                            String op1 = sc.nextLine();
 
-                    System.out.println("Enter Option 3");
-                    String op3 = sc.nextLine();
+                            System.out.println("Enter Option 2");
+                            String op2 = sc.nextLine();
 
-                    System.out.println("Enter Option 4");
-                    String op4 = sc.nextLine();
+                            System.out.println("Enter Option 3");
+                            String op3 = sc.nextLine();
 
-                    System.out.println("Enter Option As Answer");
-                    int answer = sc.nextInt();
-                    sc.nextLine();
+                            System.out.println("Enter Option 4");
+                            String op4 = sc.nextLine();
 
-                    System.out.println("Enter Subject Name ");
-                    subName = sc.nextLine();
-                    // System.out.println("Subject Name: " + subName); // Debug statement
+                            System.out.println("Enter Option As Answer");
+                            int answer = sc.nextInt();
+                            sc.nextLine();
 
-                    QuestionModel qModel = new QuestionModel(question, op1, op2, op3, op4, answer);
-                    boolean b = qService.isAddQuestion(qModel, subName);
+                            System.out.println("Enter Subject Name ");
+                            subName = sc.nextLine();
+                            // System.out.println("Subject Name: " + subName); // Debug statement
 
-                    if (b) {
-                        System.out.println("Question Added");
-                    } else {
-                        System.out.println("Something Wrong");
+                            QuestionModel qModel = new QuestionModel(question, op1, op2, op3, op4, answer);
+                            boolean b = qService.isAddQuestion(qModel, subName);
+
+                            if (b) {
+                                System.out.println("Question Added");
+                            } else {
+                                System.out.println("Something Wrong");
+                            }
+                            break;
+
+                        case 2:
+                            // Add bulk questions
+                            sc.nextLine(); // Consume newline
+                            System.out.println("Enter Subject Name To Store");
+                            String subname = sc.nextLine();
+                            b = qService.uploadBulkQuestion(subname);
+                            if (b) {
+                                System.out.println("Added");
+                            } else {
+                                System.out.println("Not Added");
+                            }
+                            break;
+
+                        default:
+                            System.out.println("Invalid choice for case 2");
                     }
                     break;
 
                 case 3:
-                    // Add bulk questions
-                    sc.nextLine(); // Consume newline
-                    System.out.println("Enter Subject Name To Store");
-                    String subname = sc.nextLine();
-                    b = qService.uploadBulkQuestion(subname);
-                    if (b) {
-                        System.out.println("Added");
-                    } else {
-                        System.out.println("Not Added");
-                    }
-                    break;
-
-                case 4:
                     // Add new exam
                     sc.nextLine(); // Consume newline
                     System.out.println("Enter Exam Name");
@@ -128,9 +139,10 @@ public class ExamClientApplication {
                     } else {
                         System.out.println("Exam Not Added");
                     }
+
                     break;
 
-                case 5:
+                case 4:
                     // Create exam schedule
                     sc.nextLine(); // Consume newline
                     List<ExamModel> list = examService.getAllExam();
@@ -175,7 +187,7 @@ public class ExamClientApplication {
                         eModel.setScheduleModel(sModel);
                         System.out.println("Enter Subject Name");
                         subName = sc.nextLine();
-                        b = examService.isSetSchedule(eModel, subName);
+                        boolean b = examService.isSetSchedule(eModel, subName);
 
                         if (b) {
                             System.out.println("Added Exam");
@@ -185,7 +197,7 @@ public class ExamClientApplication {
                     }
                     break;
 
-                case 6:
+                case 5:
                     ExamRepository examRepo = new ExamRepository();
                     sc.nextLine();
                     System.out.println("Enter Username (Lowercase Letters)");
@@ -203,8 +215,8 @@ public class ExamClientApplication {
                     result = examService.isUserPresent(studentModel);
 
                     if (result == 1) {
-                        System.out.println("\nLogin successful");
-                        // You may want to perform further actions here for a successful login
+                        System.out.println("Already Exists");
+                        // You may want to perform further actions Shere for a successful login
                     } else {
                         System.out.println("\nUser does not exist");
                         System.out.println("Create New Account? Press Y or N");
@@ -229,7 +241,45 @@ public class ExamClientApplication {
 
                             if (examService.addUser(studentModel)) {
                                 System.out.println("User added successfully!");
-                                
+
+                                List<String> subjects = sv.getAllSubjects();
+
+                                System.out.println("Select Subject");
+                                // Check if subjects list is not null and not empty
+                                if (subjects != null && !subjects.isEmpty()) {
+                                    // Iterate over the subjects list and print each subject
+                                    for (String subject : subjects) {
+                                        System.out.println(subject);
+                                    }
+                                } else {
+                                    // If the subjects list is null or empty, display a message indicating no
+                                    // subjects found
+                                    System.out.println("No subjects found.");
+                                }
+
+                                // Ask the user to enter the subject name
+                                System.out.print("Enter the subject name: ");
+                                String subjectName = sc.nextLine();
+
+                                // Call the getSubjectIdBySubjectName method to retrieve the subject ID
+                                int subjectId = sv.getSubjectIdBySubjectName(subjectName);
+
+                                System.out.println("Subject ID " + subjectId);
+
+                                int stid = sv.getStidByName(name);
+                                System.out.println("Student ID " + stid);
+
+                                boolean success = sv.addStudentSubjectAssociation(stid, subjectId);
+
+                                // Check if insertion was successful
+                                if (success) {
+                                    System.out.println("Student ID " + stid + " and Subject ID " + subjectId
+                                            + " added successfully.");
+                                } else {
+                                    System.out.println("Failed to add Student ID " + stid + " and Subject ID "
+                                            + subjectId + ".");
+                                }
+
                             } else {
                                 System.out.println("Failed to add user!");
                             }
@@ -241,9 +291,10 @@ public class ExamClientApplication {
 
                     break;
 
-                case 7:
+                case 6:
                     sc.nextLine();
                     ExamRepository examRepository = new ExamRepository();
+                    String studentName = null;
                     // Listing Exam
                     List<ExamModel> qlist = examService.getAllExam();
                     System.out.println("List Of Exams \nSelect Exam For Schedule\n");
@@ -286,26 +337,34 @@ public class ExamClientApplication {
                             List<ScheduleModel> sModel = examRepository.getExamSchedule(selectedExamId);
                             SubjectService subjectService = new SubjectService(); // Assuming you have an instance of
                                                                                   // SubjectService
+                            System.out.println("Enter Your Username");
+                             studentName = sc.nextLine();
+                            int schid = qService.getSchidByStudentName(studentName);
+                            System.out.println("Your Exam Schedule ID "+schid);
 
                             System.out.println("Exam Schedule\n");
                             System.out.println(String.format(
 
-                                    "%-12s %-7s %-12s %-12s %-12s %s", "Schedule ID", "ExamID", "ID Subject", "Start Time",
+                                    "%-12s %-7s %-12s %-12s %-12s %s", "Schedule ID", "ExamID", "ID Subject",
+                                    "Start Time",
                                     "End Time", "Exam Date"));
-                            for (ScheduleModel s : sModel) {
-                                // System.out.println();
 
-                                String subjectName = subjectService.getSubjectNameById(s.getSid());
+                                    if (schid != -1) {
+                                        for (ScheduleModel s : sModel) {
+                                            if (s.getSchid() == schid) {
+                                                String subjectName = subjectService.getSubjectNameById(s.getSid());
+                                                System.out.println(String.format(
+                                                        "%-12s %-7s %-12s %-12s %-12s %s",
+                                                        s.getSchid(), s.getExamid(), s.getSid() + "  " + subjectName, s.getStartTime(),
+                                                        s.getEndTime(),
+                                                        s.getExamDate()));
+                                                System.out.println();
+                                            }
+                                        }
+                                    } else {
+                                        System.out.println("No schedule found for the student.");
+                                    }
 
-                                System.out.println(String.format(
-                                        "%-12s %-7s %-12s %-12s %-12s %s",
-                                        s.getSchid(), s.getExamid(), s.getSid() +"  " +subjectName, s.getStartTime(), s.getEndTime(),
-                                        s.getExamDate()));
-                                System.out.println();
-
-                            }
-
-                    
                             System.out.println("Select Schedule ID");
                             selectedScheduleId = sc.nextInt();
 
@@ -328,69 +387,144 @@ public class ExamClientApplication {
                                             + " ? Y or N");
                             String y = sc.nextLine();
                             if (y.equalsIgnoreCase("y")) {
-                                SubjectRepository subRepo = new SubjectRepository();
+
+                                examRepo = new ExamRepository();
+                                // sc.nextLine();
                                 
-                                QuestionRepository questionRepository = new QuestionRepository();
-                                SubjectService subjectService = new SubjectService();
-                                ScheduleModel sModel = new ScheduleModel();
-                                int sid = subRepo.getSidFromSchid(selectedScheduleId);
+                                System.out.println("Hello "+studentName);
+                                //System.out.println("Enter Username (Lowercase Letters)");
+                                username = studentName;
 
+                                System.out.println("\nEnter Password");
+                                password = sc.nextLine();
 
-                                System.out.println("Confirm Subject ID?");
-                                
-                                String subjectId =  " "+ sid;// Convert integer to string
+                                // Creating a StudentModel object with the entered username and password
+                                studentModel = new StudentModel();
+                                studentModel.setUsername(username);
+                                studentModel.setPassword(password);
 
-                                List<QuestionModel> questionsRepo = questionRepository
-                                        .getQuestionsBySubjectId(subjectId);
+                                // Call the isUserPresent method from ExamService
+                                result = examService.isUserPresent(studentModel);
 
-                                totalMarks = 0; // Variable to store the total marks
+                                if (result == 1) {
+                                    System.out.println("\nLogin successful");
+                                    // You may want to perform further actions here for a successful login
 
-                                if (questionsRepo.isEmpty()) {
-                                    System.out.println("No questions found for the provided subject ID.");
-                                } else {
-                                    System.out.println("Questions for Subject ID " + subjectId + ":\n");
-                                
-                                    for (QuestionModel questionModel : questionsRepo) {
-                                        System.out.println("Question: " + questionModel.getName());
-                                        System.out.println("Option 1: " + questionModel.getOp1());
-                                        System.out.println("Option 2: " + questionModel.getOp2());
-                                        System.out.println("Option 3: " + questionModel.getOp3());
-                                        System.out.println("Option 4: " + questionModel.getOp4());
+                                    SubjectRepository subRepo = new SubjectRepository();
 
-                                        // Prompt the user for input
-                                        System.out.println("Enter your answer (1, 2, 3, or 4): ");
-                                        String userAnswerString = sc.nextLine();
+                                    QuestionRepository questionRepository = new QuestionRepository();
+                                    SubjectService subjectService = new SubjectService();
+                                    ScheduleModel sModel = new ScheduleModel();
+                                    int sid = subRepo.getSidFromSchid(selectedScheduleId);
 
-                                        // Convert user's answer to int
-                                        int userAnswer = Integer.parseInt(userAnswerString);
+                                    System.out.println("Confirm Subject ID?");
 
-                                        // Compare user's answer with the correct answer
-                                        if (userAnswer == questionModel.getAnswer()) {
-                                            System.out.println("Correct!");
-                                            totalMarks++; // Increment total marks for correct answer
+                                    String subjectId = " " + sid;// Convert integer to string
 
-                                        } else {
-                                            System.out
-                                                    .println("Incorrect. The correct answer is: "
-                                                            + questionModel.getAnswer());
+                                    List<QuestionModel> questionsRepo = questionRepository
+                                            .getQuestionsBySubjectId(subjectId);
+
+                                    totalMarks = 0; // Variable to store the total marks
+
+                                    if (questionsRepo.isEmpty()) {
+                                        System.out.println("No questions found for the provided subject ID.");
+                                    } else {
+                                        System.out.println("Questions for Subject ID " + subjectId + ":\n");
+
+                                        for (QuestionModel questionModel : questionsRepo) {
+                                            System.out.println("Question: " + questionModel.getName());
+                                            System.out.println("Option 1: " + questionModel.getOp1());
+                                            System.out.println("Option 2: " + questionModel.getOp2());
+                                            System.out.println("Option 3: " + questionModel.getOp3());
+                                            System.out.println("Option 4: " + questionModel.getOp4());
+
+                                            // Prompt the user for input
+                                            System.out.println("Enter your answer (1, 2, 3, or 4): ");
+                                            String userAnswerString = sc.nextLine();
+
+                                            // Convert user's answer to int
+                                            int userAnswer = Integer.parseInt(userAnswerString);
+
+                                            // Compare user's answer with the correct answer
+                                            if (userAnswer == questionModel.getAnswer()) {
+                                                System.out.println("Correct!");
+                                                totalMarks++; // Increment total marks for correct answer
+
+                                            } else {
+                                                System.out
+                                                        .println("Incorrect. The correct answer is: "
+                                                                + questionModel.getAnswer());
+                                            }
+
+                                            System.out.println(); // Add a new line for spacing
+                                        }
+                                    }
+
+                                    System.out.println("Enter Your Student ID");
+                                    int stid = examService.getStidByUsername(username);
+                                    System.out.println("Printing " + stid);
+
+                                    int finalTotalMarks = totalMarks * 10;
+                                    System.out.println("Total Marks: " + finalTotalMarks);
+
+                                    if (finalTotalMarks > 40) {
+                                        System.out.println("You're Passed");
+                                        int schid = selectedScheduleId;
+                                        double obtainedPercentage = finalTotalMarks;
+                                        double status = 1.0;
+                                        System.out.println("Student " + stid + " Schedule ID " + schid + " Marks "
+                                                + obtainedPercentage + " Status " + status);
+                                        try {
+                                            // Call the method in the service layer to update student marks
+                                            sv.updateStudentMarks(stid, schid, obtainedPercentage, status);
+
+                                            // Optionally, you can perform additional actions after updating student
+                                            // marks
+                                        } catch (Exception e) {
+                                            // Handle any exceptions that might occur during the process
+                                            e.printStackTrace();
                                         }
 
-                                        System.out.println(); // Add a new line for spacing
+                                    } else {
+                                        System.out.println("You're Failed");
+                                        int schid = selectedScheduleId;
+                                        double obtainedPercentage = finalTotalMarks;
+                                        double status = 0.0;
+                                        System.out.println("Student " + stid + " Schedule ID " + schid + " Marks "
+                                                + obtainedPercentage + " Status " + status);
+
+                                        try {
+                                            // Call the method in the service layer to update student marks
+                                            sv.updateStudentMarks(stid, schid, obtainedPercentage, status);
+
+                                            // Optionally, you can perform additional actions after updating student
+                                            // marks
+                                        } catch (Exception e) {
+                                            // Handle any exceptions that might occur during the process
+                                            e.printStackTrace();
+                                        }
                                     }
+
+                                } else {
+
+                                    System.out.println("\nUser does not exist");
+
                                 }
-                                System.out.println("Total Marks: " + totalMarks);
 
                             } else {
+                                // System.out.println("Selected Schedule is not available.");
                                 System.out.println("No Exam Attempted");
                             }
 
                         } else {
                             System.out.println("Selected Schedule is not available.");
+                            // System.out.println("Selected Exam ID is not available.");
+                            // Handle the case where the selected exam ID is not available
                         }
-
                     } else {
                         System.out.println("Selected Exam ID is not available.");
-                        // Handle the case where the selected exam ID is not available
+                        // System.out.println("\nUser does not exist");
+
                     }
 
                     break;

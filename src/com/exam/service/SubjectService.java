@@ -46,5 +46,43 @@ public class SubjectService {
         return this.subRepo.getSubjectNameById(id);
     }
 
+    public int getSubjectIdBySubjectName(String subjectName) {
+        return this.subRepo.getSubjectIdBySubjectName(subjectName);
+    }
+
+    
+    public int getStidByName(String studentName) {
+        return this.subRepo.getStidByName(studentName);
+    }
+
+
+    public boolean addStudentSubjectAssociation(int studentId, int subjectId) {
+        try {
+            // Call the repository method to add the student-subject association
+            boolean associationAdded = subRepo.addStudentSubject(studentId, subjectId);
+            
+            // Return the result of the association addition
+            return associationAdded;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; // Return false if an exception occurs
+        }
+    }
+
+    public void updateStudentMarks(int stid, int schid, double obtainedPercentage, double status) {
+        try {
+            // You can perform any validation or additional logic here before calling the repository method
+            
+            // Call the repository method to update student marks
+            subRepo.updateStudentMarks(stid, schid, obtainedPercentage, status);
+            
+            // You can perform any post-processing logic here if needed
+        } catch (Exception e) {
+            // Handle exceptions or errors appropriately
+            e.printStackTrace();
+        }
+    }
+
+    
 
 }

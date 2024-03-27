@@ -261,4 +261,25 @@ public class ExamRepository extends DBConfig {
         }
     }
 
+
+     // Method to retrieve student ID (stid) by username
+     public int getStidByUsername(String username) throws SQLException {
+        int stid = -1; // Default value if not found
+
+        try {
+            String query = "SELECT stid FROM student WHERE username = ?";
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, username);
+            try (ResultSet resultSet = stmt.executeQuery()) {
+                if (resultSet.next()) {
+                    stid = resultSet.getInt("stid");
+                }
+            }
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+
+        return stid;
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.exam.repository;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -158,5 +160,31 @@ public class QuestionRepository extends DBConfig {
 
         return questions;
     }
+
+
+    public int getSchidByStudentName(String studentName)  {
+    int schid = -1;
+    
+    try {
+        stmt = conn.prepareStatement(
+                 "SELECT s.schid " +
+                 "FROM schedule s " +
+                 "JOIN studentsubjectjoin ss ON s.sid = ss.sid " +
+                 "JOIN student st ON ss.stid = st.stid " +
+                 "WHERE st.username = ?");
+        stmt.setString(1, studentName);
+        rs = stmt.executeQuery();
+        if (rs.next()) {
+            schid = rs.getInt("schid");
+        }
+    } catch (Exception e)
+    {
+        System.out.println(e);
+    }
+    return schid;
+}
+
+
+    
 
 }

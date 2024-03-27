@@ -1,6 +1,7 @@
 package com.exam.service;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.util.*;
 
 import com.exam.helper.PathHelper;
@@ -65,11 +66,11 @@ public class QuestionService {
                         String qwithop[] = question.split(",");
                         flag = qRepo.uploadBulkQuestion(qwithop, subName);
                     }
-                    br.close(); 
+                    br.close();
                 } catch (Exception e) {
                     System.out.println(e);
                     e.printStackTrace();
-                } 
+                }
             } else {
                 System.out.println("Subject File Not Found");
             }
@@ -83,7 +84,17 @@ public class QuestionService {
         // You can include additional logic here if needed
         return qRepo.getQuestionsBySubjectId(subjectId);
     }
-    
 
-  
+    public int getSchidByStudentName(String studentName) {
+        int schid = -1;
+        try {
+            // Delegate the call to the repository layer to retrieve schid
+            schid = qRepo.getSchidByStudentName(studentName);
+        } catch (Exception e) {
+            // Handle any SQL exceptions that may occur during data retrieval
+            e.printStackTrace(); // Log the exception or handle it according to your application's requirements
+        }
+        return schid;
+    }
+
 }

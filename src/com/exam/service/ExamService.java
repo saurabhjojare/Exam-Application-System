@@ -100,5 +100,19 @@ public class ExamService {
         return examRepo.getExamSchedule(examId);
     }
 
+     // Method to get student ID by username
+     public int getStidByUsername(String username) {
+        int stid = -1; // Default value if not found
+        try {
+            // Retrieve stid from repository
+            stid = examRepo.getStidByUsername(username);
+        } catch (SQLException e) {
+            // Handle database errors
+            e.printStackTrace();
+            // Optionally, throw custom exception or return an error code
+        }
+        return stid;
+    }
+
 
 }
