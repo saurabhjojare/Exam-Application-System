@@ -113,8 +113,7 @@ public class ExamClientApplication {
                         default:
                             System.out.println("Invalid choice for case 2");
                     }
-                    break;
-                    
+                    break;      
 
                 case 3:
                     sc.nextLine();
