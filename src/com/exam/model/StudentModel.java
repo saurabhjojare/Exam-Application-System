@@ -8,7 +8,6 @@ public class StudentModel {
     private String username;
     private String password;
 
-    // Constructors
     public StudentModel() {
     }
 
@@ -21,7 +20,6 @@ public class StudentModel {
         this.password = password;
     }
 
-    // Getters and Setters
     public int getStid() {
         return stid;
     }
@@ -70,7 +68,6 @@ public class StudentModel {
         this.password = password;
     }
 
-    // toString() method
     @Override
     public String toString() {
         return "StudentModel{" +

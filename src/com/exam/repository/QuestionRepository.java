@@ -10,11 +10,9 @@ import java.util.List;
 
 import com.exam.model.QuestionModel;
 
-// Repository class for managing questions in the database
 public class QuestionRepository extends DBConfig {
-    private int questionId; // Field to store the current question ID
+    private int questionId; 
 
-    // Method to get the latest question ID from the database
     private int getQuestionId() {
         try {
             stmt = conn.prepareStatement("Select max(qid) from question");
@@ -25,31 +23,28 @@ public class QuestionRepository extends DBConfig {
             }
         } catch (Exception e) {
             System.out.println(e);
-            return 0; // Return 0 if an exception occurs
+            return 0; 
         }
-        return questionId; // Return the retrieved question ID
+        return questionId; 
     }
 
-    // Method to retrieve subject ID by subject name from the database
     public int getSubjectIdByName(String name) {
         try {
             stmt = conn.prepareStatement("select sid from subject where subjectname = ?");
             stmt.setString(1, name);
             rs = stmt.executeQuery();
             if (rs.next()) {
-                return rs.getInt(1); // Return the retrieved subject ID
+                return rs.getInt(1); 
             } else {
-                return -1; // Return -1 if subject is not found
+                return -1; 
             }
 
         } catch (Exception e) {
             System.out.println(e);
-            return 0; // Return 0 if an exception occurs
+            return 0; 
         }
     }
 
-
-    // Method to add a single question to the database
     public boolean isAddQuestion(QuestionModel qModel, String subName) {
         try {
             int qid = this.getQuestionId() + 1;
@@ -70,12 +65,11 @@ public class QuestionRepository extends DBConfig {
                         stmt = conn.prepareStatement("insert into subjectquestionjoin (qid, sid) values (?, ?)");
                         stmt.setInt(1, sid);
                         stmt.setInt(2, qid);
-                        return stmt.executeUpdate() > 0 ? true : false; // Return true if insertion is successful
+                        return stmt.executeUpdate() > 0 ? true : false;
                     } else if (sid == -1) {
-                        //System.out.println("Subject Not Found"); // Print error message if subject is not found
+                        
                         return false;
                     } else {
-                        //System.out.println("Something Wrong"); // Print error message if something goes wrong
                         return false;
                     }
                 } else {
@@ -85,11 +79,10 @@ public class QuestionRepository extends DBConfig {
                 return false;
             }
         } catch (Exception e) {
-            return false; // Return false if an exception occurs
+            return false; 
         }
     }
 
-    // Method to upload bulk questions to the database
     public boolean uploadBulkQuestion(String question[], String subName) {
         try {
             int qid = this.getQuestionId() + 1;
@@ -112,13 +105,13 @@ public class QuestionRepository extends DBConfig {
                         subjectStmt.setInt(1, qid);
                         subjectStmt.setInt(2, sid);
                         int result = subjectStmt.executeUpdate();
-                        subjectStmt.close(); // Close the statement after execution
-                        return result > 0; // Return true if insertion is successful
+                        subjectStmt.close(); 
+                        return result > 0; 
                     } else if (sid == -1) {
-                        System.out.println("Subject Not Found"); // Print error message if subject is not found
+                        System.out.println("Subject Not Found"); 
                         return false;
                     } else {
-                        System.out.println("Something Wrong"); // Print error message if something goes wrong
+                        System.out.println("Something Wrong"); 
                         return false;
                     }
                 } else {
@@ -128,7 +121,7 @@ public class QuestionRepository extends DBConfig {
                 return false;
             }
         } catch (Exception e) {
-            return false; // Return false if an exception occurs
+            return false; 
         }
     }
 
@@ -150,7 +143,6 @@ public class QuestionRepository extends DBConfig {
                 String op4 = rs.getString("op4");
                 int answer = rs.getInt("answer");
 
-                // Create a QuestionModel object and add it to the list
                 QuestionModel question = new QuestionModel(id, name, op1, op2, op3, op4, answer);
                 questions.add(question);
             }
@@ -182,9 +174,6 @@ public class QuestionRepository extends DBConfig {
         System.out.println(e);
     }
     return schid;
-}
-
-
-    
+}    
 
 }

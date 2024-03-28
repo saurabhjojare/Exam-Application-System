@@ -81,20 +81,16 @@ public class QuestionService {
     }
 
     public List<QuestionModel> getQuestionsBySubjectId(String subjectId) {
-        // You can include additional logic here if needed
         return qRepo.getQuestionsBySubjectId(subjectId);
     }
 
     public int getSchidByStudentName(String studentName) {
         int schid = -1;
         try {
-            // Delegate the call to the repository layer to retrieve schid
             schid = qRepo.getSchidByStudentName(studentName);
         } catch (Exception e) {
-            // Handle any SQL exceptions that may occur during data retrieval
-            e.printStackTrace(); // Log the exception or handle it according to your application's requirements
+            e.printStackTrace();
         }
         return schid;
     }
-
 }
