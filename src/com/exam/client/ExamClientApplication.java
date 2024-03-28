@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import com.exam.model.ExamModel;
 import com.exam.model.QuestionModel;
+import com.exam.model.ResultModel;
 import com.exam.model.ScheduleModel;
 import com.exam.model.StudentModel;
 import com.exam.model.SubjectModel;
@@ -31,7 +32,7 @@ public class ExamClientApplication {
             System.out.println("4: Create Exam Schedule ");
             System.out.println("5. Add New Student");
             System.out.println("6. Attempt Exam");
-            // System.out.println("Show The Result");
+            System.out.println("7. Show The Result");
 
             System.out.print("Enter Your Choice ");
             Scanner sc = new Scanner(System.in);
@@ -138,7 +139,7 @@ public class ExamClientApplication {
                 case 4:
                     sc.nextLine();
                     List<ExamModel> list = examService.getAllExam();
-                    System.out.println("List Of Exams \nSelect 1 For Schedule\n");
+                    System.out.println("List Of Exams");
 
                     for (ExamModel m : list) {
                         System.out.println(String.format("%-5s %-12s  %-5s  %s", m.getId(), m.getName(),
@@ -146,8 +147,7 @@ public class ExamClientApplication {
 
                     }
                     list.clear();
-                    System.out.println();
-                    System.out.println("Enter Exam Name For Schedule");
+                    System.out.println("Enter Exam Name");
                     examName = sc.nextLine();
                     ExamModel eModel = examService.getExamIdByName(examName);
                     System.out.println(eModel.getName());
@@ -191,7 +191,7 @@ public class ExamClientApplication {
                     System.out.println("Enter Username (Lowercase Letters)");
                     String username = sc.nextLine();
 
-                    System.out.println("\nEnter Password");
+                    System.out.println("Enter Password");
                     String password = sc.nextLine();
 
                     StudentModel studentModel = new StudentModel();
@@ -203,15 +203,16 @@ public class ExamClientApplication {
                     if (result == 1) {
                         System.out.println("Account Already Exists");
                     } else {
-                        System.out.println("\nUser does not exist");
-                        System.out.println("Create New Account? Press Y or N");
+                        System.out.println("User does not exist");
+                        System.out.println("Create New Account?");
+                        System.out.println(" Press Y Or N");
                         String y = sc.nextLine();
                         if (y.equalsIgnoreCase("y")) {
-                            System.out.println("Enter Full Name");
+                            System.out.println("Enter First Name & Last Name");
                             String name = sc.nextLine();
-                            System.out.println("\nEnter Email");
+                            System.out.println("Enter Email");
                             String email = sc.nextLine();
-                            System.out.println("\nEnter Contact");
+                            System.out.println("Enter Contact");
                             String contact = sc.nextLine();
 
                             studentModel.setName(name);
@@ -240,19 +241,17 @@ public class ExamClientApplication {
 
                                 int subjectId = sv.getSubjectIdBySubjectName(subjectName);
 
-                                System.out.println("Subject ID " + subjectId);
+                                System.out.println("Your Subject ID " + subjectId);
 
                                 int stid = sv.getStidByName(name);
-                                System.out.println("Student ID " + stid);
+                                System.out.println("Your Student ID " + stid);
 
                                 boolean success = sv.addStudentSubjectAssociation(stid, subjectId);
 
                                 if (success) {
-                                    System.out.println("Student ID " + stid + " and Subject ID " + subjectId
-                                            + " added successfully.");
+                                    System.out.println("Subject Assigned Successfully");
                                 } else {
-                                    System.out.println("Failed to add Student ID " + stid + " and Subject ID "
-                                            + subjectId + ".");
+                                    System.out.println("Failed To Add Subject");
                                 }
 
                             } else {
@@ -271,7 +270,8 @@ public class ExamClientApplication {
                     ExamRepository examRepository = new ExamRepository();
                     String studentName = null;
                     List<ExamModel> q1list = examService.getAllExam();
-                    System.out.println("List Of Exams \nSelect Exam For Schedule\n");
+                    System.out.println("List Of Exams");
+
                     System.out.println(
                             String.format("%-5s %-13s %-13s %-12s", "ID", "Name", "Total Marks", "Passing Marks"));
 
@@ -279,10 +279,10 @@ public class ExamClientApplication {
                         System.out.println(String.format("%-5s %-12s  %-12s  %s", m.getId(), m.getName(),
                                 m.getTotalMarks(), m.getPassingMarks()));
                     }
-                    System.out.println();
+
                     q1list.clear();
 
-                    System.out.println("Enter Exam ID For Schedule");
+                    System.out.println("Enter Exam ID");
                     examName = sc.nextLine();
 
                     eModel = examService.getExamIdByName(examName);
@@ -313,14 +313,14 @@ public class ExamClientApplication {
                             System.out.println("Enter Your Username");
                             studentName = sc.nextLine();
                             int schid = qService.getSchidByStudentName(studentName);
-                            System.out.println("Your Exam Schedule ID " + schid);
 
-                            System.out.println("Exam Schedule\n");
-                            System.out.println(String.format(
-
-                                    "%-12s %-7s %-12s %-12s %-12s %s", "Schedule ID", "ExamID", "ID Subject",
-                                    "Start Time",
-                                    "End Time", "Exam Date"));
+                            System.out.println("Exam Schedule");
+                            // Print the header
+                            System.out.println(String.format("%-12s %-7s %-12s %-12s %-12s %s",
+                                    "Schedule ID", "Exam ID", "Subject", "Start Time", "End Time", "Exam Date"));
+                            // Print the separator
+                            System.out.println(String.format("%-12s %-7s %-12s %-12s %-12s %s",
+                                    "------------", "-------", "----------", "----------", "--------", "---------"));
 
                             if (schid != -1) {
                                 for (ScheduleModel s : sModel) {
@@ -328,18 +328,17 @@ public class ExamClientApplication {
                                         String subjectName = subjectService.getSubjectNameById(s.getSid());
                                         System.out.println(String.format(
                                                 "%-12s %-7s %-12s %-12s %-12s %s",
-                                                s.getSchid(), s.getExamid(), s.getSid() + "  " + subjectName,
+                                                s.getSchid(), s.getExamid(), subjectName /* + "  " + s.getSid() */,
                                                 s.getStartTime(),
                                                 s.getEndTime(),
                                                 s.getExamDate()));
-                                        System.out.println();
                                     }
                                 }
                             } else {
                                 System.out.println("No schedule found for the student.");
                             }
 
-                            System.out.println("Select Schedule ID");
+                            System.out.println("Enter Schedule ID");
                             selectedScheduleId = sc.nextInt();
 
                             for (ScheduleModel s2 : sModel) {
@@ -357,7 +356,7 @@ public class ExamClientApplication {
                             sc.nextLine();
                             System.out
                                     .println("Do You Want To Attempt Exam For Schedule ID " + selectedScheduleId
-                                            + " ? Y or N");
+                                            + "? \nPress Y for Yes or N for No");
                             String y = sc.nextLine();
                             if (y.equalsIgnoreCase("y")) {
 
@@ -366,7 +365,7 @@ public class ExamClientApplication {
                                 System.out.println("Hello " + studentName);
                                 username = studentName;
 
-                                System.out.println("\nEnter Password");
+                                System.out.println("Enter Your Password");
                                 password = sc.nextLine();
 
                                 studentModel = new StudentModel();
@@ -376,7 +375,7 @@ public class ExamClientApplication {
                                 result = examService.isUserPresent(studentModel);
 
                                 if (result == 1) {
-                                    System.out.println("\nLogin successful");
+                                    System.out.println("Login successful");
 
                                     SubjectRepository subRepo = new SubjectRepository();
 
@@ -417,14 +416,11 @@ public class ExamClientApplication {
                                                         .println("Incorrect. The correct answer is: "
                                                                 + questionModel.getAnswer());
                                             }
-
                                             System.out.println();
                                         }
                                     }
 
-                                    System.out.println("Enter Your Student ID");
                                     int stid = examService.getStidByUsername(username);
-                                    System.out.println("Printing " + stid);
 
                                     int finalTotalMarks = totalMarks * 10;
                                     System.out.println("Total Marks: " + finalTotalMarks);
@@ -434,8 +430,11 @@ public class ExamClientApplication {
                                         int schid = selectedScheduleId;
                                         double obtainedPercentage = finalTotalMarks;
                                         double status = 1.0;
-                                        System.out.println("Student " + stid + " Schedule ID " + schid + " Marks "
-                                                + obtainedPercentage + " Status " + status);
+                                        System.out.println("Student ID | Schedule ID | Marks | Status");
+                                        System.out.println("-----------------------------------------");
+                                        System.out.printf("%-10s | %-12s | %-5.2f | %-6s%n", stid, schid,
+                                                obtainedPercentage, status);
+
                                         try {
                                             sv.updateStudentMarks(stid, schid, obtainedPercentage, status);
                                         } catch (Exception e) {
@@ -447,9 +446,11 @@ public class ExamClientApplication {
                                         int schid = selectedScheduleId;
                                         double obtainedPercentage = finalTotalMarks;
                                         double status = 0.0;
-                                        System.out.println(String.format(
-                                                "Student %-20s Schedule ID %-20s Marks %-20s Status", "", "", "", ""));
-                                        System.out.println(String.format("%-28s %-32s %-27s %s", stid, schid,
+                                        System.out.println(String.format("%-20s %-20s %-20s %s", "Student ID",
+                                                "Schedule ID", "Marks", "Status"));
+                                        System.out.println(String.format("%-20s %-20s %-20s %s", "-----------",
+                                                "------------", "-----", "------"));
+                                        System.out.println(String.format("%-20s %-20s %-20s %s", stid, schid,
                                                 obtainedPercentage, status));
 
                                         try {
@@ -475,6 +476,30 @@ public class ExamClientApplication {
                         System.out.println("Selected Exam ID is not available.");
                     }
 
+                    break;
+
+                case 7:
+                    sc.nextLine();
+                    ExamRepository resultExamRepo = new ExamRepository();
+
+                    System.out.println("Enter Your Username");
+                    username = sc.nextLine();
+
+                    List<ResultModel> resultList = resultExamRepo.getResult(username);
+                    if (!resultList.isEmpty()) {
+                        System.out.println("Results for username '" + username + "':");
+                        System.out.println("+------+-------+--------------------+--------+");
+                        System.out.println("| stid | schid | obtainedPercentage | status |");
+                        System.out.println("+------+-------+--------------------+--------+");
+                        for (ResultModel resultModel : resultList) {
+                            System.out.printf("| %-4d | %-5d | %-18.2f | %-6.2f |\n",
+                                    resultModel.getStid(), resultModel.getSchid(),
+                                    resultModel.getObtainedPercentage(), resultModel.getStatus());
+                        }
+                        System.out.println("+------+-------+--------------------+--------+");
+                    } else {
+                        System.out.println("No results found for username '" + username + "'.");
+                    }
                     break;
 
                 default:

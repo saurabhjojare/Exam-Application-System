@@ -255,4 +255,45 @@ public class ExamRepository extends DBConfig {
 
         return stid;
     }
+
+    public List<ResultModel> getResult(String username) {
+        List<ResultModel> resultList = new ArrayList<>();
+
+        try {
+            String sql = "SELECT ser.* FROM studentexamrelation AS ser JOIN student AS s ON ser.stid = s.stid WHERE s.username = ?;";
+
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, username);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int stid = rs.getInt("stid");
+                int schid = rs.getInt("schid");
+                double obtainedPercentage = rs.getDouble("obtainedpercentage");
+                Double status = rs.getDouble("status");
+
+                ResultModel result = new ResultModel(stid, schid, obtainedPercentage, status);
+                resultList.add(result);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Exception occurred while fetching result: ");
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (Exception e) {
+                System.out.println("Exception occurred while closing resources: ");
+                e.printStackTrace();
+            }
+        }
+
+        return resultList;
+    }
 }

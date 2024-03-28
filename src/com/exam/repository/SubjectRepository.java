@@ -50,7 +50,7 @@ public class SubjectRepository extends DBConfig {
     }
 
     public int getSidFromSchid(int schid) {
-        int sid = -1; 
+        int sid = -1;
         try {
             stmt = conn.prepareStatement("SELECT sid FROM schedule WHERE schid = ?");
 
@@ -73,14 +73,14 @@ public class SubjectRepository extends DBConfig {
             stmt.setString(1, subjectName);
             rs = stmt.executeQuery();
             if (rs.next()) {
-                return rs.getInt(1); 
+                return rs.getInt(1);
             } else {
-                return -1; 
+                return -1;
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            return -1; 
+            return -1;
         }
     }
 
@@ -90,62 +90,62 @@ public class SubjectRepository extends DBConfig {
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
             if (rs.next()) {
-                return rs.getString(1); 
+                return rs.getString(1);
             } else {
-                return null; 
+                return null;
             }
 
         } catch (Exception e) {
             System.out.println(e);
-            return null; 
+            return null;
         }
     }
 
     public int getStidByName(String studentName) {
-    int stid = -1; 
+        int stid = -1;
 
-    try {
-        stmt = conn.prepareStatement("SELECT stid FROM student WHERE name=?");
-        stmt.setString(1, studentName);
-        rs = stmt.executeQuery();
-
-        if (rs.next()) {
-            stid = rs.getInt("stid");
-        } else {
-            System.out.println("No student found with the name: " + studentName);
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    } finally {
         try {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stmt != null) {
-                stmt.close();
+            stmt = conn.prepareStatement("SELECT stid FROM student WHERE name=?");
+            stmt.setString(1, studentName);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                stid = rs.getInt("stid");
+            } else {
+                System.out.println("No student found with the name: " + studentName);
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-    }
 
-    return stid;
-}
+        return stid;
+    }
 
     public boolean addStudentSubject(int studentId, int subjectId) {
         try {
             String sql = "INSERT INTO studentsubjectjoin (stid, sid) VALUES (?, ?)";
             stmt = conn.prepareStatement(sql);
-            
+
             stmt.setInt(1, studentId);
             stmt.setInt(2, subjectId);
-            
+
             int rowsAffected = stmt.executeUpdate();
-            
+
             return rowsAffected > 0;
         } catch (Exception e) {
             e.printStackTrace();
-            return false; 
+            return false;
         } finally {
             try {
                 if (stmt != null) {
@@ -158,21 +158,21 @@ public class SubjectRepository extends DBConfig {
     }
 
     public void updateStudentMarks(int stid, int schid, double obtainedPercentage, double status) {
-        
-            try  {
-                String sql = "INSERT INTO studentexamrelation (stid, schid, obtainedpercentage, status) VALUES (?, ?, ?, ?)";
-                stmt = conn.prepareStatement(sql);
-                    stmt.setInt(1, stid);
-                    stmt.setInt(2, schid);
-                    stmt.setDouble(3, obtainedPercentage);
-                    stmt.setDouble(4, status);
 
-                    int rowsInserted = stmt.executeUpdate();
-                    if (rowsInserted > 0) {
-                        System.out.println("Student marks updated successfully.");
-                }
-            } catch (Exception e) {
-                System.out.println();
+        try {
+            String sql = "INSERT INTO studentexamrelation (stid, schid, obtainedpercentage, status) VALUES (?, ?, ?, ?)";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, stid);
+            stmt.setInt(2, schid);
+            stmt.setDouble(3, obtainedPercentage);
+            stmt.setDouble(4, status);
+
+            int rowsInserted = stmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("Student marks updated successfully.");
             }
+        } catch (Exception e) {
+            System.out.println();
+        }
     }
 }

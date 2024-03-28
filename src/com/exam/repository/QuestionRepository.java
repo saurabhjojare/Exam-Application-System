@@ -11,7 +11,7 @@ import java.util.List;
 import com.exam.model.QuestionModel;
 
 public class QuestionRepository extends DBConfig {
-    private int questionId; 
+    private int questionId;
 
     private int getQuestionId() {
         try {
@@ -23,9 +23,9 @@ public class QuestionRepository extends DBConfig {
             }
         } catch (Exception e) {
             System.out.println(e);
-            return 0; 
+            return 0;
         }
-        return questionId; 
+        return questionId;
     }
 
     public int getSubjectIdByName(String name) {
@@ -34,14 +34,14 @@ public class QuestionRepository extends DBConfig {
             stmt.setString(1, name);
             rs = stmt.executeQuery();
             if (rs.next()) {
-                return rs.getInt(1); 
+                return rs.getInt(1);
             } else {
-                return -1; 
+                return -1;
             }
 
         } catch (Exception e) {
             System.out.println(e);
-            return 0; 
+            return 0;
         }
     }
 
@@ -67,7 +67,7 @@ public class QuestionRepository extends DBConfig {
                         stmt.setInt(2, qid);
                         return stmt.executeUpdate() > 0 ? true : false;
                     } else if (sid == -1) {
-                        
+
                         return false;
                     } else {
                         return false;
@@ -79,7 +79,7 @@ public class QuestionRepository extends DBConfig {
                 return false;
             }
         } catch (Exception e) {
-            return false; 
+            return false;
         }
     }
 
@@ -105,13 +105,13 @@ public class QuestionRepository extends DBConfig {
                         subjectStmt.setInt(1, qid);
                         subjectStmt.setInt(2, sid);
                         int result = subjectStmt.executeUpdate();
-                        subjectStmt.close(); 
-                        return result > 0; 
+                        subjectStmt.close();
+                        return result > 0;
                     } else if (sid == -1) {
-                        System.out.println("Subject Not Found"); 
+                        System.out.println("Subject Not Found");
                         return false;
                     } else {
-                        System.out.println("Something Wrong"); 
+                        System.out.println("Something Wrong");
                         return false;
                     }
                 } else {
@@ -121,7 +121,7 @@ public class QuestionRepository extends DBConfig {
                 return false;
             }
         } catch (Exception e) {
-            return false; 
+            return false;
         }
     }
 
@@ -153,27 +153,25 @@ public class QuestionRepository extends DBConfig {
         return questions;
     }
 
+    public int getSchidByStudentName(String studentName) {
+        int schid = -1;
 
-    public int getSchidByStudentName(String studentName)  {
-    int schid = -1;
-    
-    try {
-        stmt = conn.prepareStatement(
-                 "SELECT s.schid " +
-                 "FROM schedule s " +
-                 "JOIN studentsubjectjoin ss ON s.sid = ss.sid " +
-                 "JOIN student st ON ss.stid = st.stid " +
-                 "WHERE st.username = ?");
-        stmt.setString(1, studentName);
-        rs = stmt.executeQuery();
-        if (rs.next()) {
-            schid = rs.getInt("schid");
+        try {
+            stmt = conn.prepareStatement(
+                    "SELECT s.schid " +
+                            "FROM schedule s " +
+                            "JOIN studentsubjectjoin ss ON s.sid = ss.sid " +
+                            "JOIN student st ON ss.stid = st.stid " +
+                            "WHERE st.username = ?");
+            stmt.setString(1, studentName);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                schid = rs.getInt("schid");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
         }
-    } catch (Exception e)
-    {
-        System.out.println(e);
+        return schid;
     }
-    return schid;
-}    
 
 }

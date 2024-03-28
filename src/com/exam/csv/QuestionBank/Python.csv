@@ -1,0 +1,10 @@
+What is the output of 'print(2 + 2 * 3)' in Python?,8,10,12,6,3
+What method can be used to remove an item from a list in Python?,pop(),delete(),remove(),discard(),1
+What does the 'len()' function return in Python?,Length of a string,Length of a list,Length of a dictionary,All of the above,2
+Which keyword is used to define a function in Python?,func,def,define,function,2
+What does the 'range()' function return in Python?,A list of integers,A tuple of integers,A generator object,A set of integers,3
+What is the result of '5 // 2' in Python?,2.5,2,2.0,2.25,2
+What does the 'import random' statement do in Python?,Imports the random module,Generates a random number,Imports the random function,Imports the random method,1
+What data type is (1, 2, 3) in Python?,List,Tuple,Set,Dictionary,2
+What does the 'strip()' method do in Python?,Removes all whitespace characters from the beginning and end of a string,Removes all whitespace characters from a string,Splits a string into a list,Joins elements of a list into a string,1
+Which of the following is not a valid variable name in Python?,my_variable,2variable,myVariable,_variable,2

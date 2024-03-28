@@ -18,11 +18,6 @@ public class DBConfig {
             String url = PathHelper.properties.getProperty("url");
             String userName = PathHelper.properties.getProperty("userName");
             String password = PathHelper.properties.getProperty("password");
-
-            //System.out.println("driverClassName: " + driverClassName);
-            //System.out.println("userName: " + userName);
-            //System.out.println("url: " + url);
-            //System.out.println("password: " + password);
         } catch (Exception e) {
             System.out.println("Exception occurred while printing database properties: ");
             e.printStackTrace(); 

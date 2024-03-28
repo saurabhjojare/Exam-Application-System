@@ -2,10 +2,10 @@ package com.exam.model;
 
 public class QuestionModel {
 
-    private int id; 
-    private String name; 
-    private String op1, op2, op3, op4; 
-    private int answer; 
+    private int id;
+    private String name;
+    private String op1, op2, op3, op4;
+    private int answer;
 
     public QuestionModel() {
     }

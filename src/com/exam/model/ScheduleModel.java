@@ -3,12 +3,12 @@ package com.exam.model;
 import java.util.Date;
 
 public class ScheduleModel {
-    private int schid; 
-    private int examid; 
-    private String examDate; 
-    public String startTime; 
-    public String endTime; 
-    public int sid; 
+    private int schid;
+    private int examid;
+    private String examDate;
+    public String startTime;
+    public String endTime;
+    public int sid;
 
     public ScheduleModel() {
 
