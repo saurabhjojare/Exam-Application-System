@@ -114,6 +114,7 @@ public class ExamClientApplication {
                             System.out.println("Invalid choice for case 2");
                     }
                     break;
+                    
 
                 case 3:
                     sc.nextLine();
