@@ -1,6 +1,6 @@
 ## Exam Application System
 
-This repository contains a console-based application designed to manage exams and students' performance efficiently. The system facilitates the administration of exams, creation of exam schedules, addition of subjects and questions, as well as tracking student progress. Below are the basic requirements and functionalities provided:
+This repository contains a console/web-based application designed to manage exams and students' performance efficiently. The system facilitates the administration of exams, creation of exam schedules, addition of subjects and questions, as well as tracking student progress. Below are the basic requirements and functionalities provided:
 
 1. **Database Management**:
     - Ability to add subjects to the database for exam organization.
