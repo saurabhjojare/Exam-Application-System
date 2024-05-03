@@ -1,0 +1,22 @@
+  .card-header, card-footer {
+	background-color: #fff;
+}
+
+.card {
+	border-radius: 0px;
+}
+  
+  .attemptExam {
+    width: 400px;
+    margin: 0px auto;
+  }
+  
+ 
+  
+   @media only screen and (max-width: 768px) {
+   .attemptExam {
+    width: 100%;
+  }
+   }
+   
+   
