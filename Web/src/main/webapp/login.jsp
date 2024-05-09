@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <!doctype html>
 <html lang="en">
 <head>
@@ -52,7 +53,7 @@
 						<!--
           <button type="button" class="btn btn-light" onclick="history.back()">Back</button>
            -->
-						<div class="login-link mt-1">
+						<div class="login-link mt-3">
 							Don't have an account? <a href="sign-up.jsp">Sign Up</a>
 						</div>
 					</form>

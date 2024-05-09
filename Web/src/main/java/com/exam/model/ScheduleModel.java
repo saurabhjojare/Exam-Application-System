@@ -1,7 +1,5 @@
 package com.exam.model;
 
-//import java.util.Date;
-
 public class ScheduleModel {
 	private int schid;
 	private int examid;

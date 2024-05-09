@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 //import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -123,38 +124,49 @@ public class ExamRepositoryImpl extends DBConfig implements ExamRepository {
 
 	@Override
 	public boolean isSetSchedule(ExamModel model, String subName) {
-		String examDate = null;
-		Date sqlDate = null;
-		ScheduleModel sModel = model.getScheduleModel();
-		int subId = qRepo.getSubjectIdByName(subName);
-		try {
+	    String examDate = null;
+	    Date sqlDate = null;
+	    ScheduleModel sModel = model.getScheduleModel();
+	    int subId = qRepo.getSubjectIdByName(subName);
+	    
+	    try {
+	        examDate = sModel.getExamDate();
+	        // Adjust date parsing based on the correct format (yyyy-MM-dd)
+	        LocalDate localDate = LocalDate.parse(examDate);
+	        sqlDate = java.sql.Date.valueOf(localDate);
 
-			examDate = sModel.getExamDate();
-			String[] dateSplit = examDate.split("/");
+	        stmt = conn.prepareStatement(
+	                "INSERT INTO schedule (examid, date, starttime, endtime, sid) VALUES (?, ?, ?, ?, ?)");
 
-			int year = Integer.parseInt(dateSplit[0]);
-			int month = Integer.parseInt(dateSplit[1]) - 1;
-			int day = Integer.parseInt(dateSplit[2]);
+	        stmt.setInt(1, model.getId());
+	        stmt.setDate(2, sqlDate);
+	        stmt.setString(3, sModel.startTime);
+	        stmt.setString(4, sModel.endTime);
+	        stmt.setInt(5, subId);
 
-			sqlDate = new Date(year - 1900, month, day);
+	        int rowsAffected = stmt.executeUpdate();
+	        return rowsAffected > 0;
 
-			stmt = conn.prepareStatement(
-					"INSERT INTO schedule (examid, date, starttime, endtime, sid) VALUES (?, ?, ?, ?, ?)");
-
-			stmt.setInt(1, model.getId());
-			stmt.setDate(2, sqlDate);
-			stmt.setString(3, sModel.startTime);
-			stmt.setString(4, sModel.endTime);
-			stmt.setInt(5, subId);
-
-			int rowsAffected = stmt.executeUpdate();
-			return rowsAffected > 0;
-
-		} catch (Exception e) {
-
-			return false;
-		}
+	    } catch (SQLException e) {
+	        System.out.print("SQL Error From Exam Repo: " + e.getMessage());
+	        return false;
+	    } catch (NullPointerException e) {
+	        System.out.println("Null Pointer Exception: " + e.getMessage());
+	        return false;
+	    } catch (Exception e) {
+	        System.out.println("Error From Exam Repo: " + e.getMessage());
+	        return false;
+	    } finally {
+	        try {
+	            if (stmt != null) {
+	                stmt.close();
+	            }
+	        } catch (SQLException e) {
+	            System.out.println("Error closing statement: " + e.getMessage());
+	        }
+	    }
 	}
+
 
 	@Override
 	public boolean checkUsernameAndPassword(String username, String password) {

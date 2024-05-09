@@ -101,4 +101,9 @@ public class QuestionServiceImpl implements QuestionService {
 		return schid;
 	}
 
+	@Override
+	public int getQuestionId() {
+        return qRepo.getQuestionId();
+	}
+
 }

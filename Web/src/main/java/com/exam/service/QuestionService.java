@@ -14,4 +14,6 @@ public interface QuestionService {
 	List<QuestionModel> getQuestionsBySubjectId(String subjectId);
 
 	int getSchidByStudentName(String studentName);
+
+	int getQuestionId();
 }

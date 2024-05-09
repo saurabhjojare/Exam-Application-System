@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+	<%
+HttpSession existingSession = request.getSession(false);
+if (existingSession == null || existingSession.getAttribute("username") == null) {
+	response.sendRedirect("login.jsp");
+	// Optional: You can use <jsp:forward> here if you want to ensure that the rest of the JSP page isn't processed.
+	// <jsp:forward page="login.jsp" />
+}
+String username = (String) existingSession.getAttribute("username");
+%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -36,7 +46,7 @@
 <main class="result-content">
   <section class="container-sm py-5 text-center">
     <h1>Exam Results</h1>
-    <p>Hi [Name],</p>
+    <p>Hi, <%=username%>,</p>
     <p>Your exam is complete.</p>
     <p>Here's a summary of your performance:</p>
     <ul class="list-group">

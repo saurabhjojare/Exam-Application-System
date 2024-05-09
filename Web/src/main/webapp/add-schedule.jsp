@@ -1,5 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.exam.repository.ExamRepository"%>
+<%@ page import="com.exam.repository.ExamRepositoryImpl"%>
+<%@ page import="com.exam.service.SubjectService"%>
+<%@ page import="com.exam.service.SubjectServiceImpl"%>
+<%@ page import="com.exam.repository.SubjectRepository"%>
+<%@ page import="com.exam.repository.SubjectRepositoryImpl"%>
+<%@ page import="com.exam.service.ExamService"%>
+<%@ page import="com.exam.service.ExamServiceImpl"%>
+<%@ page import="com.exam.model.ExamModel"%>
+<%@ page import="com.exam.model.ScheduleModel"%>
+
+	<%
+    HttpSession existingSession = request.getSession(false);
+    if (existingSession == null || existingSession.getAttribute("adminUsername") == null) {
+        response.sendRedirect("admin-login.jsp");
+    }
+    String username = (String) existingSession.getAttribute("adminUsername");
+%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,52 +33,104 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/login.css">
 
+<style>
+.bottom-navbar{
+display: none;
+}
+
+/* Hide sidebar on screens smaller than lg */
+@media (max-width: 992px) {
+    .sidebar {
+        display: none;
+    }
+    .bottom-navbar{
+display: block;
+}
+.marginBottom{
+margin-bottom: 50px;
+}
+    
+}
+</style>
 </head>
 <body>
 
 
 	<div class="d-flex">
-	<%@ include file="sidebar.jsp"%>
-	<div class="flex-grow-1 ms-2 d-flex" style = "height:100vh; overflow:auto">
+	    <div class="sidebar">
+        <%@ include file="sidebar.jsp"%>
+        </div>
+	<div class="flex-grow-1 d-flex" style = "height:100vh; overflow:auto">
 	<!-- Body -->
 	<main>
 		<section class="py-3 text-center">
 			<div class="loginWidth">
 				<div class="container-sm">
 					<h1 class="display-6">Create Exam Schedule</h1>
+					<span id="message">${message}</span>
 					<p class="lead">Schedule a new exam.</p>
-					<form id="examScheduleForm">
+					<form name='form' action='addschedule' method='POST' id="examScheduleForm">
 						<div class="mb-3">
 							<label for="examName" class="form-label">Select Exam Name</label>
-							<select class="form-select" id="examName">
+							<select class="form-select" id="examName" name="examName">
+								<%
+							ExamService examService = new ExamServiceImpl();
+							ExamRepository examRepository = new ExamRepositoryImpl();
+							List<ExamModel> q1list = examService.getAllExam();
+							if (q1list != null && !q1list.isEmpty()) {
+								for (ExamModel exam : q1list) {
+									out.println("<option value=\"" + exam.getName() + "\">" + exam.getName() + "</option>");
+								}
+							} else {
+								out.println("<option value=\"\">No subjects found</option>");
+							}
+							%>
 							</select>
 						</div>
 						<div class="mb-3">
-							<label for="examDate" class="form-label">Exam Date</label> <input
-								type="date" class="form-control" id="examDate"
-								value="<?php echo date('Y-m-d'); ?>">
+							<label for="examDate" class="form-label">Exam Date</label> 
+							<input
+								type="date" class="form-control" id="examDate" name="examDate"
+								value="">
 						</div>
 						<div class="mb-3">
 							<label for="startTime" class="form-label">Start Time</label> <input
-								type="time" class="form-control" id="startTime" value="09:00">
+								type="time" class="form-control" id="startTime" name="startTime" value="09:00">
 						</div>
 						<div class="mb-3">
 							<label for="endTime" class="form-label">End Time</label> <input
-								type="time" class="form-control" id="endTime" value="11:00">
+								type="time" class="form-control" id="endTime" name="endTime" value="11:00">
 						</div>
 						<div class="mb-3">
 							<label for="subjectName" class="form-label">Select
-								Subject Name</label> <select class="form-select" id="subjectName">
+								Subject Name</label> <select class="form-select" id="subjectName" name="subjectName">
+									<%
+							SubjectService subService = new SubjectServiceImpl();
+							SubjectRepository subRepository = new SubjectRepositoryImpl();
+							List<String> subjects = subService.getAllSubjects();
+							if (subjects != null && !subjects.isEmpty()) {
+                                for (String subject : subjects) {
+									out.println("<option value=\"" + subject + "\">" + subject + "</option>");
+								}
+							} else {
+								out.println("<option value=\"\">No subjects found</option>");
+							}
+							%>
 							</select>
 						</div>
+						<div class = "marginBottom">
 						<button type="submit" class="btn btn-primary">Create
 							Schedule</button>
+							</div>
 					</form>
 				</div>
 			</div>
 		</section>
 	</main>
 	</div>
+	</div>
+	<div class="bottom-navbar">
+	<%@ include file="navbar-bottom.jsp"%>
 	</div>
 
 
@@ -77,5 +147,30 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
 		integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
 		crossorigin="anonymous"></script>
+		
+		<script>
+		// JavaScript to hide the message after 4 seconds
+		setTimeout(function() {
+			var messageElement = document.getElementById('message');
+			if (messageElement) {
+				messageElement.style.display = 'none';
+			}
+		}, 4000); // 4 seconds
+	</script>
+		
+		<script>
+    // Get today's date
+    var today = new Date();
+
+    // Format date as YYYY-MM-DD
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+
+    // Set the value of the input field to today's date
+    document.getElementById("examDate").value = today;
+</script>
 </body>
 </html>

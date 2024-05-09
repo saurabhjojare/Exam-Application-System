@@ -39,39 +39,36 @@ public class ExamServiceImpl implements ExamService {
 
 	@Override
 	public boolean isSetSchedule(ExamModel model, String subName) {
-		Date d = new Date();
+	    LocalDate currentDate = LocalDate.now();
+	    ScheduleModel sModel = model.getScheduleModel();
+	    String userDate = sModel.getExamDate();
 
-		LocalDate currentDate = LocalDate.now();
+	    // Adjust date parsing based on the format of the examDate string
+	    LocalDate examDate = LocalDate.parse(userDate); // Adjust the parsing based on the format of examDate
 
-		String[] s = d.toLocaleString().split(",");
-		String dsplit[] = currentDate.toString().split("-");
+	    System.out.println("Current Date: " + currentDate);
+	    System.out.println("Exam Date: " + examDate);
+	    System.out.println("Exam Name: " + model.getName());
+	    System.out.println("Subject Name: " + subName);
 
-		ScheduleModel sModel = model.getScheduleModel();
-
-		String userDate = sModel.getExamDate();
-
-		String userDateArr[] = userDate.split("/");
-
-		String userDates[] = userDateArr[0].split("-");
-
-		int currentYear = Integer.parseInt(dsplit[0]);
-		int currentMonth = Integer.parseInt(dsplit[1]);
-		int currentDay = Integer.parseInt(dsplit[2]);
-
-		int examYear = Integer.parseInt(userDateArr[0]);
-		int examMonth = Integer.parseInt(userDateArr[1]);
-		int examDay = Integer.parseInt(userDateArr[2]);
-
-		if (examYear > currentYear || (examYear == currentYear && examMonth > currentMonth)
-				|| (examYear == currentYear && examMonth == currentMonth && examDay > currentDay)) {
-
-			return examRepo.isSetSchedule(model, subName) ? true : false;
-		} else {
-			// System.out.println("Cannot Schedule Exam");
-		}
-
-		return false;
+	    if (examDate.isAfter(currentDate)) {
+	        // If the exam date is after the current date, proceed with scheduling
+	        System.out.println("Scheduling exam...");
+	        boolean isScheduled = examRepo.isSetSchedule(model, subName);
+	        if (isScheduled) {
+	            System.out.println("Exam scheduled successfully.");
+	            return true;
+	        } else {
+	            System.out.println("Failed to schedule exam.");
+	            return false;
+	        }
+	    } else {
+	        // If the exam date has passed, print a message indicating that scheduling is not possible
+	        System.out.println("Cannot Schedule Exam: Exam date has already passed.");
+	        return false;
+	    }
 	}
+
 
 	@Override
 	public int isUserPresent(StudentModel model) {

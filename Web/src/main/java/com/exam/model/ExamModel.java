@@ -56,4 +56,10 @@ public class ExamModel {
 	public void setPassingMarks(int passingMarks) {
 		this.passingMarks = passingMarks;
 	}
+	
+	  @Override
+	public String toString() {
+		return "ExamModel [id=" + id + ", name=" + name + ", scheduleModel=" + scheduleModel + ", totalMarks="
+				+ totalMarks + ", passingMarks=" + passingMarks + "]";
+	}
 }

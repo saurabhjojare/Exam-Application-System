@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+		<%
+    HttpSession existingSession = request.getSession(false);
+    if (existingSession == null || existingSession.getAttribute("adminUsername") == null) {
+        response.sendRedirect("admin-login.jsp");
+    }
+    String username = (String) existingSession.getAttribute("adminUsername");
+%>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,12 +24,36 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/login.css">
 
+<style>
+.bottom-navbar{
+display: none;
+}
+
+/* Hide sidebar on screens smaller than lg */
+@media (max-width: 992px) {
+    .sidebar {
+        display: none;
+    }
+    
+    .bottom-navbar{
+display: block;
+}
+
+.marginBottom{
+margin-bottom: 50px;
+}
+    
+}
+</style>
+
 </head>
 <body>
 
  <div class="d-flex">
-	<%@ include file="sidebar.jsp"%>
-        <div class="flex-grow-1 ms-2 d-flex" style = "height:100vh; overflow:auto">
+	 <div class="sidebar">
+        <%@ include file="sidebar.jsp"%>
+        </div>
+        <div class="flex-grow-1 d-flex" style = "height:100vh; overflow:auto">
 
 	<main>
 		<section class="py-3 text-center">
@@ -35,7 +68,9 @@
 							<input type="text" class="form-control" id="subjectName" name="subjectName" 
 								placeholder="Enter subject name">
 						</div>
+						<div class = "marginBottom">
 						<button type="submit" class="btn btn-primary">Add Subject</button>
+						</div>
 					</form>
 				</div>
 			</div>
@@ -43,6 +78,9 @@
 	</main>
 
 	</div>
+	</div>
+	<div class="bottom-navbar">
+	<%@ include file="navbar-bottom.jsp"%>
 	</div>
 
 

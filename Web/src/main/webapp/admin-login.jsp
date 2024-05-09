@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,16 +23,27 @@
       text-align: center;
       margin-bottom: 30px;
     }
+    
+      @media (max-width: 768px) { 
+       .login-form {
+      max-width: 470px;
+      margin: 100px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    }
+      }
   </style>
 </head>
 <body>
 
 <div class="login-form">
   <h2>Login</h2>
-  <form action="#" method="post">
+  <form action="adminlogin" method="post">
     <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text" class="form-control" id="username" name="username" required>
+      <label for="email">Email</label>
+      <input type="text" class="form-control" id="email" name="email" required>
     </div>
     <div class="form-group">
       <label for="password">Password</label>

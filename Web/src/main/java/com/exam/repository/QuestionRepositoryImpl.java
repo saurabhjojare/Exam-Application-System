@@ -10,7 +10,7 @@ import com.exam.config.DBConfig;
 import com.exam.model.QuestionModel;
 
 public class QuestionRepositoryImpl extends DBConfig implements QuestionRepository {
-	private int questionId;
+	protected int questionId;
 
 	@Override
 	public int getQuestionId() {
@@ -65,8 +65,8 @@ public class QuestionRepositoryImpl extends DBConfig implements QuestionReposito
 					int sid = this.getSubjectIdByName(subName);
 					if (sid != -1) {
 						stmt = conn.prepareStatement("insert into subjectquestionjoin (qid, sid) values (?, ?)");
-						stmt.setInt(1, sid);
-						stmt.setInt(2, qid);
+						stmt.setInt(1, qid);
+						stmt.setInt(2, sid);
 						return stmt.executeUpdate() > 0 ? true : false;
 					} else if (sid == -1) {
 

@@ -1,3 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	
+	<%
+HttpSession existingSession = request.getSession(false);
+if (existingSession == null || existingSession.getAttribute("username") == null) {
+	response.sendRedirect("login.jsp");
+	// Optional: You can use <jsp:forward> here if you want to ensure that the rest of the JSP page isn't processed.
+	// <jsp:forward page="login.jsp" />
+}
+String username = (String) existingSession.getAttribute("username");
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,30 +23,43 @@
     <link rel="stylesheet" type="text/css" href="../css/login.css">
     <link rel="stylesheet" type="text/css" href="../css/exam.css">
 </head>
+
+<style>
+/* #divSpan { */
+/* display: none; */
+/* } */
+
+/* #divSpan2 { */
+/* display: none; */
+/* } */
+
+/* main { */
+/* display: none; */
+/* } */
+</style>
 <body>
 
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Enter Full Screen</h1>
-             
-            </div>
-           
-            <div class="modal-footer text-center">
-                <button type="button" class="btn btn-primary" id="startExamBtn">Enter</button>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"> -->
+<!--     <div class="modal-dialog" style = "top: 35%;"> -->
+<!--         <div class="modal-content" style="background-color: transparent; border:none;">           -->
+<!--             <div class="modal-footer text-center" style = "border-top:none;"> -->
+<!--                 <button type="button" class="btn btn-primary" id="startExamBtn" style=" margin: 0px auto; background-color: #fff; color: #000; border: 0px; border-radius: 0px; height: 80px; width: 250px; font-size: 20px;"> -->
+<!--                 Enter Full Screen -->
+<!--                 </button> -->
+<!--             </div> -->
+<!--         </div> -->
+<!--     </div> -->
+<!-- </div> -->
 
-<span style="display: none;">
+<div id = "divSpan">
+<span>
 <%@ include file="navbar.jsp"%>
 </span>
+</div>
 
 <!-- Body -->
-<main style="display: none;">
+<main>
     <section class="container-sm py-5">
         <div class="cardUp card" style="border: none">
             <div class="card-header" style="background-color: white;">
@@ -61,66 +87,19 @@
     </section>
 </main>
 
+<div  id = "divSpan2">
 
-<span style="display: none;">
 <%@ include file="footer.jsp"%>
-</span>
+
+</div>
 
 <!-- Your JavaScript code -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    // Show modal on page load
-    $(document).ready(function() {
-        $('#staticBackdrop').modal('show');
-    });
 
-    // Event listener for the "Understood" button in the modal
-    document.getElementById("startExamBtn").addEventListener("click", function() {
-        // Hide modal
-        $('#staticBackdrop').modal('hide');
-        // Show main content
-        document.querySelector('main').style.display = 'block';
-        document.querySelector('span').style.display = 'block';
-    });
-</script>
+<!-- <script src="js/exam-page.js"></script> -->
 
-<script>
-    // Show modal on page load
-    $(document).ready(function() {
-        $('#staticBackdrop').modal('show');
-    });
 
-    // Event listener for the "Understood" button in the modal
-    document.getElementById("startExamBtn").addEventListener("click", function() {
-        // Hide modal
-        $('#staticBackdrop').modal('hide');
-        // Show main content
-        document.querySelector('main').style.display = 'block';
-    });
-
-    // Enter full-screen mode
-    document.getElementById("startExamBtn").addEventListener("click", function() {
-        var element = document.documentElement;
-        if (element.requestFullscreen) {
-            element.requestFullscreen();
-        } else if (element.mozRequestFullScreen) { /* Firefox */
-            element.mozRequestFullScreen();
-        } else if (element.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
-            element.webkitRequestFullscreen();
-        } else if (element.msRequestFullscreen) { /* IE/Edge */
-            element.msRequestFullscreen();
-        }
-    });
-
-    // Listen for the fullscreenchange event
-    document.addEventListener("fullscreenchange", function () {
-        if (!document.fullscreenElement) {
-            // Close the tab when exiting full-screen mode
-            window.close();
-        }
-    });
-</script>
 
 
 </body>

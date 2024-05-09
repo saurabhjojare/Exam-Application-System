@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+	
 <!doctype html>
 <html lang="en">
 <head>
@@ -37,9 +39,21 @@
                     </a>
                 </li>
                 <li>
+                    <a href="view-exam.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("view-exam.jsp")) ? "active" : "" %>"">
+                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                        View Exam
+                    </a>
+                </li>
+                <li>
                     <a href="add-question.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("add-question.jsp")) ? "active" : "" %>"">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
                         Add Question
+                    </a>
+                </li>
+                 <li>
+                    <a href="view-question.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("view-question.jsp")) ? "active" : "" %>"">
+                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+                        View Question
                     </a>
                 </li>
                 <li>
@@ -49,14 +63,26 @@
                     </a>
                 </li>
                 <li>
+                    <a href="view-schedule.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("view-schedule.jsp")) ? "active" : "" %>"">
+                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+                        View Schedule
+                    </a>
+                </li>
+                <li>
                     <a href="add-subject.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("add-subject.jsp")) ? "active" : "" %>"">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
                         Add Subject
                     </a>
                 </li>
+                 <li>
+                    <a href="view-subject.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("view-subject.jsp")) ? "active" : "" %>"">
+                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
+                        View Subject
+                    </a>
+                </li>
             </ul>
             <hr>
-            <a class="dropdown-item text-center" href="#">Sign Out</a></li>
+            <a class="dropdown-item text-center" href="adminlogout">Sign Out</a></li>
         </div>
         
         <!-- Main Content Area -->
@@ -64,18 +90,5 @@
             <!-- Your main content here -->
         </div>
     </div>
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-		integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-		crossorigin="anonymous"></script>
 </body>
 </html>

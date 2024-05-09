@@ -33,14 +33,16 @@ public class LoginController extends HttpServlet {
 
         int result = examService.isUserPresent(studentModel);
 
-        // Set appropriate message based on the result
         String message;
         if (result == 1) {
-            HttpSession session = request.getSession(); // Start a new session or get an existing one
-            session.setAttribute("username", username); // Store username in the session
+            HttpSession session = request.getSession(); 
+            session.setAttribute("username", username); 
+            
+            session = request.getSession();
+            session.setMaxInactiveInterval(60 * 60); // Set the session timeout to one hour
 
-            // Redirect the response to attempt-exam.jsp
             response.sendRedirect("attempt-exam.jsp");
+          
         } else {
             message = "User Does Not Exist";
             request.setAttribute("message", message);
