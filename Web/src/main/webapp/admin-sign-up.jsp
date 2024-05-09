@@ -54,27 +54,27 @@
           <div class="form-group">
             <label for="fullName">Full Name</label>
             <input type="text" class="form-control" id="fullName" name="fullName" required>
-            <span id = "fullNameWarningMsg"></span>
+            <span class = "text-muted" id = "fullNameWarningMsg"></span>
           </div>
           <div class="form-group">
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" name="password" required>
-          <span id = "passwordWarningMsg1"></span>
+          <span class = "text-muted" id = "passwordWarningMsg1"></span>
           </div>
           <div class="form-group">
             <label for="confirmPassword">Confirm Password</label>
             <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-          <span id = "passwordWarningMsg"></span>
+          <span class = "text-muted" id = "passwordWarningMsg"></span>
           </div>
           <div class="form-group">
             <label for="contact">Contact</label>
             <input type="text" class="form-control" id="contact" name="contact" required>
-            <span id = "contactWarningMsg"></span>
+            <span class = "text-muted" id = "contactWarningMsg"></span>
           </div>
           <div class="form-group">
             <label for="email">Email Address</label>
             <input type="email" class="form-control" id="email" name="email" required>
-            <span id = "emailWarningMsg"></span>
+            <span class = "text-muted" id = "emailWarningMsg"></span>
           </div>
           <div class="form-group">
             <label for="role">Role</label>

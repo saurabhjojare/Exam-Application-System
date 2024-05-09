@@ -16,4 +16,6 @@ public interface QuestionService {
 	int getSchidByStudentName(String studentName);
 
 	int getQuestionId();
+	
+	
 }

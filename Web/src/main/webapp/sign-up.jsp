@@ -37,19 +37,19 @@
 							<input
 								type="text" class="form-control" id="fullName" name="fullName"
 								placeholder="Enter your full name" required>
-								 <span id="fullNameWarningMsg"></span>
+								 <span class = "text-muted" id="fullNameWarningMsg"></span>
 						</div>
 						<div class="mb-3">
 							<label for="username" class="form-label">Username</label> <input
 								type="text" class="form-control" id="username" name="username"
 								placeholder="Create a username" required>
-								<span id = "usernameWarningMsg"></span>
+								<span class = "text-muted" id = "usernameWarningMsg"></span>
 						</div>
 						<div class="mb-3">
 							<label for="email" class="form-label">Email address</label> <input
 								type="email" class="form-control" id="email" name="email"
 								placeholder="Enter your email" required>
-								<span id="emailWarningMsg"></span>
+								<span class = "text-muted" id="emailWarningMsg"></span>
 
 
 						</div>
@@ -57,7 +57,7 @@
 							<label for="contact" class="form-label">Contact Number</label> <input
 								type="tel" class="form-control" id="contact" name="contact"
 								placeholder="Enter your contact number" required>
-								<span id="contactWarningMsg"></span>
+								<span class = "text-muted" id="contactWarningMsg"></span>
 
 						</div>
 						<div class="mb-3">
@@ -69,7 +69,7 @@
 									id="showPasswordButton">Show</button>
 									
 							</div>
-							<span id = "passwordWarningMsg1"></span>
+							<span class = "text-muted" id = "passwordWarningMsg1"></span>
 						</div>
 						<button type="submit" class="btn btn-primary">Sign Up</button>
 						<div class="login-link mt-3">

@@ -1,5 +1,6 @@
 package com.exam.service;
 
+import java.sql.SQLException;
 // import java.io.*;
 import java.util.List;
 
@@ -68,5 +69,19 @@ public class SubjectServiceImpl implements SubjectService {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public String getSubjectNameBySchid(int scheduleId) {
+	    try {
+	        // Assuming subjectRepository is your repository instance
+	        return subRepo.getSubjectNameBySchid(scheduleId);
+	    } catch (Exception e) {
+	        // Handle exceptions appropriately, such as logging or throwing
+	        e.printStackTrace();
+	        return null; // or return an appropriate error code/message
+	    }
+	}
+
+
 
 }

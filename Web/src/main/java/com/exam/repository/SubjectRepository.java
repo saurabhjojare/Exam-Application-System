@@ -22,5 +22,7 @@ public interface SubjectRepository {
 	boolean addStudentSubject(int studentId, int subjectId);
 
 	void updateStudentMarks(int stid, int schid, double obtainedPercentage, double status);
+	
+	public String getSubjectNameBySchid(int scheduleId);
 
 }

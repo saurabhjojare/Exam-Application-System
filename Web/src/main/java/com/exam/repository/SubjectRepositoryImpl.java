@@ -21,6 +21,26 @@ public class SubjectRepositoryImpl extends DBConfig implements SubjectRepository
 			return false;
 		}
 	}
+	
+	@Override
+	public String getSubjectNameBySchid(int scheduleId) {
+	    try {
+	        stmt = conn.prepareStatement("SELECT s.subjectname FROM schedule sc JOIN subject s ON sc.sid = s.sid WHERE sc.schid = ?");
+	        stmt.setInt(1, scheduleId);
+	        rs = stmt.executeQuery();
+	        if (rs.next()) {
+	            return rs.getString("subjectname");
+	        } else {
+	            return null; // or handle the case when no subject is found for the given scheduleId
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace(); // Handle the exception properly
+	        return null; // or return an appropriate error code/message
+	    } finally {
+	        // Close resources like stmt and rs here
+	    }
+	}
+
 
 	@Override
 	public boolean isSubjectPresent(String subName) {

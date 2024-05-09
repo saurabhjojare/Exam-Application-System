@@ -18,4 +18,6 @@ public interface SubjectService {
 	boolean addStudentSubjectAssociation(int studentId, int subjectId);
 
 	void updateStudentMarks(int stid, int schid, double obtainedPercentage, double status);
+	
+	public String getSubjectNameBySchid(int scheduleId);
 }
