@@ -24,7 +24,7 @@
                 <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
                 <span class="fs-4">Dashboard</span>
             </a>
-            <hr>
+            <hr style = "margin-bottom: 5px;">
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
                     <a href="profile-page.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("profile-page.jsp")) ? "active" : "" %>" aria-current="page">
@@ -32,6 +32,7 @@
                         Admin
                     </a>
                 </li>
+                <hr style = "margin-top: 5px; margin-bottom: 5px;">
                 <li>
                     <a href="add-exam.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("add-exam.jsp")) ? "active" : "" %>"">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
@@ -78,6 +79,13 @@
                     <a href="view-subject.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("view-subject.jsp")) ? "active" : "" %>"">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
                         View Subject
+                    </a>
+                    <hr style = "margin-top: 5px; margin-bottom: 5px;">
+                </li>
+                 <li>
+                    <a href="view-result.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("view-result.jsp")) ? "active" : "" %>"">
+                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
+                        View Result
                     </a>
                 </li>
             </ul>
