@@ -25,6 +25,27 @@ String username = (String) existingSession.getAttribute("username");
 </head>
 
 <style>
+body {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    pointer-events: none; /* Allows interaction with elements behind the overlay */
+}
+
+
 /* #divSpan { */
 /* display: none; */
 /* } */
@@ -99,7 +120,21 @@ String username = (String) existingSession.getAttribute("username");
 
 <!-- <script src="js/exam-page.js"></script> -->
 
+<script>
+$(document).ready(function(){
+    $(document).on("contextmenu",function(e){
+        return false;
+    });
+});
 
+$(document).ready(function(){
+    $(document).on("copy paste",function(e){
+        e.preventDefault();
+    });
+});
+
+
+</script>
 
 
 </body>

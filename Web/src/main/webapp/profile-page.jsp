@@ -87,7 +87,7 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 			<%@ include file="navbar-bottom.jsp"%>
 		</div>
 		<!-- Main Content Area -->
-		<div class="flex-grow-1 view-padding text-center display-6">
+		<div class="flex-grow-1 view-padding text-center display-6 mt-3">
 			<span style="font-size: 25px;">Exam Application System </span> <br>
 			<div class="mt-4 text-start">
 

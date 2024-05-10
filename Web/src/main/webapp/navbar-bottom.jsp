@@ -53,6 +53,7 @@
 <!--                 <i class="bi bi-house-door"></i> -->
                 <span>Admin</span>
             </a>
+            <hr style = "color:#fff; margin-top:10px; margin-bottom:10px;">
           </li>
           <li class="nav-item">
             <a href="add-exam.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("add-exam.jsp")) ? "active" : "" %>">
@@ -100,10 +101,18 @@
             <a href="view-subject.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("view-subject.jsp")) ? "active" : "" %>">
                 
                 <span>View Subject</span>
+                <hr style = "color:#fff; margin-top:18px; margin-bottom:0px;">
+            </a>
+          </li>
+           <li class="nav-item">
+            <a href="view-result.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("view-result.jsp")) ? "active" : "" %>">
+                
+                <span>View Result</span>
+                <hr style = "color:#fff; margin-top:18px; margin-bottom:0px; border: 1.9px solid #fff">
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="adminlogout">
+            <a class="nav-link text-white text-center" href="adminlogout">
             
                 <span>Sign Out</span>
             </a>

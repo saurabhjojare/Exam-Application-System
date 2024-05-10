@@ -17,33 +17,27 @@
 	transform: translateX(-50%);
 }
 
-
-@media (max-width: 1200px) {
- .navbar-nav {
-      
-          white-space: nowrap; 
-          margin-top: 0px;
-          text-align: center;
-    } 
-  
+#countdown {
+    color: white;
+    width:190px;
+    
 }
 
-
-@media (max-width: 700px) {
-    .navbar-nav {
+@media (max-width: 991px) {
+.navbar-nav {
         text-align: center;
-        width: 100%;
+     
     }
     
-        .navbar-expand-lg .navbar-collapse {
-        flex-basis: none;
-    }
+    #countdown {
+     width:100%;
     
-      .navbar-nav .nav-item .nav-link {
-        white-space: nowrap; /* Prevent text wrapping */
-    }
+    text-align: center;
+    
 }
 }
+
+
 </style>
 </head>
 <body>
@@ -51,8 +45,11 @@
 	<% String currentPage = request.getServletPath(); %>
 	<% if(currentPage.equals("/exam.jsp")) { %>
 <%-- 	 <span class="text-white userName"><%=username%></span> --%>
+     <span id="countdown"></span>
 	 <% } %>
 		<div class="p-4 container">
+		            
+		
 			<!-- Centered Brand -->
 			<% if (request.getAttribute("showNavbarBrand") != null) { %>
             <a href="home.jsp" class="navbar-brand text-white" style="font-size: 25px; font-weight: 300;">Exam Application System</a>
@@ -67,6 +64,7 @@
 				<% if(currentPage.equals("/exam.jsp") || currentPage.equals("/attempt-exam.jsp") || currentPage.equals("/result.jsp")) { %>
 					<li class="nav-item">
 						<a class="nav-link text-white" href="logout" style = "white-space: nowrap;">Sign Out</a>
+						<span id="countdown"></span>
 					</li>
 				<% } %>
 			</ul>
@@ -76,5 +74,32 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+	
+	<script>
+        // Set the date and time for the countdown (1 hour from now)
+        var countdownDate = new Date();
+        countdownDate.setHours(countdownDate.getHours() + 1);
+
+        // Update the countdown every second
+        var countdown = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = countdownDate - now;
+            
+            // Calculate remaining time
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Display the countdown
+            document.getElementById("countdown").innerHTML = "Time Left: " 
+            + minutes + "m " + seconds + "s ";
+            
+            // If the countdown is over, display a message
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.getElementById("countdown").innerHTML = "Time Out";
+            }
+        }, 1000);
+    </script>
 </body>
 </html>

@@ -72,7 +72,7 @@
 							<span class = "text-muted" id = "passwordWarningMsg1"></span>
 						</div>
 						<button type="submit" class="btn btn-primary">Sign Up</button>
-						<div class="login-link mt-3">
+						<div class="login-link mt-3 text-center">
 							Have an account? <a href="login.jsp">Log In</a>
 						</div>
 					</form>
