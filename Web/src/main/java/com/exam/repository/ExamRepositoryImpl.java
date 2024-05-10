@@ -67,6 +67,53 @@ public class ExamRepositoryImpl extends DBConfig implements ExamRepository {
 			return null;
 		}
 	}
+	
+	public List<String[]> getAllResults() {
+        List<String[]> data = new ArrayList<>();
+        
+        try {
+            // Query to fetch data
+            String query = "SELECT student.name AS student_name, exam.examname AS exam_name, subject.subjectname AS subject_name, schedule.date AS schedule_date, studentexamrelation.obtainedpercentage, studentexamrelation.status " +
+                           "FROM studentexamrelation " +
+                           "INNER JOIN student ON studentexamrelation.stid = student.stid " +
+                           "INNER JOIN schedule ON studentexamrelation.schid = schedule.schid " +
+                           "INNER JOIN exam ON schedule.examid = exam.examid " +
+                           "INNER JOIN subject ON schedule.sid = subject.sid;";
+            
+            // Creating prepared statement
+            stmt = conn.prepareStatement(query);
+            
+            // Executing query
+            rs = stmt.executeQuery();
+            
+            // Processing result set
+            while (rs.next()) {
+                String[] row = {
+                    rs.getString("student_name"),
+                    rs.getString("exam_name"),
+                    rs.getString("subject_name"),
+                    rs.getString("schedule_date"),
+                    String.valueOf(rs.getDouble("obtainedpercentage")),
+                    String.valueOf(rs.getDouble("status"))
+                };
+                data.add(row);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Closing resources
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return data;
+    }
+
 
 	@Override
 	public List<ScheduleModel> getExamSchedule(int examId) throws SQLException {

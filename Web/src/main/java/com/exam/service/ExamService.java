@@ -28,4 +28,6 @@ public interface ExamService {
 	List<ResultModel> getResultsByUsername(String username);
 	
 	public String getExamNameByExamId(int examId);
+	
+	public List<String[]> getAllResults();
 }

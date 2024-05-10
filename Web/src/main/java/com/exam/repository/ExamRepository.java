@@ -30,4 +30,6 @@ public interface ExamRepository {
 	List<ResultModel> getResult(String username);
 	
 	public String getExamNameByExamId(int examId);
+	
+	public List<String[]> getAllResults();
 }

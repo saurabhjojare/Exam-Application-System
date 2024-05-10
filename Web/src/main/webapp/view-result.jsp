@@ -12,6 +12,12 @@
 <%@ page import="com.exam.service.ExamServiceImpl"%>
 
 <%
+ExamService examService = new ExamServiceImpl();
+List<String[]> results = examService.getAllResults();
+%>
+
+
+<%
 HttpSession existingSession = request.getSession(false);
 if (existingSession == null || existingSession.getAttribute("adminUsername") == null) {
 	response.sendRedirect("admin-login.jsp");
@@ -81,12 +87,12 @@ td.value {
 	padding-right: 100px;
 }
 
- @media (min-width: 992px) { 
-    .view-padding {
-    height: 100vh; 
-    overflow: auto;
-    }
-    }
+@media ( min-width : 992px) {
+	.view-padding {
+		height: 100vh;
+		overflow: auto;
+	}
+}
 
 /* Hide sidebar on screens smaller than lg */
 @media ( max-width : 992px) {
@@ -118,8 +124,7 @@ td.value {
 				<%@ include file="sidebar.jsp"%>
 			</div>
 			<!-- Main Content Area -->
-			<div class="flex-grow-1 view-padding text-center"
-				>
+			<div class="flex-grow-1 view-padding text-center">
 				<h3 class="display-6 mt-2">Schedule Details</h3>
 
 				<div class="d-flex justify-content-center mb-3">
@@ -136,34 +141,55 @@ td.value {
 
 					</thead>
 					<tbody>
+						<%
+						for (String[] result : results) {
+						%>
 						<tr>
-							
+
 							<td class="key" style="padding: 15px">#</td>
 							<td class="value" style="padding: 15px">1</td>
 						</tr>
 
 						<tr>
 							<td class="key" style="padding-left: 15px">Student Name</td>
-							<td class="value" style="padding-right: 15px">
-								Saurabh Jojare
+							<td class="value" style="padding-right: 15px"><%=result[0]%>
 							</td>
 						</tr>
 
 						<tr>
-							<td class="key" style="padding-left: 15px">Schedule</td>
-							<td class="value" style="padding-right: 15px">
-							Mock
+							<td class="key" style="padding-left: 15px">Exam Name</td>
+							<td class="value" style="padding-right: 15px"><%=result[1]%>
+							</td>
+						</tr>
+
+						<tr>
+							<td class="key" style="padding-left: 15px">Subject Name</td>
+							<td class="value" style="padding-right: 15px"><%=result[2]%>
+							</td>
+						</tr>
+						<tr>
+							<td class="key" style="padding-left: 15px">Exam Date</td>
+							<td class="value" style="padding-right: 15px"><%=result[3]%>
 							</td>
 						</tr>
 						<tr>
 							<td class="key" style="padding-left: 15px">Marks</td>
-							<td class="value" style="padding-right: 15px">85</td>
+							<%
+							double obtainedPercentage = Double.parseDouble(result[4]);
+							String formattedPercentage = String.format("%.2f", obtainedPercentage);
+							%>
+							<td class="value" style="padding-right: 15px"><%=formattedPercentage%> %</td>
 						</tr>
 						<tr>
 							<td class="key" style="padding-left: 15px">Status</td>
-							<td class="value" style="padding-right: 15px">Pass</td>
+							<%
+							double status = Double.parseDouble(result[5]);
+							String statusText = (status == 1.0) ? "Pass" : "Fail";
+							%>
+							<td class="value" style="padding-right: 15px"><%=statusText%></td>
 						</tr>
-						
+
+
 
 
 
@@ -174,7 +200,9 @@ td.value {
 								<button class="btn btn-danger">Delete</button>
 							</td>
 						</tr>
-						
+						<%
+						}
+						%>
 					</tbody>
 				</table>
 			</div>
