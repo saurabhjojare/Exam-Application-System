@@ -64,7 +64,7 @@
 				<% if(currentPage.equals("/exam.jsp") || currentPage.equals("/attempt-exam.jsp") || currentPage.equals("/result.jsp")) { %>
 					<li class="nav-item">
 						<a class="nav-link text-white" href="logout" style = "white-space: nowrap;">Sign Out</a>
-						<span id="countdown"></span>
+						
 					</li>
 				<% } %>
 			</ul>

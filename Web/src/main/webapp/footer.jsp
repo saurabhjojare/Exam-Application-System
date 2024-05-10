@@ -21,6 +21,8 @@
 		<!-- Footer -->
 		<footer class="footer mt-auto py-3 bg-light">
 			<div class="container text-center">
+<!-- 			<span id="current-time" class="text-muted"></span><br> -->
+<!-- 			<hr style = "width:145px; margin: 5px auto;"> -->
 				<span class="text-muted">Exam Application System &copy; 2024</span>
 			</div>
 		</footer>
@@ -37,5 +39,28 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
 		integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
 		crossorigin="anonymous"></script>
+		
+		<script>
+    // Function to get the current time in HH:MM format
+    function getCurrentTime() {
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        return 'Current Time: '+ hours + ':' + minutes;
+    }
+
+    // Update the current time element every second
+    function updateTime() {
+        const currentTimeElement = document.getElementById('current-time');
+        if (currentTimeElement) {
+            currentTimeElement.textContent = getCurrentTime();
+        }
+    }
+
+    // Update time initially and then every second
+    updateTime(); // Initial update
+    setInterval(updateTime, 1000); // Update every second
+</script>
+		
 </body>
 </html>
