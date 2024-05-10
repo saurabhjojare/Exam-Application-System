@@ -16,4 +16,6 @@ public interface QuestionRepository {
 	int getQuestionId();
 
 	int getSubjectIdByName(String name);
+	
+	public List<QuestionModel> getAllQuestion();
 }

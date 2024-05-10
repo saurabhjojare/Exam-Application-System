@@ -106,4 +106,8 @@ public class QuestionServiceImpl implements QuestionService {
         return qRepo.getQuestionId();
 	}
 
+	 // Method to get all questions
+    public List<QuestionModel> getAllQuestion() {
+        return qRepo.getAllQuestion();
+    }
 }

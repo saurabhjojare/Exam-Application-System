@@ -121,6 +121,24 @@ public class ExamRepositoryImpl extends DBConfig implements ExamRepository {
 		}
 		return null;
 	}
+	
+	public String getExamNameByExamId(int examId) {
+	    try {
+	        stmt = conn.prepareStatement("SELECT examname FROM exam WHERE examid = ?");
+	        stmt.setInt(1, examId); // Set the parameter for the examId
+	        rs = stmt.executeQuery();
+	        if (rs.next()) {
+	            return rs.getString(1); // Return the examname directly
+	        } else {
+	            return null; // Return null if the exam is not found
+	        }
+	    } catch (SQLException e) {
+	        System.out.println(e);
+	        return null;
+	    }
+	}
+
+
 
 	@Override
 	public boolean isSetSchedule(ExamModel model, String subName) {

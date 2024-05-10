@@ -2,6 +2,7 @@ package com.exam.service;
 
 import java.util.List;
 
+import com.exam.model.ScheduleModel;
 import com.exam.model.SubjectModel;
 
 public interface SubjectService {
@@ -20,4 +21,6 @@ public interface SubjectService {
 	void updateStudentMarks(int stid, int schid, double obtainedPercentage, double status);
 	
 	public String getSubjectNameBySchid(int scheduleId);
+	
+	public List<ScheduleModel> getAllSchedule();
 }

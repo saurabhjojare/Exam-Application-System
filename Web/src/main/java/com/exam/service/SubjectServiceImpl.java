@@ -4,6 +4,7 @@ import java.sql.SQLException;
 // import java.io.*;
 import java.util.List;
 
+import com.exam.model.ScheduleModel;
 import com.exam.model.SubjectModel;
 import com.exam.repository.SubjectRepository;
 import com.exam.repository.SubjectRepositoryImpl;
@@ -82,6 +83,15 @@ public class SubjectServiceImpl implements SubjectService {
 	    }
 	}
 
+	@Override
+	public List<ScheduleModel> getAllSchedule() {
+	    try {
+	        return subRepo.getAllSchedule(); // Assuming you have a method in your repository for this purpose
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null; // or return an appropriate error code/message
+	    }
+	}
 
 
 }

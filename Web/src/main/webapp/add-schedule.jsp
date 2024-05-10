@@ -95,11 +95,11 @@ margin-bottom: 50px;
 						</div>
 						<div class="mb-3">
 							<label for="startTime" class="form-label">Start Time</label> <input
-								type="time" class="form-control" id="startTime" name="startTime" value="09:00">
+								type="time" class="form-control" id="startTime" name="startTime" value="08:00">
 						</div>
 						<div class="mb-3">
 							<label for="endTime" class="form-label">End Time</label> <input
-								type="time" class="form-control" id="endTime" name="endTime" value="11:00">
+								type="time" class="form-control" id="endTime" name="endTime" value="10:00">
 						</div>
 						<div class="mb-3">
 							<label for="subjectName" class="form-label">Select
@@ -159,18 +159,59 @@ margin-bottom: 50px;
 	</script>
 		
 		<script>
-    // Get today's date
-    var today = new Date();
+    // Get tomorrow's date
+    var tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
 
     // Format date as YYYY-MM-DD
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
-    var yyyy = today.getFullYear();
+    var dd = String(tomorrow.getDate()).padStart(2, '0');
+    var mm = String(tomorrow.getMonth() + 1).padStart(2, '0'); // January is 0!
+    var yyyy = tomorrow.getFullYear();
 
-    today = yyyy + '-' + mm + '-' + dd;
+    tomorrow = yyyy + '-' + mm + '-' + dd;
 
-    // Set the value of the input field to today's date
-    document.getElementById("examDate").value = today;
+    // Set the value of the input field to tomorrow's date
+    document.getElementById("examDate").value = tomorrow;
 </script>
+
+<script>
+    // Get current time
+    var now = new Date();
+
+    // Set minutes to 0
+    now.setMinutes(0);
+
+    // Format time as HH:00
+    var hh = String(now.getHours()).padStart(2, '0');
+    var mm = '00';
+
+    var currentTime = hh + ':' + mm;
+
+    // Set the value of the input field "startTime" to the current time with minutes set to 00
+    document.getElementById("startTime").value = currentTime;
+</script>
+
+
+<script>
+    // Get current time
+    var now = new Date();
+
+    // Add 2 hours to the current time
+    now.setHours(now.getHours() + 2);
+    now.setMinutes(0); // Set minutes to 0
+
+    // Format time as HH:MM
+    var hh = String(now.getHours()).padStart(2, '0');
+    var mm = String(now.getMinutes()).padStart(2, '0');
+
+    var endTime = hh + ':' + mm;
+
+    // Set the value of the input field "endTime" to 2 hours after the current time with minutes set to 00
+    document.getElementById("endTime").value = endTime;
+</script>
+
+
+
+
 </body>
 </html>

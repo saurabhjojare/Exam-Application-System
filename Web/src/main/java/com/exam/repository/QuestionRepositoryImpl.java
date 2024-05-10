@@ -11,6 +11,7 @@ import com.exam.model.QuestionModel;
 
 public class QuestionRepositoryImpl extends DBConfig implements QuestionRepository {
 	protected int questionId;
+	List<QuestionModel> listQuestion = new ArrayList<>();
 
 	@Override
 	public int getQuestionId() {
@@ -27,6 +28,31 @@ public class QuestionRepositoryImpl extends DBConfig implements QuestionReposito
 		}
 		return questionId;
 	}
+	
+	@Override
+	public List<QuestionModel> getAllQuestion() {
+	    try {
+	        stmt = conn.prepareStatement("SELECT * FROM question");
+	        rs = stmt.executeQuery();
+	        while (rs.next()) {
+	            QuestionModel model = new QuestionModel();
+	            model.setId(rs.getInt("qid"));
+	            model.setName(rs.getString("question"));
+	            model.setOp1(rs.getString("op1"));
+	            model.setOp2(rs.getString("op2"));
+	            model.setOp3(rs.getString("op3"));
+	            model.setOp4(rs.getString("op4"));
+	            model.setAnswer(rs.getInt("answer"));
+	            listQuestion.add(model);
+	        }
+	        return listQuestion.size() > 0 ? listQuestion : null;
+	    } catch (Exception e) {
+	        System.out.println(e);
+	        return null;
+	    }
+	}
+
+
 
 	@Override
 	public int getSubjectIdByName(String name) {

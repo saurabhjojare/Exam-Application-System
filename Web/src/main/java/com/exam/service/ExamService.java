@@ -26,4 +26,6 @@ public interface ExamService {
 	int getStidByUsername(String username);
 
 	List<ResultModel> getResultsByUsername(String username);
+	
+	public String getExamNameByExamId(int examId);
 }

@@ -1,13 +1,17 @@
 package com.exam.repository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.exam.config.DBConfig;
+import com.exam.model.ScheduleModel;
 import com.exam.model.SubjectModel;
 
 public class SubjectRepositoryImpl extends DBConfig implements SubjectRepository {
 	List<String> list = new ArrayList<>();
+	List<ScheduleModel> listSchedule = new ArrayList<>();
+	List<String> listSubject = new ArrayList<>();
 
 	@Override
 	public boolean isAddSubject(SubjectModel model) {
@@ -56,18 +60,42 @@ public class SubjectRepositoryImpl extends DBConfig implements SubjectRepository
 
 	@Override
 	public List<String> getAllSubjects() {
-		try {
-			stmt = conn.prepareStatement("select subjectname from subject");
-			rs = stmt.executeQuery();
-			while (rs.next()) {
-				list.add(rs.getString(1));
-			}
-			return list.size() > 0 ? list : null;
-		} catch (Exception e) {
-			System.out.println(e);
-			return null;
-		}
+	    try {
+	        stmt = conn.prepareStatement("select subjectname from subject");
+	        rs = stmt.executeQuery();
+	        while (rs.next()) {
+	            list.add(rs.getString(1));
+	        }
+	        return list;
+	    } catch (Exception e) {
+	        System.out.println(e);
+	        return Collections.emptyList();
+	    }
 	}
+
+	@Override
+	public List<ScheduleModel> getAllSchedule() {
+	   
+	    try {
+	        stmt = conn.prepareStatement("SELECT * FROM schedule");
+	        rs = stmt.executeQuery();
+	        while (rs.next()) {
+	            ScheduleModel model = new ScheduleModel();
+	            model.setSchid(rs.getInt("schid"));
+	            model.setExamid(rs.getInt("examid"));
+	            model.setExamDate(rs.getString("date")); // Changed to match the column name in the table
+	            model.setStartTime(rs.getString("starttime")); // Changed to match the column name in the table
+	            model.setEndTime(rs.getString("endtime")); // Changed to match the column name in the table
+	            model.setSid(rs.getInt("sid"));
+	            listSchedule.add(model);
+	        }
+	        return listSchedule.size() > 0 ? listSchedule : null;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
+
 
 	@Override
 	public int getSidFromSchid(int schid) {

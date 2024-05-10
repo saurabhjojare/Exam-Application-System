@@ -17,5 +17,7 @@ public interface QuestionService {
 
 	int getQuestionId();
 	
+	public List<QuestionModel> getAllQuestion();
+	
 	
 }

@@ -109,4 +109,10 @@ public class ExamServiceImpl implements ExamService {
 		return examRepo.getResult(username);
 	}
 
+	@Override
+	public String getExamNameByExamId(int examId) {
+		// TODO Auto-generated method stub
+		return examRepo.getExamNameByExamId(examId);
+	}
+
 }

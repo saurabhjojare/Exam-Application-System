@@ -2,6 +2,7 @@ package com.exam.repository;
 
 import java.util.List;
 
+import com.exam.model.ScheduleModel;
 import com.exam.model.SubjectModel;
 
 public interface SubjectRepository {
@@ -24,5 +25,7 @@ public interface SubjectRepository {
 	void updateStudentMarks(int stid, int schid, double obtainedPercentage, double status);
 	
 	public String getSubjectNameBySchid(int scheduleId);
+	
+	public List<ScheduleModel> getAllSchedule();
 
 }

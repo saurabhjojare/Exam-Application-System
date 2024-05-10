@@ -28,4 +28,6 @@ public interface ExamRepository {
 	int getStidByUsername(String username) throws SQLException;
 
 	List<ResultModel> getResult(String username);
+	
+	public String getExamNameByExamId(int examId);
 }
