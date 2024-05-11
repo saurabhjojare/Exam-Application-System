@@ -164,7 +164,7 @@ padding-right :10px;
 						if (count <= totalSubject) { // Check if it's not the last iteration
 						%>
 						<tr class="empty-row">
-							<td colspan="2">&nbsp;</td>
+							<td colspan="2"></td>
 							<!-- Add empty cells for space between each set of exam details -->
 						</tr>
 						<%
@@ -172,7 +172,7 @@ padding-right :10px;
 						} // End of loop 
 						} else {
 						// Handle case where QuestionList is null
-						out.println("<tr><td colspan='2'>No questions found.</td></tr>");
+						out.println("<tr><td colspan='2'>No subjects found.</td></tr>");
 						}
 						%>
                 </tbody>

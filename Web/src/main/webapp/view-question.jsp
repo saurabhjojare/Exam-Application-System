@@ -183,7 +183,7 @@ td.value {
 						if (count <= totalQuestions) { // Check if it's not the last iteration
 						%>
 						<tr class="empty-row">
-							<td colspan="2">&nbsp;</td>
+							<td colspan="2"></td>
 							<!-- Add empty cells for space between each set of exam details -->
 						</tr>
 						<%

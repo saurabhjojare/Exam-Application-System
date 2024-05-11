@@ -166,9 +166,9 @@ td.value {
                 <button class="btn btn-danger">Delete</button>
             </td>
         </tr>
-        <tr class="empty-row">
-            <td colspan="2">&nbsp;</td> <!-- Add empty cells for space between each set of exam details -->
-        </tr>
+        <tr class="empty-row" style = "border: 0px solid #fff;">
+							<td colspan="2"></td>
+		</tr>
         <% 
             } // End of loop
         } else { // If no exams are found
