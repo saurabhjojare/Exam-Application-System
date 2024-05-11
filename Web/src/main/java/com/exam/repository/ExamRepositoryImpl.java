@@ -382,4 +382,24 @@ public class ExamRepositoryImpl extends DBConfig implements ExamRepository {
 		return resultList;
 	}
 
+	@Override
+	public String getTimeBySchId(int schId) {
+	    try {
+	        stmt = conn.prepareStatement("SELECT starttime, endtime FROM schedule WHERE schid = ?");
+	        stmt.setInt(1, schId);
+	        rs = stmt.executeQuery();
+	        if (rs.next()) {
+	            String startTime = rs.getString("starttime");
+	            String endTime = rs.getString("endtime");
+	            return startTime + " - " + endTime; // Concatenate start and end time
+	        } else {
+	            return null; // Return null if the schedule is not found
+	        }
+	    } catch (SQLException e) {
+	        System.out.println(e);
+	        return null;
+	    }
+	}
+
+
 }

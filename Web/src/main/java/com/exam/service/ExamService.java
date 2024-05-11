@@ -30,4 +30,6 @@ public interface ExamService {
 	public String getExamNameByExamId(int examId);
 	
 	public List<String[]> getAllResults();
+	
+	public String getTimeBySchId(int schId);
 }

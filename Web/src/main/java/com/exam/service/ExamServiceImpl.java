@@ -121,4 +121,11 @@ public class ExamServiceImpl implements ExamService {
 		return examRepo.getAllResults();
 	}
 
+
+    @Override
+    public String getTimeBySchId(int schId) {
+        return examRepo.getTimeBySchId(schId);
+    }
+
+
 }
