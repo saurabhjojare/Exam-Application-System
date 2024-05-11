@@ -93,6 +93,13 @@ String username = (String) existingSession.getAttribute("username");
 							Schedule</label> <select class="form-select" id="scheduleSelection">
 						</select>
 					</div>
+					
+					<div class="mb-3">
+						<label for="timeSelection" class="form-label">Select
+							Time</label> <select class="form-select" id="timeSelection">
+						</select>
+					</div>
+
 					<div class="mb-3">
 						<label for="subjectSelection" class="form-label">Select
 							Subject</label> <select class="form-select" id="subjectSelection">
@@ -139,8 +146,6 @@ String username = (String) existingSession.getAttribute("username");
 	<%@ include file="footer.jsp"%>
 
 
-
-
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -155,81 +160,150 @@ String username = (String) existingSession.getAttribute("username");
 		crossorigin="anonymous"></script>
 
 	<script>
-    // Function to fetch schedules for the selected exam
-    function fetchSchedules(examId) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'fetchSchedules?examId=' + examId, true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    var schedules = JSON.parse(xhr.responseText);
-                    var scheduleDropdown = document.getElementById('scheduleSelection');
-                    scheduleDropdown.innerHTML = '';
-                    if (schedules.length > 0) {
-                        schedules.forEach(function(schedule) {
-                            var option = new Option(schedule.examDate, schedule.schid);
-                            scheduleDropdown.add(option);
-                        });
-                        // Automatically fetch subjects for the first schedule
-                        fetchSubjects(schedules[0].schid);
-                    } else {
-                        scheduleDropdown.add(new Option('No schedules available', ''));
-                    }
-                } else {
-                    console.error('Error fetching schedules');
-                }
-            }
-        };
-        xhr.send();
-    }
+		// Function to fetch subjects for the selected schedule
+		function fetchSubjects(scheduleId) {
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', 'fetchSubjects?scheduleId=' + scheduleId, true);
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === XMLHttpRequest.DONE) {
+					if (xhr.status === 200) {
+						var subjects = JSON.parse(xhr.responseText);
+						var subjectDropdown = document
+								.getElementById('subjectSelection');
+						subjectDropdown.innerHTML = '';
+						if (subjects.length > 0) {
+							subjects.forEach(function(subject) {
+								var option = new Option(subject.name,
+										subject.id);
+								subjectDropdown.add(option);
+							});
+						} else {
+							subjectDropdown.add(new Option(
+									'No subjects available', ''));
+						}
+					} else {
+						console.error('Error fetching subjects');
+					}
+				}
+			};
+			xhr.send();
+		}
 
-    // Function to fetch subjects for the selected schedule
-    function fetchSubjects(scheduleId) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'fetchSubjects?scheduleId=' + scheduleId, true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    var subjects = JSON.parse(xhr.responseText);
-                    var subjectDropdown = document.getElementById('subjectSelection');
-                    subjectDropdown.innerHTML = '';
-                    if (subjects.length > 0) {
-                        subjects.forEach(function(subject) {
-                            var option = new Option(subject.name, subject.id);
-                            subjectDropdown.add(option);
-                        });
-                    } else {
-                        subjectDropdown.add(new Option('No subjects available', ''));
-                    }
-                } else {
-                    console.error('Error fetching subjects');
-                }
-            }
-        };
-        xhr.send();
-    }
+		// Function to fetch schedules for the selected exam
+		function fetchSchedules(examId) {
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', 'fetchSchedules?examId=' + examId, true);
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === XMLHttpRequest.DONE) {
+					if (xhr.status === 200) {
+						var schedules = JSON.parse(xhr.responseText);
+						var scheduleDropdown = document
+								.getElementById('scheduleSelection');
+						scheduleDropdown.innerHTML = '';
+						if (schedules.length > 0) {
+							schedules.forEach(function(schedule) {
+							    // Extracting only hours and minutes from start and end times
+							    var startTime = schedule.startTime.slice(0, 5); // Extracts the first 5 characters (HH:MM)
+							    var endTime = schedule.endTime.slice(0, 5); // Extracts the first 5 characters (HH:MM)
 
-    // Fetch schedules for the currently selected exam on page load
-    window.addEventListener('load', function() {
-        var examSelection = document.getElementById('examSelection');
-        var selectedExamId = examSelection.value;
-        fetchSchedules(selectedExamId);
-    });
+							    var option = new Option(
+							        schedule.examDate,
+							        schedule.schid
+							    );
+							    scheduleDropdown.add(option);
+							});
 
-    // Fetch schedules when the exam selection changes
-    document.getElementById('examSelection').addEventListener('change', function() {
-        var examId = this.value;
-        fetchSchedules(examId);
-    });
+							// Automatically fetch subjects for the first schedule
+							fetchSubjects(schedules[0].schid);
+						} else {
+							scheduleDropdown.add(new Option(
+									'No schedules available', ''));
+							// If no schedules available, clear subjects dropdown
+							var subjectDropdown = document
+									.getElementById('subjectSelection');
+							subjectDropdown.innerHTML = '';
+							subjectDropdown.add(new Option(
+									'No subjects available', ''));
+						}
+					} else {
+						console.error('Error fetching schedules');
+					}
+				}
+			};
+			xhr.send();
+		}
+		
+		
+		// Function to fetch schedules for the selected exam
+		function fetchTimes(examId) {
+		    var xhr = new XMLHttpRequest();
+		    xhr.open('GET', 'fetchSchedules?examId=' + examId, true);
+		    xhr.onreadystatechange = function() {
+		        if (xhr.readyState === XMLHttpRequest.DONE) {
+		            if (xhr.status === 200) {
+		                var times = JSON.parse(xhr.responseText);
+		                var timeDropdown = document.getElementById('timeSelection');
+		                timeDropdown.innerHTML = '';
+		                if (times.length > 0) {
+		                    times.forEach(function(time) {
+		                        // Extracting only hours and minutes from start and end times
+		                        var startTime = time.startTime.slice(0, 5); // Extracts the first 5 characters (HH:MM)
+		                        var endTime = time.endTime.slice(0, 5); // Extracts the first 5 characters (HH:MM)
 
-    // Fetch subjects when the schedule selection changes
-    document.getElementById('scheduleSelection').addEventListener('change', function() {
-        var scheduleId = this.value;
-        fetchSubjects(scheduleId);
-    });
-</script>
-	
-	
+		                        var option = new Option(
+		                           startTime + ' - ' + endTime,
+		                            time.schid
+		                        );
+		                        timeDropdown.add(option);
+		                    });
+		                } else {
+		                    timeDropdown.add(new Option(
+		                        'No time available', ''));
+		                }
+		            } else {
+		                console.error('Error fetching time');
+		            }
+		        }
+		    };
+		    xhr.send();
+		}
+		
+		// Fetch schedules for the currently selected exam on page load
+		window.addEventListener('load', function() {
+		    var examSelection = document.getElementById('examSelection');
+		    var selectedExamId = examSelection.value;
+		    fetchSchedules(selectedExamId);
+		    fetchTimes(selectedExamId); // Add this line to fetch times for the selected exam
+		});
+
+
+
+
+		// Fetch schedules for the currently selected exam on page load
+		window.addEventListener('load', function() {
+			var examSelection = document.getElementById('examSelection');
+			var selectedExamId = examSelection.value;
+			fetchSchedules(selectedExamId);
+		});
+
+		// Fetch schedules when the exam selection changes
+		document.getElementById('scheduleSelection').addEventListener('change', function() {
+		    var scheduleId = this.value;
+		    fetchSubjects(scheduleId); // Update subjects based on the selected schedule
+		    fetchTimes(scheduleId); // Fetch times based on the selected schedule
+		});
+
+
+
+		// Fetch subjects when the schedule selection changes
+		document.getElementById('scheduleSelection').addEventListener('change',
+				function() {
+					var scheduleId = this.value;
+					fetchSubjects(scheduleId);
+				});
+	</script>
+
+
 
 	<script>
 		document.getElementById('confirmStartExam').addEventListener('click',

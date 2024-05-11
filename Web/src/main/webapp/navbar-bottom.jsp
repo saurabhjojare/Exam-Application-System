@@ -53,6 +53,12 @@
 <!--                 <i class="bi bi-house-door"></i> -->
                 <span>Admin</span>
             </a>
+          </li>
+          <li class="nav-item">
+            <a href="add-admin.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("add-admin.jsp")) ? "active" : "" %>">
+<!--                 <i class="bi bi-house-door"></i> -->
+                <span>Add Admin</span>
+            </a>
             <hr style = "color:#fff; margin-top:10px; margin-bottom:10px;">
           </li>
           <li class="nav-item">

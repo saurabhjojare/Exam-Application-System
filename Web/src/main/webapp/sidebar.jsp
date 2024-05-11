@@ -32,6 +32,12 @@
                         Admin
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="add-admin.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("add-admin.jsp")) ? "active" : "" %>" aria-current="page">
+                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
+                        Add Admin
+                    </a>
+                </li>
                 <hr style = "margin-top: 5px; margin-bottom: 5px;">
                 <li>
                     <a href="add-exam.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("add-exam.jsp")) ? "active" : "" %>"">
