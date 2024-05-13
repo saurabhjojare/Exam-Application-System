@@ -66,7 +66,12 @@ margin-bottom: 52px;
   <div class="row justify-content-center">
     <div class="col-lg-6">
       <div class="signup-form">
+      
       <h1 class="display-6 text-center">Add Admin</h1>
+      <center>
+      <span id="message">${message}</span>
+      </center>
+       
         <p class="lead text-center">Enter details for the new admin.</p>
         <form id="signupForm" action="adminsignup" method="post">
           <div class="form-group mb-3">
@@ -150,13 +155,26 @@ margin-bottom: 52px;
     <script src="js/signupValidation.js"></script>
 		
 		<script>
+		$(document).ready(function() {
+			  $('#signupForm').submit(function(e) {
+			    // Perform all validations before submitting the form
+			    var isValid = validatefullName() && validatePassword() && validatePasswordMatch() && validateContact() && validateEmail();
+			    
+			    if (!isValid) {
+			      // Prevent form submission if any validation fails
+			      e.preventDefault();
+			    }
+			  });
+			});
+		
+		
 		// JavaScript to hide the message after 4 seconds
 		setTimeout(function() {
 			var messageElement = document.getElementById('message');
 			if (messageElement) {
 				messageElement.style.display = 'none';
 			}
-		}, 4000); // 4 seconds
+		}, 60000); // 4 seconds
 	</script>
 </body>
 </html>

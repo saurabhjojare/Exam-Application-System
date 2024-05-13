@@ -29,9 +29,11 @@
 			<div class="loginWidth">
 				<div class="container-sm">
 					<h1 class="display-4 text-center" >Sign Up</h1>
+					<center>
 					<span class = "text-center" id="message">${message}</span>
+					</center>
 					<p class="lead text-center">Create your account to get started.</p>
-					<form name='form' action='signup' method='POST'>
+					<form id="signupForm" name='form' action='signup' method='POST'>
 						<div class="mb-3">
 							<label for="fullName" class="form-label">Full Name</label> 
 							<input
@@ -71,7 +73,9 @@
 							</div>
 							<span class = "text-muted" id = "passwordWarningMsg1"></span>
 						</div>
+						<center>
 						<button type="submit" class="btn btn-primary">Sign Up</button>
+						</center>
 						<div class="login-link mt-3 text-center">
 							Have an account? <a href="login.jsp">Log In</a>
 						</div>
@@ -102,6 +106,20 @@
 <script src="js/userSignupValidation.js"></script>
 
 	<script>
+	// Form submission validation
+	$(document).ready(function() {
+	  $('#signupForm').submit(function(e) {
+	    // Perform all validations before submitting the form
+	    var isValid = validateFullName() && validateUsername() && validatePassword() && validateContact() && validateEmail();
+	    
+	    if (!isValid) {
+	      // Prevent form submission if any validation fails
+	      e.preventDefault();
+	    }
+	  });
+	});
+
+	
 	document.getElementById('showPasswordButton').addEventListener(
 			'click',
 			function() {

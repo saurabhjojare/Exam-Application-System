@@ -57,12 +57,12 @@ body {
 			<button type="submit" class="btn btn-primary btn-block">Sign
 				in</button>
 		</form>
+<!-- 		<div class="text-center mt-3"> -->
+<!-- 			<p> -->
+<!-- 				Don't have an account? <a href="admin-sign-up.jsp">Sign up</a> -->
+<!-- 			</p> -->
+<!-- 		</div> -->
 		<div class="text-center mt-3">
-			<p>
-				Don't have an account? <a href="admin-sign-up.jsp">Sign up</a>
-			</p>
-		</div>
-		<div class="text-center">
 			<p>
 				Are you a user? <a href="login.jsp">Login</a>
 			</p>

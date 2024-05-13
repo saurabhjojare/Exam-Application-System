@@ -52,11 +52,15 @@ public class AdminSignupController extends HttpServlet {
         // Call the service layer to insert the admin
         boolean success = adminService.insertAdmin(admin);
 
-        // Redirect based on insertion result
+        // If registration is successful, display message without redirecting
         if (success) {
-            response.sendRedirect("admin-login.jsp?message=Admin registered successfully");
+            // Set success message in request attribute
+            request.setAttribute("message", "Admin registered successfully");
         } else {
-            response.sendRedirect("admin-signup.jsp?error=Failed to register admin");
+        	request.setAttribute("message", "Admin not registered");
         }
+
+        // Forward the request to the JSP to display the message
+        request.getRequestDispatcher("add-admin.jsp").forward(request, response);
     }
 }
