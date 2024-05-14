@@ -69,6 +69,7 @@ String username = (String) existingSession.getAttribute("username");
 }
 
 
+
 @media only screen and (max-width: 768px) {
 	.attemptExam {
 		width: 100%;
@@ -77,6 +78,7 @@ String username = (String) existingSession.getAttribute("username");
 </style>
 </head>
 <body>
+<div id="toast-container"></div>
 
 	<%@ include file="navbar.jsp"%>
 
@@ -142,7 +144,7 @@ String username = (String) existingSession.getAttribute("username");
 			</div>
 			
 	
-			<div id="toast-container"></div>
+			
 			
 			<div class="modal fade" id="confirmationModal" tabindex="-1"
 				aria-labelledby="confirmationModalLabel" aria-hidden="true">
@@ -312,7 +314,16 @@ String username = (String) existingSession.getAttribute("username");
 
 <script>
 
+//Flag to track if a toast is currently being displayed
+let isToastVisible = false;
+
 function showToast(message) {
+    // If a toast is already visible, return early
+    if (isToastVisible) return;
+
+    // Set the flag to indicate a toast is being displayed
+    isToastVisible = true;
+
     // Create toast element
     var toast = document.createElement('div');
     toast.classList.add('toast');
@@ -327,12 +338,13 @@ function showToast(message) {
         toast.classList.add('show');
     }, 100);
 
-    // Hide toast after 3 seconds
+    // Hide toast after 6 seconds
     setTimeout(function () {
         toast.classList.remove('show');
-        // Remove toast from DOM after transition
+        // Remove toast from DOM after transition and reset the flag
         setTimeout(function () {
             container.removeChild(toast);
+            isToastVisible = false;
         }, 300);
     }, 6000);
 }
@@ -344,7 +356,7 @@ document.getElementById('confirmStartExam').addEventListener('click', function (
     var selectedSubject = document.getElementById('subjectSelection').options[document.getElementById('subjectSelection').selectedIndex].text;
     var selectedTime = document.getElementById('timeSelection').value;
 
- // Get the current date in yyyy-mm-dd format
+    // Get the current date in yyyy-mm-dd format
     var currentDate = new Date().toISOString().split('T')[0];
 
     // Parse the selected date to yyyy-mm-dd format
@@ -358,28 +370,24 @@ document.getElementById('confirmStartExam').addEventListener('click', function (
         console.log("Selected Date:", selectedDate);
         var errorMessage = 'This exam schedule has already passed or the selected date is invalid';
 
-        // If the date is invalid or before the current date, redirect to attempt-exam.jsp
-    window.location.href = 'attempt-exam.jsp?errorMessage=' + encodeURIComponent(errorMessage);
-        // Show alert informing the user that the exam has passed
-//         showToast('This exam schedule has already passed or the selected date is invalid');
+        // Show toast message
+        showToast(errorMessage);
     } else {
         // Encode subject name
         var encodedSubject = encodeURIComponent(selectedSubject);
         // Redirect to the exam page with necessary parameters
         window.location.href = 'exam.jsp?examId=' + selectedExamId + '&date=' + selectedSchedule + '&subname=' + encodedSubject + '&ename=' + encodeURIComponent(selectedExamName) + '&time=' + selectedTime;
     }
-
 });
-
 
 document.addEventListener('DOMContentLoaded', function () {
     var params = new URLSearchParams(window.location.search);
     var errorMessage = params.get('errorMessage');
-    
+
     if (errorMessage) {
         // Check if the toast has already been shown
         var toastShown = sessionStorage.getItem('toastShown');
-        
+
         if (!toastShown) {
             // Show toast message with the error message
             showToast(errorMessage);
@@ -388,7 +396,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 });
-
 
 
 </script>

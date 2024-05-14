@@ -102,7 +102,7 @@ td.value {
 		display: block;
 	}
 	.marginBottom {
-		margin-bottom: 40px;
+		margin-bottom: 45px;
 	}
 }
 
@@ -118,7 +118,7 @@ td.value {
 <body>
 
 	<div class="marginBottom">
-		<div class="d-flex">
+		<div class="d-flex marginBottom">
 			<div class="sidebar">
 				<%@ include file="sidebar.jsp"%>
 			</div>

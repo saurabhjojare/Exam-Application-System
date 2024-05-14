@@ -34,6 +34,14 @@
 <link rel="stylesheet" type="text/css" href="css/login.css">
 
 <style>
+
+  .step {
+        display: none;
+    }
+    .step.active {
+        display: block;
+    }
+    
 .bottom-navbar{
 display: none;
 }
@@ -47,7 +55,7 @@ display: none;
 display: block;
 }
 .marginBottom{
-margin-bottom: 50px;
+margin-bottom: 110px;
 }
     
 }
@@ -64,12 +72,31 @@ margin-bottom: 50px;
 	<!-- Body -->
 	<main>
 		<section class="py-3 text-center">
-			<div class="loginWidth">
+			<div class="loginWidth marginBottom">
 				<div class="container-sm">
 					<h1 class="display-6">Create Exam Schedule</h1>
 					<span id="message">${message}</span>
 					<p class="lead">Schedule a new exam.</p>
 					<form name='form' action='addschedule' method='POST' id="examScheduleForm">
+						<div class="step active" id="step1">
+						<div class="mb-3">
+							<label for="examDate" class="form-label">Exam Date</label> 
+							<input
+								type="date" class="form-control" id="examDate" name="examDate"
+								value="">
+						</div>
+						<div class="mb-3">
+							<label for="startTime" class="form-label">Start Time</label> <input
+								type="time" class="form-control" id="startTime" name="startTime" value="08:00">
+						</div>
+						<div class="mb-3">
+							<label for="endTime" class="form-label">End Time</label> <input
+								type="time" class="form-control" id="endTime" name="endTime" value="10:00">
+								            <button type="button" class="btn btn-primary mt-3" onclick="nextStep()" style = "float:left;">Next</button>
+								
+						</div>
+						</div>
+						<div class="step" id="step2">
 						<div class="mb-3">
 							<label for="examName" class="form-label">Select Exam Name</label>
 							<select class="form-select" id="examName" name="examName">
@@ -86,20 +113,6 @@ margin-bottom: 50px;
 							}
 							%>
 							</select>
-						</div>
-						<div class="mb-3">
-							<label for="examDate" class="form-label">Exam Date</label> 
-							<input
-								type="date" class="form-control" id="examDate" name="examDate"
-								value="">
-						</div>
-						<div class="mb-3">
-							<label for="startTime" class="form-label">Start Time</label> <input
-								type="time" class="form-control" id="startTime" name="startTime" value="08:00">
-						</div>
-						<div class="mb-3">
-							<label for="endTime" class="form-label">End Time</label> <input
-								type="time" class="form-control" id="endTime" name="endTime" value="10:00">
 						</div>
 						<div class="mb-3">
 							<label for="subjectName" class="form-label">Select
@@ -119,9 +132,12 @@ margin-bottom: 50px;
 							</select>
 						</div>
 						<div class = "marginBottom">
+						          <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
+						
 						<button type="submit" class="btn btn-primary">Create
 							Schedule</button>
 							</div>
+							<div class="step" id="step2">
 					</form>
 				</div>
 			</div>
@@ -197,6 +213,27 @@ margin-bottom: 50px;
 
     // Set the value of the input field "endTime" to 2 hours after the current time with minutes set to 00
     document.getElementById("endTime").value = endTime;
+</script>
+
+<script>
+
+function nextStep() {
+    const currentStep = document.querySelector('.step.active');
+    const nextStep = currentStep.nextElementSibling;
+    if (nextStep && nextStep.classList.contains('step')) {
+        currentStep.classList.remove('active');
+        nextStep.classList.add('active');
+    }
+}
+
+function prevStep() {
+    const currentStep = document.querySelector('.step.active');
+    const prevStep = currentStep.previousElementSibling;
+    if (prevStep && prevStep.classList.contains('step')) {
+        currentStep.classList.remove('active');
+        prevStep.classList.add('active');
+    }
+}
 </script>
 
 

@@ -27,6 +27,14 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/login.css">
 <style>
+  .step {
+        display: none;
+    }
+    .step.active {
+        display: block;
+    }
+
+
 .bottom-navbar{
 display: none;
 }
@@ -41,7 +49,7 @@ display: block;
 }
 
 .marginBottom{
-margin-bottom: 32px;
+margin-bottom: 110px;
 }
 
 .ms-2 {
@@ -62,15 +70,19 @@ margin-bottom: 32px;
 
 			<!-- Body -->
 			<main>
-				<section class="py-3 text-center pb-6">
-					<div class="loginWidth pb-4">
+				<section class="py-3 text-center">
+				
+					<div class="loginWidth">
+					
 						<div class="container-sm">
 							<h1 class="display-6">Add Question</h1>
 							<span id="message">${message}</span>
 							<p class="lead">Please enter the details for the new
 								question.</p>
 							<form name='form' action='addquestion' method='POST'>
-								<div class="mb-4">
+							
+							<div class="step active" id="step1">
+								<div class="mb-3">
 									<label for="questionName" class="form-label">Question
 										Name</label> <input type="text" class="form-control" id="questionName"
 										name="questionName" placeholder="Enter question text">
@@ -90,11 +102,18 @@ margin-bottom: 32px;
 										type="text" class="form-control" id="option3" name="option3"
 										placeholder="Enter option 3 text">
 								</div>
-								<div class="mb-3">
+								<div class="mb-0">
 									<label for="option4" class="form-label">Option 4</label> <input
 										type="text" class="form-control" id="option4" name="option4"
 										placeholder="Enter option 4 text">
 								</div>
+								<div class = "marginBottom">
+								<button type="button" class="btn btn-primary mt-3" onclick="nextStep()" style ="float: inline-start;">Next</button>
+							    </div>
+							  
+								</div>
+								
+								<div class="step" id="step2">
 								<div class="mb-3">
 									<label for="answer" class="form-label">Enter Option As
 										Answer</label> <select id="answer" class="form-control" name="answer">
@@ -129,13 +148,18 @@ margin-bottom: 32px;
 								<input type="file" id="fileInput" accept=".csv"
 									style="display: none;">
 								<button type="button" class="btn btn-secondary"
-									id="importQuestionsBtn">Import Bulk Questions</button>
+									id="importQuestionsBtn">Import Bulk</button>
+							   <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
+									
+								</div>
 								</div>
 							</form>
+							
 
 						</div>
 
 					</div>
+				
 
 				</section>
 			</main>
@@ -151,6 +175,24 @@ margin-bottom: 32px;
 
 
 	<script>
+	 function nextStep() {
+         const currentStep = document.querySelector('.step.active');
+         const nextStep = currentStep.nextElementSibling;
+         if (nextStep && nextStep.classList.contains('step')) {
+             currentStep.classList.remove('active');
+             nextStep.classList.add('active');
+         }
+     }
+
+     function prevStep() {
+         const currentStep = document.querySelector('.step.active');
+         const prevStep = currentStep.previousElementSibling;
+         if (prevStep && prevStep.classList.contains('step')) {
+             currentStep.classList.remove('active');
+             prevStep.classList.add('active');
+         }
+     }
+	
 		// Function to handle importing CSV file
 		function handleFileSelect(event) {
 			const file = event.target.files[0];

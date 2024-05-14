@@ -8,6 +8,9 @@
     String username = (String) existingSession.getAttribute("adminUsername");
 %>
 
+<%@ include file="common-resources.jsp" %>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,11 +18,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Add Exam</title>
 <link rel="icon" href="../img/favicon.png" type="image/x-icon">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/login.css">
 
 <style>
+
+   .step {
+        display: none;
+    }
+    .step.active {
+        display: block;
+    }
 
  .loginWidth {
     max-width: 800px; /* Set a maximum width for the login form */
@@ -74,20 +83,11 @@ margin-bottom: 52px;
        
         <p class="lead text-center">Enter details for the new admin.</p>
         <form id="signupForm" action="adminsignup" method="post">
+        <div class="step active" id="step1">
           <div class="form-group mb-3">
             <label for="fullName">Full Name</label>
             <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter Full Name" required>
             <span class = "text-muted" id = "fullNameWarningMsg"></span>
-          </div>
-          <div class="form-group mb-3">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
-          <span class = "text-muted" id = "passwordWarningMsg1"></span>
-          </div>
-          <div class="form-group mb-3">
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
-          <span class = "text-muted" id = "passwordWarningMsg"></span>
           </div>
           <div class="form-group mb-3">
             <label for="contact">Contact</label>
@@ -98,7 +98,22 @@ margin-bottom: 52px;
             <label for="email">Email Address</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email Address" required>
             <span class = "text-muted" id = "emailWarningMsg"></span>
+       
+            
           </div>
+          <div class="form-group mb-3">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
+          <span class = "text-muted" id = "passwordWarningMsg1"></span>
+          </div>
+          <div class="form-group mb-3">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+          <span class = "text-muted" id = "passwordWarningMsg"></span>
+               <button type="button" class="btn btn-primary mt-3" onclick="nextStep()">Next</button>
+          </div>
+          </div>
+          <div class="step" id="step2">
           <div class="form-group mb-3">
             <label for="role">Role</label>
             <select class="form-control" id="role" name="role" required>
@@ -130,7 +145,10 @@ margin-bottom: 52px;
           
           <div class = "text-center">
           <div class = "marginBottom">
+          <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
+          
           <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+          </div>
           </div>
           </div>
           
@@ -148,13 +166,30 @@ margin-bottom: 52px;
 	<%@ include file="navbar-bottom.jsp"%>
 	</div>
 	
-		
-		
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+	
     <script src="js/signupValidation.js"></script>
 		
 		<script>
+		
+		  function nextStep() {
+	          const currentStep = document.querySelector('.step.active');
+	          const nextStep = currentStep.nextElementSibling;
+	          if (nextStep && nextStep.classList.contains('step')) {
+	              currentStep.classList.remove('active');
+	              nextStep.classList.add('active');
+	          }
+	      }
+
+	      function prevStep() {
+	          const currentStep = document.querySelector('.step.active');
+	          const prevStep = currentStep.previousElementSibling;
+	          if (prevStep && prevStep.classList.contains('step')) {
+	              currentStep.classList.remove('active');
+	              prevStep.classList.add('active');
+	          }
+	      }
+		
+		
 		$(document).ready(function() {
 			  $('#signupForm').submit(function(e) {
 			    // Perform all validations before submitting the form

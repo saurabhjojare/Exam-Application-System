@@ -56,7 +56,7 @@
 						<div class="login-link mt-3">
 							Don't have an account? <a href="sign-up.jsp">Sign Up</a>
 						</div>
-						<div class="login-link mt-3">Are you an admin? 
+						<div class="login-link mt-2">Are you an admin? 
 						<a href="admin-login.jsp">Login</a>
 						</div>
 					</form>

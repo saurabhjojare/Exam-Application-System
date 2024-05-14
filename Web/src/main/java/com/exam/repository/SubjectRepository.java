@@ -27,5 +27,7 @@ public interface SubjectRepository {
 	public String getSubjectNameBySchid(int scheduleId);
 	
 	public List<ScheduleModel> getAllSchedule();
+	
+	public int getStidByUserName(String userName);
 
 }

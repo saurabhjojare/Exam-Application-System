@@ -26,6 +26,7 @@ public class SubjectRepositoryImpl extends DBConfig implements SubjectRepository
 		}
 	}
 	
+	
 	@Override
 	public String getSubjectNameBySchid(int scheduleId) {
 	    try {
@@ -183,6 +184,36 @@ public class SubjectRepositoryImpl extends DBConfig implements SubjectRepository
 
 		return stid;
 	}
+	
+	
+	@Override
+	public int getStidByUserName(String userName) {
+        int stid = -1; // Default value if not found
+        String query = "SELECT stid FROM student WHERE username = ?";
+
+        try {
+            // Creating prepared statement
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, userName); // Set the username parameter
+
+            // Execute the query
+            rs = stmt.executeQuery();
+
+            // If a row is returned, extract the stid
+            if (rs.next()) {
+                stid = rs.getInt("stid");
+            }
+
+            // Close resources
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle exception appropriately
+        }
+
+        return stid;
+    }
+
 
 	@Override
 	public boolean addStudentSubject(int studentId, int subjectId) {

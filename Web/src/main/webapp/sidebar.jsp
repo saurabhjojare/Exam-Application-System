@@ -15,11 +15,35 @@
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
+    .sidebar {
+        height: 100vh;
+        overflow-y: hidden;
+    }
+    .sidebar-content {
+        height: 100%;
+        overflow-y: auto;
+        padding-right: 20px; /* Adjust if necessary to prevent content being cut off */
+    }
+    /* Hide scrollbar */
+    .sidebar-content::-webkit-scrollbar {
+        display: none;
+    }
+    .sidebar-content {
+        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+        scrollbar-width: none;  /* Firefox */
+    }
+</style>
 </head>
 <body>
     <div class="d-flex">
         <!-- Sidebar -->
-        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px; height: 100vh;">
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark sidebar" style="width: 280px;">
+        <div class="sidebar-content">
             <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
                 <span class="fs-4">Dashboard</span>
@@ -97,6 +121,7 @@
             </ul>
             <hr>
             <a class="dropdown-item text-center" href="adminlogout">Sign Out</a></li>
+        </div>
         </div>
         
         <!-- Main Content Area -->

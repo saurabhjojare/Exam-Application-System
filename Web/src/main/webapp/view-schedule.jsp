@@ -97,7 +97,7 @@ td.value {
 		display: block;
 	}
 	.marginBottom {
-		margin-bottom: 40px;
+		margin-bottom: 60px;
 	}
 }
 

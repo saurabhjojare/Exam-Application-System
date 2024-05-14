@@ -93,7 +93,7 @@ td.value {
 		display: block;
 	}
 	.marginBottom {
-		margin-bottom: 42px;
+		margin-bottom: 60px;
 	}
 }
 

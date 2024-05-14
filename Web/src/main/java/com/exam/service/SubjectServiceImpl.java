@@ -93,5 +93,10 @@ public class SubjectServiceImpl implements SubjectService {
 	    }
 	}
 
+	@Override
+	public int getStidByUserName(String userName) {
+		return this.subRepo.getStidByUserName(userName);
+	}
+
 
 }

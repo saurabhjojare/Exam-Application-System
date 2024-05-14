@@ -16,6 +16,15 @@
 <link rel="stylesheet" type="text/css" href="css/login.css">
 <link rel="stylesheet" type="text/css" href="css/sign-up.css">
 
+<style>
+    .step {
+        display: none;
+    }
+    .step.active {
+        display: block;
+    }
+</style>
+
 </head>
 <body>
 	<%
@@ -34,6 +43,7 @@
 					</center>
 					<p class="lead text-center">Create your account to get started.</p>
 					<form id="signupForm" name='form' action='signup' method='POST'>
+					<div class="step active" id="step1">
 						<div class="mb-3">
 							<label for="fullName" class="form-label">Full Name</label> 
 							<input
@@ -42,25 +52,29 @@
 								 <span class = "text-muted" id="fullNameWarningMsg"></span>
 						</div>
 						<div class="mb-3">
-							<label for="username" class="form-label">Username</label> <input
-								type="text" class="form-control" id="username" name="username"
-								placeholder="Create a username" required>
-								<span class = "text-muted" id = "usernameWarningMsg"></span>
+							<label for="contact" class="form-label">Contact Number</label> <input
+								type="tel" class="form-control" id="contact" name="contact"
+								placeholder="Enter your contact number" required>
+								<span class = "text-muted" id="contactWarningMsg"></span>
+
 						</div>
+						
 						<div class="mb-3">
 							<label for="email" class="form-label">Email address</label> <input
 								type="email" class="form-control" id="email" name="email"
 								placeholder="Enter your email" required>
 								<span class = "text-muted" id="emailWarningMsg"></span>
 
-
+						<button type="button" class="btn btn-primary mt-3" onclick="nextStep()">Next</button>
 						</div>
+						
+						</div>
+						<div class="step" id="step2">
 						<div class="mb-3">
-							<label for="contact" class="form-label">Contact Number</label> <input
-								type="tel" class="form-control" id="contact" name="contact"
-								placeholder="Enter your contact number" required>
-								<span class = "text-muted" id="contactWarningMsg"></span>
-
+							<label for="username" class="form-label">Username</label> <input
+								type="text" class="form-control" id="username" name="username"
+								placeholder="Create a username" required>
+								<span class = "text-muted" id = "usernameWarningMsg"></span>
 						</div>
 						<div class="mb-3">
 							<label for="signupPassword" class="form-label">Password</label>
@@ -73,11 +87,16 @@
 							</div>
 							<span class = "text-muted" id = "passwordWarningMsg1"></span>
 						</div>
+						
+						
 						<center>
+						<button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
+						
 						<button type="submit" class="btn btn-primary">Sign Up</button>
 						</center>
 						<div class="login-link mt-3 text-center">
 							Have an account? <a href="login.jsp">Log In</a>
+						</div>
 						</div>
 					</form>
 				</div>
@@ -133,6 +152,26 @@
 					this.textContent = 'Show';
 				}
 			});
+	
+	
+	
+	  function nextStep() {
+          const currentStep = document.querySelector('.step.active');
+          const nextStep = currentStep.nextElementSibling;
+          if (nextStep && nextStep.classList.contains('step')) {
+              currentStep.classList.remove('active');
+              nextStep.classList.add('active');
+          }
+      }
+
+      function prevStep() {
+          const currentStep = document.querySelector('.step.active');
+          const prevStep = currentStep.previousElementSibling;
+          if (prevStep && prevStep.classList.contains('step')) {
+              currentStep.classList.remove('active');
+              prevStep.classList.add('active');
+          }
+      }
 			
 			
 			
