@@ -113,6 +113,53 @@ public class ExamRepositoryImpl extends DBConfig implements ExamRepository {
         
         return data;
     }
+	
+	public List<String[]> getAllQuestion(String subjectName) {
+        List<String[]> data = new ArrayList<>();
+        
+        try {
+            // Query to fetch data
+        	String query = "SELECT q.* FROM question q JOIN subjectquestionjoin sqj ON q.qid = sqj.qid JOIN subject s ON sqj.sid = s.sid WHERE s.subjectname = ?";
+
+            
+            // Creating prepared statement
+            stmt = conn.prepareStatement(query);
+            
+         // Set the subjectName parameter
+            stmt.setString(1, subjectName);
+            
+         // Executing query
+            rs = stmt.executeQuery();
+            
+            // Processing result set
+            while (rs.next()) {
+                String[] row = {
+                	String.valueOf(rs.getInt("qid")),
+                    rs.getString("question"),
+                    rs.getString("op1"),
+                    rs.getString("op2"),
+                    rs.getString("op3"),
+                    rs.getString("op4"),
+                    String.valueOf(rs.getInt("answer")),
+                };
+                data.add(row);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Closing resources
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return data;
+    }
+
 
 
 	@Override
@@ -400,6 +447,8 @@ public class ExamRepositoryImpl extends DBConfig implements ExamRepository {
 	        return null;
 	    }
 	}
+	
+	
 
 
 }

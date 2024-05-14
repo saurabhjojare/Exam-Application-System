@@ -23,7 +23,6 @@ if (existingSession == null || existingSession.getAttribute("username") == null)
 String username = (String) existingSession.getAttribute("username");
 %>
 
-
 <!doctype html>
 
 <html lang="en">
@@ -47,6 +46,29 @@ String username = (String) existingSession.getAttribute("username");
 	margin: 0px auto;
 }
 
+#toast-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+}
+
+.toast {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+
 @media only screen and (max-width: 768px) {
 	.attemptExam {
 		width: 100%;
@@ -63,16 +85,18 @@ String username = (String) existingSession.getAttribute("username");
 	<main>
 		<section class="py-5 text-center">
 			<div class="container-sm">
-
+		
 				<span class="lead">Hello, <strong><%=username%></strong></span>
 				<h1>Attempt Exam</h1>
 				<p class="lead">Please select the exam and schedule before
 					starting.</p>
 
 				<div class="attemptExam">
+<!-- 				<form id="examForm" method="post" action="fetchallquestions"> -->
+				
 					<div class="mb-3">
 						<label for="examSelection" class="form-label">Select Exam</label>
-						<select class="form-select" id="examSelection">
+						<select class="form-select" id="examSelection" name="examSelection">
 							<%
 							ExamService examService = new ExamServiceImpl();
 							ExamRepository examRepository = new ExamRepositoryImpl();
@@ -90,24 +114,23 @@ String username = (String) existingSession.getAttribute("username");
 					</div>
 					<div class="mb-3">
 						<label for="scheduleSelection" class="form-label">Select
-							Schedule</label> <select class="form-select" id="scheduleSelection">
+							Schedule</label> <select class="form-select" id="scheduleSelection" name="scheduleSelection">
 						</select>
 					</div>
 					
 					<div class="mb-3">
 						<label for="timeSelection" class="form-label">Select
-							Time</label> <select class="form-select" id="timeSelection">
+							Time</label> <select class="form-select" id="timeSelection" name="timeSelection">
 						</select>
 					</div>
 
 					<div class="mb-3">
 						<label for="subjectSelection" class="form-label">Select
-							Subject</label> <select class="form-select" id="subjectSelection">
+							Subject</label> <select class="form-select" id="subjectSelection" name="subjectSelection">
 							<!-- Subject options will be dynamically populated here -->
 						</select>
 					</div>
-
-
+<!-- 					</form> -->
 
 				</div>
 				<p style="width: 450px; margin: 0px auto;" class="mb-3">Please
@@ -117,7 +140,10 @@ String username = (String) existingSession.getAttribute("username");
 					data-bs-toggle="modal" data-bs-target="#confirmationModal">Start
 					Exam</a>
 			</div>
-
+			
+	
+			<div id="toast-container"></div>
+			
 			<div class="modal fade" id="confirmationModal" tabindex="-1"
 				aria-labelledby="confirmationModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
@@ -146,18 +172,8 @@ String username = (String) existingSession.getAttribute("username");
 	<%@ include file="footer.jsp"%>
 
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-		integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-		crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 
 	<script>
     // Function to make an XMLHttpRequest
@@ -290,12 +306,98 @@ String username = (String) existingSession.getAttribute("username");
     });
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+
+
+<script>
+
+function showToast(message) {
+    // Create toast element
+    var toast = document.createElement('div');
+    toast.classList.add('toast');
+    toast.textContent = message;
+
+    // Append toast to container
+    var container = document.getElementById('toast-container');
+    container.appendChild(toast);
+
+    // Show toast
+    setTimeout(function () {
+        toast.classList.add('show');
+    }, 100);
+
+    // Hide toast after 3 seconds
+    setTimeout(function () {
+        toast.classList.remove('show');
+        // Remove toast from DOM after transition
+        setTimeout(function () {
+            container.removeChild(toast);
+        }, 300);
+    }, 6000);
+}
+
+document.getElementById('confirmStartExam').addEventListener('click', function () {
+    var selectedExamId = document.getElementById('examSelection').value;
+    var selectedExamName = document.getElementById('examSelection').options[document.getElementById('examSelection').selectedIndex].text;
+    var selectedSchedule = document.getElementById('scheduleSelection').options[document.getElementById('scheduleSelection').selectedIndex].text;
+    var selectedSubject = document.getElementById('subjectSelection').options[document.getElementById('subjectSelection').selectedIndex].text;
+    var selectedTime = document.getElementById('timeSelection').value;
+
+ // Get the current date in yyyy-mm-dd format
+    var currentDate = new Date().toISOString().split('T')[0];
+
+    // Parse the selected date to yyyy-mm-dd format
+    var selectedDateParts = selectedSchedule.split('-');
+    var selectedDate = selectedDateParts[0] + '-' + selectedDateParts[1].padStart(2, '0') + '-' + selectedDateParts[2].padStart(2, '0');
+
+    // Check if the selected date is before the current date or if the date is invalid
+    if (selectedDate < currentDate) {
+        // Log current date and selected date for debugging
+        console.log("Current Date:", currentDate);
+        console.log("Selected Date:", selectedDate);
+        var errorMessage = 'This exam schedule has already passed or the selected date is invalid';
+
+        // If the date is invalid or before the current date, redirect to attempt-exam.jsp
+    window.location.href = 'attempt-exam.jsp?errorMessage=' + encodeURIComponent(errorMessage);
+        // Show alert informing the user that the exam has passed
+//         showToast('This exam schedule has already passed or the selected date is invalid');
+    } else {
+        // Encode subject name
+        var encodedSubject = encodeURIComponent(selectedSubject);
+        // Redirect to the exam page with necessary parameters
+        window.location.href = 'exam.jsp?examId=' + selectedExamId + '&date=' + selectedSchedule + '&subname=' + encodedSubject + '&ename=' + encodeURIComponent(selectedExamName) + '&time=' + selectedTime;
+    }
+
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    var params = new URLSearchParams(window.location.search);
+    var errorMessage = params.get('errorMessage');
+    
+    if (errorMessage) {
+        // Check if the toast has already been shown
+        var toastShown = sessionStorage.getItem('toastShown');
+        
+        if (!toastShown) {
+            // Show toast message with the error message
+            showToast(errorMessage);
+            // Set flag to indicate that the toast has been shown
+            sessionStorage.setItem('toastShown', 'true');
+        }
+    }
+});
+
+
+
+</script>
 
 	<script>
-		document.getElementById('confirmStartExam').addEventListener('click',
-				function() {
-					window.location.href = 'exam.jsp';
-				});
+// 		document.getElementById('confirmStartExam').addEventListener('click',
+// 				function() {
+// 					window.location.href = 'exam.jsp';
+// 				});
 	</script>
 </body>
 </html>
