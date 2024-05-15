@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import com.exam.model.StudentModel;
 import com.exam.service.ExamService;
@@ -18,42 +19,46 @@ public class SignUpController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
+	    response.setContentType("text/html");
+	    PrintWriter out = response.getWriter();
 
-		ExamService examService = new ExamServiceImpl();
-		StudentModel studentModel = new StudentModel();
-		
-		String fullName = request.getParameter("fullName");
-		String username = request.getParameter("username");
-		String email = request.getParameter("email");
-		String contact = request.getParameter("contact");
-		String signupPassword = request.getParameter("signupPassword");
-		
-//	    out.println("Full Name: " + fullName);
-//	    out.println("Username: " + username);
-//	    out.println("Email: " + email);
-//	    out.println("Contact: " + contact);
-//	    out.println("Password: " + signupPassword);
-		
-		studentModel.setName(fullName);
-		studentModel.setUsername(username);
-		studentModel.setEmail(email);
-		studentModel.setContact(contact);
-		studentModel.setPassword(signupPassword);
-		
-		boolean result = examService.addUser(studentModel);
-		
-		// Check if the result is true or false
-		if (result) {
-		    // If the addition was successful, redirect to login.jsp
-		    response.sendRedirect("login.jsp");
-		} else {
-		    // If the addition failed, set an appropriate message and forward to sign-up.jsp
-		    String message = "Something Went Wrong";
-		    request.setAttribute("message", message);
-		    request.getRequestDispatcher("sign-up.jsp").forward(request, response);
-		}
+	    ExamService examService = new ExamServiceImpl();
+	    StudentModel studentModel = new StudentModel();
+
+	    String fullName = request.getParameter("fullName");
+	    String username = request.getParameter("username");
+	    String email = request.getParameter("email");
+	    String contact = request.getParameter("contact");
+	    String signupPassword = request.getParameter("signupPassword");
+
+	    // Check if an existing session exists
+	    HttpSession existingSession = request.getSession(false);
+	    if (existingSession != null) {
+	        // If an existing session exists, invalidate it
+	        existingSession.invalidate();
+	    }
+
+	    // Create a new session
+	    HttpSession session = request.getSession();
+	    session.setAttribute("username", username);
+
+	    studentModel.setName(fullName);
+	    studentModel.setUsername(username);
+	    studentModel.setEmail(email);
+	    studentModel.setContact(contact);
+	    studentModel.setPassword(signupPassword);
+
+	    boolean result = examService.addUser(studentModel);
+
+	    // Check if the result is true or false
+	    if (result) {
+	        response.sendRedirect("selectSubject");
+	    } else {
+	        // If the addition failed, set an appropriate message and forward to sign-up.jsp
+	        String message = "Something Went Wrong";
+	        request.setAttribute("message", message);
+	        request.getRequestDispatcher("sign-up.jsp").forward(request, response);
+	    }
 	}
 
 

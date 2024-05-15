@@ -1,68 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.List"%>
-<%@ page import="com.exam.repository.ExamRepository"%>
-<%@ page import="com.exam.repository.ExamRepositoryImpl"%>
-<%@ page import="com.exam.service.SubjectService"%>
-<%@ page import="com.exam.service.SubjectServiceImpl"%>
-<%@ page import="com.exam.repository.SubjectRepository"%>
-<%@ page import="com.exam.repository.SubjectRepositoryImpl"%>
-<%@ page import="com.exam.service.ExamService"%>
-<%@ page import="com.exam.service.ExamServiceImpl"%>
-<%@ page import="com.exam.model.ExamModel"%>
-<%@ page import="com.exam.model.ScheduleModel"%>
+<%@ include file="existingSession.jsp" %>
+<%@ include file="common-resources.jsp" %>
 
-	<%
-    HttpSession existingSession = request.getSession(false);
-    if (existingSession == null || existingSession.getAttribute("adminUsername") == null) {
-        response.sendRedirect("admin-login.jsp");
-    }
-    String username = (String) existingSession.getAttribute("adminUsername");
-%>
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Add Schedule</title>
-<link rel="icon" href="../img/favicon.png" type="image/x-icon">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-	crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/login.css">
+<link rel="stylesheet" type="text/css" href="css/addSchedule.css">
+<link rel="stylesheet" type="text/css" href="css/nextStep.css">
 
-<style>
-
-  .step {
-        display: none;
-    }
-    .step.active {
-        display: block;
-    }
-    
-.bottom-navbar{
-display: none;
-}
-
-/* Hide sidebar on screens smaller than lg */
-@media (max-width: 992px) {
-    .sidebar {
-        display: none;
-    }
-    .bottom-navbar{
-display: block;
-}
-.marginBottom{
-margin-bottom: 110px;
-}
-    
-}
-</style>
 </head>
 <body>
-
 
 	<div class="d-flex">
 	    <div class="sidebar">
@@ -137,7 +86,7 @@ margin-bottom: 110px;
 						<button type="submit" class="btn btn-primary">Create
 							Schedule</button>
 							</div>
-							<div class="step" id="step2">
+							</div>
 					</form>
 				</div>
 			</div>
@@ -150,94 +99,9 @@ margin-bottom: 110px;
 	</div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-		
-		<script>
-		// JavaScript to hide the message after 4 seconds
-		setTimeout(function() {
-			var messageElement = document.getElementById('message');
-			if (messageElement) {
-				messageElement.style.display = 'none';
-			}
-		}, 4000); // 4 seconds
-	</script>
-		
-		<script>
-    // Get tomorrow's date
-    var tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-
-    // Format date as YYYY-MM-DD
-    var dd = String(tomorrow.getDate()).padStart(2, '0');
-    var mm = String(tomorrow.getMonth() + 1).padStart(2, '0'); // January is 0!
-    var yyyy = tomorrow.getFullYear();
-
-    tomorrow = yyyy + '-' + mm + '-' + dd;
-
-    // Set the value of the input field to tomorrow's date
-    document.getElementById("examDate").value = tomorrow;
-</script>
-
-<script>
-    // Get current time
-    var now = new Date();
-
-    // Set minutes to 0
-    now.setMinutes(0);
-
-    // Format time as HH:00
-    var hh = String(now.getHours()).padStart(2, '0');
-    var mm = '00';
-
-    var currentTime = hh + ':' + mm;
-
-    // Set the value of the input field "startTime" to the current time with minutes set to 00
-    document.getElementById("startTime").value = currentTime;
-</script>
-
-
-<script>
-    // Get current time
-    var now = new Date();
-
-    // Add 2 hours to the current time
-    now.setHours(now.getHours() + 2);
-    now.setMinutes(0); // Set minutes to 0
-
-    // Format time as HH:MM
-    var hh = String(now.getHours()).padStart(2, '0');
-    var mm = String(now.getMinutes()).padStart(2, '0');
-
-    var endTime = hh + ':' + mm;
-
-    // Set the value of the input field "endTime" to 2 hours after the current time with minutes set to 00
-    document.getElementById("endTime").value = endTime;
-</script>
-
-<script>
-
-function nextStep() {
-    const currentStep = document.querySelector('.step.active');
-    const nextStep = currentStep.nextElementSibling;
-    if (nextStep && nextStep.classList.contains('step')) {
-        currentStep.classList.remove('active');
-        nextStep.classList.add('active');
-    }
-}
-
-function prevStep() {
-    const currentStep = document.querySelector('.step.active');
-    const prevStep = currentStep.previousElementSibling;
-    if (prevStep && prevStep.classList.contains('step')) {
-        currentStep.classList.remove('active');
-        prevStep.classList.add('active');
-    }
-}
-</script>
-
-
-
+<script src="js/nextButton.js"></script>
+<script src="js/hideMessge.js"></script>
+<script src="js/addSchedule.js"></script>
 
 </body>
 </html>

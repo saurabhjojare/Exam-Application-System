@@ -48,11 +48,13 @@ public class AssignSubjectController extends HttpServlet {
          
      	if (success) {
             request.setAttribute("message", "Subject Assigned");
+            response.sendRedirect("login.jsp");
         } else {
             request.setAttribute("message", "Something Wrong");
+            request.getRequestDispatcher("select-subject.jsp").forward(request, response);
         }
 
-        request.getRequestDispatcher("select-subject.jsp").forward(request, response);
+//        request.getRequestDispatcher("select-subject.jsp").forward(request, response);
         
 //         if (success) {
 //             out.println("Student subject association added successfully.");

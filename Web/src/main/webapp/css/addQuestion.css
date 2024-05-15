@@ -1,0 +1,82 @@
+.bottom-navbar{
+display: none;
+}
+
+/* Hide sidebar on screens smaller than lg */
+@media (max-width: 992px) {
+    .sidebar {
+        display: none;
+    }
+    .bottom-navbar{
+display: block;
+}
+
+.marginBottom{
+margin-bottom: 110px;
+}
+
+.ms-2 {
+    margin-left: 0px !important;
+}
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /* Default styles for all screens */
+  .loginWidth {
+    max-width: 400px; /* Set a maximum width for the login form */
+    margin: 0 auto; /* Center the form horizontally */
+  }
+  
+  .form-label {
+    float: left;
+  }
+
+  /* Styles for mobile screens (smaller than 768px) */
+  @media screen and (max-width: 568px) {
+    .loginWidth {
+      width: 100%; /* Set width to 90% of viewport on mobile */
+      max-width: 100%;
+    }
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  html, body {
+	height: 100%;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+main {
+	flex: 1;
+}
+/* Sticky footer styles */
+.footer {
+	flex-shrink: 0;
+}
+
+/* Additional style for centering the text */
+        .navbar-text {
+            margin: auto;
+        }

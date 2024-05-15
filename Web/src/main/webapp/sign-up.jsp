@@ -1,29 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ include file="common-resources.jsp" %>
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sign Up</title>
-<link rel="icon" href="../img/favicon.png" type="image/x-icon">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-	crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/login.css">
-<link rel="stylesheet" type="text/css" href="css/sign-up.css">
-
-<style>
-    .step {
-        display: none;
-    }
-    .step.active {
-        display: block;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="css/signUp.css">
+<link rel="stylesheet" type="text/css" href="css/nextStep.css">
 
 </head>
 <body>
@@ -59,14 +42,15 @@
 
 						</div>
 						
-						<div class="mb-3">
+						<div class="mb-0">
 							<label for="email" class="form-label">Email address</label> <input
 								type="email" class="form-control" id="email" name="email"
 								placeholder="Enter your email" required>
 								<span class = "text-muted" id="emailWarningMsg"></span>
 
-						<button type="button" class="btn btn-primary mt-3" onclick="nextStep()">Next</button>
+						
 						</div>
+						<button type="button" class="btn btn-primary mt-3" onclick="nextStep()">Next</button>
 						
 						</div>
 						<div class="step" id="step2">
@@ -107,81 +91,9 @@
 	<%@ include file="footer.jsp"%>
 
 
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-		integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-		crossorigin="anonymous"></script>
-
-
-<script src="js/userSignupValidation.js"></script>
-
-	<script>
-	// Form submission validation
-	$(document).ready(function() {
-	  $('#signupForm').submit(function(e) {
-	    // Perform all validations before submitting the form
-	    var isValid = validateFullName() && validateUsername() && validatePassword() && validateContact() && validateEmail();
-	    
-	    if (!isValid) {
-	      // Prevent form submission if any validation fails
-	      e.preventDefault();
-	    }
-	  });
-	});
-
-	
-	document.getElementById('showPasswordButton').addEventListener(
-			'click',
-			function() {
-				const passwordInput = document
-						.getElementById('signupPassword');
-				if (passwordInput.type === 'password') {
-					passwordInput.type = 'text';
-					this.textContent = 'Hide';
-				} else {
-					passwordInput.type = 'password';
-					this.textContent = 'Show';
-				}
-			});
-	
-	
-	
-	  function nextStep() {
-          const currentStep = document.querySelector('.step.active');
-          const nextStep = currentStep.nextElementSibling;
-          if (nextStep && nextStep.classList.contains('step')) {
-              currentStep.classList.remove('active');
-              nextStep.classList.add('active');
-          }
-      }
-
-      function prevStep() {
-          const currentStep = document.querySelector('.step.active');
-          const prevStep = currentStep.previousElementSibling;
-          if (prevStep && prevStep.classList.contains('step')) {
-              currentStep.classList.remove('active');
-              prevStep.classList.add('active');
-          }
-      }
-			
-			
-			
-			// JavaScript to hide the message after 4 seconds
-	setTimeout(function() {
-		var messageElement = document.getElementById('message');
-		if (messageElement) {
-			messageElement.style.display = 'none';
-		}
-	}, 4000); // 4 seconds
-	</script>
+	 <script src="js/userSignupValidation.js"></script>	
+	 <script src="js/nextButton.js"></script>
+	 <script src="js/hideMessge.js"></script>
+	 <script src="js/showPassword.js"></script>
 </body>
 </html>

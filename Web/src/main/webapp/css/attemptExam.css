@@ -1,0 +1,51 @@
+ /* Default styles for all screens */
+  .loginWidth {
+    max-width: 400px; /* Set a maximum width for the login form */
+    margin: 0 auto; /* Center the form horizontally */
+  }
+  
+  .form-label {
+    float: left;
+  }
+
+  /* Styles for mobile screens (smaller than 768px) */
+  @media screen and (max-width: 568px) {
+    .loginWidth {
+      width: 100%; /* Set width to 90% of viewport on mobile */
+      max-width: 100%;
+    }
+  }
+
+
+.attemptExam {
+	width: 500px;
+	margin: 0px auto;
+}
+
+#toast-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+}
+
+.toast {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+@media only screen and (max-width: 768px) {
+	.attemptExam {
+		width: 100%;
+	}
+}

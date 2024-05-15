@@ -6,36 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bottom Navbar</title>
-<link rel="icon" href="../img/favicon.png" type="image/x-icon">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<style>
-/* Custom CSS for the body content */
-.body-content {
-    margin-top: 70px; /* Adjust margin top to accommodate the navbar */
-    padding: 20px;
-}
-
-.navbar-bottom {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    z-index: 1000; /* Ensure navbar is on top of other content */
-}
-
-/* Additional styling for the bottom navbar */
-.navbar-nav {
-    justify-content: space-around; /* Evenly space the items */
-    width: 100%; /* Ensure full width */
-}
-
-@media (max-width: 576px) {
-    .navbar-bottom {
-        height: auto;
-    }
-}
-
-</style>
+<link rel="stylesheet" type="text/css" href="css/navbarBottom.css">
 </head>
 <body>
     <!-- Navbar -->

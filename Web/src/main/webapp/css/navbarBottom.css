@@ -1,0 +1,25 @@
+
+/* Custom CSS for the body content */
+.body-content {
+    margin-top: 70px; /* Adjust margin top to accommodate the navbar */
+    padding: 20px;
+}
+
+.navbar-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure navbar is on top of other content */
+}
+
+/* Additional styling for the bottom navbar */
+.navbar-nav {
+    justify-content: space-around; /* Evenly space the items */
+    width: 100%; /* Ensure full width */
+}
+
+@media (max-width: 576px) {
+    .navbar-bottom {
+        height: auto;
+    }
+}

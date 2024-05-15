@@ -1,4 +1,4 @@
- // Function to validate the username
+ // Function to validate the Full Name
   function validatefullName() {
     var fullNameInput = document.getElementById('fullName').value.trim();
     var fullNameWarningMsg = document.getElementById('fullNameWarningMsg');
@@ -56,8 +56,6 @@ function validateContact() {
   return isValid; // Return the validation result
 }
 
-  
-
   //Function to validate the email address
 function validateEmail() {
   var email = document.getElementById('email').value.trim();
@@ -97,3 +95,17 @@ function validateEmail() {
       }
     });
   });
+  
+  
+  $(document).ready(function() {
+			  $('#signupForm').submit(function(e) {
+			    // Perform all validations before submitting the form
+			    var isValid = validatefullName() && validatePassword() && validatePasswordMatch() && validateContact() && validateEmail();
+			    
+			    if (!isValid) {
+			      // Prevent form submission if any validation fails
+			      e.preventDefault();
+			    }
+			  });
+			});
+		

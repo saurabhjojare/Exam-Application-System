@@ -1,0 +1,52 @@
+
+html, body {
+	height: 100%;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+main {
+	flex: 1;
+}
+/* Sticky footer styles */
+.footer {
+	flex-shrink: 0;
+}
+
+/* Additional style for centering the text */
+        .navbar-text {
+            margin: auto;
+        }
+
+
+
+.navbar-brand {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+#countdown {
+    color: white;
+    width:190px;
+    
+}
+
+@media (max-width: 991px) {
+.navbar-nav {
+        text-align: center;
+     
+    }
+    
+    #countdown {
+     width:100%;
+    
+    text-align: center;
+    
+}
+}
+
+

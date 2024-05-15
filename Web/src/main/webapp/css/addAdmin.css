@@ -1,0 +1,75 @@
+
+ .loginWidth {
+    max-width: 800px; /* Set a maximum width for the login form */
+    margin: 0 auto; /* Center the form horizontally */
+  }
+    
+        
+.bottom-navbar{
+display: none;
+}
+
+
+  
+  
+  .form-label {
+    float: left;
+  }
+
+  
+  
+  
+  /* Hide sidebar on screens smaller than lg */
+@media (max-width: 992px) {
+    .sidebar {
+        display: none;
+    }
+    .bottom-navbar{
+display: block;
+}
+
+.marginBottom{
+margin-bottom: 48px;
+}    
+
+ .loginWidth {
+      width: 50%; /* Set width to 90% of viewport on mobile */
+      max-width: 100%;
+    }
+}
+  
+  
+  @media (max-width: 700px) {
+	.loginWidth {
+      width: 100%; /* Set width to 90% of viewport on mobile */
+      max-width: 100%;
+    }
+	}
+  
+  
+  
+  
+  
+  
+  
+  html, body {
+	height: 100%;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+main {
+	flex: 1;
+}
+/* Sticky footer styles */
+.footer {
+	flex-shrink: 0;
+}
+
+/* Additional style for centering the text */
+        .navbar-text {
+            margin: auto;
+        }

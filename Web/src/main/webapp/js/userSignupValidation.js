@@ -69,7 +69,6 @@ function validateEmail() {
   return isValid; // Return the validation result
 }
 
-
 // Event listeners
 document.getElementById('fullName').addEventListener('input', validateFullName);
 document.getElementById('username').addEventListener('input', validateUsername);
@@ -86,3 +85,16 @@ document.getElementById('signupPassword').addEventListener('blur', validatePassw
 document.getElementById('contact').addEventListener('blur', validateContact);
 document.getElementById('email').addEventListener('blur', validateEmail);
 
+
+$(document).ready(function() {
+			  $('#signupForm').submit(function(e) {
+			    // Perform all validations before submitting the form
+			    var isValid = validateFullName() && validatePassword() && validateContact() && validateEmail() && validateUsername();
+			    
+			    if (!isValid) {
+			      // Prevent form submission if any validation fails
+			      e.preventDefault();
+			    }
+			  });
+			});
+			
