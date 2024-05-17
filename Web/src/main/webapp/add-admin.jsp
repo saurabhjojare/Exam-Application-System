@@ -39,19 +39,19 @@
 												<div class="form-group mb-3">
 													<label for="fullName">Full Name</label> <input type="text"
 														class="form-control" id="fullName" name="fullName"
-														placeholder="Enter Full Name" required> <span
+														placeholder="Enter Full Name" autocomplete="off" required> <span
 														class="text-muted" id="fullNameWarningMsg"></span>
 												</div>
 												<div class="form-group mb-3">
 													<label for="contact">Contact</label> <input type="text"
 														class="form-control" id="contact" name="contact"
-														placeholder="Enter Contact" required> <span
+														placeholder="Enter Contact" autocomplete="off" required> <span
 														class="text-muted" id="contactWarningMsg"></span>
 												</div>
 												<div class="form-group mb-3">
 													<label for="email">Email Address</label> <input
 														type="email" class="form-control" id="email" name="email"
-														placeholder="Enter Email Address" required> <span
+														placeholder="Enter Email Address" autocomplete="off" required> <span
 														class="text-muted" id="emailWarningMsg"></span>
 
 
@@ -59,13 +59,13 @@
 												<div class="form-group mb-3">
 													<label for="password">Password</label> <input
 														type="password" class="form-control" id="password"
-														name="password" placeholder="Enter Password" required>
+														name="password" placeholder="Enter Password" autocomplete="new-password" required>
 													<span class="text-muted" id="passwordWarningMsg1"></span>
 												</div>
 												<div class="form-group mb-3">
 													<label for="confirmPassword">Confirm Password</label> <input
 														type="password" class="form-control" id="confirmPassword"
-														name="confirmPassword" placeholder="Confirm Password"
+														name="confirmPassword" placeholder="Confirm Password" autocomplete="new-password" 
 														required> <span class="text-muted"
 														id="passwordWarningMsg"></span>
 
@@ -111,8 +111,7 @@
 														<button type="button" class="btn btn-secondary"
 															onclick="prevStep()">Back</button>
 
-														<button type="submit" class="btn btn-primary btn-block">Sign
-															Up</button>
+														<button type="submit" class="btn btn-primary btn-block">Add Admin</button>
 													</div>
 												</div>
 											</div>

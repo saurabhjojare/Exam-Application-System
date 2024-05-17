@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Attempt Exam</title>
 <link rel="stylesheet" type="text/css" href="css/attemptExam.css">
+<link rel="stylesheet" type="text/css" href="css/nextStep.css">
 </head>
 <body>
 <div id="toast-container"></div>
@@ -21,7 +22,7 @@
 		<section class="py-5 text-center">
 			<div class="container-sm">
 		
-				<span class="lead">Hello, <strong><%=username%></strong></span>
+<%-- 				<span class="lead" style="display:none;">Hello, <strong><%=username%></strong></span> --%>
 				<h1>Attempt Exam</h1>
 				<p class="lead">Please select the exam and schedule before
 					starting.</p>
@@ -29,6 +30,9 @@
 				<div class="attemptExam">
 <!-- 				<form id="examForm" method="post" action="fetchallquestions"> -->
 				
+				
+
+				<div class="step active" id="step1">
 					<div class="mb-3">
 						<label for="examSelection" class="form-label">Select Exam</label>
 						<select class="form-select" id="examSelection" name="examSelection">
@@ -47,33 +51,54 @@
 
 						</select>
 					</div>
+					
+					
 					<div class="mb-3">
 						<label for="scheduleSelection" class="form-label">Select
 							Schedule</label> <select class="form-select" id="scheduleSelection" name="scheduleSelection">
+					   <option value="" disabled selected>Loading</option>
+							
 						</select>
 					</div>
+					
+					<input type="hidden" id="scheduleId" name="scheduleId" value="">
+					
+					<div class="mb-0">
+						<label for="subjectSelection" class="form-label">Select
+							Subject</label> <select class="form-select" id="subjectSelection" name="subjectSelection">
+					    <option value="" disabled selected>Loading</option>
+							
+							<!-- Subject options will be dynamically populated here -->
+						</select>
+					</div>
+					
+					
+					<button type="button" class="btn btn-primary mt-2 mb-3" onclick="nextStep()" style="float: inline-start;">Next</button>
+					</div>
+					
+					
+					<div class="step" id="step2">
 					
 					<div class="mb-3">
 						<label for="timeSelection" class="form-label">Select
 							Time</label> <select class="form-select" id="timeSelection" name="timeSelection">
+							        <option value="" disabled selected>Loading</option>	
 						</select>
 					</div>
-
-					<div class="mb-3">
-						<label for="subjectSelection" class="form-label">Select
-							Subject</label> <select class="form-select" id="subjectSelection" name="subjectSelection">
-							<!-- Subject options will be dynamically populated here -->
-						</select>
-					</div>
+					
+					
 <!-- 					</form> -->
 
-				</div>
+				
 				<p style="width: 450px; margin: 0px auto;" class="mb-3">Please
 					ensure you have a stable internet connection and a quiet
 					environment before proceeding.</p>
 				<a href="exam.jsp" class="btn btn-primary" id="startExamButton"
 					data-bs-toggle="modal" data-bs-target="#confirmationModal">Start
 					Exam</a>
+					<button type="button" class="btn btn-secondary"
+											onclick="prevStep()">Back</button>
+			</div>
 			</div>
 			
 	
@@ -106,6 +131,7 @@
 
 	<%@ include file="footer.jsp"%>
 	
+	<script src="js/nextButton.js"></script>
 	<script src="js/attemptExam.js"></script>
 	<script src="js/examToast.js"></script>
 </body>

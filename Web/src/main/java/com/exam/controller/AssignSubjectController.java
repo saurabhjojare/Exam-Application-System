@@ -3,7 +3,6 @@ package com.exam.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import com.exam.model.SubjectModel;
 import com.exam.service.SubjectService;
 import com.exam.service.SubjectServiceImpl;
 
@@ -36,37 +35,21 @@ public class AssignSubjectController extends HttpServlet {
         // Fetch subject ID using the subject name
         int subjectId = sv.getSubjectIdBySubjectName(subjectName);
         int studentId = sv.getStidByUserName(studentName);
-
-        // Print subject name and user ID for debugging purposes
-        out.println("Subject Name: " + subjectName);
-        out.println("User Name: " + studentName);
-        out.println("Subject ID: " + subjectId);
-        out.println("Student ID: " + studentId);
   
-         // Call service method to add student subject association
-         boolean success = sv.addStudentSubjectAssociation(studentId, subjectId);
-         
-     	if (success) {
-            request.setAttribute("message", "Subject Assigned");
-            response.sendRedirect("login.jsp");
-        } else {
-            request.setAttribute("message", "Something Wrong");
-            request.getRequestDispatcher("select-subject.jsp").forward(request, response);
-        }
-
-//        request.getRequestDispatcher("select-subject.jsp").forward(request, response);
+        // Call service method to add student subject association
+        boolean success = sv.addStudentSubjectAssociation(studentId, subjectId);
         
-//         if (success) {
-//             out.println("Student subject association added successfully.");
-//         } else {
-//             out.println("Failed to add student subject association.");
-//         }
+        HttpSession session = request.getSession();
+        if (success) {
+            session.setAttribute("message", "Subject Assigned");
+        } else {
+            session.setAttribute("message", "Something Wrong");
+        }
+        response.sendRedirect("select-subject.jsp");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         doGet(request, response);
     }
-
 }

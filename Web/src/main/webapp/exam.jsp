@@ -2,10 +2,10 @@
 <%@ include file="userSession.jsp" %>
 
 <%
-String ExamName = request.getParameter("ename");
-String ScheduleDate = request.getParameter("date");
-String SubjectName = request.getParameter("subname");
-String SelectedTime = request.getParameter("time");
+String ExamName = request.getParameter("ename") != null ? request.getParameter("ename") : "Default Exam";
+String ScheduleDate = request.getParameter("date") != null ? request.getParameter("date") : "Default Date";
+String SubjectName = request.getParameter("subname") != null ? request.getParameter("subname") : "Default Subject";
+String SelectedTime = request.getParameter("time") != null ? request.getParameter("time") : "Default Time";
 %>
 
 <%

@@ -1,0 +1,43 @@
+
+#profile {
+    
+    width: 240px;cursor: pointer;
+}
+
+.profile span {  
+   cursor: pointer;
+}
+
+
+
+a {
+	text-decoration: none;
+	margin-left: 0px;
+}
+
+
+@media (min-width: 991px) {
+.jumbWidth {
+	width: 55%;
+}
+	
+}
+
+@media (max-width: 991px) {
+	#profile {
+   text-align: center;
+    width: 100%;
+}
+
+.profile {
+	 text-align: center;
+    width: 100%;
+}
+
+a {
+	text-decoration: none;
+	margin-left: 0px;
+}
+
+
+	}

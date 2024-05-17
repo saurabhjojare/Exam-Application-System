@@ -16,31 +16,38 @@
 <%-- 	 <span class="text-white userName"><%=username%></span> --%>
      <span id="countdown"></span>
 	 <% } %>
+	 <% if(currentPage.equals("/profile.jsp")  || currentPage.equals("/select-subject.jsp") || currentPage.equals("/attempt-exam.jsp")) { %>
+	 <div class = "profileName">
+     <span class ="text-white"><a href="profile.jsp" class="text-decoration-none text-white">saurabhjojare</a></span>
+     </div>
+	 <% } %>
 		<div class="p-4 container">
-		            
-		
 			<!-- Centered Brand -->
 			<% if (request.getAttribute("showNavbarBrand") != null) { %>
-            <a href="home.jsp" class="navbar-brand text-white" style="font-size: 25px; font-weight: 300;">Exam Application System</a>
+            <a href="home.jsp" class="navbar-brand text-white" style="font-size: 25px; font-weight: 300;">QuizConnect</a>
         <% } else { %>
-            <span class="navbar-brand text-white" style="font-size: 25px; font-weight: 300;">Exam Application System</span>
+            <span class="navbar-brand text-white" style="font-size: 25px; font-weight: 300;">QuizConnect</span>
         <% } %>
 		</div>
 		<!-- Right-aligned items -->
 		<div class="navbar-collapse justify-content-end">
 			<ul class="navbar-nav">
+				<% if(currentPage.equals("/profile.jsp") || currentPage.equals("/add-subject.jsp") || currentPage.equals("/student-result.jsp")) { %>
+					<li class="nav-item">
+						<a class="nav-link text-white" href="attempt-exam.jsp" style = "white-space: nowrap;">Exam</a>
+					</li>
+				<% } %>
 				
-				<% if(currentPage.equals("/exam.jsp") || currentPage.equals("/attempt-exam.jsp") || currentPage.equals("/result.jsp")) { %>
+				<% if(currentPage.equals("/exam.jsp") || currentPage.equals("/attempt-exam.jsp") || currentPage.equals("/result.jsp") || currentPage.equals("/select-subject.jsp")) { %>
 					<li class="nav-item">
 						<a class="nav-link text-white" href="logout" style = "white-space: nowrap;">Sign Out</a>
 						
 					</li>
 				<% } %>
+				
 			</ul>
 		</div>
 	</nav>
-
-		
     
     <script src="js/Timer.js"></script>
 </body>

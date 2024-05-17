@@ -1,4 +1,3 @@
-
 html, body {
 	height: 100%;
 }
@@ -11,6 +10,18 @@ body {
 main {
 	flex: 1;
 }
+
+#profile {
+    display: flex;
+    width: 230px;
+}
+
+.profileName {
+	width:250px;
+}
+
+
+
 /* Sticky footer styles */
 .footer {
 	flex-shrink: 0;
@@ -20,8 +31,6 @@ main {
         .navbar-text {
             margin: auto;
         }
-
-
 
 .navbar-brand {
 	position: absolute;
@@ -35,6 +44,7 @@ main {
     
 }
 
+
 @media (max-width: 991px) {
 .navbar-nav {
         text-align: center;
@@ -43,10 +53,22 @@ main {
     
     #countdown {
      width:100%;
-    
     text-align: center;
-    
 }
+
+#profile {
+   text-align: center;
+    width: 100%;
 }
+
+.profileName {
+	text-align: center;
+    width: 100%;
+}
+
+
+}
+
+
 
 

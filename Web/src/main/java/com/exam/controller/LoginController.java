@@ -41,7 +41,7 @@ public class LoginController extends HttpServlet {
             session = request.getSession();
             session.setMaxInactiveInterval(60 * 60); // Set the session timeout to one hour
 
-            response.sendRedirect("attempt-exam.jsp");
+            response.sendRedirect("profile.jsp");
           
         } else {
             message = "User Does Not Exist";

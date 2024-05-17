@@ -11,8 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import com.exam.repository.SubjectRepository;
-import com.exam.repository.SubjectRepositoryImpl;
 import com.exam.service.SubjectService;
 import com.exam.service.SubjectServiceImpl;
 
@@ -33,20 +31,23 @@ public class SelectSubjectController extends HttpServlet {
         SubjectService subjectService = new SubjectServiceImpl();
         List<String> listSubject = subjectService.getAllSubjects();
 
+        // Get the message from the session and remove it
+        HttpSession session = request.getSession();
+        String message = (String) session.getAttribute("message");
+        session.removeAttribute("message");
+
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
+            request.getRequestDispatcher("common-resources.jsp").include(request, response);
+            request.getRequestDispatcher("userSession.jsp").include(request, response);
             out.println("<!doctype html>");
             out.println("<html lang=\"en\">");
             out.println("<head>");
             out.println("<meta charset=\"utf-8\">");
             out.println("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
             out.println("<title>Select Subject</title>");
-            out.println("<link rel=\"icon\" href=\"../img/favicon.png\" type=\"image/x-icon\">");
-            out.println("<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH\" crossorigin=\"anonymous\">");
-            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/style.css\">");
-            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/login.css\">");
-            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/sign-up.css\">");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/selectSubject.css\">");
             out.println("</head>");
             out.println("<body>");
             request.getRequestDispatcher("navbar.jsp").include(request, response);
@@ -58,7 +59,9 @@ public class SelectSubjectController extends HttpServlet {
             out.println("<h1 class=\"display-4 text-center\">Select Subject</h1>");
             out.println("<center>");
             out.println("<span class=\"\" style=\"font-size: 1.9rem;font-weight: 300;\">Hello, <strong>" + username + "</strong></span><br>");
-            out.println("<span class=\"text-center\" id=\"message\">" + (request.getAttribute("message") != null ? request.getAttribute("message") : "") + "</span>");
+            if (message != null) {
+                out.println("<span class=\"text-center\" id=\"message\">" + message + "</span>");
+            }
             out.println("</center>");
             out.println("<p class=\"lead text-center\">Choose a subject</p>");
             out.println("<form id=\"signupForm\" name='form' action='assignsubject' method='POST'>");
@@ -93,15 +96,7 @@ public class SelectSubjectController extends HttpServlet {
             out.println("<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz\" crossorigin=\"anonymous\"></script>");
             out.println("<script src=\"https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js\" integrity=\"sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r\" crossorigin=\"anonymous\"></script>");
             out.println("<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js\" integrity=\"sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy\" crossorigin=\"anonymous\"></script>");
-            out.println("<script src=\"js/userSignupValidation.js\"></script>");
-            out.println("<script type=\"text/javascript\">");
-            out.println("setTimeout(function() {");
-            out.println("var messageElement = document.getElementById('message');");
-            out.println("if (messageElement) {");
-            out.println("messageElement.style.display = 'none';");
-            out.println("}");
-            out.println("}, 4000);");
-            out.println("</script>");
+            out.println("<script src=\"js/hideMessge.js\"></script>");
             out.println("</body>");
             out.println("</html>");
         } finally {

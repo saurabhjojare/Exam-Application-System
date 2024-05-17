@@ -52,7 +52,10 @@ public class SignUpController extends HttpServlet {
 
 	    // Check if the result is true or false
 	    if (result) {
-	        response.sendRedirect("selectSubject");
+	    	// If the addition failed, set an appropriate message and forward to sign-up.jsp
+	        String message = "User Added";
+	        request.setAttribute("message", message);
+	        request.getRequestDispatcher("login.jsp").forward(request, response);
 	    } else {
 	        // If the addition failed, set an appropriate message and forward to sign-up.jsp
 	        String message = "Something Went Wrong";

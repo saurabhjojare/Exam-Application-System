@@ -15,7 +15,7 @@
 			<div class="container text-center">
 <!-- 			<span id="current-time" class="text-muted"></span><br> -->
 <!-- 			<hr style = "width:145px; margin: 5px auto;"> -->
-				<span class="text-muted">Exam Application System &copy; 2024</span>
+				<span class="text-muted">ByteBridge Group &copy; 2024</span>
 			</div>
 		</footer>
 

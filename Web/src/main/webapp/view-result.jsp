@@ -18,13 +18,13 @@ List<String[]> results = examService.getAllResults();
 </head>
 <body>
 
-	<div class="marginBottom">
-		<div class="d-flex marginBottom">
+	<div class="">
+		<div class="d-flex">
 			<div class="sidebar">
 				<%@ include file="sidebar.jsp"%>
 			</div>
 			<!-- Main Content Area -->
-			<div class="flex-grow-1 view-padding text-center">
+			<div class="flex-grow-1 view-padding text-center marginBottom">
 				<h3 class="display-6 mt-2">Result Details</h3>
 
 

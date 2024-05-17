@@ -31,13 +31,13 @@
 							<label for="fullName" class="form-label">Full Name</label> 
 							<input
 								type="text" class="form-control" id="fullName" name="fullName"
-								placeholder="Enter your full name" required>
+								placeholder="Enter your full name" autocomplete="off" required>
 								 <span class = "text-muted" id="fullNameWarningMsg"></span>
 						</div>
 						<div class="mb-3">
 							<label for="contact" class="form-label">Contact Number</label> <input
 								type="tel" class="form-control" id="contact" name="contact"
-								placeholder="Enter your contact number" required>
+								placeholder="Enter your contact number" autocomplete="off" required>
 								<span class = "text-muted" id="contactWarningMsg"></span>
 
 						</div>
@@ -45,7 +45,7 @@
 						<div class="mb-0">
 							<label for="email" class="form-label">Email address</label> <input
 								type="email" class="form-control" id="email" name="email"
-								placeholder="Enter your email" required>
+								placeholder="Enter your email" autocomplete="off" required>
 								<span class = "text-muted" id="emailWarningMsg"></span>
 
 						
@@ -57,21 +57,20 @@
 						<div class="mb-3">
 							<label for="username" class="form-label">Username</label> <input
 								type="text" class="form-control" id="username" name="username"
-								placeholder="Create a username" required>
+								placeholder="Create a username" autocomplete="off" required>
 								<span class = "text-muted" id = "usernameWarningMsg"></span>
 						</div>
 						<div class="mb-3">
 							<label for="signupPassword" class="form-label">Password</label>
 							<div class="input-group">
 								<input type="password" class="form-control" id="signupPassword"
-									name="signupPassword" placeholder="Create a password" required>
+									name="signupPassword" placeholder="Create a password" autocomplete="new-password" required>
 								<button class="btn btn-outline-secondary" type="button"
 									id="showPasswordButton">Show</button>
 									
 							</div>
 							<span class = "text-muted" id = "passwordWarningMsg1"></span>
 						</div>
-						
 						
 						<center>
 						<button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>

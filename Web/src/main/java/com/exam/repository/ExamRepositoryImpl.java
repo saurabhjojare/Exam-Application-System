@@ -168,7 +168,7 @@ public class ExamRepositoryImpl extends DBConfig implements ExamRepository {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		try {
-			stmt = conn.prepareStatement("SELECT * FROM schedule WHERE examid = ?");
+			stmt = conn.prepareStatement("SELECT * FROM schedule WHERE examid = ? AND date >= CURDATE()");
 			stmt.setInt(1, examId);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -432,13 +432,13 @@ public class ExamRepositoryImpl extends DBConfig implements ExamRepository {
 	@Override
 	public String getTimeBySchId(int schId) {
 	    try {
-	        stmt = conn.prepareStatement("SELECT starttime, endtime FROM schedule WHERE schid = ?");
+	        stmt = conn.prepareStatement("SELECT TIME_FORMAT(starttime, '%H:%i') AS starttime, TIME_FORMAT(endtime, '%H:%i') AS endtime FROM schedule WHERE schid = ? AND starttime >= NOW()");
 	        stmt.setInt(1, schId);
 	        rs = stmt.executeQuery();
 	        if (rs.next()) {
 	            String startTime = rs.getString("starttime");
 	            String endTime = rs.getString("endtime");
-	            return startTime + " - " + endTime; // Concatenate start and end time
+	            return startTime + " To " + endTime; // Concatenate start and end time
 	        } else {
 	            return null; // Return null if the schedule is not found
 	        }

@@ -1,58 +1,56 @@
-
- .loginWidth {
-    max-width: 800px; /* Set a maximum width for the login form */
-    margin: 0 auto; /* Center the form horizontally */
-  }
-    
-        
-.bottom-navbar{
-display: none;
+/* Sticky footer styles */
+html, body {
+	height: vh;
+	margin: 0;
+	padding: 0;
 }
 
-
-  
-  
-  .form-label {
-    float: left;
-  }
-
-  
-  
-  
-  /* Hide sidebar on screens smaller than lg */
-@media (max-width: 992px) {
-    .sidebar {
-        display: none;
-    }
-    .bottom-navbar{
-display: block;
+.content {
+	flex: 1 0 auto;
 }
 
-.marginBottom{
-margin-bottom: 48px;
-}    
-
- .loginWidth {
-      width: 50%; /* Set width to 90% of viewport on mobile */
-      max-width: 100%;
-    }
+.footer {
+	flex-shrink: 0;
 }
-  
-  
-  @media (max-width: 700px) {
-	.loginWidth {
-      width: 100%; /* Set width to 90% of viewport on mobile */
-      max-width: 100%;
-    }
+
+.loginWidth {
+	max-width: 800px; /* Set a maximum width for the login form */
+	margin: 0 auto; /* Center the form horizontally */
+}
+
+.bottom-navbar {
+	display: none;
+}
+
+.form-label {
+	float: left;
+}
+
+/* Hide sidebar on screens smaller than lg */
+@media ( max-width : 992px) {
+	.sidebar {
+		display: none;
 	}
-  
-  
-  
-  
-  
-  
-  
-  html, body {
+	.bottom-navbar {
+		display: block;
+	}
+	.marginBottom {
+		margin-bottom: 48px;
+	}
+	.loginWidth {
+		width: 50%; /* Set width to 90% of viewport on mobile */
+		max-width: 100%;
+	}
+}
+
+@media ( max-width : 700px) {
+	.loginWidth {
+		width: 100%; /* Set width to 90% of viewport on mobile */
+		max-width: 100%;
+	}
+}
+
+html, body {
 	height: 100%;
 }
 
@@ -70,6 +68,6 @@ main {
 }
 
 /* Additional style for centering the text */
-        .navbar-text {
-            margin: auto;
-        }
+.navbar-text {
+	margin: auto;
+}
