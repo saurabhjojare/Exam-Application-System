@@ -8,6 +8,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sidebar</title>
 <link rel="stylesheet" type="text/css" href="css/Sidebar.css">
+<style>
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #1488CC;
+}
+</style>
+
 </head>
 <body>
     <div class="d-flex">

@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>View Subject</title>
 <link rel="stylesheet" type="text/css" href="css/viewSubject.css">
+<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
 </head>
 <body>
 

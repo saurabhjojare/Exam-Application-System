@@ -26,6 +26,7 @@ html, body {
 	float: left;
 }
 
+
 /* Hide sidebar on screens smaller than lg */
 @media ( max-width : 992px) {
 	.sidebar {

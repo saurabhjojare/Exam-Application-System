@@ -14,6 +14,7 @@ List<String[]> results = examService.getAllResults();
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>View Result</title>
 <link rel="stylesheet" type="text/css" href="css/viewResult.css">
+<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
 
 </head>
 <body>

@@ -9,6 +9,7 @@
 <title>Add Schedule</title>
 <link rel="stylesheet" type="text/css" href="css/addSchedule.css">
 <link rel="stylesheet" type="text/css" href="css/nextStep.css">
+<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
 
 </head>
 <body>

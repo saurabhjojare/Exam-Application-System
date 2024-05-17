@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>View Question</title>
 <link rel="stylesheet" type="text/css" href="css/viewQuestion.css">
+<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
 </head>
 <body>
 	

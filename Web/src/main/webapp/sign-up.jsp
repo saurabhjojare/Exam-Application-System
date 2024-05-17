@@ -7,6 +7,7 @@
 <title>Sign Up</title>
 <link rel="stylesheet" type="text/css" href="css/signUp.css">
 <link rel="stylesheet" type="text/css" href="css/nextStep.css">
+<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
 
 </head>
 <body>

@@ -22,6 +22,7 @@ if (listStudent != null && !listStudent.isEmpty()) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Profile</title>
 <link rel="stylesheet" type="text/css" href="css/Profile.css">
+<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
 </head>
 <body>
 	<%@ include file="navbar.jsp"%>

@@ -42,6 +42,7 @@ String result = totalScore >= 60 ? "Pass" : "Fail";
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Result</title>
 <link rel="stylesheet" type="text/css" href="css/Result.css">
+<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
 </head>
 <body>
 

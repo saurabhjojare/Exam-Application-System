@@ -10,6 +10,7 @@
 <title>Attempt Exam</title>
 <link rel="stylesheet" type="text/css" href="css/attemptExam.css">
 <link rel="stylesheet" type="text/css" href="css/nextStep.css">
+<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
 </head>
 <body>
 	<div id="toast-container"></div>

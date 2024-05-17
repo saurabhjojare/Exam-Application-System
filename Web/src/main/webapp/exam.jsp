@@ -27,6 +27,7 @@ List<String[]> results = examService.getAllQuestion(SubjectName);
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Exam</title>
 <link rel="stylesheet" type="text/css" href="css/Exam.css">
+<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
 </head>
 
 <body>

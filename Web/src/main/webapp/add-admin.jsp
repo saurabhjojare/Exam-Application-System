@@ -9,6 +9,7 @@
 <title>Add Exam</title>
 <link rel="stylesheet" type="text/css" href="css/addAdmin.css">
 <link rel="stylesheet" type="text/css" href="css/nextStep.css">
+<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
 
 </head>
 <body>

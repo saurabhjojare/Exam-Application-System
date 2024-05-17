@@ -9,6 +9,7 @@
 <title>Add Question</title>
 <link rel="stylesheet" type="text/css" href="css/addQuestion.css">
 <link rel="stylesheet" type="text/css" href="css/nextStep.css">
+<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
 </head>
 <body>
 	<div class="d-flex">

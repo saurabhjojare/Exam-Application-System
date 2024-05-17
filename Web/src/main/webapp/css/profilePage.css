@@ -17,7 +17,7 @@
 	.marginBottom {
 		margin-bottom: 10px;
 	}
-
+	
 
 /* Hide sidebar on screens smaller than lg */
 @media ( max-width : 992px) {

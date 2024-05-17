@@ -8,6 +8,7 @@
 <title>Home</title>
 
 	<link rel="stylesheet" type="text/css" href="css/Home.css">
+	<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
 </head>
 <body >
 		<%@ include file="navbar.jsp"%>

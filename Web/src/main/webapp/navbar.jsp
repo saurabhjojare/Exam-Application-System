@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="css/Navbar.css">
 </head>
 <body>
-	<nav class="p-2 navbar navbar-expand-lg navbar-light bg-dark">
+	<nav class="p-2 navbar navbar-expand-lg navColor">
 	<% String currentPage = request.getServletPath(); %>
 	<% if(currentPage.equals("/exam.jsp")) { %>
 <%-- 	 <span class="text-white userName"><%=username%></span> --%>
@@ -21,7 +21,7 @@
      <span class ="text-white"><a href="profile.jsp" class="text-decoration-none text-white">Profile</a></span>
      </div>
 	 <% } %>
-		<div class="p-4 container">
+		<div class="p-4 container ">
 			<!-- Centered Brand -->
 			<% if (request.getAttribute("showNavbarBrand") != null) { %>
             <a href="home.jsp" class="navbar-brand text-white" style="font-size: 25px; font-weight: 300;">QuizConnect</a>
