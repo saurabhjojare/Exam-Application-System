@@ -91,18 +91,3 @@
 											});
 						});
 	
-
-	
-	
-	
-	// Function to get URL parameter by name
-function getUrlParameter(name) {
-    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    var results = regex.exec(location.search);
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-}
-
-// Get the scheduleId parameter from the URL
-var scheduleId = getUrlParameter('scheduleId');
-console.log(scheduleId);

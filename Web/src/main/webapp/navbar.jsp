@@ -18,7 +18,7 @@
 	 <% } %>
 	 <% if(currentPage.equals("/profile.jsp")  || currentPage.equals("/select-subject.jsp") || currentPage.equals("/attempt-exam.jsp")) { %>
 	 <div class = "profileName">
-     <span class ="text-white"><a href="profile.jsp" class="text-decoration-none text-white">saurabhjojare</a></span>
+     <span class ="text-white"><a href="profile.jsp" class="text-decoration-none text-white">Profile</a></span>
      </div>
 	 <% } %>
 		<div class="p-4 container">
@@ -34,7 +34,7 @@
 			<ul class="navbar-nav">
 				<% if(currentPage.equals("/profile.jsp") || currentPage.equals("/add-subject.jsp") || currentPage.equals("/student-result.jsp")) { %>
 					<li class="nav-item">
-						<a class="nav-link text-white" href="attempt-exam.jsp" style = "white-space: nowrap;">Exam</a>
+						<a class="nav-link text-white" href="attempt-exam.jsp" style = "white-space: nowrap;">Exams</a>
 					</li>
 				<% } %>
 				

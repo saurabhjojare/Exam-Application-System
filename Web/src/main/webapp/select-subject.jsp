@@ -28,7 +28,7 @@
                 <div class="container-sm">
                     <h1 class="display-4 text-center">Select Subject</h1>
                     <center>
-                        <span class="" style="font-size: 1.9rem;font-weight: 300;">Hello, <strong><%= username %></strong></span><br>
+<%--                         <span class="" style="font-size: 1.9rem;font-weight: 300;">Hello, <strong><%= username %></strong></span><br> --%>
                         <% if (message != null) { %>
                             <span class="text-center" id="message"><%= message %></span>
                         <% } %>

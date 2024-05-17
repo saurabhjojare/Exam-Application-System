@@ -2,6 +2,13 @@
 <%@ include file="userSession.jsp" %>
 
 <%
+// Retrieve parameters from URL
+String examId = request.getParameter("examId");
+String scheduleId = request.getParameter("scheduleId");
+// Use examId and scheduleId to fetch data and display exam
+%>
+
+<%
 String ExamName = request.getParameter("ename") != null ? request.getParameter("ename") : "Default Exam";
 String ScheduleDate = request.getParameter("date") != null ? request.getParameter("date") : "Default Date";
 String SubjectName = request.getParameter("subname") != null ? request.getParameter("subname") : "Default Subject";
@@ -183,6 +190,9 @@ List<String[]> results = examService.getAllQuestion(SubjectName);
 	<!-- <script src="js/fullScreenExam.js"></script> -->
 	<script src="js/examPage.js"></script>
 	<%@ include file="common-resources.jsp" %>
+	<script>
+	console.log(scheduleId);
+	</script>
 
 </body>
 </html>

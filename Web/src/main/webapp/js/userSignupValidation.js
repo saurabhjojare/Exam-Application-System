@@ -15,7 +15,7 @@ function validateFullName() {
 function validateUsername() {
 var usernameInput = document.getElementById('username').value.trim();
 var usernameWarningMsg = document.getElementById('usernameWarningMsg');
-var isValid = /^[a-z]+$/.test(usernameInput); // Regular expression to allow letters, numbers, and underscores
+var isValid = /^[a-z0-9]+$/.test(usernameInput); // Regular expression to allow letters, numbers, and underscores
 
 if (usernameInput === '') {
    usernameWarningMsg.textContent = ''; // Clear the warning message if input is empty
