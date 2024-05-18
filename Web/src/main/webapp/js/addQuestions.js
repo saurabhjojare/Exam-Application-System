@@ -1,27 +1,31 @@
-
-	
-		// Function to handle importing CSV file
-		function handleFileSelect(event) {
-			const file = event.target.files[0];
-			const reader = new FileReader();
-
-			reader.onload = function(e) {
-				const csv = e.target.result;
-				// Process the CSV data here, for example, you can parse it and extract questions
-				console.log(csv);
-			};
-
-			reader.readAsText(file);
-		}
-
-		// Add event listener to the import button
-		document.getElementById('importQuestionsBtn').addEventListener('click',
-				function() {
-					// Trigger file input click
-					document.getElementById('fileInput').click();
-				});
-
-		// Add event listener to file input
-		document.getElementById('fileInput').addEventListener('change',
-				handleFileSelect);
-	
+//document.getElementById("importQuestionsBtn").addEventListener("click", function() {
+//    var subjectName = document.getElementById("subjectName").value;
+//    var fileInput = document.getElementById("fileInput").files[0];
+//    
+//    if (subjectName.trim() === "") {
+//        alert("Please select a subject");
+//        return;
+//    }
+//    
+//    if (!fileInput) {
+//        alert("Please select a file to import");
+//        return;
+//    }
+//    
+//    var formData = new FormData();
+//    formData.append("subjectName", subjectName);
+//    formData.append("file", fileInput);
+//    
+//    var xhr = new XMLHttpRequest();
+//    xhr.open("POST", "importQuestion");
+//    xhr.onload = function() {
+//        if (xhr.status === 200) {
+//            // Success, do something if needed
+//            window.location.href = "/importSuccess.jsp";
+//        } else {
+//            alert("Error occurred while importing questions");
+//        }
+//    };
+//    xhr.send(formData);
+//});
+//

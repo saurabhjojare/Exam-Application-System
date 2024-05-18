@@ -61,6 +61,8 @@
 									<div class="marginBottom">
 										<button type="button" class="btn btn-primary mt-3"
 											onclick="nextStep()" style="float: inline-start;">Next</button>
+											<button type="button" class="btn btn-secondary mt-3"
+											id="importQuestionsBtn" style ="float: inline-end;" onclick="window.location.href='import-questions.jsp';">Import Questions</button>
 									</div>
 
 								</div>
@@ -99,8 +101,8 @@
 										<!-- Button for importing bulk questions -->
 										<input type="file" id="fileInput" accept=".csv"
 											style="display: none;">
-										<button type="button" class="btn btn-secondary"
-											id="importQuestionsBtn">Import Questions</button>
+<!-- 										<button type="button" class="btn btn-secondary" -->
+<!-- 											id="importQuestionsBtn">Import Questions</button> -->
 										<button type="button" class="btn btn-secondary"
 											onclick="prevStep()">Back</button>
 
