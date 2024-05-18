@@ -14,4 +14,12 @@ public class StudentServiceImpl implements StudentService{
 		return this.studRepo.getStudentByUsername(username);
 	}
 
+	@Override
+	public boolean insertStudentExamRelation(int stid, int schid, double obtainedPercentage, double status) {
+		// TODO Auto-generated method stub
+		return this.studRepo.insertStudentExamRelation(stid, schid, obtainedPercentage, status);
+	}
+	
+	
+
 }

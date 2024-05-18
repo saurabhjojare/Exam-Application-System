@@ -45,4 +45,32 @@ public class StudentRepositoryImpl extends DBConfig implements StudentRepository
 
         return listStudent.isEmpty() ? null : listStudent;
     }
+    
+    
+    @Override
+    public boolean insertStudentExamRelation(int stid, int schid, double obtainedPercentage, double status) {
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = conn.prepareStatement("INSERT INTO studentexamrelation (stid, schid, obtainedpercentage, status) VALUES (?, ?, ?, ?)");
+            stmt.setInt(1, stid);
+            stmt.setInt(2, schid);
+            stmt.setDouble(3, obtainedPercentage);
+            stmt.setDouble(4, status);
+            
+            int rowsAffected = stmt.executeUpdate();
+            
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace(); // Consider using a logging framework
+        } finally {
+            try {
+                if (stmt != null) stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace(); // Consider using a logging framework
+            }
+        }
+
+        return false;
+    }
 }

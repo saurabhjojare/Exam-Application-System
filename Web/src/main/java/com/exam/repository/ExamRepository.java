@@ -27,7 +27,7 @@ public interface ExamRepository {
 
 	int getStidByUsername(String username) throws SQLException;
 
-	List<ResultModel> getResult(String username);
+	public List<String[]> getResult(String username);
 	
 	public String getExamNameByExamId(int examId);
 	
@@ -36,4 +36,6 @@ public interface ExamRepository {
 	public String getTimeBySchId(int schId);
 	
 	public List<String[]> getAllQuestion(String subjectName);
+	
+	public int[] getMarksByExamId(int examId);
 }

@@ -388,45 +388,60 @@ public class ExamRepositoryImpl extends DBConfig implements ExamRepository {
 	}
 
 	@Override
-	public List<ResultModel> getResult(String username) {
-		List<ResultModel> resultList = new ArrayList<>();
+	public List<String[]> getResult(String username) {
+	    List<String[]> resultList = new ArrayList<>();
+	    PreparedStatement stmt = null;
+	    ResultSet rs = null;
 
-		try {
-			String sql = "SELECT ser.* FROM studentexamrelation AS ser JOIN student AS s ON ser.stid = s.stid WHERE s.username = ?;";
+	    try {
+	        String sql = "SELECT e.examname, subj.subjectname, ser.obtainedpercentage, ser.status, sch.date " +
+	                     "FROM studentexamrelation AS ser " +
+	                     "JOIN student AS s ON ser.stid = s.stid " +
+	                     "JOIN schedule AS sch ON ser.schid = sch.schid " +
+	                     "JOIN exam AS e ON sch.examid = e.examid " +
+	                     "JOIN subject AS subj ON sch.sid = subj.sid " +
+	                     "WHERE s.username = ?";
 
-			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, username);
+	        stmt = conn.prepareStatement(sql);
+	        stmt.setString(1, username);
 
-			rs = stmt.executeQuery();
+	        rs = stmt.executeQuery();
 
-			while (rs.next()) {
-				int stid = rs.getInt("stid");
-				int schid = rs.getInt("schid");
-				double obtainedPercentage = rs.getDouble("obtainedpercentage");
-				Double status = rs.getDouble("status");
+	        while (rs.next()) {
+	            String examName = rs.getString("examname");
+	            String subjectName = rs.getString("subjectname");
+	            double obtainedPercentage = rs.getDouble("obtainedpercentage");
+	            double status = rs.getDouble("status");
+	            String date = rs.getString("date");
 
-				ResultModel result = new ResultModel(stid, schid, obtainedPercentage, status);
-				resultList.add(result);
-			}
+	            String[] result = new String[5];
+	            result[0] = examName;
+	            result[1] = subjectName;
+	            result[2] = String.valueOf(obtainedPercentage);
+	            result[3] = String.valueOf(status);
+	            result[4] = date;
 
-		} catch (Exception e) {
-			System.out.println("Exception occurred while fetching result: ");
-			e.printStackTrace();
-		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (stmt != null) {
-					stmt.close();
-				}
-			} catch (Exception e) {
-				System.out.println("Exception occurred while closing resources: ");
-				e.printStackTrace();
-			}
-		}
+	            resultList.add(result);
+	        }
 
-		return resultList;
+	    } catch (SQLException e) {
+	        System.out.println("Exception occurred while fetching result: ");
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (rs != null) {
+	                rs.close();
+	            }
+	            if (stmt != null) {
+	                stmt.close();
+	            }
+	        } catch (SQLException e) {
+	            System.out.println("Exception occurred while closing resources: ");
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return resultList;
 	}
 
 	@Override
@@ -448,7 +463,38 @@ public class ExamRepositoryImpl extends DBConfig implements ExamRepository {
 	    }
 	}
 	
+	 @Override
+	    public int[] getMarksByExamId(int examId) {
+	        int[] marks = new int[2]; // Array to hold total marks and passing marks
+	        PreparedStatement stmt = null;
+	        ResultSet rs = null;
+
+	        try {
+	            stmt = conn.prepareStatement("SELECT totalmarks, passingmarks FROM exam WHERE examid = ?");
+	            stmt.setInt(1, examId);
+	            rs = stmt.executeQuery();
+
+	            if (rs.next()) {
+	                marks[0] = rs.getInt("totalmarks"); // Total marks
+	                marks[1] = rs.getInt("passingmarks"); // Passing marks
+	            }
+	        } catch (SQLException e) {
+	            System.out.println("Error retrieving marks by exam ID: " + e.getMessage());
+	        } finally {
+	            try {
+	                if (rs != null) {
+	                    rs.close();
+	                }
+	                if (stmt != null) {
+	                    stmt.close();
+	                }
+	            } catch (SQLException e) {
+	                System.out.println("Error closing resources: " + e.getMessage());
+	            }
+	        }
+
+	        return marks;
+	    }
 	
-
-
+	
 }

@@ -14,7 +14,7 @@
 	<% String currentPage = request.getServletPath(); %>
 	<% if(currentPage.equals("/exam.jsp")) { %>
 <%-- 	 <span class="text-white userName"><%=username%></span> --%>
-     <span id="countdown"></span>
+<!--      <span id="countdown"></span> -->
 	 <% } %>
 	 <% if(currentPage.equals("/profile.jsp")  || currentPage.equals("/select-subject.jsp") || currentPage.equals("/attempt-exam.jsp") || currentPage.equals("/exam-complete.jsp") || currentPage.equals("/result.jsp")) { %>
 	 <div class = "profileName">

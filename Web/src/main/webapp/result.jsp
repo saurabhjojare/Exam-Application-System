@@ -1,38 +1,11 @@
 <%@ include file="userSession.jsp"%>
 <%@ include file="common-resources.jsp"%>
 
+
 <%
-// Retrieve URL parameters with default values
-int correctAnswers = 0;
-int incorrectAnswers = 0;
-int totalQuestions = 0;
-int attemptedQuestions = 0;
-
-try {
-	correctAnswers = Integer.parseInt(request.getParameter("correctAnswers"));
-} catch (NumberFormatException e) {
-	correctAnswers = 0;
-}
-try {
-	incorrectAnswers = Integer.parseInt(request.getParameter("incorrectAnswers"));
-} catch (NumberFormatException e) {
-	incorrectAnswers = 0;
-}
-try {
-	totalQuestions = Integer.parseInt(request.getParameter("totalQuestions"));
-} catch (NumberFormatException e) {
-	totalQuestions = 0;
-}
-try {
-	attemptedQuestions = Integer.parseInt(request.getParameter("attemptedQuestions"));
-} catch (NumberFormatException e) {
-	attemptedQuestions = 0;
-}
-
-// Calculate total score
-int totalScore = (totalQuestions > 0) ? (correctAnswers * 100) / totalQuestions : 0;
-// Determine result
-String result = totalScore >= 60 ? "Pass" : "Fail";
+ExamService examService = new ExamServiceImpl();
+List<String[]> results = examService.getResult(username);
+int count = 1;
 %>
 
 <!doctype html>
@@ -51,35 +24,56 @@ String result = totalScore >= 60 ? "Pass" : "Fail";
 	<!-- Body -->
 	<main class="result-content">
 
-		<section class="container-sm py-5 text-center">
-<!-- 			<p class="fw-light h3"> -->
-<!-- 				Hi, -->
-<%-- 				<%=username%></p> --%>
+		<section class="container-sm pt-5 text-center">
+			<!-- 			<p class="fw-light h3"> -->
+			<!-- 				Hi, -->
+			<%-- 				<%=username%></p> --%>
 			<h1 class="fw-light">Exam Results</h1>
 
 			<p>Here's a summary of your performance:</p>
-			<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Exam Name</th>
-            <th scope="col">Subject Name</th>
-            <th scope="col">Exam Date</th>
-            <th scope="col">Marks</th>
-            <th scope="col">Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mock</td>
-            <td>C</td>
-            <td>2024-05-15</td>
-            <td>80.40 %</td>
-            <td>Pass</td>
-        </tr>
-    </tbody>
-</table>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Exam Name</th>
+						<th scope="col">Subject</th>
+						<th scope="col">Exam Date</th>
+						<th scope="col">Marks</th>
+						<th scope="col">Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%
+						if (results.isEmpty()) {
+						%>
+						<tr>
+							<td colspan="2" style="text-align: center;">No results
+								found.</td>
+						</tr>
+						<%
+						} else {
+						%>
+						<%
+						for (String[] result : results) {
+							 String status = result[3].equals("1.0") ? "Pass" : "Fail";
+						%>
+					<tr>
+						<th scope="row"><%=count++%></th>
+						<td><%=result[0]%></td>
+						<td><%=result[1]%></td>
+						<td><%=result[4]%></td>
+						<td><%=result[2]%></td>
+						<td><%= status %></td>
+						
+					</tr>
+						<%
+						}
+						%>
+						<%
+						}
+						%>
+				</tbody>
+			</table>
 
 
 		</section>

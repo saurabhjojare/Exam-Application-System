@@ -1,18 +1,3 @@
-
-		 $(document).ready(function(){
-		     $(document).on("contextmenu",function(e){
-		         return false;
-		     });
-		 });
-
-		$(document).ready(function() {
-			$(document).on("copy paste", function(e) {
-				e.preventDefault();
-			});
-		});
-	
-
-	
 		$(document).ready(function() {
 				// Initialize match count
 				var matchCount = 0;

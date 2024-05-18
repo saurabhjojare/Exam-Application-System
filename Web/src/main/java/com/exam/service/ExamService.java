@@ -25,7 +25,7 @@ public interface ExamService {
 
 	int getStidByUsername(String username);
 
-	List<ResultModel> getResultsByUsername(String username);
+	public List<String[]> getResult(String username);
 	
 	public String getExamNameByExamId(int examId);
 	
@@ -34,4 +34,6 @@ public interface ExamService {
 	public String getTimeBySchId(int schId);
 	
 	public List<String[]> getAllQuestion(String subjectName);
+	
+	public int[] getMarksByExamId(int examId);
 }

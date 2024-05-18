@@ -37,6 +37,7 @@ function showToast(message) {
 document.getElementById('confirmStartExam').addEventListener('click', function () {
     var selectedExamId = document.getElementById('examSelection').value;
     var selectedExamName = document.getElementById('examSelection').options[document.getElementById('examSelection').selectedIndex].text;
+    var selectedScheduleId = document.getElementById('scheduleSelection').value; // Add this line to get the selected schedule ID
     var selectedSchedule = document.getElementById('scheduleSelection').options[document.getElementById('scheduleSelection').selectedIndex].text;
     var selectedSubject = document.getElementById('subjectSelection').options[document.getElementById('subjectSelection').selectedIndex].text;
     var selectedTime = document.getElementById('timeSelection').value;
@@ -61,9 +62,10 @@ document.getElementById('confirmStartExam').addEventListener('click', function (
         // Encode subject name
         var encodedSubject = encodeURIComponent(selectedSubject);
         // Redirect to the exam page with necessary parameters
-        window.location.href = 'exam.jsp?examId=' + selectedExamId + '&date=' + selectedSchedule + '&subname=' + encodedSubject + '&ename=' + encodeURIComponent(selectedExamName) + '&time=' + selectedTime;
+        window.location.href = 'exam.jsp?examId=' + selectedExamId + '&scheduleId=' + selectedScheduleId + '&date=' + selectedSchedule + '&subname=' + encodedSubject + '&ename=' + encodeURIComponent(selectedExamName) + '&time=' + selectedTime;
     }
 });
+
 
 document.addEventListener('DOMContentLoaded', function () {
     var params = new URLSearchParams(window.location.search);

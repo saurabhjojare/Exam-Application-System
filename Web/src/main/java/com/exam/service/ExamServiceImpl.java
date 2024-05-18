@@ -105,7 +105,7 @@ public class ExamServiceImpl implements ExamService {
 	}
 
 	@Override
-	public List<ResultModel> getResultsByUsername(String username) {
+	public List<String[]> getResult(String username) {
 		return examRepo.getResult(username);
 	}
 
@@ -130,5 +130,12 @@ public class ExamServiceImpl implements ExamService {
     public List<String[]> getAllQuestion(String subjectName) {
         return examRepo.getAllQuestion(subjectName);
     }
+
+	@Override
+	public int[] getMarksByExamId(int examId) {
+		// TODO Auto-generated method stub
+		return examRepo.getMarksByExamId(examId);
+	}
+
 
 }
