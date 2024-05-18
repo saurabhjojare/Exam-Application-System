@@ -38,17 +38,17 @@ double marksPerQuestion = (double) totalMarks / questionCount;
 
 <main>
     <section class="container-sm py-5" id="examWidth">
-        <span>Schedule ID <%=scheduleId %> | </span>
-        <span>Username <%=username %> | </span>
-        <span>Exam ID <%=examId %> | </span><br>
-        <span>Total Marks: <%= totalMarks %> | </span>
-        <span>Passing Marks: <%= passingMarks %> | </span><br>
-        <span>Questions <%=questionCount%> | </span>
-        <span>Marks Per Question <%=marksPerQuestion %></span><br>
-        <span id="correctAnswerSpan"></span>
-        <span id="correctCount"></span>
-        <span id="percentage"></span>
-        <span id="passOrFail"></span>
+<%--         <span>Schedule ID <%=scheduleId %> | </span> --%>
+<%--         <span>Username <%=username %> | </span> --%>
+<%--         <span>Exam ID <%=examId %> | </span><br> --%>
+<%--         <span>Total Marks: <%= totalMarks %> | </span> --%>
+<%--         <span>Passing Marks: <%= passingMarks %> | </span><br> --%>
+<%--         <span>Questions <%=questionCount%> | </span> --%>
+<%--         <span>Marks Per Question <%=marksPerQuestion %></span><br> --%>
+        <span id="correctAnswerSpan" style="display: none;"></span>
+        <span id="correctCount" style="display: none;"></span>
+        <span id="percentage" style="display: none;"></span>
+        <span id="passOrFail" style="display: none;"></span>
 
         <p style="display: none;">
             Selected Exam: <%=ExamName%>

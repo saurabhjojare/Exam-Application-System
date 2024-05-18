@@ -49,26 +49,17 @@ String result = totalScore >= 60 ? "Pass" : "Fail";
 	<%@ include file="navbar.jsp"%>
 
 	<!-- Body -->
-	<main class="result-content">
-		<section class="container-sm py-5 text-center">
+	<main class="result-content mt-2">
+		<section class="container-sm py-5 text-center mt-5">
 		<span class ="h3 fw-light">
 				Hi,
 				<%=username%>
 			</span>
 			<h1 class = "fw-light mt-3">Your exam is complete</h1>
 			
-			
-			<h5 class ="h5 fw-light">View your result <a href="result.jsp" class="text-decoration-none">here</a></h5>
+			<h5 class ="h5 fw-light mt-3">View your result <a href="result.jsp" class="text-decoration-none">here</a></h5>
 			<ul class="list-group">
-				
-				
-				<li
-					class="list-group-item d-flex justify-content-between align-items-center mt-3">
-					Attempted Questions: <span class="badge bg-primary rounded-pill"><%=attemptedQuestions%></span>
-				</li>
-				
-
-
+	
 			</ul>
 		</section>
 	</main>

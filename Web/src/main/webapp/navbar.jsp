@@ -18,7 +18,7 @@
 	 <% } %>
 	 <% if(currentPage.equals("/profile.jsp")  || currentPage.equals("/select-subject.jsp") || currentPage.equals("/attempt-exam.jsp") || currentPage.equals("/exam-complete.jsp") || currentPage.equals("/result.jsp")) { %>
 	 <div class = "profileName">
-     <span class ="text-white"><a href="profile.jsp" class="text-decoration-none text-white">Profile</a></span>
+     <span class ="text-white"><a href="profile.jsp" class="text-decoration-none text-white">Home</a></span>
      </div>
 	 <% } %>
 		<div class="p-4 container ">
