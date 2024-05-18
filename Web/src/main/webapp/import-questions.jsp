@@ -26,7 +26,7 @@
 						<div class="container-sm">
 							<h1 class="display-6">Import Questions</h1>
 							<span id="message">${message}</span>
-							<p class="lead">Please select subject and file to import</p>
+							<p class="lead">Select a subject and choose a file to import</p>
 							<form name='form' id="importForm" action='importQuestion'
 								method='POST' enctype='multipart/form-data'>
 								<div>
@@ -74,14 +74,6 @@
 	document.getElementById('importQuestionsBtn').addEventListener('click', function() {
 	    document.getElementById('fileInput').click();
 	});
-
-	// Function to update hidden input field with selected subject
-	document.querySelector('#subjectName').addEventListener('change', function() {
-	    var selectedSubject = this.value;
-	    console.log("Selected Subject:", selectedSubject);
-	    document.getElementById('selectedSubject').value = selectedSubject;
-	});
-
 
 	</script>
 </body>

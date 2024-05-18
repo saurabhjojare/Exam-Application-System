@@ -16,7 +16,7 @@
 <%-- 	 <span class="text-white userName"><%=username%></span> --%>
      <span id="countdown"></span>
 	 <% } %>
-	 <% if(currentPage.equals("/profile.jsp")  || currentPage.equals("/select-subject.jsp") || currentPage.equals("/attempt-exam.jsp")) { %>
+	 <% if(currentPage.equals("/profile.jsp")  || currentPage.equals("/select-subject.jsp") || currentPage.equals("/attempt-exam.jsp") || currentPage.equals("/exam-complete.jsp") || currentPage.equals("/result.jsp")) { %>
 	 <div class = "profileName">
      <span class ="text-white"><a href="profile.jsp" class="text-decoration-none text-white">Profile</a></span>
      </div>

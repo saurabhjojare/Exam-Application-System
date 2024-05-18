@@ -9,24 +9,24 @@ int totalQuestions = 0;
 int attemptedQuestions = 0;
 
 try {
-    correctAnswers = Integer.parseInt(request.getParameter("correctAnswers"));
+	correctAnswers = Integer.parseInt(request.getParameter("correctAnswers"));
 } catch (NumberFormatException e) {
-    correctAnswers = 0;
+	correctAnswers = 0;
 }
 try {
-    incorrectAnswers = Integer.parseInt(request.getParameter("incorrectAnswers"));
+	incorrectAnswers = Integer.parseInt(request.getParameter("incorrectAnswers"));
 } catch (NumberFormatException e) {
-    incorrectAnswers = 0;
+	incorrectAnswers = 0;
 }
 try {
-    totalQuestions = Integer.parseInt(request.getParameter("totalQuestions"));
+	totalQuestions = Integer.parseInt(request.getParameter("totalQuestions"));
 } catch (NumberFormatException e) {
-    totalQuestions = 0;
+	totalQuestions = 0;
 }
 try {
-    attemptedQuestions = Integer.parseInt(request.getParameter("attemptedQuestions"));
+	attemptedQuestions = Integer.parseInt(request.getParameter("attemptedQuestions"));
 } catch (NumberFormatException e) {
-    attemptedQuestions = 0;
+	attemptedQuestions = 0;
 }
 
 // Calculate total score
@@ -50,41 +50,38 @@ String result = totalScore >= 60 ? "Pass" : "Fail";
 
 	<!-- Body -->
 	<main class="result-content">
-		<section class="container-sm py-5 text-center">
-			<h1>Exam Results</h1>
-			<p>
-				Hi,
-				<%=username%>,
-			</p>
-			<p>Your exam is complete.</p>
-			<p>Here's a summary of your performance:</p>
-			<ul class="list-group">
-				<li
-					class="list-group-item d-flex justify-content-between align-items-center">
-					Total Marks Scored: <span class="badge bg-primary rounded-pill"><%=totalScore%></span>
-				</li>
-				<li
-					class="list-group-item d-flex justify-content-between align-items-center">
-					Maximum Marks: <span class="badge bg-primary rounded-pill">100</span>
-				</li>
-				<li
-					class="list-group-item d-flex justify-content-between align-items-center">
-					Attempted Questions: <span class="badge bg-primary rounded-pill"><%=attemptedQuestions%></span>
-				</li>
-				<li
-					class="list-group-item d-flex justify-content-between align-items-center">
-					Correct Answers: <span class="badge bg-primary rounded-pill"><%=correctAnswers%></span>
-				</li>
-				<li
-					class="list-group-item d-flex justify-content-between align-items-center">
-					Incorrect Answers: <span class="badge bg-primary rounded-pill"><%=incorrectAnswers%></span>
-				</li>
-				<li
-					class="list-group-item d-flex justify-content-between align-items-center">
-					Result: <span class="badge bg-success rounded-pill"><%=result%></span>
-				</li>
 
-			</ul>
+		<section class="container-sm py-5 text-center">
+<!-- 			<p class="fw-light h3"> -->
+<!-- 				Hi, -->
+<%-- 				<%=username%></p> --%>
+			<h1 class="fw-light">Exam Results</h1>
+
+			<p>Here's a summary of your performance:</p>
+			<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Exam Name</th>
+            <th scope="col">Subject Name</th>
+            <th scope="col">Exam Date</th>
+            <th scope="col">Marks</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mock</td>
+            <td>C</td>
+            <td>2024-05-15</td>
+            <td>80.40 %</td>
+            <td>Pass</td>
+        </tr>
+    </tbody>
+</table>
+
+
 		</section>
 	</main>
 

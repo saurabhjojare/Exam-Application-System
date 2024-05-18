@@ -24,15 +24,7 @@ public class ImportQuestionController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String subjectName = request.getParameter("subjectName");
-        // Set the content type of the response
-        response.setContentType("text/plain");
-        // Get the PrintWriter object
-        PrintWriter out = response.getWriter();
-        // Print the subject name
-        out.println(subjectName);
-        // Set the subjectName as the value of the hidden input field
-        out.flush();
+      
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

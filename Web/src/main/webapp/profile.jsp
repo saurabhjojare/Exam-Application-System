@@ -59,7 +59,7 @@ if (listStudent != null && !listStudent.isEmpty()) {
 
 						<ul class="nav justify-content-center">
 							<li class="nav-item"><a class="nav-link text-primary-emphasis" href="select-subject.jsp">Add Subject</a></li>
-							<li class="nav-item"><a class="nav-link text-primary-emphasis" href="#">View Result</a></li>
+							<li class="nav-item"><a class="nav-link text-primary-emphasis" href="result.jsp">View Result</a></li>
 							<li class="nav-item"><a class="nav-link text-danger" href="#">Edit Profile</a></li>
 							<li class="nav-item"><a class="nav-link text-success" href="logout">Sign Out</a></li>
 						</ul>

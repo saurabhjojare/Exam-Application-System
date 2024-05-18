@@ -87,7 +87,7 @@
 												// Calculate total attempted questions
 												var totalQuestions = answeredQuestions.length;
 												// Redirect to result.jsp with URL parameters
-												window.location.href = "result.jsp?correctAnswers="+ correctCounter+ "&incorrectAnswers="+ incorrectCounter + "&totalQuestions="+ totalQuestions + "&attemptedQuestions=" + totalQuestions;
+												window.location.href = "exam-complete.jsp?correctAnswers="+ correctCounter+ "&incorrectAnswers="+ incorrectCounter + "&totalQuestions="+ totalQuestions + "&attemptedQuestions=" + totalQuestions;
 											});
 						});
 	
