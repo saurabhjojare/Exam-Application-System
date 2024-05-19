@@ -58,13 +58,12 @@ int count = 1;
 							 String status = result[3].equals("1.0") ? "Pass" : "Fail";
 						%>
 					<tr>
-						<th scope="row"><%=count++%></th>
+						<td><%=count++%></td>
 						<td><%=result[0]%></td>
 						<td><%=result[1]%></td>
 						<td><%=result[4]%></td>
 						<td><%=result[2]%></td>
 						<td><%= status %></td>
-						
 					</tr>
 						<%
 						}

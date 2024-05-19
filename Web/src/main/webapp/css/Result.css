@@ -1,7 +1,13 @@
   .result-content {
     max-width: 1000px; /* Adjust the width as needed */
     margin: 0 auto; /* Centers the content horizontally */
+    width: 800px;
   }
+  
+  tr {
+  line-height: 40px;
+  }
+
   
    @media only screen and (max-width: 768px) {
     .result-content { /* Target your result content class */

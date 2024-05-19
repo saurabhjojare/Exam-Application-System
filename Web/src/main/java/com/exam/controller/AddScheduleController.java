@@ -34,11 +34,6 @@ public class AddScheduleController extends HttpServlet {
 	    String subjectName = request.getParameter("subjectName");
 	    	    
 	    try {
-//	    	  Date d1 = new Date(examDate);
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-//
-//            String formattedDate = sdf.format(d1);
-
 	        // Get the ExamModel by name
 	        ExamModel eModel = examService.getExamIdByName(examName);
 

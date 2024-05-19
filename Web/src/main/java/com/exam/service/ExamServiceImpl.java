@@ -51,7 +51,7 @@ public class ExamServiceImpl implements ExamService {
 	    System.out.println("Exam Name: " + model.getName());
 	    System.out.println("Subject Name: " + subName);
 
-	    if (examDate.isAfter(currentDate)) {
+	    if (!examDate.isBefore(currentDate)) {
 	        // If the exam date is after the current date, proceed with scheduling
 	        System.out.println("Scheduling exam...");
 	        boolean isScheduled = examRepo.isSetSchedule(model, subName);

@@ -15,11 +15,12 @@
 			<div class="container text-center">
 <!-- 			<span id="current-time" class="text-muted"></span><br> -->
 <!-- 			<hr style = "width:145px; margin: 5px auto;"> -->
-				<span class="text-muted">ByteBridge Group &copy; 2024</span>
+				<span class="text-muted">ByteBridge Group &copy; <span id="year"></span></span>
 			</div>
 		</footer>
 
 <script src="js/currentTime.js"></script>
+<script src="js/currentYear.js"></script>
 		
 </body>
 </html>

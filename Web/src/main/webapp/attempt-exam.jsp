@@ -140,6 +140,225 @@
 	<script src="js/nextButton.js"></script>
 	<script src="js/attemptExam.js"></script>
 	<script src="js/examToast.js"></script>
+	<script>
+
+	//Flag to track if a toast is currently being displayed
+	let isToastVisible = false;
+
+	function showToast(message) {
+	    // If a toast is already visible, return early
+	    if (isToastVisible) return;
+
+	    // Set the flag to indicate a toast is being displayed
+	    isToastVisible = true;
+
+	    // Create toast element
+	    var toast = document.createElement('div');
+	    toast.classList.add('toast');
+	    toast.textContent = message;
+
+	    // Append toast to container
+	    var container = document.getElementById('toast-container');
+	    container.appendChild(toast);
+
+	    // Show toast
+	    setTimeout(function () {
+	        toast.classList.add('show');
+	    }, 100);
+
+	    // Hide toast after 6 seconds
+	    setTimeout(function () {
+	        toast.classList.remove('show');
+	        // Remove toast from DOM after transition and reset the flag
+	        setTimeout(function () {
+	            container.removeChild(toast);
+	            isToastVisible = false;
+	        }, 300);
+	    }, 6000);
+	}
+
+	document.getElementById('confirmStartExam').addEventListener('click', function () {
+	    var selectedExamId = document.getElementById('examSelection').value;
+	    var selectedExamName = document.getElementById('examSelection').options[document.getElementById('examSelection').selectedIndex].text;
+	    var selectedScheduleId = document.getElementById('scheduleSelection').value;
+	    var selectedSchedule = document.getElementById('scheduleSelection').options[document.getElementById('scheduleSelection').selectedIndex].text;
+	    var selectedSubject = document.getElementById('subjectSelection').options[document.getElementById('subjectSelection').selectedIndex].text;
+	    var selectedTime = document.getElementById('timeSelection').value;
+
+	    // Get the current date in yyyy-mm-dd format
+	    var currentDate = new Date().toISOString().split('T')[0];
+	    // Get the current time in hh:mm AM/PM format
+	    var currentTime = new Date().toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'});
+
+	    // Parse the selected date to yyyy-mm-dd format
+	    var selectedDateParts = selectedSchedule.split('-');
+	    var selectedDate = selectedDateParts[0] + '-' + selectedDateParts[1].padStart(2, '0') + '-' + selectedDateParts[2].padStart(2, '0');
+
+	    // Check if the selected date is before the current date or if the date is invalid
+	    if (selectedSchedule !== currentDate || selectedTime !== currentTime) {
+	        // Log current date, selected date, current time, and selected time for debugging
+	        console.log("Current Date:", currentDate);
+	        console.log("Selected Date:", selectedDate);
+	        console.log("Current Time:", currentTime);
+	        console.log("Selected Time:", selectedTime);
+	        var errorMessage = 'This exam schedule is not for today or not for the current time';
+
+	        // Show toast message
+	        showToast(errorMessage);
+	    } else {
+	        // Encode subject name
+	        var encodedSubject = encodeURIComponent(selectedSubject);
+	        // Redirect to the exam page with necessary parameters
+	        window.location.href = 'exam.jsp?examId=' + selectedExamId + '&scheduleId=' + selectedScheduleId + '&date=' + selectedSchedule + '&subname=' + encodedSubject + '&ename=' + encodeURIComponent(selectedExamName) + '&time=' + selectedTime;
+	    }
+	});
+
+
+	document.addEventListener('DOMContentLoaded', function () {
+	    var params = new URLSearchParams(window.location.search);
+	    var errorMessage = params.get('errorMessage');
+
+	    if (errorMessage) {
+	        // Check if the toast has already been shown
+	        var toastShown = sessionStorage.getItem('toastShown');
+
+	        if (!toastShown) {
+	            // Show toast message with the error message
+	            showToast(errorMessage);
+	            // Set flag to indicate that the toast has been shown
+	            sessionStorage.setItem('toastShown', 'true');
+	        }
+	    }
+	});
+
+	</script>
+	<script>
+	// Function to make an XMLHttpRequest
+	function makeRequest(method, url, callback) {
+	    var xhr = new XMLHttpRequest();
+	    xhr.open(method, url, true);
+	    xhr.onreadystatechange = function() {
+	        if (xhr.readyState === XMLHttpRequest.DONE) {
+	            callback(xhr);
+	        }
+	    };
+	    xhr.send();
+	}
+
+	// Function to handle successful response for fetching subjects
+	function handleSubjectResponse(xhr) {
+	    if (xhr.status === 200) {
+	        var subjects = JSON.parse(xhr.responseText);
+	        var subjectDropdown = document.getElementById('subjectSelection');
+	        subjectDropdown.innerHTML = '';
+	        if (subjects.length > 0) {
+	            subjects.forEach(function(subject) {
+	                var option = new Option(subject.name, subject.id);
+	                subjectDropdown.add(option);
+	            });
+	        } else {
+	            subjectDropdown.add(new Option('No subjects available', ''));
+	        }
+	    } else {
+	        console.error('Error fetching subjects');
+	    }
+	}
+
+	// Function to handle successful response for fetching schedules
+	function handleScheduleResponse(xhr) {
+	    if (xhr.status === 200) {
+	        var schedules = JSON.parse(xhr.responseText);
+	        var scheduleDropdown = document.getElementById('scheduleSelection');
+	        
+	        scheduleDropdown.innerHTML = '';
+	        if (schedules.length > 0) {
+	            schedules.forEach(function(schedule) {
+	                var option = new Option(schedule.examDate, schedule.schid);
+	                scheduleDropdown.add(option);
+	            });
+	            // Automatically fetch subjects and times for the currently selected schedule
+	            var selectedScheduleId = scheduleDropdown.value;
+	            console.log('Selected Schedule ID:', selectedScheduleId); // Print the selected schedule ID to console on load
+	            fetchSubjects(selectedScheduleId);
+	            fetchTimes(selectedScheduleId);
+	        } else {
+	            scheduleDropdown.add(new Option('No schedules available', ''));
+	            // If no schedules available, clear subjects dropdown
+	            var subjectDropdown = document.getElementById('subjectSelection');
+	            subjectDropdown.innerHTML = '';
+	            subjectDropdown.add(new Option('No subjects available', ''));
+	            // Clear times dropdown
+	            var timeDropdown = document.getElementById('timeSelection');
+	            timeDropdown.innerHTML = '';
+	            timeDropdown.add(new Option('No time available', ''));
+	        }
+	    } else {
+	        console.error('Error fetching schedules');
+	    }
+	}
+
+	// Function to handle successful response for fetching times
+	function handleTimeResponse(xhr) {
+	    if (xhr.status === 200) {
+	        console.log('Response received:', xhr.responseText); // Log the response
+	        var times = JSON.parse(xhr.responseText);
+	        console.log('Parsed time data:', times); // Log the parsed time data
+	        var timeDropdown = document.getElementById('timeSelection');
+	        timeDropdown.innerHTML = '';
+	        if (times.length > 0) {
+	            times.forEach(function(time) {
+	                var option = new Option(time);
+	                timeDropdown.add(option);
+	            });
+	        } else {
+	            timeDropdown.add(new Option('No time available', ''));
+	        }
+	    } else {
+	        console.error('Error fetching times');
+	    }
+	}
+
+	// Function to fetch subjects for the selected schedule
+	function fetchSubjects(scheduleId) {
+	    var url = 'fetchSubjects?scheduleId=' + scheduleId;
+	    makeRequest('GET', url, handleSubjectResponse);
+	}
+
+	// Function to fetch schedules for the selected exam
+	function fetchSchedules(examId) {
+	    var url = 'fetchSchedules?examId=' + examId;
+	    makeRequest('GET', url, handleScheduleResponse);
+	}
+
+	// Function to fetch times for the selected schedule
+	function fetchTimes(scheduleId) {
+	    var url = 'fetchTime?scheduleId=' + scheduleId;
+	    makeRequest('GET', url, handleTimeResponse);
+	}
+
+	// Fetch schedules, subjects, and times when the schedule selection changes
+	document.getElementById('scheduleSelection').addEventListener('change', function() {
+	    console.log('Schedule selection changed'); // Verify the event listener is triggered
+	    var scheduleId = this.value;
+	    console.log('Selected Schedule ID:', scheduleId); // Print the selected schedule ID to console
+	    fetchSubjects(scheduleId);
+	    fetchTimes(scheduleId); // Also fetch times for the selected schedule
+	});
+
+	// Fetch schedules and times for the currently selected exam on page load
+	window.addEventListener('load', function() {
+	    var examSelection = document.getElementById('examSelection');
+	    var selectedExamId = examSelection.value;
+	    fetchSchedules(selectedExamId);
+	});
+
+	// Fetch schedules, subjects, and times when the exam selection changes
+	document.getElementById('examSelection').addEventListener('change', function() {
+	    var examId = this.value;
+	    fetchSchedules(examId);
+	});
+
+	</script>
 	
 </body>
 </html>
