@@ -33,7 +33,7 @@ public interface ExamRepository {
 	
 	public List<String[]> getAllResults();
 	
-	public String getTimeBySchId(int schId);
+	public String[] getTimeBySchId(int schId);
 	
 	public List<String[]> getAllQuestion(String subjectName);
 	

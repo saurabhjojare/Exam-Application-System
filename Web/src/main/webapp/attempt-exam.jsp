@@ -1,5 +1,13 @@
 <%@ include file="common-resources.jsp"%>
 <%@ include file="userSession.jsp"%>
+<%@ page import="java.net.URLDecoder" %>
+
+<%
+String NoExamMessage = request.getParameter("NoExamMessage");
+if (NoExamMessage != null) {
+    NoExamMessage = URLDecoder.decode(NoExamMessage, "UTF-8");
+}
+%>
 
 <!doctype html>
 
@@ -25,6 +33,10 @@
 
 				<%-- 				<span class="lead" style="display:none;">Hello, <strong><%=username%></strong></span> --%>
 				<h1>Attempt Exam</h1>
+				 <% if (NoExamMessage != null && NoExamMessage.trim().length() > 0) { %>
+    <p id = "message"><%= NoExamMessage %></p>
+<% } %>
+
 				<p class="lead">Please select the exam and schedule before
 					starting.</p>
 
@@ -138,101 +150,16 @@
 	<%@ include file="footer.jsp"%>
 
 	<script src="js/nextButton.js"></script>
-	<script src="js/attemptExam.js"></script>
-	<script src="js/examToast.js"></script>
-	<script>
-
-	//Flag to track if a toast is currently being displayed
-	let isToastVisible = false;
-
-	function showToast(message) {
-	    // If a toast is already visible, return early
-	    if (isToastVisible) return;
-
-	    // Set the flag to indicate a toast is being displayed
-	    isToastVisible = true;
-
-	    // Create toast element
-	    var toast = document.createElement('div');
-	    toast.classList.add('toast');
-	    toast.textContent = message;
-
-	    // Append toast to container
-	    var container = document.getElementById('toast-container');
-	    container.appendChild(toast);
-
-	    // Show toast
-	    setTimeout(function () {
-	        toast.classList.add('show');
-	    }, 100);
-
-	    // Hide toast after 6 seconds
-	    setTimeout(function () {
-	        toast.classList.remove('show');
-	        // Remove toast from DOM after transition and reset the flag
-	        setTimeout(function () {
-	            container.removeChild(toast);
-	            isToastVisible = false;
-	        }, 300);
-	    }, 6000);
-	}
-
-	document.getElementById('confirmStartExam').addEventListener('click', function () {
-	    var selectedExamId = document.getElementById('examSelection').value;
-	    var selectedExamName = document.getElementById('examSelection').options[document.getElementById('examSelection').selectedIndex].text;
-	    var selectedScheduleId = document.getElementById('scheduleSelection').value;
-	    var selectedSchedule = document.getElementById('scheduleSelection').options[document.getElementById('scheduleSelection').selectedIndex].text;
-	    var selectedSubject = document.getElementById('subjectSelection').options[document.getElementById('subjectSelection').selectedIndex].text;
-	    var selectedTime = document.getElementById('timeSelection').value;
-
-	    // Get the current date in yyyy-mm-dd format
-	    var currentDate = new Date().toISOString().split('T')[0];
-	    // Get the current time in hh:mm AM/PM format
-	    var currentTime = new Date().toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'});
-
-	    // Parse the selected date to yyyy-mm-dd format
-	    var selectedDateParts = selectedSchedule.split('-');
-	    var selectedDate = selectedDateParts[0] + '-' + selectedDateParts[1].padStart(2, '0') + '-' + selectedDateParts[2].padStart(2, '0');
-
-	    // Check if the selected date is before the current date or if the date is invalid
-	    if (selectedSchedule !== currentDate || selectedTime !== currentTime) {
-	        // Log current date, selected date, current time, and selected time for debugging
-	        console.log("Current Date:", currentDate);
-	        console.log("Selected Date:", selectedDate);
-	        console.log("Current Time:", currentTime);
-	        console.log("Selected Time:", selectedTime);
-	        var errorMessage = 'This exam schedule is not for today or not for the current time';
-
-	        // Show toast message
-	        showToast(errorMessage);
-	    } else {
-	        // Encode subject name
-	        var encodedSubject = encodeURIComponent(selectedSubject);
-	        // Redirect to the exam page with necessary parameters
-	        window.location.href = 'exam.jsp?examId=' + selectedExamId + '&scheduleId=' + selectedScheduleId + '&date=' + selectedSchedule + '&subname=' + encodedSubject + '&ename=' + encodeURIComponent(selectedExamName) + '&time=' + selectedTime;
-	    }
-	});
-
-
-	document.addEventListener('DOMContentLoaded', function () {
-	    var params = new URLSearchParams(window.location.search);
-	    var errorMessage = params.get('errorMessage');
-
-	    if (errorMessage) {
-	        // Check if the toast has already been shown
-	        var toastShown = sessionStorage.getItem('toastShown');
-
-	        if (!toastShown) {
-	            // Show toast message with the error message
-	            showToast(errorMessage);
-	            // Set flag to indicate that the toast has been shown
-	            sessionStorage.setItem('toastShown', 'true');
-	        }
-	    }
-	});
-
-	</script>
-	<script>
+	<script src="js/hideMessge.js"></script>
+<!-- 	<script src="js/attemptExam.js"></script> -->
+<!-- 	<script src="js/examToast.js"></script> -->
+<script>
+//Declare startTime and endTime variables globally
+	let startTime = '', endTime = '';
+	let currentTime = new Date().toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'});
+	console.log(typeof(startTime));
+	console.log(typeof(endTime));
+	console.log(typeof(currentTime));
 	// Function to make an XMLHttpRequest
 	function makeRequest(method, url, callback) {
 	    var xhr = new XMLHttpRequest();
@@ -296,13 +223,27 @@
 	        console.error('Error fetching schedules');
 	    }
 	}
+	
 
 	// Function to handle successful response for fetching times
 	function handleTimeResponse(xhr) {
 	    if (xhr.status === 200) {
-	        console.log('Response received:', xhr.responseText); // Log the response
+		    var currentTime = new Date().toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'});
+		    console.log("Current Time:", currentTime);
+	        // console.log('Response received:', xhr.responseText); // Log the response
 	        var times = JSON.parse(xhr.responseText);
-	        console.log('Parsed time data:', times); // Log the parsed time data
+	        // console.log('Parsed time data:', times); // Log the parsed time data
+	        
+	        // Extract and log start time and end time
+	        if (times.length > 0) {
+	            times.forEach(function(time) {
+	                startTime = time.split(' - ')[0];
+	                endTime = time.split(' - ')[1];
+	                console.log('Start Time:', startTime);
+	                console.log('End Time:', endTime);
+	            });
+	        }
+
 	        var timeDropdown = document.getElementById('timeSelection');
 	        timeDropdown.innerHTML = '';
 	        if (times.length > 0) {
@@ -317,6 +258,7 @@
 	        console.error('Error fetching times');
 	    }
 	}
+
 
 	// Function to fetch subjects for the selected schedule
 	function fetchSubjects(scheduleId) {
@@ -359,6 +301,114 @@
 	});
 
 	</script>
+	
+	<script>
+
+	//Flag to track if a toast is currently being displayed
+	let isToastVisible = false;
+
+	function showToast(message) {
+	    // If a toast is already visible, return early
+	    if (isToastVisible) return;
+
+	    // Set the flag to indicate a toast is being displayed
+	    isToastVisible = true;
+
+	    // Create toast element
+	    var toast = document.createElement('div');
+	    toast.classList.add('toast');
+	    toast.textContent = message;
+
+	    // Append toast to container
+	    var container = document.getElementById('toast-container');
+	    container.appendChild(toast);
+
+	    // Show toast
+	    setTimeout(function () {
+	        toast.classList.add('show');
+	    }, 100);
+
+	    // Hide toast after 6 seconds
+	    setTimeout(function () {
+	        toast.classList.remove('show');
+	        // Remove toast from DOM after transition and reset the flag
+	        setTimeout(function () {
+	            container.removeChild(toast);
+	            isToastVisible = false;
+	        }, 300);
+	    }, 6000);
+	}
+	
+	
+
+	document.getElementById('confirmStartExam').addEventListener('click', function () {
+	    var selectedExamId = document.getElementById('examSelection').value;
+	    var selectedExamName = document.getElementById('examSelection').options[document.getElementById('examSelection').selectedIndex].text;
+	    var selectedScheduleId = document.getElementById('scheduleSelection').value;
+	    var selectedSchedule = document.getElementById('scheduleSelection').options[document.getElementById('scheduleSelection').selectedIndex].text;
+	    var selectedSubject = document.getElementById('subjectSelection').options[document.getElementById('subjectSelection').selectedIndex].text;
+	    var selectedTime = document.getElementById('timeSelection').value;
+
+	    // Get the current date in yyyy-mm-dd format
+	    var currentDate = new Date().toISOString().split('T')[0];
+	    // Get the current time in hh:mm AM/PM format
+	    var currentTime = new Date().toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'});
+
+	    // Parse the selected date to yyyy-mm-dd format
+	    var selectedDateParts = selectedSchedule.split('-');
+	    var selectedDate = selectedDateParts[0] + '-' + selectedDateParts[1].padStart(2, '0') + '-' + selectedDateParts[2].padStart(2, '0');
+	
+// 	    var timeParts = selectedTime.split(' - ');
+// 	    var startTime2 = timeParts[0];
+// 	    var endTime2 = timeParts[1];
+	    
+
+	    // Check if the selected date is before the current date or if the date is invalid
+	  if (selectedSchedule === currentDate && (currentTime >= startTime && currentTime <= endTime)) {
+        // Encode subject name
+        var encodedSubject = encodeURIComponent(selectedSubject);
+        // Redirect to the exam page with necessary parameters
+        window.location.href = 'exam.jsp?examId=' + selectedExamId + '&scheduleId=' + selectedScheduleId + '&date=' + selectedSchedule + '&subname=' + encodedSubject + '&ename=' + encodeURIComponent(selectedExamName) + '&time=' + selectedTime;
+    } else {
+        var errorMessage = '';
+        if (selectedSchedule !== currentDate) {
+            errorMessage = 'This exam schedule is not for today';
+        } else {
+            errorMessage = 'The exam is not available at the current time';
+        }
+        // Show toast message
+        showToast(errorMessage);
+    }
+	});
+
+
+	document.addEventListener('DOMContentLoaded', function () {
+	    var params = new URLSearchParams(window.location.search);
+	    var errorMessage = params.get('errorMessage');
+
+	    if (errorMessage) {
+	        // Check if the toast has already been shown
+	        var toastShown = sessionStorage.getItem('toastShown');
+
+	        if (!toastShown) {
+	            // Show toast message with the error message
+	            showToast(errorMessage);
+	            // Set flag to indicate that the toast has been shown
+	            sessionStorage.setItem('toastShown', 'true');
+	        }
+	    }
+	});
+
+	</script>
+	
+	<script>
+	// Clear parameters from URL and reload the page
+	window.history.replaceState({}, document.title, window.location.pathname);
+
+	// Alternatively, you can clear parameters without reloading the page
+	// window.history.pushState({}, document.title, window.location.pathname);
+	</script>
+	
 	
 </body>
 </html>

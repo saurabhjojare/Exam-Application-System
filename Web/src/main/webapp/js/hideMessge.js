@@ -4,4 +4,4 @@
 			if (messageElement) {
 				messageElement.style.display = 'none';
 			}
-		}, 3000); // 4 seconds
+		}, 4000); // 4 seconds

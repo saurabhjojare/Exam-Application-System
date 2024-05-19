@@ -15,8 +15,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/fetchTime")
-public class FetchTimeController extends HttpServlet {
+@WebServlet("/fetchStartTime")
+public class FetchStartTime extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     private final ExamService examService = new ExamServiceImpl();
@@ -28,17 +28,17 @@ public class FetchTimeController extends HttpServlet {
         String[] times = examService.getTimeBySchId(scheduleId);
         
         List<String> timeList = new ArrayList<>();
-        if (times != null && times.length >= 2) {
-            // Concatenate start time and end time separated by a space
-            String startTimeAndEndTime = times[0] + " - " + times[1];
-            timeList.add(startTimeAndEndTime);
-            
+        if (times != null && times.length >= 1) {
+            for (int i = 0; i < times.length; i++) {
+                if (i == 0) {
+                    timeList.add(times[i]); // Add only the start time
+                }
+            }
             // Log success message to Tomcat console
             System.out.println("Time retrieved successfully for schedule Id: " + scheduleId);
             
-            // Print start time and end time
+            // Print start time
             System.out.println("Start Time: " + times[0]);
-            System.out.println("End Time: " + times[1]);
         } else {
             // Log error message to Tomcat console
             System.err.println("Error: Failed to retrieve time for schedule Id: " + scheduleId);

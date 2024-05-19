@@ -122,7 +122,7 @@ public class ExamServiceImpl implements ExamService {
 	}
 
     @Override
-    public String getTimeBySchId(int schId) {
+    public String[] getTimeBySchId(int schId) {
         return examRepo.getTimeBySchId(schId);
     }
 

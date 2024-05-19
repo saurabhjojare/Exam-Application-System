@@ -445,15 +445,15 @@ public class ExamRepositoryImpl extends DBConfig implements ExamRepository {
 	}
 
 	@Override
-	public String getTimeBySchId(int schId) {
+	public String[] getTimeBySchId(int schId) {
 	    try {
-	        stmt = conn.prepareStatement("SELECT TIME_FORMAT(starttime, '%h:%i %p') AS starttime, TIME_FORMAT(endtime, '%h:%i %p') AS endtime FROM schedule WHERE schid = ? AND (CURTIME() <= starttime OR CURTIME() <= endtime)");
+	        stmt = conn.prepareStatement("SELECT TIME_FORMAT(starttime, '%h:%i %p') AS starttime, TIME_FORMAT(endtime, '%h:%i %p') AS endtime FROM schedule WHERE schid = ? AND date >= CURDATE()");
 	        stmt.setInt(1, schId);
 	        rs = stmt.executeQuery();
 	        if (rs.next()) {
 	            String startTime = rs.getString("starttime");
 	            String endTime = rs.getString("endtime");
-	            return startTime + " To " + endTime; // Concatenate start and end time
+	            return new String[]{startTime, endTime}; // Return array with start and end time
 	        } else {
 	            return null; // Return null if the schedule is not found
 	        }
@@ -462,6 +462,7 @@ public class ExamRepositoryImpl extends DBConfig implements ExamRepository {
 	        return null;
 	    }
 	}
+
 	
 	 @Override
 	    public int[] getMarksByExamId(int examId) {
