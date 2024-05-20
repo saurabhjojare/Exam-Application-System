@@ -17,6 +17,10 @@
 	
 	<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 	
+	<!-- Animate CSS -->
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+	
 	<!-- Favicon -->
 	
 	<link rel="icon" href="img/favicon.png" type="image/x-icon">
@@ -45,6 +49,8 @@
 	<%@ page import="com.exam.repository.SubjectRepositoryImpl"%>
 	<%@ page import="com.exam.repository.QuestionRepository"%>
 	<%@ page import="com.exam.repository.QuestionRepositoryImpl"%>
+	<%@ page import="com.exam.repository.AdminRepository"%>
+	<%@ page import="com.exam.repository.AdminRepositoryImpl"%>
 	
 	
 	<%@ page import="com.exam.model.ExamModel"%>

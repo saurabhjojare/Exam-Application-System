@@ -73,6 +73,7 @@ if (listStudent != null && !listStudent.isEmpty()) {
 						<br>
 						<p>No student information found.</p>
 						<%
+						session.invalidate();
 						}
 						%>
 					</div>

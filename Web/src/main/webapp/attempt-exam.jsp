@@ -59,7 +59,7 @@ if (NoExamMessage != null) {
 										out.println("<option value=\"" + exam.getId() + "\">" + exam.getName() + "</option>");
 									}
 								} else {
-									out.println("<option value=\"\">No subjects found</option>");
+									out.println("<option value=\"\">Exam not found</option>");
 								}
 								%>
 
@@ -71,8 +71,17 @@ if (NoExamMessage != null) {
 							<label for="scheduleSelection" class="form-label">Select
 								Schedule</label> <select class="form-select" id="scheduleSelection"
 								name="scheduleSelection">
+								<% 
+								if (q1list != null && !q1list.isEmpty()) {
+								%>
 								<option value="" disabled selected>Loading</option>
-
+								<% 
+								} else {
+								%>
+								<option value="" disabled selected>Schedule not found</option>
+								<%
+								} 
+								%>
 							</select>
 						</div>
 
@@ -82,8 +91,17 @@ if (NoExamMessage != null) {
 							<label for="subjectSelection" class="form-label">Select
 								Subject</label> <select class="form-select" id="subjectSelection"
 								name="subjectSelection">
+								<% 
+								if (q1list != null && !q1list.isEmpty()) {
+								%>
 								<option value="" disabled selected>Loading</option>
-
+								<% 
+								} else {
+								%>
+								<option value="" disabled selected>Subject not found</option>
+								<%
+								} 
+								%>
 								<!-- Subject options will be dynamically populated here -->
 							</select>
 						</div>
@@ -100,7 +118,17 @@ if (NoExamMessage != null) {
 							<label for="timeSelection" class="form-label">Select Time</label>
 							<select class="form-select" id="timeSelection"
 								name="timeSelection">
+								<% 
+								if (q1list != null && !q1list.isEmpty()) {
+								%>
 								<option value="" disabled selected>Loading</option>
+								<% 
+								} else {
+								%>
+								<option value="" disabled selected>Time not found</option>
+								<%
+								} 
+								%>
 							</select>
 						</div>
 
@@ -184,7 +212,7 @@ if (NoExamMessage != null) {
 	                subjectDropdown.add(option);
 	            });
 	        } else {
-	            subjectDropdown.add(new Option('No subjects available', ''));
+	            subjectDropdown.add(new Option('Subject not found', ''));
 	        }
 	    } else {
 	        console.error('Error fetching subjects');
@@ -209,15 +237,15 @@ if (NoExamMessage != null) {
 	            fetchSubjects(selectedScheduleId);
 	            fetchTimes(selectedScheduleId);
 	        } else {
-	            scheduleDropdown.add(new Option('No schedules available', ''));
+	            scheduleDropdown.add(new Option('Schedules not found', ''));
 	            // If no schedules available, clear subjects dropdown
 	            var subjectDropdown = document.getElementById('subjectSelection');
 	            subjectDropdown.innerHTML = '';
-	            subjectDropdown.add(new Option('No subjects available', ''));
+	            subjectDropdown.add(new Option('Subject not found', ''));
 	            // Clear times dropdown
 	            var timeDropdown = document.getElementById('timeSelection');
 	            timeDropdown.innerHTML = '';
-	            timeDropdown.add(new Option('No time available', ''));
+	            timeDropdown.add(new Option('Time not found', ''));
 	        }
 	    } else {
 	        console.error('Error fetching schedules');
@@ -252,7 +280,7 @@ if (NoExamMessage != null) {
 	                timeDropdown.add(option);
 	            });
 	        } else {
-	            timeDropdown.add(new Option('No time available', ''));
+	            timeDropdown.add(new Option('Time not found', ''));
 	        }
 	    } else {
 	        console.error('Error fetching times');
@@ -280,9 +308,9 @@ if (NoExamMessage != null) {
 
 	// Fetch schedules, subjects, and times when the schedule selection changes
 	document.getElementById('scheduleSelection').addEventListener('change', function() {
-	    console.log('Schedule selection changed'); // Verify the event listener is triggered
+// 	    console.log('Schedule selection changed'); // Verify the event listener is triggered
 	    var scheduleId = this.value;
-	    console.log('Selected Schedule ID:', scheduleId); // Print the selected schedule ID to console
+// 	    console.log('Selected Schedule ID:', scheduleId); // Print the selected schedule ID to console
 	    fetchSubjects(scheduleId);
 	    fetchTimes(scheduleId); // Also fetch times for the selected schedule
 	});

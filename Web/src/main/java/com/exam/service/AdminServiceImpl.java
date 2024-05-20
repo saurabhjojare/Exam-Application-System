@@ -32,4 +32,10 @@ public class AdminServiceImpl implements AdminService {
 	        // Call the repository method to get admins by username
 	        return adminRepository.getAdminsByUsername(email);
 	    }
+
+	@Override
+	public List<AdminModel> getAllAdmins() {
+		// TODO Auto-generated method stub
+		return adminRepository.getAllAdmins();
+	}
 }

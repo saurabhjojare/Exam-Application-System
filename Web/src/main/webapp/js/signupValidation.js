@@ -9,6 +9,7 @@
     } else {
         fullNameWarningMsg.textContent = isValid ? '' : 'Enter your first name followed by a space, then your last name';
     }
+     return isValid; // Return the validation result
   }
 
   // Function to validate the password match
@@ -24,6 +25,8 @@
     } else {
       passwordWarningMsg.textContent = 'Passwords do not match.';
     }
+    
+     return isValid; // Return the validation result
   }
   
 //Function to validate the password
@@ -50,7 +53,7 @@ function validateContact() {
   if (contact === '') {
     contactWarningMsg.textContent = ''; // Clear the warning message if input is empty
   } else {
-    contactWarningMsg.textContent = isValid ? '' : 'Contact should be in international format (+CCXXXXXXXXXX)';
+    contactWarningMsg.textContent = isValid ? '' : 'Contact should be in international format';
   }
 
   return isValid; // Return the validation result
@@ -84,6 +87,7 @@ function validateEmail() {
   document.getElementById('contact').addEventListener('blur', validateContact);
   document.getElementById('email').addEventListener('blur', validateEmail);
 
+
   // Form submission validation
   $(document).ready(function() {
     $('#signupForm').submit(function(e) {
@@ -97,15 +101,16 @@ function validateEmail() {
   });
   
   
-  $(document).ready(function() {
-			  $('#signupForm').submit(function(e) {
-			    // Perform all validations before submitting the form
-			    var isValid = validatefullName() && validatePassword() && validatePasswordMatch() && validateContact() && validateEmail();
-			    
-			    if (!isValid) {
-			      // Prevent form submission if any validation fails
-			      e.preventDefault();
-			    }
-			  });
-			});
+$(document).ready(function() {
+  $('#signupForm').submit(function(e) {
+    // Perform all validations before submitting the form
+    var isValid = validatefullName() && validatePassword() && validatePasswordMatch() && validateContact() && validateEmail();
+    
+    if (!isValid) {
+      // Prevent form submission if any validation fails
+      e.preventDefault();
+    }
+  });
+});
+
 		

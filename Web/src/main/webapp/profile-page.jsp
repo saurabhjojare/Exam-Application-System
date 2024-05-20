@@ -76,6 +76,8 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 				<span class="display-6" style="font-size: 28px;">No admin
 					found.</span><br>
 				<%
+				// Invalidate session if no admin is found
+			    session.invalidate();
 				}
 				%>
 				<div class="marginBottom">

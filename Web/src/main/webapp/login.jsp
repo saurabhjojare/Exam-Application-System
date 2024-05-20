@@ -22,7 +22,9 @@
 			<div class="loginWidth">
 				<div class="container-sm">
 					<h1 class="display-4">Login</h1>
+					<div class="animate__animated animate__shakeX">
 					<span id="message">${message}</span>
+					</div>
 					<p class="lead">Please enter your credentials to log in.</p>
 					<form name='form' action='login' method='Post'>
 						<div class="mb-3">
@@ -61,6 +63,20 @@
 
 	<script src="js/hideMessge.js"></script>
 	<script src="js/showPasswordUser.js"></script>
+	<script>
+		// Function to redirect to login.jsp after displaying the message
+		function redirectToLogin() {
+			var messageElement = document.getElementById('message');
+			if (messageElement && messageElement.textContent.trim() !== '') {
+				setTimeout(function() {
+					window.location.href = 'login.jsp';
+				}, 3000); // Redirect after 3 seconds
+			}
+		}
+
+		// Call the function on page load
+		window.onload = redirectToLogin;
+	</script>
 	
 </body>
 </html>

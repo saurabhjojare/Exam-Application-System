@@ -56,9 +56,13 @@ int count = 1;
 						if (results.isEmpty()) {
 						%>
 						<tr>
-							<td colspan="2" style="text-align: center;">No results
-								found.</td>
-						</tr>
+    <td colspan="6" style="border: none;">
+        <div style="display: flex; justify-content: center; align-items: center;">
+            No results found.
+        </div>
+    </td>
+</tr>
+						
 						<%
 						} else {
 						%>

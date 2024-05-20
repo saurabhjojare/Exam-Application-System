@@ -9,20 +9,24 @@ function validateFullName() {
   } else {
     fullNameWarningMsg.textContent = isValid ? '' : 'Enter your first name followed by a space, then your last name';
   }
+  return isValid; // Return the validation result
 }
 
-//Function to validate the username
+// Function to validate the username
 function validateUsername() {
-var usernameInput = document.getElementById('username').value.trim();
-var usernameWarningMsg = document.getElementById('usernameWarningMsg');
-var isValid = /^[a-z0-9]+$/.test(usernameInput); // Regular expression to allow letters, numbers, and underscores
+  var usernameInput = document.getElementById('username').value.trim();
+  var usernameWarningMsg = document.getElementById('usernameWarningMsg');
+  var isValid = /^[a-z]+$/.test(usernameInput); // Regular expression to allow letters, numbers, and underscores
 
-if (usernameInput === '') {
-   usernameWarningMsg.textContent = ''; // Clear the warning message if input is empty
-} else {
-   usernameWarningMsg.textContent = isValid ? '' : 'Username can only lowercase contain letters';
+  if (usernameInput === '') {
+     usernameWarningMsg.textContent = ''; // Clear the warning message if input is empty
+  } else {
+     usernameWarningMsg.textContent = isValid ? '' : 'Username can only lowercase contain letters & digits';
+  }
+
+  return isValid; // Return the validation result
 }
-}
+
 
 //Function to validate the password
 function validatePassword() {
@@ -48,7 +52,7 @@ function validateContact() {
   if (contact === '') {
     contactWarningMsg.textContent = ''; // Clear the warning message if input is empty
   } else {
-    contactWarningMsg.textContent = isValid ? '' : 'Contact should be in international format (+CCXXXXXXXXXX)';
+    contactWarningMsg.textContent = isValid ? '' : 'Contact should be in international format';
   }
 
   return isValid; // Return the validation result
@@ -76,8 +80,6 @@ document.getElementById('signupPassword').addEventListener('input', validatePass
 document.getElementById('contact').addEventListener('input', validateContact);
 document.getElementById('email').addEventListener('input', validateEmail);
 
-
-
 // Clear warning messages when input fields lose focus
 document.getElementById('fullName').addEventListener('blur', validateFullName);
 document.getElementById('username').addEventListener('blur', validateUsername);
@@ -85,16 +87,15 @@ document.getElementById('signupPassword').addEventListener('blur', validatePassw
 document.getElementById('contact').addEventListener('blur', validateContact);
 document.getElementById('email').addEventListener('blur', validateEmail);
 
-
 $(document).ready(function() {
-			  $('#signupForm').submit(function(e) {
-			    // Perform all validations before submitting the form
-			    var isValid = validateFullName() && validatePassword() && validateContact() && validateEmail() && validateUsername();
-			    
-			    if (!isValid) {
-			      // Prevent form submission if any validation fails
-			      e.preventDefault();
-			    }
-			  });
-			});
-			
+  $('#signupForm').submit(function(e) {
+    // Perform all validations before submitting the form
+    var isValid = validateFullName() && validatePassword() && validateContact() && validateEmail() && validateUsername();
+    
+    if (!isValid) {
+      // Prevent form submission if any validation fails
+      e.preventDefault();
+      console.log('Form submission prevented due to validation errors.');
+    }
+  });
+});

@@ -31,7 +31,9 @@
                     <center>
 <%--                         <span class="" style="font-size: 1.9rem;font-weight: 300;">Hello, <strong><%= username %></strong></span><br> --%>
                         <% if (message != null) { %>
+                        <div class="animate__animated animate__shakeX">
                             <span class="text-center" id="message"><%= message %></span>
+                            </div>
                         <% } %>
                     </center>
                     <p class="lead text-center">Choose a subject</p>
@@ -46,7 +48,7 @@
                                         <option value="<%= subject %>"><%= subject %></option>
                                 <%    }
                                 } else { %>
-                                    <option value="">No subjects found.</option>
+                                    <option value="">No subjects found</option>
                                 <% } %>
                             </select>
                             <span class="text-muted" id="subjectWarningMsg"></span>

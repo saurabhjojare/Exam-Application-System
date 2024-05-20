@@ -41,9 +41,9 @@ public class AssignSubjectController extends HttpServlet {
         
         HttpSession session = request.getSession();
         if (success) {
-            session.setAttribute("message", "Subject Assigned");
+            session.setAttribute("message", "<span class=\"text-success\">Subject Assigned</span>");
         } else {
-            session.setAttribute("message", "Something Wrong");
+            session.setAttribute("message", "<span class=\"text-danger\">Oops, Something Went Wrong</span>");
         }
         response.sendRedirect("select-subject.jsp");
     }

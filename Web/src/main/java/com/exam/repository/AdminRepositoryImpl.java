@@ -121,4 +121,48 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository {
 
         return admins;
     }
+    
+    
+ // Method to fetch all admin details and return a list
+    @Override
+    public List<AdminModel> getAllAdmins() {
+        List<AdminModel> admins = new ArrayList<>();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            String query = "SELECT * FROM admin";
+            stmt = conn.prepareStatement(query);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                AdminModel admin = new AdminModel();
+                admin.setId(rs.getInt("id"));
+                admin.setfullName(rs.getString("fullName"));
+                // Exclude fetching password here for security reasons
+                admin.setContact(rs.getString("contact"));
+                admin.setEmail(rs.getString("email"));
+                admin.setRole(rs.getString("role"));
+                admin.setDepartment(rs.getString("department"));
+                admin.setPermissions(rs.getString("permissions"));
+                admins.add(admin);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return admins;
+    }
+
 }

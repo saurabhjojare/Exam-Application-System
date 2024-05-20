@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Add Exam</title>
+<title>Add Admin</title>
 <link rel="stylesheet" type="text/css" href="css/addAdmin.css">
 <link rel="stylesheet" type="text/css" href="css/nextStep.css">
 <link rel="stylesheet" type="text/css" href="css/CustomColor.css">
@@ -78,10 +78,11 @@
 												<div class="form-group mb-3">
 													<label for="role">Role</label> <select class="form-control"
 														id="role" name="role" required>
-														<option value="">Select Role</option>
+														<option value="" disabled>Select Role</option>
 														<option value="Administrator">Administrator</option>
 														<option value="Manager">Manager</option>
 														<option value="Supervisor">Supervisor</option>
+														<option value="Supervisor">Staff</option>
 														<!-- Add more options as needed -->
 													</select>
 												</div>
@@ -89,10 +90,10 @@
 													<label for="department">Department</label> <select
 														class="form-control" id="department" name="department"
 														required>
-														<option value="">Select Department</option>
+														<option value="" disabled>Select Department</option>
 														<option value="IT Department">IT Department</option>
-														<option value="Marketing Department">Marketing
-															Department</option>
+														<option value="IT Department">HR Department</option>
+														<option value="Marketing Department">Marketing Department</option>
 														<!-- Add more options as needed -->
 													</select>
 												</div>
@@ -100,7 +101,8 @@
 													<label for="permissions">Permissions</label> <select
 														class="form-control" id="permissions" name="permissions"
 														required>
-														<option value="">Select Permissions</option>
+														<option value="" disabled>Select Permissions</option>
+														<option value="System Level">System Level</option>
 														<option value="Full Access">Full Access</option>
 														<option value="Limited Access">Limited Access</option>
 														<!-- Add more options as needed -->
@@ -132,7 +134,7 @@
 		<%@ include file="navbar-bottom.jsp"%>
 	</div>
 
-	<script src="js/signupValidation.js"></script>
+<!-- 	<script src="js/signupValidation.js"></script> -->
 	<script src="js/nextButton.js"></script>
 	<script src="js/hideMessge.js"></script>
 </body>

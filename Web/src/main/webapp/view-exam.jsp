@@ -41,7 +41,7 @@
         ExamRepository examRepository = new ExamRepositoryImpl();
         List<ExamModel> examList = examService.getAllExam();
         int count = 1;
-        int totalExams = examList.size();
+        int totalExams = (examList != null) ? examList.size() : 0;
         
         if(totalExams > 0) { // Check if exams are found
             for (ExamModel exam : examList) {

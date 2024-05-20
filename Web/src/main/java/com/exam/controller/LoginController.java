@@ -37,14 +37,14 @@ public class LoginController extends HttpServlet {
         if (result == 1) {
             HttpSession session = request.getSession(); 
             session.setAttribute("username", username); 
-            
+         
             session = request.getSession();
-            session.setMaxInactiveInterval(60 * 60); // Set the session timeout to one hour
+//          session.setMaxInactiveInterval(60 * 60); // Set the session timeout to one hour
 
             response.sendRedirect("profile.jsp");
           
         } else {
-            message = "User Does Not Exist";
+            message = "<span class=\"text-danger\">User Not Found</span>";
             request.setAttribute("message", message);
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }

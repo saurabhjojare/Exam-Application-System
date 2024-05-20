@@ -11,5 +11,7 @@ public interface AdminRepository {
 	boolean loginAdmin(String email, String password);
 	
 	public List<AdminModel> getAdminsByUsername(String email);
+	
+	public List<AdminModel> getAllAdmins();
 
 }
