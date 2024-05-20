@@ -46,7 +46,7 @@ if (listStudent != null && !listStudent.isEmpty()) {
 						<%
 						if (student != null) {
 						%>
-						<h1 class="text-body-emphasis mt-2 fw-light"><%=student.getName()%></h1>
+						<h1 class="text-body-emphasis mt-2 fw-light">Hello, <%=student.getName()%></h1>
 						<p class="h4 mt-3 fw-lighter">
 							<strong>Email: </strong><span class="text-lowercase"><%=student.getEmail()%></span>
 						</p>

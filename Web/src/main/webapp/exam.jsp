@@ -39,20 +39,22 @@ double marksPerQuestion = (double) totalMarks / questionCount;
 <div id="divSpan">
     <span> <%@ include file="navbar.jsp"%> </span>
 </div>
-
+	<span class = "text-center pt-3 lead" style= "font-size:19px;">Time Left: <span id="timeLeft"></span></span>
 <main>
-    <section class="container-sm py-5" id="examWidth">
+    <section class="container-sm py-3" id="examWidth">
 <%--         <span>Schedule ID <%=scheduleId %> | </span> --%>
 <%--         <span>Username <%=username %> | </span> --%>
 <%--         <span>Exam ID <%=examId %> | </span><br> --%>
 <%--         <span>Total Marks: <%= totalMarks %> | </span> --%>
 <%--         <span>Passing Marks: <%= passingMarks %> | </span><br> --%>
 <%--         <span>Questions <%=questionCount%> | </span> --%>
+<%-- 	         <span>Selected Time <%=SelectedTime%></span> --%>
 <%--         <span>Marks Per Question <%=marksPerQuestion %></span><br> --%>
         <span id="correctAnswerSpan" style="display: none;"></span>
         <span id="correctCount" style="display: none;"></span>
         <span id="percentage" style="display: none;"></span>
         <span id="passOrFail" style="display: none;"></span>
+        
 
         <p style="display: none;">
             Selected Exam: <%=ExamName%>
@@ -173,7 +175,7 @@ double marksPerQuestion = (double) totalMarks / questionCount;
     </script>
     
 <!-- <script src="js/examPage.js"></script> -->
-<script src="js/CopyPaste.js"></script>
+<!-- <script src="js/CopyPaste.js"></script> -->
 <script src="js/SubmitExam.js"></script>
 <script>
 //Clear parameters from URL and reload the page
@@ -190,6 +192,49 @@ double marksPerQuestion = (double) totalMarks / questionCount;
         // Show the selected question
         document.getElementById("question" + index).style.display = "block";
     }
+</script>
+
+<script>
+    var selectedTime = "<%= SelectedTime %>";
+    var timeParts = selectedTime.split(' - ');
+    var startTimeParts = timeParts[0].split(':');
+    var endTimeParts = timeParts[1].split(':');
+
+    // Convert start time to minutes
+    var startHours = parseInt(startTimeParts[0]);
+    var startMinutes = parseInt(startTimeParts[1]);
+    var startTimeInMinutes = startHours * 60 + startMinutes;
+
+    // Convert end time to minutes
+    var endHours = parseInt(endTimeParts[0]);
+    var endMinutes = parseInt(endTimeParts[1]);
+    var endTimeInMinutes = endHours * 60 + endMinutes;
+
+    // Calculate the difference in minutes
+    var timeDifferenceInMinutes = endTimeInMinutes - startTimeInMinutes;
+
+    function displayRemainingTime() {
+        var hours = Math.floor(timeDifferenceInMinutes / 60);
+        var minutes = timeDifferenceInMinutes % 60;
+        
+        if (timeDifferenceInMinutes <= 0) {
+            document.getElementById("timeLeft").textContent = "Time's up!";
+            document.getElementById("submitButton").click(); // Automatically submit the form
+        } else {
+            if (hours > 0) {
+                document.getElementById("timeLeft").textContent = hours + " hours, " + minutes + " minutes";
+            } else {
+                document.getElementById("timeLeft").textContent = minutes + " minutes";
+            }
+
+            // Decrease the time difference by 1 minute and call the function again after 1 minute
+            timeDifferenceInMinutes -= 1;
+            setTimeout(displayRemainingTime, 60000);
+        }
+    }
+
+    // Initial call to display the remaining time immediately
+    displayRemainingTime();
 </script>
 
 

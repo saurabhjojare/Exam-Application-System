@@ -45,7 +45,7 @@ public class ExamSubmitServlet extends HttpServlet {
         if(insertionResult) {
             request.getRequestDispatcher("exam-complete.jsp").forward(request, response);
         } else {
-        	out.println("Not Success");
+        	request.getRequestDispatcher("examSubmitFailed.jsp").forward(request, response);
         }
 
 

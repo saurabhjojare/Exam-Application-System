@@ -31,6 +31,15 @@ int count = 1;
 			<h1 class="fw-light">Exam Results</h1>
 
 			<p>Here's a summary of your performance:</p>
+				<div class="d-flex justify-content-center mb-3">
+					<div class="input-group" style="width: 400px;">
+						<input type="text" class="form-control"
+							placeholder="Search Result" aria-label="Search result"
+							aria-describedby="button-addon2">
+						<!--         <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button> -->
+					</div>
+				</div>
+			
 			<table class="table table-hover">
 				<thead>
 					<tr>
