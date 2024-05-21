@@ -16,7 +16,7 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>View Admin</title>
-<link rel="stylesheet" type="text/css" href="css/viewResult.css">
+<link rel="stylesheet" type="text/css" href="css/viewAdmin.css">
 <link rel="stylesheet" type="text/css" href="css/CustomColor.css">
 </head>
 <body>

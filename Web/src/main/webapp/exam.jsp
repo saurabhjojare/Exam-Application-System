@@ -195,7 +195,7 @@ double marksPerQuestion = (double) totalMarks / questionCount;
 </script>
 
 <script>
-    var selectedTime = "<%= SelectedTime %>";
+    var selectedTime = "<%= SelectedTime %>"; // Example format: "22:00 - 02:00"
     var timeParts = selectedTime.split(' - ');
     var startTimeParts = timeParts[0].split(':');
     var endTimeParts = timeParts[1].split(':');
@@ -210,16 +210,21 @@ double marksPerQuestion = (double) totalMarks / questionCount;
     var endMinutes = parseInt(endTimeParts[1]);
     var endTimeInMinutes = endHours * 60 + endMinutes;
 
+    // Adjust for end time on the next day if needed
+    if (endTimeInMinutes <= startTimeInMinutes) {
+        endTimeInMinutes += 24 * 60; // Add 24 hours in minutes
+    }
+
     // Calculate the difference in minutes
     var timeDifferenceInMinutes = endTimeInMinutes - startTimeInMinutes;
 
     function displayRemainingTime() {
         var hours = Math.floor(timeDifferenceInMinutes / 60);
         var minutes = timeDifferenceInMinutes % 60;
-        
+
         if (timeDifferenceInMinutes <= 0) {
             document.getElementById("timeLeft").textContent = "Time's up!";
-            document.getElementById("submitButton").click(); // Automatically submit the form
+            document.getElementById("submitButton").click(); // Automatically submit the form if needed
         } else {
             if (hours > 0) {
                 document.getElementById("timeLeft").textContent = hours + " hours, " + minutes + " minutes";
@@ -236,6 +241,8 @@ double marksPerQuestion = (double) totalMarks / questionCount;
     // Initial call to display the remaining time immediately
     displayRemainingTime();
 </script>
+
+
 <script>
 //Disable the browser's back button
 window.onload = function () {
