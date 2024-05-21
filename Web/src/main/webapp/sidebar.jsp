@@ -40,13 +40,13 @@
         <!-- Sidebar -->
         <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark sidebar" style="width: 280px;">
         <div class="sidebar-content">
-            <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <a href="#" class="d-flex align-items-center mb-md-0 me-md-auto text-white text-decoration-none">
                 <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
                 <span class="fs-4">Dashboard</span>
             </a>
-            <hr style = "margin-bottom: 5px;">
+<!--             <hr style = "margin-bottom: 0px;"> -->
             <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
+                <li class="nav-item mt-2">
                     <a href="profile-page.jsp" class="nav-link <%=(request.getRequestURI().endsWith("profile-page.jsp")) ? "active" : "" %>" aria-current="page">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                         Profile

@@ -190,10 +190,10 @@ if (NoExamMessage != null) {
 <script>
 //Declare startTime and endTime variables globally
 	let startTime = '', endTime = '';
-	let currentTime = new Date().toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'});
-	console.log(typeof(startTime));
-	console.log(typeof(endTime));
-	console.log(typeof(currentTime));
+	var currentTime = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+// 	console.log(typeof(startTime));
+// 	console.log(typeof(endTime));
+// 	console.log(typeof(currentTime));
 	// Function to make an XMLHttpRequest
 	function makeRequest(method, url, callback) {
 	    var xhr = new XMLHttpRequest();
@@ -262,8 +262,8 @@ if (NoExamMessage != null) {
 	// Function to handle successful response for fetching times
 	function handleTimeResponse(xhr) {
 	    if (xhr.status === 200) {
-		    var currentTime = new Date().toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'});
-		    console.log("Current Time:", currentTime);
+// 	    	var currentTime = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+// 		    console.log("Current Time:", currentTime);
 	        // console.log('Response received:', xhr.responseText); // Log the response
 	        var times = JSON.parse(xhr.responseText);
 	        // console.log('Parsed time data:', times); // Log the parsed time data
@@ -372,6 +372,36 @@ if (NoExamMessage != null) {
 	    }, 6000);
 	}
 	
+	function isCurrentTimeWithinRange(startTime, endTime, currentTime) {
+	    // Parsing start time
+	    const [startHour, startMinute, startSecond] = startTime.split(':').map(Number);
+
+	    // Parsing end time
+	    const [endHour, endMinute, endSecond] = endTime.split(':').map(Number);
+
+	    // Parsing current time
+	    const [currentHour, currentMinute, currentSecond] = currentTime.split(':').map(Number);
+
+	    // Creating start, end, and current Date objects
+	    const start = new Date();
+	    start.setHours(startHour, startMinute, startSecond, 0);
+
+	    let end = new Date();
+	    end.setHours(endHour, endMinute, endSecond, 0);
+
+	    const current = new Date();
+	    current.setHours(currentHour, currentMinute, currentSecond, 0);
+
+	    // If end time is earlier than start time, assume it's the next day
+	    if (end < start) {
+	        end.setDate(end.getDate() + 1);
+	    }
+
+	    // Checking if the current time is within the range
+	    return (current >= start && current <= end) || (end < start && (current >= start || current <= end));
+	}
+
+	
 	
 
 	document.getElementById('confirmStartExam').addEventListener('click', function () {
@@ -385,7 +415,7 @@ if (NoExamMessage != null) {
 	    // Get the current date in yyyy-mm-dd format
 	    var currentDate = new Date().toISOString().split('T')[0];
 	    // Get the current time in hh:mm AM/PM format
-	    var currentTime = new Date().toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'});
+// 	    var currentTime = new Date().toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'});
 
 	    // Parse the selected date to yyyy-mm-dd format
 	    var selectedDateParts = selectedSchedule.split('-');
@@ -394,9 +424,12 @@ if (NoExamMessage != null) {
 // 	    var timeParts = selectedTime.split(' - ');
 // 	    var startTime2 = timeParts[0];
 // 	    var endTime2 = timeParts[1];
+		console.log("Current Time From Toast:", currentTime);
+		console.log('Start Time From Toast:', startTime);
+        console.log('End Time From Toast:', endTime);
 	    
 	    // Check if the selected date is before the current date or if the date is invalid
-	  if (selectedSchedule === currentDate && (currentTime >= startTime && currentTime <= endTime)) {
+	  if (selectedSchedule === currentDate && isCurrentTimeWithinRange(startTime, endTime, currentTime)) {
         // Encode subject name
         var encodedSubject = encodeURIComponent(selectedSubject);
         // Redirect to the exam page with necessary parameters

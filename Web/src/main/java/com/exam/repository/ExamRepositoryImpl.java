@@ -447,7 +447,7 @@ public class ExamRepositoryImpl extends DBConfig implements ExamRepository {
 	@Override
 	public String[] getTimeBySchId(int schId) {
 	    try {
-	        stmt = conn.prepareStatement("SELECT TIME_FORMAT(starttime, '%h:%i %p') AS starttime, TIME_FORMAT(endtime, '%h:%i %p') AS endtime FROM schedule WHERE schid = ? AND date >= CURDATE()");
+	        stmt = conn.prepareStatement("SELECT starttime, endtime FROM schedule WHERE schid = ? AND date >= CURDATE()");
 	        stmt.setInt(1, schId);
 	        rs = stmt.executeQuery();
 	        if (rs.next()) {
