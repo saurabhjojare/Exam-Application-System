@@ -70,7 +70,7 @@
 			if (messageElement && messageElement.textContent.trim() !== '') {
 				setTimeout(function() {
 					window.location.href = 'login.jsp';
-				}, 3000); // Redirect after 3 seconds
+				}, 1500); // Redirect after 3 seconds
 			}
 		}
 

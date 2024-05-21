@@ -23,7 +23,9 @@
 			<div class="loginWidth">
 				<div class="container-sm">
 					<h1 class="display-6">Add Subject</h1>
+					<div class="animate__animated animate__shakeX">
 					<span id="message">${message}</span>
+					</div>
 					<p class="lead">Please enter the details for the new subject.</p>
 					<form name='form' action='addsubject' method='POST'>
 						<div class="mb-3">

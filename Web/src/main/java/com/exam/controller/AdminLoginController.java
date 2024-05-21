@@ -37,7 +37,7 @@ public class AdminLoginController extends HttpServlet {
             response.sendRedirect("admininfo");
         } else {
             // Redirect back to the login page with an error message
-            response.sendRedirect("admin-login.jsp?error=Invalid email or password");
+            response.sendRedirect("admin-login.jsp?InvalidCredential");
         }
     }
 }

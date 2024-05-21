@@ -31,11 +31,11 @@ public class AddSubjectController extends HttpServlet {
 		int result = sv.addSubject(model);
 
 		if (result == 1) {
-            request.setAttribute("message", "Subject Added");
+            request.setAttribute("message", "<span class=\"text-success\">Subject Added</span>");
         } else if (result == -1) {
-            request.setAttribute("message", "Subject Already Added");
+            request.setAttribute("message", "<span class=\"text-body-secondary\">Subject Already Added</span>");
         } else {
-            request.setAttribute("message", "Something Wrong");
+            request.setAttribute("message", "<span class=\"text-danger\">Subject Not Added</span>");
         }
 
         request.getRequestDispatcher("add-subject.jsp").forward(request, response);

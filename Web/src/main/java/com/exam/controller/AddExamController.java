@@ -36,11 +36,11 @@ public class AddExamController extends HttpServlet {
 	    int result = examService.isAddExam(examModel);
 	    
 	    if (result == 1) {
-            request.setAttribute("message", "Exam Added");
+            request.setAttribute("message", "<span class=\"text-success\">Exam Added</span>");
         } else if (result == -1) {
-            request.setAttribute("message", "Exam Already Present");
+            request.setAttribute("message", "<span class=\"text-body-secondary\">Exam Already Exist</span>");
         } else {
-            request.setAttribute("message", "Exam Not Added");
+            request.setAttribute("message", "<span class=\"text-danger\">Exam Not Added</span>");
         }
 
         request.getRequestDispatcher("add-exam.jsp").forward(request, response);

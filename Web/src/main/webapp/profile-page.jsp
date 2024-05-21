@@ -14,7 +14,7 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Admin Panel</title>
+<title>Admin Profile</title>
 <link rel="stylesheet" type="text/css" href="css/profilePage.css">
 <link rel="stylesheet" type="text/css" href="css/CustomColor.css">
 </head>
@@ -28,8 +28,9 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 		</div>
 		<!-- Main Content Area -->
 		<div class="flex-grow-1 view-padding text-center display-6" style = "height:100vh; overflow:auto">
-			<br>
-			<span style="font-size: 25px;">Exam Application System </span> <br><br>
+			<div class = "mt-3 mb-5">
+			<span class="display-6">Exam Application System </span>
+			</div>
 			<div class="text-start">
 
 

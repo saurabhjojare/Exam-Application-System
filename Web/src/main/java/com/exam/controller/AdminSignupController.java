@@ -55,9 +55,9 @@ public class AdminSignupController extends HttpServlet {
         // If registration is successful, display message without redirecting
         if (success) {
             // Set success message in request attribute
-            request.setAttribute("message", "Admin registered successfully");
+            request.setAttribute("message", "<span class=\"text-success\">Admin Added</span>");
         } else {
-        	request.setAttribute("message", "Admin not registered");
+        	request.setAttribute("message", "<span class=\"text-danger\">Admin Not Added</span>");
         }
 
         // Forward the request to the JSP to display the message

@@ -25,7 +25,9 @@
 			<div class="loginWidth marginBottom">
 				<div class="container-sm">
 					<h1 class="display-6">Create Exam Schedule</h1>
+					<div class="animate__animated animate__shakeX">
 					<span id="message">${message}</span>
+					</div>
 					<p class="lead">Schedule a new exam.</p>
 					<form name='form' action='addschedule' method='POST' id="examScheduleForm">
 						<div class="step active" id="step1">

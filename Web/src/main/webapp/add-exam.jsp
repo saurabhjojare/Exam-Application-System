@@ -23,7 +23,9 @@
 					<div class="loginWidth">
 						<div class="container-sm">
 							<h1 class="display-6">New Exam</h1>
+							<div class="animate__animated animate__shakeX">
 							<span id="message">${message}</span>
+							</div>
 							<p class="lead">Enter details for the new exam.</p>
 							<form name='form' action='addexam' method='POST' id="newExamForm">
 								<div class="mb-3">

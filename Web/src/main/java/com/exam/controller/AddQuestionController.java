@@ -45,9 +45,9 @@ public class AddQuestionController extends HttpServlet {
 	    String message; 
 	    
 	    if (b) {
-	        message = "Question Added";
+	        message = "<span class=\"text-success\">Question Added</span>";
 	    } else {
-	        message = "Question Not Added";
+	        message = "<span class=\"text-danger\">Question Not Added</span>";
 	        request.setAttribute("message", message);
 	        request.getRequestDispatcher("add-question.jsp").forward(request, response);
 	        return; 

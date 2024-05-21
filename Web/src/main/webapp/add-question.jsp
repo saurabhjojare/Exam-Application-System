@@ -26,7 +26,9 @@
 
 						<div class="container-sm">
 							<h1 class="display-6">Add Question</h1>
+							<div class="animate__animated animate__shakeX">
 							<span id="message">${message}</span>
+							</div>
 							<p class="lead">Please enter the details for the new
 								question.</p>
 							<form name='form' action='addquestion' method='POST'>

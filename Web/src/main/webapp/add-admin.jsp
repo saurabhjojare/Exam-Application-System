@@ -29,9 +29,11 @@
 									<div class="signup-form">
 
 										<h1 class="display-6 text-center">Add Admin</h1>
+										<div class="animate__animated animate__shakeX">
 										<center>
 											<span id="message">${message}</span>
 										</center>
+										</div>
 
 										<p class="lead text-center">Enter details for the new
 											admin.</p>

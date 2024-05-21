@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Forwarding Page</title>
+    <title>Redirecting</title>
 </head>
 <body>
 <script>

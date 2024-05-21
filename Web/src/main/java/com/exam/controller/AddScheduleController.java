@@ -50,9 +50,9 @@ public class AddScheduleController extends HttpServlet {
 	        String message; 
 		    
 		    if (b) {
-		        message = "Schedule Added";
+		        message = "<span class=\"text-success\">Schedule Added</span>";
 		    } else {
-		        message = "Schedule Not Added";
+		        message = "<span class=\"text-danger\">Schedule Not Added</span>";
 		        request.setAttribute("message", message);
 		        request.getRequestDispatcher("add-schedule.jsp").forward(request, response);
 		        return; 

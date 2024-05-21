@@ -7,6 +7,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bottom Navbar</title>
 <link rel="stylesheet" type="text/css" href="css/navbarBottom.css">
+<style>
+ .navbar-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-height: 100%; /* Adjust the height as needed */
+    overflow-y: scroll;
+  }
+  .navbar-bottom::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+  .navbar-bottom {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .bg-dark {
+    background-color: transparent;
+    background: linear-gradient(to right, #1a2980, #26d0ce);
+}
+</style>
 </head>
 <body>
     <!-- Navbar -->
@@ -29,6 +50,13 @@
             <a href="add-admin.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("add-admin.jsp")) ? "active" : "" %>">
 <!--                 <i class="bi bi-house-door"></i> -->
                 <span>Add Admin</span>
+            </a>
+          
+          </li>
+          <li class="nav-item">
+            <a href="view-admin.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("view-admin.jsp")) ? "active" : "" %>">
+<!--                 <i class="bi bi-house-door"></i> -->
+                <span>View Admin</span>
             </a>
             <hr style = "color:#fff; margin-top:10px; margin-bottom:10px;">
           </li>
