@@ -1,12 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<%@ include file="common-resources.jsp" %>
+
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title></title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Helpdesk</title>
+
+	<link rel="stylesheet" type="text/css" href="css/Home.css">
+	<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
 </head>
-<body>
+<body >
+		<%@ include file="navbar.jsp"%>
+
+		<!-- Body -->
+		<main class="d-flex align-items-center text-center">
+		<div class = "container">
+			<section class="py-5 text-center">
+				<div class="container">
+					<h1 class="display-6">Coming Soon</h1>
+<!-- 					<p class="lead"></p> -->
+<!-- 					<p><a href="index.jsp" class="text-decoration-none"></a></p> -->
+				</div>
+			</section>
+		</div>
+		</main>
+		
+		<%@ include file="footer.jsp"%>
 
 </body>
 </html>

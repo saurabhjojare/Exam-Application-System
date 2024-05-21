@@ -4,6 +4,7 @@
 <%@ page import="java.util.*" %>
 
 <%
+try {
 String examId = request.getParameter("examId");
 String scheduleId = request.getParameter("scheduleId");
 
@@ -20,7 +21,6 @@ int[] marks = examService.getMarksByExamId(Integer.parseInt(examId));
 int totalMarks = marks[0];
 int passingMarks = marks[1];
 double marksPerQuestion = (double) totalMarks / questionCount;
-
 %>
 
 <!DOCTYPE html>
@@ -236,6 +236,55 @@ double marksPerQuestion = (double) totalMarks / questionCount;
     // Initial call to display the remaining time immediately
     displayRemainingTime();
 </script>
+<script>
+//Disable the browser's back button
+window.onload = function () {
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
+};
+
+
+//Function to store selected option in localStorage
+function saveSelection(questionIndex, option) {
+    localStorage.setItem("question" + questionIndex, option);
+}
+
+// Function to load selected option from localStorage and set radio buttons
+function loadSelection() {
+    for (var i = 1; i <= config.questionCount; i++) {
+        var selectedOption = localStorage.getItem("question" + i);
+        if (selectedOption !== null) {
+            document.querySelector('input[name="question' + i + '"][value="' + selectedOption + '"]').checked = true;
+        }
+    }
+}
+
+// Call loadSelection function when the page loads
+window.onload = loadSelection;
+
+// Attach event listeners to radio buttons to save selections
+var radioButtons = document.querySelectorAll('input[type="radio"]');
+radioButtons.forEach(function(radioButton) {
+    radioButton.addEventListener('click', function(event) {
+        var questionIndex = this.name.match(/\d+/)[0]; // Extract question index from name attribute
+        var selectedOption = this.value;
+        saveSelection(questionIndex, selectedOption);
+    });
+});
+
+// Remove stored selections when the tab is closed
+window.onbeforeunload = function() {
+    localStorage.clear();
+};
+</script>
+
+<% 
+} catch (Exception e) {
+    response.sendRedirect("attempt-exam.jsp?error=" + URLEncoder.encode(e.getMessage(), "UTF-8"));
+} 
+%>
 
 
 </body>

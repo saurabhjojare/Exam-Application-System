@@ -106,9 +106,13 @@ if (NoExamMessage != null) {
 							</select>
 						</div>
 
-
+						<button type="button" class="btn btn-secondary mt-2 mb-3"
+							onclick="window.history.back();" style="float: inline-start;">Back</button>
 						<button type="button" class="btn btn-primary mt-2 mb-3"
-							onclick="nextStep()" style="float: inline-start;">Next</button>
+							onclick="nextStep()" style="float: inline-end;">Next</button>
+						
+							
+							
 					</div>
 
 
@@ -139,13 +143,15 @@ if (NoExamMessage != null) {
 						<p style="width: 450px; margin: 0px auto;" class="mb-3">Please
 							ensure you have a stable internet connection and a quiet
 							environment before proceeding.</p>
+							<button type="button" class="btn btn-secondary"
+							onclick="prevStep()">Back</button>
 						<a href="exam.jsp" class="btn btn-primary" id="startExamButton"
 							data-bs-toggle="modal" data-bs-target="#confirmationModal">Start
 							Exam</a>
-						<button type="button" class="btn btn-secondary"
-							onclick="prevStep()">Back</button>
+						
 					</div>
 				</div>
+	</div>
 
 
 
@@ -287,7 +293,6 @@ if (NoExamMessage != null) {
 	    }
 	}
 
-
 	// Function to fetch subjects for the selected schedule
 	function fetchSubjects(scheduleId) {
 	    var url = 'fetchSubjects?scheduleId=' + scheduleId;
@@ -390,13 +395,23 @@ if (NoExamMessage != null) {
 // 	    var startTime2 = timeParts[0];
 // 	    var endTime2 = timeParts[1];
 	    
-
 	    // Check if the selected date is before the current date or if the date is invalid
 	  if (selectedSchedule === currentDate && (currentTime >= startTime && currentTime <= endTime)) {
         // Encode subject name
         var encodedSubject = encodeURIComponent(selectedSubject);
         // Redirect to the exam page with necessary parameters
-        window.location.href = 'exam.jsp?examId=' + selectedExamId + '&scheduleId=' + selectedScheduleId + '&date=' + selectedSchedule + '&subname=' + encodedSubject + '&ename=' + encodeURIComponent(selectedExamName) + '&time=' + selectedTime;
+        var url = 'exam.jsp?examId=' + selectedExamId + 
+          '&scheduleId=' + selectedScheduleId + 
+          '&date=' + selectedSchedule + 
+          '&subname=' + encodedSubject + 
+          '&ename=' + encodeURIComponent(selectedExamName) + 
+          '&time=' + selectedTime;
+        window.open(url, '_blank'); 
+     // Close the modal
+        var modal = document.getElementById('confirmationModal');
+        var bootstrapModal = bootstrap.Modal.getInstance(modal);
+        bootstrapModal.hide();
+        window.close();
     } else {
         var errorMessage = '';
         if (selectedSchedule !== currentDate) {
@@ -430,6 +445,10 @@ if (NoExamMessage != null) {
 	</script>
 	
 	<script>
+	// Function to close the current tab
+	function closeTab() {
+	    window.close();
+	}
 	// Clear parameters from URL and reload the page
 	window.history.replaceState({}, document.title, window.location.pathname);
 

@@ -89,6 +89,10 @@ int count = 1;
 
 
 		</section>
+		<div class = "text-center">
+		 <button type="button" class="btn btn-secondary"
+											onclick="window.history.back();">Back</button>
+											</div>
 	</main>
 
 	<%@ include file="footer.jsp"%>

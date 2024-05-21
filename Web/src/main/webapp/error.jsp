@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Leadership</title>
+<title>Error</title>
 
 	<link rel="stylesheet" type="text/css" href="css/Home.css">
 	<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
@@ -18,9 +18,9 @@
 		<div class = "container">
 			<section class="py-5 text-center">
 				<div class="container">
-					<h1 class="display-6">Coming Soon</h1>
-<!-- 					<p class="lead"></p> -->
-<!-- 					<p><a href="index.jsp" class="text-decoration-none"></a></p> -->
+					<h1 class="display-6">Oops! Something Went Wrong</h1>
+					<p class="lead">Sorry, an unexpected error occurred.</p>
+					<p>Please try again later or <a href="helpdesk.jsp" class="text-decoration-none">contact us</a> if the problem persists.</p>
 				</div>
 			</section>
 		</div>

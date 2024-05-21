@@ -16,7 +16,7 @@
 <%-- 	 <span class="text-white userName"><%=username%></span> --%>
 <!--      <span id="countdown"></span> -->
 	 <% } %>
-	 <% if(currentPage.equals("/profile.jsp")  || currentPage.equals("/select-subject.jsp") || currentPage.equals("/attempt-exam.jsp") || currentPage.equals("/exam-complete.jsp") || currentPage.equals("/result.jsp")  || currentPage.equals("/examSubmitFailed.jsp")) { %>
+	 <% if(currentPage.equals("/profile.jsp")  || currentPage.equals("/select-subject.jsp") || currentPage.equals("/attempt-exam.jsp") || currentPage.equals("/exam-complete.jsp") || currentPage.equals("/result.jsp")  || currentPage.equals("/examSubmitFailed.jsp") || currentPage.equals("/error.jsp")  || currentPage.equals("/contact.jsp") || currentPage.equals("/helpdesk.jsp")) { %>
 	 <div class = "profileName">
      <span class ="text-white"><a href="profile.jsp" class="text-decoration-none text-white">Home</a></span>
      </div>
@@ -35,6 +35,18 @@
 				<% if(currentPage.equals("/profile.jsp") || currentPage.equals("/add-subject.jsp") || currentPage.equals("/student-result.jsp")) { %>
 					<li class="nav-item">
 						<a class="nav-link text-white" href="attempt-exam.jsp" style = "white-space: nowrap;">Exams</a>
+					</li>
+				<% } %>
+				
+				<% if(currentPage.equals("/login.jsp") || currentPage.equals("/helpdesk.jsp")) { %>
+					<li class="nav-item">
+						<a class="nav-link text-white" href="contact.jsp" style = "white-space: nowrap;">Contact Us</a>
+					</li>
+				<% } %>
+				
+				<% if(currentPage.equals("/contact.jsp")) { %>
+					<li class="nav-item">
+						<a class="nav-link text-white" href="helpdesk.jsp" style = "white-space: nowrap;">Helpdesk</a>
 					</li>
 				<% } %>
 				

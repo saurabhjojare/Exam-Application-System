@@ -55,6 +55,8 @@
                         </div>
                         <center>
                             <button type="submit" class="btn btn-primary">Select Subject</button>
+                            <button type="button" class="btn btn-secondary"
+											onclick="window.history.back();">Back</button>
                         </center>
                     </form>
                 </div>
