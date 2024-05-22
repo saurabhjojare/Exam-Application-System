@@ -25,6 +25,8 @@ public class ExamSubmitServlet extends HttpServlet {
         String scheduleId = request.getParameter("scheduleId");
         String username = request.getParameter("username");
         String percentage = request.getParameter("percentage");
+        percentage = percentage.replace("%", ""); // Remove the percentage symbol
+
         String passOrFail = request.getParameter("passOrFail");
         
         response.setContentType("text/html");
@@ -47,7 +49,6 @@ public class ExamSubmitServlet extends HttpServlet {
         } else {
         	request.getRequestDispatcher("examSubmitFailed.jsp").forward(request, response);
         }
-
 
 //        out.println("<html><body>");
 //        out.println("<h1>Exam Submission Result</h1>");

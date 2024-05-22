@@ -5,22 +5,22 @@
 
 <%
 try {
-String examId = request.getParameter("examId");
-String scheduleId = request.getParameter("scheduleId");
+    String examId = request.getParameter("examId");
+    String scheduleId = request.getParameter("scheduleId");
 
-String ExamName = request.getParameter("ename") != null ? request.getParameter("ename") : "Default Exam";
-String ScheduleDate = request.getParameter("date") != null ? request.getParameter("date") : "Default Date";
-String SubjectName = request.getParameter("subname") != null ? request.getParameter("subname") : "Default Subject";
-String SelectedTime = request.getParameter("time") != null ? request.getParameter("time") : "Default Time";
+    String ExamName = request.getParameter("ename") != null ? request.getParameter("ename") : "Default Exam";
+    String ScheduleDate = request.getParameter("date") != null ? request.getParameter("date") : "Default Date";
+    String SubjectName = request.getParameter("subname") != null ? request.getParameter("subname") : "Default Subject";
+    String SelectedTime = request.getParameter("time") != null ? request.getParameter("time") : "Default Time";
 
-ExamService examService = new ExamServiceImpl();
-List<String[]> results = examService.getAllQuestion(SubjectName);
+    ExamService examService = new ExamServiceImpl();
+    List<String[]> results = examService.getAllQuestion(SubjectName);
 
-int questionCount = results.size();
-int[] marks = examService.getMarksByExamId(Integer.parseInt(examId));
-int totalMarks = marks[0];
-int passingMarks = marks[1];
-double marksPerQuestion = (double) totalMarks / questionCount;
+    int questionCount = results.size();
+    int[] marks = examService.getMarksByExamId(Integer.parseInt(examId));
+    int totalMarks = marks[0];
+    int passingMarks = marks[1];
+    double marksPerQuestion = (double) totalMarks / questionCount;
 %>
 
 <!DOCTYPE html>
@@ -39,22 +39,13 @@ double marksPerQuestion = (double) totalMarks / questionCount;
 <div id="divSpan">
     <span> <%@ include file="navbar.jsp"%> </span>
 </div>
-	<span class = "text-center pt-3 lead" style= "font-size:19px;">Time Left: <span id="timeLeft"></span></span>
+<span class="text-center pt-3 lead" style="font-size:19px;">Time Left: <span id="timeLeft"></span></span>
 <main>
     <section class="container-sm py-3" id="examWidth">
-<%--         <span>Schedule ID <%=scheduleId %> | </span> --%>
-<%--         <span>Username <%=username %> | </span> --%>
-<%--         <span>Exam ID <%=examId %> | </span><br> --%>
-<%--         <span>Total Marks: <%= totalMarks %> | </span> --%>
-<%--         <span>Passing Marks: <%= passingMarks %> | </span><br> --%>
-<%--         <span>Questions <%=questionCount%> | </span> --%>
-<%-- 	         <span>Selected Time <%=SelectedTime%></span> --%>
-<%--         <span>Marks Per Question <%=marksPerQuestion %></span><br> --%>
         <span id="correctAnswerSpan" style="display: none;"></span>
         <span id="correctCount" style="display: none;"></span>
         <span id="percentage" style="display: none;"></span>
         <span id="passOrFail" style="display: none;"></span>
-        
 
         <p style="display: none;">
             Selected Exam: <%=ExamName%>
@@ -71,14 +62,9 @@ double marksPerQuestion = (double) totalMarks / questionCount;
 
         <%
         if (results.isEmpty()) {
-        	String NoExamMessage = ""; // Message to be passed
-        	NoExamMessage = "No question or subject available"; // Set the message
+            String NoExamMessage = "No question or subject available"; // Set the message
             response.sendRedirect("attempt-exam.jsp?NoExamMessage=" + URLEncoder.encode(NoExamMessage, "UTF-8")); // Redirect with message
         %>
-<!--         <tr> -->
-<!--             <td colspan="2" style="text-align: center;">No results found.</td> -->
-<!--         </tr> -->
-	
         <%
         } else {
             int count2 = 1;
@@ -87,63 +73,60 @@ double marksPerQuestion = (double) totalMarks / questionCount;
                 int count = 1; // Reset count for each iteration
         %>
         <div class="question-container" id="question<%=questionIndex%>" style="display: <%= questionIndex == 1 ? "block" : "none" %>;">
-        
-        <div class="cardUp card" style="border: none">
-            <div class="card-header" style="background-color: white;">
-                <h4><%=count2++%>) <%=result[1]%></h4>
-            </div>
-            <div class="card-body">
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio"
-                        name="question<%=questionIndex%>" id="option1_<%=questionIndex%>"
-                        value="1"> <label class="form-check-label"
-                        for="option1_<%=questionIndex%>"><%=count++%>) <%=result[2]%>
-                    </label>
+            <div class="cardUp card" style="border: none">
+                <div class="card-header" style="background-color: white;">
+                    <h4><%=count2++%>) <%=result[1]%></h4>
                 </div>
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio"
-                        name="question<%=questionIndex%>" id="option2_<%=questionIndex%>"
-                        value="2"> <label class="form-check-label"
-                        for="option2_<%=questionIndex%>"><%=count++%>) <%=result[3]%>
-                    </label>
-                </div>
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio"
-                        name="question<%=questionIndex%>" id="option3_<%=questionIndex%>"
-                        value="3"> <label class="form-check-label"
-                        for="option3_<%=questionIndex%>"> <%=count++%>) <%=result[4]%>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio"
-                        name="question<%=questionIndex%>" id="option4_<%=questionIndex%>"
-                        value="4"> <label class="form-check-label"
-                        for="option4_<%=questionIndex%>"><%=count++%>) <%=result[5]%>
-                    </label>
-                </div>
+                <div class="card-body">
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio"
+                            name="question<%=questionIndex%>" id="option1_<%=questionIndex%>"
+                            value="1"> <label class="form-check-label"
+                            for="option1_<%=questionIndex%>"><%=count++%>) <%=result[2]%>
+                        </label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio"
+                            name="question<%=questionIndex%>" id="option2_<%=questionIndex%>"
+                            value="2"> <label class="form-check-label"
+                            for="option2_<%=questionIndex%>"><%=count++%>) <%=result[3]%>
+                        </label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio"
+                            name="question<%=questionIndex%>" id="option3_<%=questionIndex%>"
+                            value="3"> <label class="form-check-label"
+                            for="option3_<%=questionIndex%>"> <%=count++%>) <%=result[4]%>
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                            name="question<%=questionIndex%>" id="option4_<%=questionIndex%>"
+                            value="4"> <label class="form-check-label"
+                            for="option4_<%=questionIndex%>"><%=count++%>) <%=result[5]%>
+                        </label>
+                    </div>
 
-                <%
-                for (int i = 0; i < results.size(); i++) {
-                %>
-                <input type="hidden" id="correctAnswer_<%=i + 1%>"
-                    value="<%=results.get(i)[6]%>">
-                <%
-                }
-                %>
-
-                <br>
+                    <%
+                    for (int i = 0; i < results.size(); i++) {
+                    %>
+                    <input type="hidden" id="correctAnswer_<%=i + 1%>"
+                        value="<%=results.get(i)[6]%>">
+                    <%
+                    }
+                    %>
+                    <br>
+                </div>
             </div>
-        </div>
-           <!-- Next and previous buttons -->
-       <!-- Next and previous buttons -->
-<div class="text-center">
-    <% if (questionIndex > 1) { %>
-        <button type="button" class="btn btn-primary" onclick="showQuestion(<%= questionIndex - 1 %>);">Previous</button>
-    <% } %>
-    <% if (questionIndex < questionCount) { %>
-        <button type="button" class="btn btn-primary" onclick="showQuestion(<%= questionIndex + 1 %>);">Next</button>
-    <% } %>
-</div>
+            <!-- Next and previous buttons -->
+            <div class="text-center">
+                <% if (questionIndex > 1) { %>
+                    <button type="button" class="btn btn-primary" onclick="showQuestion(<%= questionIndex - 1 %>);">Previous</button>
+                <% } %>
+                <% if (questionIndex < questionCount) { %>
+                    <button type="button" class="btn btn-primary" onclick="showQuestion(<%= questionIndex + 1 %>);">Next</button>
+                <% } %>
+            </div>
         </div>
         <%
             questionIndex++;
@@ -166,23 +149,85 @@ double marksPerQuestion = (double) totalMarks / questionCount;
     <%@ include file="footer.jsp"%>
 </div>
 
-	<script type="text/javascript">
-        var config = {
-            questionCount: <%= questionCount %>,
-            marksPerQuestion: <%= marksPerQuestion %>,
-            passingMarks: <%= passingMarks %>
-        };
-    </script>
-    
-<!-- <script src="js/examPage.js"></script> -->
-<!-- <script src="js/CopyPaste.js"></script> -->
-<script src="js/SubmitExam.js"></script>
-<script>
-//Clear parameters from URL and reload the page
-// window.history.replaceState({}, document.title, window.location.pathname);
+<script type="text/javascript">
+    var config = {
+        questionCount: <%= questionCount %>,
+        marksPerQuestion: <%= marksPerQuestion %>,
+        passingMarks: <%= passingMarks %>
+    };
 </script>
 
+<script src="js/SubmitExam.js"></script>
 <script>
+$(document).ready(function() {
+    var correctCounter = 0;
+    var prevSelectedOptions = {};
+    var prevSelectedCorrect = {};
+    var questionCount = config.questionCount;
+    var marksPerQuestion = config.marksPerQuestion;
+    var passingMarks = config.passingMarks;
+
+    $("input[type='radio']").click(function() {
+        var selectedOption = $(this).val();
+        var questionIndex = $(this).attr("name").replace("question", "");
+        var prevSelectedOption = prevSelectedOptions[questionIndex];
+        var prevSelectedIsCorrect = prevSelectedCorrect[questionIndex];
+        var correctAnswer = $("#correctAnswer_" + questionIndex).val();
+
+        if (selectedOption === correctAnswer && (!prevSelectedOption || !prevSelectedIsCorrect)) {
+            correctCounter++;
+        } else if (selectedOption !== correctAnswer && (prevSelectedOption && prevSelectedIsCorrect)) {
+            correctCounter--;
+        }
+
+        prevSelectedOptions[questionIndex] = selectedOption;
+        prevSelectedCorrect[questionIndex] = (selectedOption === correctAnswer);
+
+        $("#correctAnswerSpan").text("Correct Answer: " + correctAnswer);
+        $("#correctCount").text("Correct Answers: " + correctCounter);
+        var percentage = (correctCounter / questionCount) * 100;
+        console.log("Percentage:", percentage);
+        $("#percentage").text(" | Percentage: " + percentage.toFixed(2) + "%");
+
+        var marksObtained = correctCounter * marksPerQuestion;
+
+        if (marksObtained >= passingMarks) {
+            $("#passOrFail").text("Pass");
+        } else {
+            $("#passOrFail").text("Fail");
+        }
+    });
+
+    $("#submitButton").click(function() {
+        submitForm();
+    });
+
+    window.submitForm = function() {
+        var percentageText = $("#percentage").text().split(": ")[1] || "0.00";
+        var passOrFailText = $("#passOrFail").text() || "Fail";
+
+        if (!percentageText) {
+            percentageText = "0.00";
+        }
+
+        $("#hiddenPercentage").val(percentageText);
+        $("#hiddenPassOrFail").val(passOrFailText);
+
+        // Calculate percentage and pass/fail status if no option was selected
+        if (correctCounter === 0) {
+            var percentage = (correctCounter / questionCount) * 100;
+            $("#percentage").text(" | Percentage: " + percentage.toFixed(2) + "%");
+
+            if (correctCounter * marksPerQuestion >= passingMarks) {
+                $("#passOrFail").text("Pass");
+            } else {
+                $("#passOrFail").text("Fail");
+            }
+        }
+
+        $("#examForm").submit();
+    }
+
     function showQuestion(index) {
         // Hide all questions
         var questions = document.getElementsByClassName("question-container");
@@ -192,9 +237,8 @@ double marksPerQuestion = (double) totalMarks / questionCount;
         // Show the selected question
         document.getElementById("question" + index).style.display = "block";
     }
-</script>
 
-<script>
+    // Countdown Timer Script
     var selectedTime = "<%= SelectedTime %>"; // Example format: "22:00 - 02:00"
     var timeParts = selectedTime.split(' - ');
     var startTimeParts = timeParts[0].split(':');
@@ -224,7 +268,7 @@ double marksPerQuestion = (double) totalMarks / questionCount;
 
         if (timeDifferenceInMinutes <= 0) {
             document.getElementById("timeLeft").textContent = "Time's up!";
-            document.getElementById("submitButton").click(); // Automatically submit the form if needed
+            submitForm(); // Automatically submit the form if needed
         } else {
             if (hours > 0) {
                 document.getElementById("timeLeft").textContent = hours + " hours, " + minutes + " minutes";
@@ -240,11 +284,11 @@ double marksPerQuestion = (double) totalMarks / questionCount;
 
     // Initial call to display the remaining time immediately
     displayRemainingTime();
+});
 </script>
 
-
 <script>
-//Disable the browser's back button
+// Disable the browser's back button
 window.onload = function () {
     history.pushState(null, null, document.URL);
     window.addEventListener('popstate', function () {
@@ -252,8 +296,7 @@ window.onload = function () {
     });
 };
 
-
-//Function to store selected option in localStorage
+// Function to store selected option in localStorage
 function saveSelection(questionIndex, option) {
     localStorage.setItem("question" + questionIndex, option);
 }
@@ -269,7 +312,7 @@ function loadSelection() {
 }
 
 // Call loadSelection function when the page loads
-window.onload = loadSelection;
+loadSelection();
 
 // Attach event listeners to radio buttons to save selections
 var radioButtons = document.querySelectorAll('input[type="radio"]');
@@ -292,7 +335,6 @@ window.onbeforeunload = function() {
     response.sendRedirect("attempt-exam.jsp?error=" + URLEncoder.encode(e.getMessage(), "UTF-8"));
 } 
 %>
-
 
 </body>
 </html>
