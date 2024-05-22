@@ -32,6 +32,28 @@ try {
 <link rel="stylesheet" type="text/css" href="css/Exam.css">
 <link rel="stylesheet" type="text/css" href="css/CustomColor.css">
 
+<script>
+    let tabSwitchCount = 0;
+
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            tabSwitchCount++;
+            if (tabSwitchCount === 2) {
+                alert('After three attempts, the page will auto-submit.'); // Show different message on the second switch
+            } else if (tabSwitchCount === 3) {
+                alert('After this the page will auto-submit.'); // Show different message on the third switch
+            } else if (tabSwitchCount === 4) {
+                alert('Over'); // Show "Over" message on the fourth switch
+                tabSwitchCount = 0; // Reset count after showing the message
+                // Automatically click on the submit button
+                document.getElementById('submitButton').click();
+            } else {
+                alert(`You are trying to switch tabs! Please stay on this tab.`);
+            }
+        }
+    });
+</script>
+
 </head>
 
 <body>
@@ -325,7 +347,7 @@ radioButtons.forEach(function(radioButton) {
 });
 
 // Remove stored selections when the tab is closed
-window.onbeforeunload = function() {
+if (timeDifferenceInMinutes <= 0) {
     localStorage.clear();
 };
 </script>

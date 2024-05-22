@@ -31,8 +31,8 @@
 								method='POST' enctype='multipart/form-data'>
 								<div>
 									<label for="subjectName" class="form-label">Subject
-										Name</label> <select id="subjectName" class="form-control"
-										name="subjectName">
+										Name</label> 
+									<select id="subjectName" class="form-control" name="subjectName" onchange="updateSelectedSubject()">
 										<option value="">Select Subject</option>
 										<%
 										SubjectService sv = new SubjectServiceImpl();
@@ -50,10 +50,8 @@
 								<div class="mt-3">
 									<!-- Hidden input field to store selected subject -->
 									<input type="hidden" id="selectedSubject" name="subject">
-									<input type="file" id="fileInput" name="fileInput"
-										accept=".csv" style="display: none;">
-									<button type="button" class="btn btn-secondary"
-										id="importQuestionsBtn">Import Questions</button>
+									<input type="file" id="fileInput" name="fileInput" accept=".csv" style="display: none;">
+									<button type="button" class="btn btn-secondary" id="importQuestionsBtn">Import Questions</button>
 									<button type="submit" class="btn btn-primary">Submit</button>
 								</div>
 							</form>
@@ -71,10 +69,21 @@
 	<script src="js/hideMessge.js"></script>
 
 	<script>
+	function updateSelectedSubject() {
+	    var subjectName = document.getElementById('subjectName').value;
+	    document.getElementById('selectedSubject').value = subjectName;
+	}
+
 	document.getElementById('importQuestionsBtn').addEventListener('click', function() {
 	    document.getElementById('fileInput').click();
 	});
 
+	document.getElementById('fileInput').addEventListener('change', function() {
+	    var fileName = this.value.split('\\').pop();
+	    if (fileName) {
+	        alert('Selected file: ' + fileName);
+	    }
+	});
 	</script>
 </body>
 </html>
