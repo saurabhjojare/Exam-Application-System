@@ -33,25 +33,15 @@ try {
 <link rel="stylesheet" type="text/css" href="css/CustomColor.css">
 
 <script>
-    let tabSwitchCount = 0;
-
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            tabSwitchCount++;
-            if (tabSwitchCount === 2) {
-                alert('After three attempts, the page will auto-submit.'); // Show different message on the second switch
-            } else if (tabSwitchCount === 3) {
-                alert('After this the page will auto-submit.'); // Show different message on the third switch
-            } else if (tabSwitchCount === 4) {
-                alert('Over'); // Show "Over" message on the fourth switch
-                tabSwitchCount = 0; // Reset count after showing the message
-                // Automatically click on the submit button
-                document.getElementById('submitButton').click();
-            } else {
-                alert(`You are trying to switch tabs! Please stay on this tab.`);
-            }
-        }
-    });
+function showQuestion(index) {
+    // Hide all questions
+    var questions = document.getElementsByClassName("question-container");
+    for (var i = 0; i < questions.length; i++) {
+        questions[i].style.display = "none";
+    }
+    // Show the selected question
+    document.getElementById("question" + index).style.display = "block";
+}
 </script>
 
 </head>
@@ -260,7 +250,7 @@ $(document).ready(function() {
         document.getElementById("question" + index).style.display = "block";
     }
 
-    // Countdown Timer Script
+ // Countdown Timer Script
     var selectedTime = "<%= SelectedTime %>"; // Example format: "22:00 - 02:00"
     var timeParts = selectedTime.split(' - ');
     var startTimeParts = timeParts[0].split(':');
@@ -281,14 +271,34 @@ $(document).ready(function() {
         endTimeInMinutes += 24 * 60; // Add 24 hours in minutes
     }
 
-    // Calculate the difference in minutes
-    var timeDifferenceInMinutes = endTimeInMinutes - startTimeInMinutes;
+    // Calculate the exam duration in minutes
+    var examDurationInMinutes = endTimeInMinutes - startTimeInMinutes;
+
+    var scheduleId = "<%= scheduleId %>"; // Get the schedule ID to use as a key for localStorage
+    var username = "<%= username %>"; // Get the username to use as part of the key for localStorage
+    var storageKey = 'endTime_' + scheduleId + '_' + username;
 
     function displayRemainingTime() {
-        var hours = Math.floor(timeDifferenceInMinutes / 60);
-        var minutes = timeDifferenceInMinutes % 60;
+        var storedEndTime = localStorage.getItem(storageKey);
 
-        if (timeDifferenceInMinutes <= 0) {
+        if (storedEndTime === null) {
+            // Save the end time in localStorage if not already stored
+            var currentTime = new Date().getTime();
+            var endTime = currentTime + examDurationInMinutes * 60 * 1000;
+            localStorage.setItem(storageKey, endTime);
+            storedEndTime = endTime;
+        } else {
+            storedEndTime = parseInt(storedEndTime);
+        }
+
+        var currentTime = new Date().getTime();
+        var remainingTimeInMilliseconds = storedEndTime - currentTime;
+        var remainingTimeInMinutes = Math.ceil(remainingTimeInMilliseconds / 60000); // Use Math.ceil to ensure we don't show 0 minutes
+
+        var hours = Math.floor(remainingTimeInMinutes / 60);
+        var minutes = remainingTimeInMinutes % 60;
+
+        if (remainingTimeInMilliseconds <= 0) {
             document.getElementById("timeLeft").textContent = "Time's up!";
             submitForm(); // Automatically submit the form if needed
         } else {
@@ -298,15 +308,22 @@ $(document).ready(function() {
                 document.getElementById("timeLeft").textContent = minutes + " minutes";
             }
 
-            // Decrease the time difference by 1 minute and call the function again after 1 minute
-            timeDifferenceInMinutes -= 1;
+            // Update remaining time every minute
             setTimeout(displayRemainingTime, 60000);
         }
     }
 
     // Initial call to display the remaining time immediately
     displayRemainingTime();
+
+    // Disable the browser's back button
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
 });
+
+
 </script>
 
 <script>
@@ -316,39 +333,6 @@ window.onload = function () {
     window.addEventListener('popstate', function () {
         history.pushState(null, null, document.URL);
     });
-};
-
-// Function to store selected option in localStorage
-function saveSelection(questionIndex, option) {
-    localStorage.setItem("question" + questionIndex, option);
-}
-
-// Function to load selected option from localStorage and set radio buttons
-function loadSelection() {
-    for (var i = 1; i <= config.questionCount; i++) {
-        var selectedOption = localStorage.getItem("question" + i);
-        if (selectedOption !== null) {
-            document.querySelector('input[name="question' + i + '"][value="' + selectedOption + '"]').checked = true;
-        }
-    }
-}
-
-// Call loadSelection function when the page loads
-loadSelection();
-
-// Attach event listeners to radio buttons to save selections
-var radioButtons = document.querySelectorAll('input[type="radio"]');
-radioButtons.forEach(function(radioButton) {
-    radioButton.addEventListener('click', function(event) {
-        var questionIndex = this.name.match(/\d+/)[0]; // Extract question index from name attribute
-        var selectedOption = this.value;
-        saveSelection(questionIndex, selectedOption);
-    });
-});
-
-// Remove stored selections when the tab is closed
-if (timeDifferenceInMinutes <= 0) {
-    localStorage.clear();
 };
 </script>
 
