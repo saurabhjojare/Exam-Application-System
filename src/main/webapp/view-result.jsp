@@ -1,4 +1,4 @@
-<%@ include file="existingSession.jsp" %>
+<%-- <%@ include file="existingSession.jsp" %> --%>
 <%@ include file="common-resources.jsp" %>
 
 
@@ -97,13 +97,13 @@ List<String[]> results = examService.getAllResults();
 							%>
 							<td class="value" style="padding-right: 15px"><%=statusText%></td>
 						</tr>
-						<tr>
-							<td class="key" style="padding-left: 15px">Edit</td>
-							<td>
-								<button class="btn btn-primary">Update</button>
-								<button class="btn btn-danger">Delete</button>
-							</td>
-						</tr>
+<!-- 						<tr> -->
+<!-- 							<td class="key" style="padding-left: 15px">Edit</td> -->
+<!-- 							<td> -->
+<!-- 								<button class="btn btn-primary">Update</button> -->
+<!-- 								<button class="btn btn-danger">Delete</button> -->
+<!-- 							</td> -->
+<!-- 						</tr> -->
 						<tr class="empty-row" style = "border:0px solid #fff;">
 							<td colspan="2"></td>
 						</tr>

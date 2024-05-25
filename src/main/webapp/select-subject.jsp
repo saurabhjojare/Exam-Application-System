@@ -77,7 +77,7 @@ session.removeAttribute("message");
 								Subject</button>
 
 							<button type="button" class="btn btn-secondary"
-								onclick="window.history.back();">Back</button>
+								onclick="window.location.href='profile.jsp';">Back</button>
 						</center>
 					</form>
 				</div>

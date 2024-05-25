@@ -19,6 +19,24 @@ public class StudentServiceImpl implements StudentService{
 		// TODO Auto-generated method stub
 		return this.studRepo.insertStudentExamRelation(stid, schid, obtainedPercentage, status);
 	}
+
+	@Override
+	public List<String[]> fetchStudentsByCourse(int courseId) {
+		// TODO Auto-generated method stub
+		return this.studRepo.fetchStudentsByCourse(courseId);
+	}
+
+	@Override
+	public List<String[]> fetchCourses() {
+		// TODO Auto-generated method stub
+		return this.studRepo.fetchCourses();
+	}
+
+	@Override
+	public List<String[]> fetchStudents() {
+		// TODO Auto-generated method stub
+		return this.studRepo.fetchStudents();
+	}
 	
 	
 

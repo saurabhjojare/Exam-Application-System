@@ -10,9 +10,17 @@
 <link rel="stylesheet" type="text/css" href="css/Sidebar.css">
 <style>
 
-.nav-link {
-       color: #fff;
- }
+.nav {
+--bs-nav-link-color: var(--bs-link-color);
+}
+:root {
+    --bs-link-color: #fff;
+}
+
+.nav .nav-link {
+    color: var(--bs-nav-link-color);
+}
+
  
  .nav-link:hover {
        color: #fff;
@@ -118,6 +126,12 @@
                     <a href="view-result.jsp" class="nav-link <%=(request.getRequestURI().endsWith("view-result.jsp")) ? "active" : "" %>"">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
                         View Result
+                    </a>
+                </li>
+                 <li>
+                    <a href="view-student.jsp" class="nav-link <%=(request.getRequestURI().endsWith("view-student.jsp")) ? "active" : "" %>"">
+                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
+                        View Student
                     </a>
                 </li>
             </ul>

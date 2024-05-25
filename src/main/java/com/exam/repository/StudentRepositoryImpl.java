@@ -73,4 +73,99 @@ public class StudentRepositoryImpl extends DBConfig implements StudentRepository
 
         return false;
     }
+    
+    public List<String[]> fetchStudents() {
+        List<String[]> studentData = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM student";
+            stmt = conn.prepareStatement(query);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int sid = rs.getInt("sid");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                String contact = rs.getString("contact");
+                int courseId = rs.getInt("courseid");
+
+                String[] studentRow = {String.valueOf(sid), name, email, contact, String.valueOf(courseId)};
+                studentData.add(studentRow);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return studentData;
+    }
+    
+    public List<String[]> fetchCourses() {
+        List<String[]> courseData = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM subject";
+            stmt = conn.prepareStatement(query);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int courseId = rs.getInt("sid");
+                String courseName = rs.getString("subjectname");
+
+                String[] courseRow = {String.valueOf(courseId), courseName};
+                courseData.add(courseRow);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return courseData;
+    }
+    
+    public List<String[]> fetchStudentsByCourse(int courseId) {
+        List<String[]> studentData = new ArrayList<>();
+        try {
+            String query = "SELECT student.stid, student.name, student.email, student.contact, student.username " +
+                           "FROM student " +
+                           "JOIN studentsubjectjoin ON student.stid = studentsubjectjoin.stid " +
+                           "JOIN subject ON studentsubjectjoin.sid = subject.sid " +
+                           "WHERE subject.sid = ?";
+            stmt = conn.prepareStatement(query);
+            stmt.setInt(1, courseId);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int sid = rs.getInt("stid");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                String contact = rs.getString("contact");
+                String username = rs.getString("username");
+
+                String[] studentRow = {String.valueOf(sid), name, email, contact, username};
+                studentData.add(studentRow);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return studentData;
+    }
+
+
 }

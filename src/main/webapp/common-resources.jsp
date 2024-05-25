@@ -42,6 +42,8 @@
 	<%@ page import="com.exam.service.AdminServiceImpl"%>
 	<%@ page import="com.exam.service.QuestionService"%>
 	<%@ page import="com.exam.service.QuestionServiceImpl"%>
+	<%@ page import="com.exam.service.StudentService"%>
+	<%@ page import="com.exam.service.StudentServiceImpl"%>
 	
 	
 	<%@ page import="com.exam.repository.ExamRepository"%>
@@ -52,6 +54,8 @@
 	<%@ page import="com.exam.repository.QuestionRepositoryImpl"%>
 	<%@ page import="com.exam.repository.AdminRepository"%>
 	<%@ page import="com.exam.repository.AdminRepositoryImpl"%>
+	<%@ page import="com.exam.repository.StudentRepository"%>
+	<%@ page import="com.exam.repository.StudentRepositoryImpl"%>
 	
 	
 	<%@ page import="com.exam.model.ExamModel"%>
