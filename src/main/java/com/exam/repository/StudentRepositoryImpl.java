@@ -166,6 +166,50 @@ public class StudentRepositoryImpl extends DBConfig implements StudentRepository
         }
         return studentData;
     }
+    
+	 @Override
+		public boolean isDeleteStudentById(int id) {
+			try {
+				stmt = conn.prepareStatement("DELETE FROM student WHERE stid = ?");
+				stmt.setInt(1, id);
+				int value = stmt.executeUpdate();
+				return value > 0;
+			} catch (Exception ex) {
+				System.out.println(ex);
+				return false;
+			}
+		}
+	 
+	  @Override
+	    public boolean isStudentEnrolledInSubject(String studentName, String subjectName) {
+	        PreparedStatement stmt = null;
+	        ResultSet rs = null;
+	        System.out.println("from"+studentName);
+	    	System.out.println("from"+subjectName);
+	        try {
+	            String query = "SELECT s.username AS student_name, subj.subjectname AS subject_name " +
+	                           "FROM student s " +
+	                           "JOIN studentsubjectjoin ss ON s.stid = ss.stid " +
+	                           "JOIN subject subj ON ss.sid = subj.sid " +
+	                           "WHERE s.username = ? AND subj.subjectname = ?";
+	            stmt = conn.prepareStatement(query);
+	            stmt.setString(1, studentName);
+	            stmt.setString(2, subjectName);
+	            rs = stmt.executeQuery();
+
+	            return rs.next();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return false;
+	        } finally {
+	            try {
+	                if (rs != null) rs.close();
+	                if (stmt != null) stmt.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
 
 
 }

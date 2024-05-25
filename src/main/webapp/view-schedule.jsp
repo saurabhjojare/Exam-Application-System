@@ -24,7 +24,7 @@
 					<div class="input-group" style="width: 400px;">
 						<input type="text" class="form-control"
 							placeholder="Search Schedule" aria-label="Search schedule"
-							aria-describedby="button-addon2">
+							aria-describedby="button-addon2" disabled>
 						<!--         <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button> -->
 					</div>
 				</div>
@@ -99,7 +99,7 @@
 						<tr>
 							<td class="key" style="padding-left: 15px">Edit</td>
 							<td>
-								<button class="btn btn-primary">Update</button> <a
+								<button class="btn btn-primary" disabled>Update</button> <a
 								href='deleteSchedule?id=<%=schedule.getSchid()%>' class="btn btn-danger">Delete</a>
 							</td>
 						</tr>

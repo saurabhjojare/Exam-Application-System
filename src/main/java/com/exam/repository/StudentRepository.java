@@ -15,4 +15,9 @@ public interface StudentRepository {
 	 public List<String[]> fetchCourses();
 	 
 	 public List<String[]> fetchStudents();
+	 
+	 public boolean isDeleteStudentById(int id);
+	    
+	 boolean isStudentEnrolledInSubject(String studentName, String subjectName);
+
 }

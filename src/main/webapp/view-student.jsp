@@ -38,7 +38,7 @@ List<String[]> results = examService.getAllResults();
 					<input type="text" class="form-control" id="searchInput"
 						placeholder="Search Result" aria-label="Search result"
 						aria-describedby="button-addon2"
-						onkeyup="searchByName(this.value)">
+						onkeyup="searchByName(this.value)" disabled>
 					<!-- <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button> -->
 				</div>
 			</div>

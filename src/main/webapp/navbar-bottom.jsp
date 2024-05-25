@@ -43,7 +43,7 @@
           <li class="nav-item">
             <a href="profile-page.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("profile-page.jsp")) ? "active" : "" %>">
 <!--                 <i class="bi bi-house-door"></i> -->
-                <span>Admin</span>
+                <span>Admin Profile</span>
             </a>
           </li>
           <li class="nav-item">
@@ -113,6 +113,11 @@
             <a href="view-result.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("view-result.jsp")) ? "active" : "" %>">
                 
                 <span>View Result</span>
+            </a>
+          </li> <li class="nav-item">
+            <a href="view-student.jsp" class="nav-link text-white <%=(request.getRequestURI().endsWith("view-student.jsp")) ? "active" : "" %>">
+                
+                <span>View Students</span>
                 <hr style = "color:#fff; margin-top:18px; margin-bottom:0px; border: 1.9px solid #fff">
             </a>
           </li>

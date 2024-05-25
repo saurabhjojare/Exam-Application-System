@@ -34,7 +34,7 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 						<input type="text" class="form-control" id="searchInput"
 							placeholder="Search Result" aria-label="Search result"
 							aria-describedby="button-addon2"
-							onkeyup="searchByName(this.value)">
+							onkeyup="searchByName(this.value)" disabled>
 						<!-- <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button> -->
 					</div>
 				</div>
@@ -90,7 +90,7 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 						<tr>
 							<td class="key" style="padding-left: 15px">Edit</td>
 							<td>
-								<button class="btn btn-primary">Update </button>
+								<button class="btn btn-primary" disabled>Update </button>
 								<a
 						href='deleteAdmin?id=<%=admin2.getId()%>'><button class="btn btn-danger">Delete</button></a>
 							</td>

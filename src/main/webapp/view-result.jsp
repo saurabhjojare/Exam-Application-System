@@ -34,11 +34,15 @@ List<String[]> results = examService.getAllResults();
 						<input type="text" class="form-control" id="searchInput"
 							placeholder="Search Result" aria-label="Search result"
 							aria-describedby="button-addon2"
-							onkeyup="searchByName(this.value)">
+							onkeyup="searchByName(this.value)" disabled>
+							
 						<!-- <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button> -->
 					</div>
+					
 				</div>
-
+				<div class="mb-3 fw-light">
+				<span >Please note: In order to delete a student's result, you must first delete the student record.</span>
+				</div>
 
 				<table class="table table-bordered" id="resultsTable">
 					<thead>

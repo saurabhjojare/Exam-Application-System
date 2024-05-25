@@ -57,7 +57,7 @@
                 <li class="nav-item mt-2">
                     <a href="profile-page.jsp" class="nav-link <%=(request.getRequestURI().endsWith("profile-page.jsp")) ? "active" : "" %>" aria-current="page">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-                        Profile
+                        Admin Profile
                     </a>
                 </li>
                 <li class="nav-item">

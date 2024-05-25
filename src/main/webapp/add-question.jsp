@@ -64,7 +64,7 @@
 										<button type="button" class="btn btn-primary mt-3"
 											onclick="nextStep()" style="float: inline-start;">Next</button>
 											<button type="button" class="btn btn-secondary mt-3"
-											id="importQuestionsBtn" style ="float: inline-end;" onclick="window.location.href='import-questions.jsp';">Import Questions</button>
+											id="importQuestionsBtn" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Coming Soon" style ="float: inline-end;" onclick="window.location.href='import-questions.jsp';" disabled>Import Questions</button>
 									</div>
 
 								</div>

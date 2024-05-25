@@ -37,6 +37,18 @@ public class StudentServiceImpl implements StudentService{
 		// TODO Auto-generated method stub
 		return this.studRepo.fetchStudents();
 	}
+
+	@Override
+	public boolean isDeleteStudentById(int id) {
+		// TODO Auto-generated method stub
+		return this.studRepo.isDeleteStudentById(id);
+	}
+
+	@Override
+	public boolean isStudentEnrolledInSubject(String studentName, String subjectName) {
+		// TODO Auto-generated method stub
+		return this.studRepo.isStudentEnrolledInSubject(studentName, subjectName);
+	}
 	
 	
 

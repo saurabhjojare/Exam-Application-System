@@ -87,7 +87,8 @@ if (NoExamMessage != null) {
 
 						<input type="hidden" id="scheduleId" name="scheduleId" value="">
 
-						<div class="mb-0">
+						<div class="mb-0" style="display:flex; gap:5px;">
+						<div class = "w-50">
 							<label for="subjectSelection" class="form-label">Select
 								Subject</label> <select class="form-select" id="subjectSelection"
 								name="subjectSelection">
@@ -105,21 +106,8 @@ if (NoExamMessage != null) {
 								<!-- Subject options will be dynamically populated here -->
 							</select>
 						</div>
-
-						<button type="button" class="btn btn-secondary mt-2 mb-3"
-							onclick="window.history.back();" style="float: inline-start;">Back</button>
-						<button type="button" class="btn btn-primary mt-2 mb-3"
-							onclick="nextStep()" style="float: inline-end;">Next</button>
-						
-							
-							
-					</div>
-
-
-					<div class="step" id="step2">
-
-						<div class="mb-3">
-							<label for="timeSelection" class="form-label">Select Time</label>
+						<div class = "w-50">
+						<label for="timeSelection" class="form-label">Select Time</label>
 							<select class="form-select" id="timeSelection"
 								name="timeSelection">
 								<% 
@@ -134,6 +122,23 @@ if (NoExamMessage != null) {
 								} 
 								%>
 							</select>
+						</div>
+						</div>
+
+						<button type="button" class="btn btn-secondary mt-2 mb-3"
+							onclick="window.history.back();" style="float: inline-start;">Back</button>
+						<button type="button" class="btn btn-primary mt-2 mb-3"
+							onclick="nextStep()" style="float: inline-end;">Next</button>
+						
+							
+							
+					</div>
+
+
+					<div class="step" id="step2">
+
+						<div class="mb-3">
+							
 						</div>
 
 
@@ -411,9 +416,11 @@ if (NoExamMessage != null) {
 	    var selectedSchedule = document.getElementById('scheduleSelection').options[document.getElementById('scheduleSelection').selectedIndex].text;
 	    var selectedSubject = document.getElementById('subjectSelection').options[document.getElementById('subjectSelection').selectedIndex].text;
 	    var selectedTime = document.getElementById('timeSelection').value;
-
+		
+	    const now = new Date();
+	    const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
 	    // Get the current date in yyyy-mm-dd format
-	    var currentDate = new Date().toISOString().split('T')[0];
+	    var currentDate = localDate.toISOString().split('T')[0];
 	    // Get the current time in hh:mm AM/PM format
 // 	    var currentTime = new Date().toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'});
 
@@ -448,6 +455,8 @@ if (NoExamMessage != null) {
     } else {
         var errorMessage = '';
         if (selectedSchedule !== currentDate) {
+        	console.log("Selected Date"+selectedSchedule);
+        	console.log("Current Date"+currentDate);
             errorMessage = 'This exam schedule is not for today';
         } else {
             errorMessage = 'The exam is not available at the current time';

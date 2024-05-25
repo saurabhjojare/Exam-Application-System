@@ -83,7 +83,7 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 				%>
 				<div class="marginBottom">
 					<button type="button" class="btn btn-primary mt-3 marginBottom"
-						onclick="location.href='update-admin-details.jsp'">Update
+						onclick="location.href='update-admin-details.jsp'" disabled>Update
 						Details</button>
 				</div>
 

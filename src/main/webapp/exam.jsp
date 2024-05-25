@@ -23,6 +23,19 @@ try {
     double marksPerQuestion = (double) totalMarks / questionCount;
 %>
 
+<%
+	
+    StudentService studentRepository = new StudentServiceImpl();
+	System.out.println(username);
+	System.out.println(SubjectName);
+    boolean isEnrolled = studentRepository.isStudentEnrolledInSubject(username.trim(), SubjectName.trim().toLowerCase());
+    System.out.println(isEnrolled);
+
+    if (!isEnrolled) {
+        request.getRequestDispatcher("select-subject.jsp").forward(request, response);
+    } else {
+%> 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -359,6 +372,9 @@ window.onload = function () {
     });
 };
 </script>
+<%
+    }
+%>
 
 <% 
 } catch (Exception e) {
