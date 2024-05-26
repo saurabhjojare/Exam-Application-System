@@ -1,0 +1,19 @@
+   body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #1a2980, #26d0ce);
+            background-clip: text;
+            color: transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .my-element {
+  animation-duration: 2s; /* don't forget to set a duration! */
+		}

@@ -18,20 +18,15 @@ List<String[]> results = examService.getAllResults();
 </head>
 <body>
 
-
 	<div class="d-flex">
-
 
 		<div class="sidebar">
 			<%@ include file="sidebar.jsp"%>
 		</div>
 
-
 		<!-- Main Content Area -->
 		<div class="flex-grow-1 view-padding text-center marginBottom">
 			<h3 class="display-6 mt-2">Student Details</h3>
-
-
 
 			<div class="d-flex justify-content-center mb-3">
 				<div class="input-group" style="width: 400px;">
@@ -49,8 +44,8 @@ List<String[]> results = examService.getAllResults();
 					<select id="courseSelect" class="form-select mb-4"
 						aria-label="select" onchange="fetchStudentsByCourse()">
 						<%
-						StudentService fetchDataObj = new StudentServiceImpl(); // Instantiate fetchData object 
-						List<String[]> courseData = fetchDataObj.fetchCourses(); // Call the fetchCourses method to retrieve course data
+						StudentService fetchDataObj = new StudentServiceImpl(); 
+						List<String[]> courseData = fetchDataObj.fetchCourses(); 
 						for (String[] course : courseData) {
 						%>
 						<option value="<%=course[0]%>"><%=course[1]%></option>
@@ -61,16 +56,8 @@ List<String[]> results = examService.getAllResults();
 				</div>
 			</div>
 
-
-
-<!-- 			<table id="studentTable" class="table"> -->
-<!-- 				<tbody id="studentTableBody"> -->
-<!-- 				</tbody> -->
-<!-- 			</table> -->
 			<div id="studentTableBody">
 			</div>
-
-
 		</div>
 	</div>
 
@@ -79,26 +66,8 @@ List<String[]> results = examService.getAllResults();
 	<div class="bottom-navbar">
 		<%@ include file="navbar-bottom.jsp"%>
 	</div>
-
-	<script>
-		function fetchStudentsByCourse() {
-			var courseId = document.getElementById('courseSelect').value;
-
-			var xhr = new XMLHttpRequest();
-			xhr.open('GET', 'fetchStudentsByCourse.jsp?courseId=' + courseId,
-					true);
-			xhr.onreadystatechange = function() {
-				if (xhr.readyState == 4 && xhr.status == 200) {
-					document.getElementById('studentTableBody').innerHTML = xhr.responseText;
-				}
-			};
-			xhr.send();
-		}
-
-		document.addEventListener('DOMContentLoaded', function() {
-			fetchStudentsByCourse();
-		});
-	</script>
-
+	
+	<script src="js/fetchStudentsByCourse.js"></script>
+	
 </body>
 </html>

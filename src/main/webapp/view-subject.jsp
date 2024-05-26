@@ -37,7 +37,6 @@
 					<tbody>
 						<tr>
 							<%
-							// Assuming examList contains a list of ExamModel objects
 							SubjectService subjectService = new SubjectServiceImpl();
 							SubjectRepository subjectRepository = new SubjectRepositoryImpl();
 	                        List<Map<String, String>> listSubject = subjectService.getAllSubjectsId();
@@ -64,17 +63,16 @@
 							</td>
 						</tr>
 						<%
-						if (count <= totalSubject) { // Check if it's not the last iteration
+						if (count <= totalSubject) {
 						%>
 						<tr class="empty-row">
 							<td colspan="2"></td>
-							<!-- Add empty cells for space between each set of exam details -->
 						</tr>
 						<%
-						} // End of if
-						} // End of loop 
+						} 
+						} 
 						} else {
-						// Handle case where QuestionList is null
+						
 						out.println("<tr><td colspan='2'>No subjects found.</td></tr>");
 						}
 						%>
