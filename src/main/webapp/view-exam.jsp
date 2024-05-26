@@ -33,7 +33,6 @@
 
 				<table class="table table-bordered">
 					<thead>
-						<!-- Empty table header, as it seems not to have any specific content -->
 					</thead>
 					<tbody>
 						<%
@@ -43,7 +42,7 @@
 						int count = 1;
 						int totalExams = (examList != null) ? examList.size() : 0;
 
-						if (totalExams > 0) { // Check if exams are found
+						if (totalExams > 0) { 
 							for (ExamModel exam : examList) {
 						%>
 						<tr>
@@ -74,14 +73,14 @@
 							<td colspan="2"></td>
 						</tr>
 						<%
-						} // End of loop
-						} else { // If no exams are found
+						} 
+						} else { 
 						%>
 						<tr>
 							<td colspan="2">No exams found.</td>
 						</tr>
 						<%
-						} // End of if-else condition
+						} 
 						%>
 					</tbody>
 				</table>

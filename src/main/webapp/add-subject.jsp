@@ -31,7 +31,7 @@
 						<div class="mb-3">
 							<label for="subjectName" class="form-label">Subject Name</label>
 							<input type="text" class="form-control" id="subjectName" name="subjectName" 
-								placeholder="Enter subject name">
+								placeholder="Enter subject name" required>
 						</div>
 <!-- 						<div class="input-group mb-3"> -->
 <!-- 							<span class="input-group-text" id="basic-addon1">#</span> <input -->

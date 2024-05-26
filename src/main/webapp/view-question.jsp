@@ -40,7 +40,6 @@
 					<tbody>
 						<tr>
 							<%
-							// Assuming examList contains a list of ExamModel objects
 							QuestionService questionService = new QuestionServiceImpl();
 							QuestionRepository questionRepository = new QuestionRepositoryImpl();
 							List<QuestionModel> listQuestion = questionService.getAllQuestion();
@@ -86,17 +85,15 @@
 							</td>
 						</tr>
 						<%
-						if (count <= totalQuestions) { // Check if it's not the last iteration
+						if (count <= totalQuestions) { 
 						%>
 						<tr class="empty-row">
 							<td colspan="2"></td>
-							<!-- Add empty cells for space between each set of exam details -->
 						</tr>
 						<%
-						} // End of if
-						} // End of loop 
+						} 
+						}  
 						} else {
-						// Handle case where QuestionList is null
 						out.println("<tr><td colspan='2'>No questions found.</td></tr>");
 						}
 						%>

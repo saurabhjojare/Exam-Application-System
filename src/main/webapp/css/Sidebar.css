@@ -1,3 +1,31 @@
+.nav {
+--bs-nav-link-color: var(--bs-link-color);
+}
+:root {
+    --bs-link-color: #fff;
+}
+
+.nav .nav-link {
+    color: var(--bs-nav-link-color);
+}
+
+ 
+ .nav-link:hover {
+       color: #fff;
+ }
+ 
+
+.text-bg-dark {
+    color: #fff !important;
+    background-color: transparent;
+    background: linear-gradient(to right, #1a2980, #26d0ce);
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #000;
+    background-color: #fff;
+    transition: none;
+}
 
     html, body {
         height: 100%;

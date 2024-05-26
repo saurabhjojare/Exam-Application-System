@@ -1,3 +1,22 @@
+ .navbar-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-height: 100%; /* Adjust the height as needed */
+    overflow-y: scroll;
+  }
+  .navbar-bottom::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+  .navbar-bottom {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .bg-dark {
+    background-color: transparent;
+    background: linear-gradient(to right, #1a2980, #26d0ce);
+}
 
 /* Custom CSS for the body content */
 .body-content {

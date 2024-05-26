@@ -90,7 +90,6 @@
 
 	<%@ include file="footer.jsp"%>
 
-
 	 <script src="js/userSignupValidation.js"></script>	
 	 <script src="js/nextButton.js"></script>
 	 <script src="js/hideMessge.js"></script>

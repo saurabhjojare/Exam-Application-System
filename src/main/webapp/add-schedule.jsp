@@ -35,15 +35,15 @@
 							<label for="examDate" class="form-label">Exam Date</label> 
 							<input
 								type="date" class="form-control" id="examDate" name="examDate"
-								value="">
+								value="" required>
 						</div>
 						<div class="mb-3">
 							<label for="startTime" class="form-label">Start Time</label> <input
-								type="time" class="form-control" id="startTime" name="startTime" value="08:00">
+								type="time" class="form-control" id="startTime" name="startTime" value="08:00" required>
 						</div>
 						<div class="mb-3">
 							<label for="endTime" class="form-label">End Time</label> <input
-								type="time" class="form-control" id="endTime" name="endTime" value="10:00">
+								type="time" class="form-control" id="endTime" name="endTime" value="10:00" required>
 								            <button type="button" class="btn btn-primary mt-3" onclick="nextStep()" style = "float:left;">Next</button>
 								
 						</div>
@@ -51,7 +51,7 @@
 						<div class="step" id="step2">
 						<div class="mb-3">
 							<label for="examName" class="form-label">Select Exam Name</label>
-							<select class="form-select" id="examName" name="examName">
+							<select class="form-select" id="examName" name="examName" required>
 								<%
 							ExamService examService = new ExamServiceImpl();
 							ExamRepository examRepository = new ExamRepositoryImpl();
@@ -68,7 +68,7 @@
 						</div>
 						<div class="mb-3">
 							<label for="subjectName" class="form-label">Select
-								Subject Name</label> <select class="form-select" id="subjectName" name="subjectName">
+								Subject Name</label> <select class="form-select" id="subjectName" name="subjectName" required>
 									<%
 							SubjectService subService = new SubjectServiceImpl();
 							SubjectRepository subRepository = new SubjectRepositoryImpl();

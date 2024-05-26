@@ -8,39 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sidebar</title>
 <link rel="stylesheet" type="text/css" href="css/Sidebar.css">
-<style>
-
-.nav {
---bs-nav-link-color: var(--bs-link-color);
-}
-:root {
-    --bs-link-color: #fff;
-}
-
-.nav .nav-link {
-    color: var(--bs-nav-link-color);
-}
-
- 
- .nav-link:hover {
-       color: #fff;
- }
- 
-
-.text-bg-dark {
-    color: #fff !important;
-    background-color: transparent;
-    background: linear-gradient(to right, #1a2980, #26d0ce);
-}
-
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    color: #000;
-    background-color: #fff;
-    transition: none;
-}
-</style>
-
-
 
 </head>
 <body>
@@ -140,9 +107,7 @@
         </div>
         </div>
         
-        <!-- Main Content Area -->
         <div class="flex-grow-1 ms-2">
-            <!-- Your main content here -->
         </div>
     </div>
 </body>

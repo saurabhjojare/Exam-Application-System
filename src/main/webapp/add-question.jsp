@@ -38,27 +38,27 @@
 										<label for="questionName" class="form-label">Question
 											Name</label> <input type="text" class="form-control"
 											id="questionName" name="questionName"
-											placeholder="Enter question text">
+											placeholder="Enter question text" required>
 									</div>
 									<div class="mb-3">
 										<label for="option1" class="form-label">Option 1</label> <input
 											type="text" class="form-control" id="option1" name="option1"
-											placeholder="Enter option 1 text">
+											placeholder="Enter option 1 text" required>
 									</div>
 									<div class="mb-3">
 										<label for="option2" class="form-label">Option 2</label> <input
 											type="text" class="form-control" id="option2" name="option2"
-											placeholder="Enter option 2 text">
+											placeholder="Enter option 2 text" required>
 									</div>
 									<div class="mb-3">
 										<label for="option3" class="form-label">Option 3</label> <input
 											type="text" class="form-control" id="option3" name="option3"
-											placeholder="Enter option 3 text">
+											placeholder="Enter option 3 text" required>
 									</div>
 									<div class="mb-0">
 										<label for="option4" class="form-label">Option 4</label> <input
 											type="text" class="form-control" id="option4" name="option4"
-											placeholder="Enter option 4 text">
+											placeholder="Enter option 4 text" required>
 									</div>
 									<div class="marginBottom">
 										<button type="button" class="btn btn-primary mt-3"
@@ -72,7 +72,7 @@
 								<div class="step" id="step2">
 									<div class="mb-3">
 										<label for="answer" class="form-label">Enter Option As
-											Answer</label> <select id="answer" class="form-control" name="answer">
+											Answer</label> <select id="answer" class="form-control" name="answer" required>
 											<option value="1">Option 1</option>
 											<option value="2">Option 2</option>
 											<option value="3">Option 3</option>
@@ -83,7 +83,7 @@
 										<label for="subjectName" class="form-label">Subject
 											Name</label> <select id="subjectName" class="form-control"
 											name="subjectName">
-											<option value="">Select Subject</option>
+											<option value="" required>Select Subject</option>
 											<%
 											SubjectService sv = new SubjectServiceImpl();
 											List<String> subjects = sv.getAllSubjects();

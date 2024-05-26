@@ -31,18 +31,18 @@
 								<div class="mb-3">
 									<label for="examName" class="form-label">Exam Name</label> <input
 										type="text" class="form-control" id="examName" name="examName"
-										placeholder="Enter exam name">
+										placeholder="Enter exam name" required>
 								</div>
 								<div class="mb-3">
 									<label for="totalMarks" class="form-label">Total Marks</label>
 									<input type="number" class="form-control" id="totalMarks"
-										name="totalMarks" placeholder="Enter total marks">
+										name="totalMarks" placeholder="Enter total marks" required>
 								</div>
 								<div class="mb-3">
 									<label for="passingMarks" class="form-label">Passing
 										Marks</label> <input type="number" class="form-control"
 										id="passingMarks" name="passingMarks"
-										placeholder="Enter passing marks">
+										placeholder="Enter passing marks" required>
 								</div>
 								<div class="marginBottom">
 									<button type="submit" class="btn btn-primary">Create

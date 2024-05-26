@@ -183,6 +183,7 @@ function showQuestion(index) {
 </script>
 
 <script src="js/SubmitExam.js"></script>
+<script src="js/CopyPaste.js"></script>
 <script>
 $(document).ready(function() {
     var correctCounter = 0;

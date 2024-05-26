@@ -36,7 +36,6 @@
 					<tbody>
 						<tr>
 							<%
-							// Assuming examList contains a list of ExamModel objects
 							SubjectService subjectService = new SubjectServiceImpl();
 							SubjectRepository subjectRepository = new SubjectRepositoryImpl();
 							List<ScheduleModel> listSchedule = subjectService.getAllSchedule();
@@ -57,15 +56,12 @@
 								if (subjectName != null) {
 									out.print(subjectName);
 								} else {
-									out.print("Subject not found"); // or handle the case when subject is not found
+									out.print("Subject not found"); 
 								}
 								%>
 							</td>
 						</tr>
-						<!-- 						<tr> -->
-						<!-- 							<td class="key" style="padding-left: 15px">Schedule ID</td> -->
-						<%-- 							<td class="value" style="padding-right: 15px"><%=schedule.getSchid()%></td> --%>
-						<!-- 						</tr> -->
+			
 						<tr>
 							<td class="key" style="padding-left: 15px">Exam</td>
 							<td class="value" style="padding-right: 15px">
@@ -76,7 +72,7 @@
 								if (examName != null) {
 									out.print(examName);
 								} else {
-									out.print("Exam not found"); // or handle the case when the exam is not found
+									out.print("Exam not found"); 
 								}
 								%>
 							</td>

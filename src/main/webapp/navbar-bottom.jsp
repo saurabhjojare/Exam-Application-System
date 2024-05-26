@@ -7,27 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bottom Navbar</title>
 <link rel="stylesheet" type="text/css" href="css/navbarBottom.css">
-<style>
- .navbar-bottom {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    max-height: 100%; /* Adjust the height as needed */
-    overflow-y: scroll;
-  }
-  .navbar-bottom::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
-  }
-  .navbar-bottom {
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
-  }
-  
-  .bg-dark {
-    background-color: transparent;
-    background: linear-gradient(to right, #1a2980, #26d0ce);
-}
-</style>
 </head>
 <body>
     <!-- Navbar -->
@@ -135,9 +114,9 @@
     </div>
 </nav>
 
-    <!-- Main Content Area -->
+  
     <div class="flex-grow-1 ms-2">
-        <!-- Your main content here -->
+       
     </div>
 </body>
 </html>

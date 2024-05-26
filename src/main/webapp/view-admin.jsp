@@ -2,7 +2,6 @@
 <%@ include file="common-resources.jsp"%>
 
 <%
-//Retrieve the AdminService instance from the servlet context
 AdminService adminService = (AdminService) request.getServletContext().getAttribute("adminService");
 
 List<AdminModel> admins = Optional.ofNullable(adminService).map(service -> service.getAllAdmins())

@@ -66,12 +66,7 @@ session.removeAttribute("message");
 								%>
 							</select> <span class="text-muted" id="subjectWarningMsg"></span>
 						</div>
-<!-- 						<div class="input-group mb-3"> -->
-<!-- 							<span class="input-group-text" id="basic-addon1">#</span> <input -->
-<!-- 								type="text" class="form-control" placeholder="Subject Pin" -->
-<!-- 								name="subjectpin" aria-label="subjectpin" -->
-<!-- 								aria-describedby="basic-addon1"> -->
-<!-- 						</div> -->
+
 						<center>
 							<button type="submit" class="btn btn-primary">Select
 								Subject</button>
