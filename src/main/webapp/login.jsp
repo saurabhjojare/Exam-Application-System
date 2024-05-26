@@ -27,6 +27,9 @@
 					</div>
 					<p class="lead">Please enter your credentials to log in.</p>
 					<form name='form' action='login' method='Post'>
+<!-- 					<input type="hidden" name="userType" value="student"> -->
+<!-- 					<input type="hidden" name="userType" value="admin"> -->
+					
 						<div class="mb-3">
 							<label for="username" class="form-label">Username</label> <input
 								type="text" name="username" class="form-control" id="username"
@@ -50,9 +53,12 @@
 						<div class="login-link mt-3">
 							Don't have an account? <a href="sign-up.jsp">Sign Up</a>
 						</div>
-						<div class="login-link mt-2">Are you an admin? 
-						<a href="admin-login.jsp">Login</a>
+						<div class="login-link mt-2">Trouble logging in?
+						<a href="#">Forgot Password</a>
 						</div>
+						  <!-- Include hidden inputs for both student and admin -->
+    <input type="hidden" name="userType" value="student">
+    <input type="hidden" name="userType" value="admin">
 					</form>
 				</div>
 			</div>

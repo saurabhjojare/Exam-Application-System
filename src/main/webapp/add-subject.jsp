@@ -32,13 +32,9 @@
 							<label for="subjectName" class="form-label">Subject Name</label>
 							<input type="text" class="form-control" id="subjectName" name="subjectName" 
 								placeholder="Enter subject name" required>
+							<div class="text-start fw-light" id="SubjectWarningMsg"></div>
+								
 						</div>
-<!-- 						<div class="input-group mb-3"> -->
-<!-- 							<span class="input-group-text" id="basic-addon1">#</span> <input -->
-<!-- 								type="text" class="form-control" placeholder="Subject pin" -->
-<!-- 								name="Password" aria-label="password" -->
-<!-- 								aria-describedby="basic-addon1"> -->
-<!-- 						</div> -->
 						<div class = "marginBottom">
 						<button type="submit" class="btn btn-primary">Add Subject</button>
 						</div>
@@ -53,7 +49,8 @@
 	<div class="bottom-navbar">
 	<%@ include file="navbar-bottom.jsp"%>
 	</div>
-	
+		
 		<script src="js/hideMessge.js"></script>
+		<script src="js/AddSubjectValidation.js"></script>
 </body>
 </html>

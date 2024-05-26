@@ -19,5 +19,7 @@ public interface StudentRepository {
 	 public boolean isDeleteStudentById(int id);
 	    
 	 boolean isStudentEnrolledInSubject(String studentName, String subjectName);
+	 
+	 public boolean loginStudent(String username, String password);
 
 }

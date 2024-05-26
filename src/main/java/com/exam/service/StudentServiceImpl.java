@@ -49,6 +49,12 @@ public class StudentServiceImpl implements StudentService{
 		// TODO Auto-generated method stub
 		return this.studRepo.isStudentEnrolledInSubject(studentName, subjectName);
 	}
+
+	@Override
+	public boolean loginStudent(String username, String password) {
+		// TODO Auto-generated method stub
+		return this.studRepo.loginStudent(username, password);
+	}
 	
 	
 

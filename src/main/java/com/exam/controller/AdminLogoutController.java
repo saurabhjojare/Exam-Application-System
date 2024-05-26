@@ -18,7 +18,7 @@ public class AdminLogoutController extends HttpServlet {
 	            session.invalidate();
 	        }
 	        // Redirect to login page after logout
-	        response.sendRedirect("admin-login.jsp");
+	        response.sendRedirect("login.jsp");
 	    }
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

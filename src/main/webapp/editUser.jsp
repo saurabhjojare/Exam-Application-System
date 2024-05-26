@@ -19,8 +19,6 @@
 			<section class="py-5 text-center">
 				<div class="container">
 					<h1 class="display-6">Coming Soon</h1>
-<!-- 					<p class="lead"></p> -->
-<!-- 					<p><a href="index.jsp" class="text-decoration-none"></a></p> -->
 				</div>
 			</section>
 		</div>

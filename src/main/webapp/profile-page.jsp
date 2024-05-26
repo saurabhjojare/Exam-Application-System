@@ -28,8 +28,10 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 		</div>
 		<!-- Main Content Area -->
 		<div class="flex-grow-1 view-padding text-center display-6" style = "height:100vh; overflow:auto">
-			<div class = "mt-3 mb-5">
+			<div class = "mt-3 mb-4">
 			<span class="display-6">Exam Application System </span>
+			<p class="lead text-center mt-3">Welcome, Administrator</p>
+			
 			</div>
 			<div class="text-start">
 

@@ -27,7 +27,12 @@
 							<div class="row justify-content-center">
 								<div class="col-lg-6">
 									<div class="signup-form">
-
+<!-- <div class="p-5 text-center bg-body-tertiary rounded-3"> -->
+<!--     <h1 class="text-body-emphasis">Basic jumbotron</h1> -->
+<!--     <p class="lead"> -->
+<!--       This is a simple Bootstrap jumbotron that sits within a <code>.container</code>, recreated with built-in utility classes. -->
+<!--     </p> -->
+<!--   </div> -->
 										<h1 class="display-6 text-center">Add Admin</h1>
 										<div class="animate__animated animate__shakeX">
 										<center>
@@ -136,7 +141,7 @@
 		<%@ include file="navbar-bottom.jsp"%>
 	</div>
 
-<!-- 	<script src="js/signupValidation.js"></script> -->
+    <script src="js/signupValidation.js"></script>
 	<script src="js/nextButton.js"></script>
 	<script src="js/hideMessge.js"></script>
 </body>

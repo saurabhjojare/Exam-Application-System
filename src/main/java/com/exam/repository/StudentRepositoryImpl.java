@@ -210,6 +210,38 @@ public class StudentRepositoryImpl extends DBConfig implements StudentRepository
 	            }
 	        }
 	    }
+	  
+	// Method to check if an admin with the given username and password exists
+	    @Override
+	    public boolean loginStudent(String username, String password) {
+	        PreparedStatement stmt = null;
+	        ResultSet rs = null;
+
+	        try {
+	            String query = "SELECT * FROM student WHERE username = ? AND password = ?";
+	            stmt = conn.prepareStatement(query);
+	            stmt.setString(1, username);
+	            stmt.setString(2, password); 
+
+	            rs = stmt.executeQuery();
+	            return rs.next(); 
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return false;
+	        } finally {
+	            try {
+	                if (rs != null) {
+	                    rs.close();
+	                }
+	                if (stmt != null) {
+	                    stmt.close();
+	                }
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+	    
 
 
 }
