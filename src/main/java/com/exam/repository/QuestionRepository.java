@@ -20,4 +20,6 @@ public interface QuestionRepository {
 	public List<QuestionModel> getAllQuestion();
 	
 	public boolean isDeleteQuestionById(int id);
+	
+	public List<String[]> fetchQuestionsByCourse(int courseId);
 }

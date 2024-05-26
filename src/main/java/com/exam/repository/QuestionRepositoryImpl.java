@@ -214,5 +214,45 @@ public class QuestionRepositoryImpl extends DBConfig implements QuestionReposito
 					return false;
 				}
 			}
+	  
+	  public List<String[]> fetchQuestionsByCourse(int courseId) {
+		    List<String[]> questionData = new ArrayList<>();
+		    PreparedStatement stmt = null;
+		    ResultSet rs = null;
+
+		    try {
+		        String query = "SELECT q.qid, q.question, q.op1, q.op2, q.op3, q.op4, q.answer " +
+		                       "FROM question q " +
+		                       "JOIN subjectquestionjoin sqj ON q.qid = sqj.qid " +
+		                       "WHERE sqj.sid = ?";
+
+		        stmt = conn.prepareStatement(query);
+		        stmt.setInt(1, courseId);
+		        rs = stmt.executeQuery();
+
+		        while (rs.next()) {
+		            int qid = rs.getInt("qid");
+		            String question = rs.getString("question");
+		            String op1 = rs.getString("op1");
+		            String op2 = rs.getString("op2");
+		            String op3 = rs.getString("op3");
+		            String op4 = rs.getString("op4");
+		            int answer = rs.getInt("answer");
+
+		            String[] questionRow = {String.valueOf(qid), question, op1, op2, op3, op4, String.valueOf(answer)};
+		            questionData.add(questionRow);
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		        try {
+		            if (rs != null) rs.close();
+		            if (stmt != null) stmt.close();
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		        }
+		    }
+		    return questionData;
+		}
 
 }

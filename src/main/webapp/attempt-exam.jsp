@@ -87,8 +87,8 @@ if (NoExamMessage != null) {
 
 						<input type="hidden" id="scheduleId" name="scheduleId" value="">
 
-						<div class="mb-0" style="display:flex; gap:5px;">
-						<div class = "w-50">
+						<div class="mb-0">
+						
 							<label for="subjectSelection" class="form-label">Select
 								Subject</label> <select class="form-select" id="subjectSelection"
 								name="subjectSelection">
@@ -105,24 +105,8 @@ if (NoExamMessage != null) {
 								%>
 								<!-- Subject options will be dynamically populated here -->
 							</select>
-						</div>
-						<div class = "w-50">
-						<label for="timeSelection" class="form-label">Select Time</label>
-							<select class="form-select" id="timeSelection"
-								name="timeSelection">
-								<% 
-								if (q1list != null && !q1list.isEmpty()) {
-								%>
-								<option value="" disabled selected>Loading</option>
-								<% 
-								} else {
-								%>
-								<option value="" disabled selected>Time not found</option>
-								<%
-								} 
-								%>
-							</select>
-						</div>
+						
+					
 						</div>
 
 						<button type="button" class="btn btn-secondary mt-2 mb-3"
@@ -138,7 +122,21 @@ if (NoExamMessage != null) {
 					<div class="step" id="step2">
 
 						<div class="mb-3">
-							
+							<label for="timeSelection" class="form-label">Select Time</label>
+							<select class="form-select" id="timeSelection"
+								name="timeSelection">
+								<% 
+								if (q1list != null && !q1list.isEmpty()) {
+								%>
+								<option value="" disabled selected>Loading</option>
+								<% 
+								} else {
+								%>
+								<option value="" disabled selected>Time not found</option>
+								<%
+								} 
+								%>
+							</select>
 						</div>
 
 

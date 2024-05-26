@@ -53,8 +53,7 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 					class="text-body-secondary"><%=admin.getContact()%></small></span><br>
 					</div>
 					<div class ="mb-1">
-				<span class="display-6" style="font-size: 28px;">Email
-					Address: <small class="text-body-secondary"><%=admin.getEmail()%></small>
+				<span class="display-6" style="font-size: 28px;">Email: <small class="text-body-secondary"><%=admin.getEmail()%></small>
 				</span><br> 
 				</div>
 				<div class ="mb-1">

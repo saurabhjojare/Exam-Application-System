@@ -116,4 +116,10 @@ public class QuestionServiceImpl implements QuestionService {
 		// TODO Auto-generated method stub
 		return qRepo.isDeleteQuestionById(id);
 	}
+
+	@Override
+	public List<String[]> fetchQuestionsByCourse(int courseId) {
+		// TODO Auto-generated method stub
+		return qRepo.fetchQuestionsByCourse(courseId);
+	}
 }

@@ -21,4 +21,6 @@ public interface QuestionService {
 	
 	public boolean isDeleteQuestionById(int id);
 	
+	public List<String[]> fetchQuestionsByCourse(int courseId);
+	
 }
