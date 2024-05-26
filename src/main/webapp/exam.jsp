@@ -108,7 +108,7 @@ function showQuestion(index) {
                             name="question<%=questionIndex%>" id="option1_<%=questionIndex%>"
                             value="1"> <label class="form-check-label"
                             for="option1_<%=questionIndex%>"><%=count++%>) <%=result[2]%>
-                            <br><span class="text-secondary opacity-30"><%=username%></span><br>
+<%--                             <br><span class="text-secondary opacity-30"><%=username%></span><br> --%>
                         </label>
                     </div>
                     <div class="form-check mb-3">
@@ -116,7 +116,7 @@ function showQuestion(index) {
                             name="question<%=questionIndex%>" id="option2_<%=questionIndex%>"
                             value="2"> <label class="form-check-label"
                             for="option2_<%=questionIndex%>"><%=count++%>) <%=result[3]%>
-                            <br><span class="text-secondary opacity-30"><%=username%></span><br>
+<%--                             <br><span class="text-secondary opacity-30"><%=username%></span><br> --%>
                         </label>
                     </div>
                     <div class="form-check mb-3">
@@ -124,7 +124,7 @@ function showQuestion(index) {
                             name="question<%=questionIndex%>" id="option3_<%=questionIndex%>"
                             value="3"> <label class="form-check-label"
                             for="option3_<%=questionIndex%>"> <%=count++%>) <%=result[4]%>
-                            <br><span class="text-secondary opacity-30"><%=username%></span><br>
+<%--                             <br><span class="text-secondary opacity-30"><%=username%></span><br> --%>
                         </label>
                     </div>
                     <div class="form-check">
@@ -132,7 +132,7 @@ function showQuestion(index) {
                             name="question<%=questionIndex%>" id="option4_<%=questionIndex%>"
                             value="4"> <label class="form-check-label"
                             for="option4_<%=questionIndex%>"><%=count++%>) <%=result[5]%>
-                            <br><span class="text-secondary opacity-30"><%=username%></span><br>
+<%--                             <br><span class="text-secondary opacity-30"><%=username%></span><br> --%>
                         </label>
                     </div>
 

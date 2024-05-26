@@ -33,7 +33,7 @@ if (listStudent != null && !listStudent.isEmpty()) {
 			<section class="text-center">
 				<div class="container">
 					<div
-						class="position-relative p-4 text-center text-muted bg-body border border-dashed rounded-5">
+						class="position-relative p-4 text-center text-muted bg-body border border-dashed rounded-5" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);">
 						<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
 							fill="currentColor" class="bi bi-person-bounding-box"
 							viewBox="0 0 16 16">

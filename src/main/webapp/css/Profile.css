@@ -1,7 +1,27 @@
 
+@media (min-width: 1250px) {
+.jumbWidth {
+	width: 45%;
+}
+	
+}
+
+@media (max-width: 1250px) {
+	.jumbWidth {
+	width: 60%;
+}
+}
+
+@media (max-width: 1000px) {
+	.jumbWidth {
+	width: 100%;
+}
+}
+
 #profile {
     
-    width: 240px;cursor: pointer;
+    width: 240px;
+    cursor: pointer;
 }
 
 .profile span {  
@@ -16,12 +36,6 @@ a {
 }
 
 
-@media (min-width: 991px) {
-.jumbWidth {
-	width: 55%;
-}
-	
-}
 
 @media (max-width: 991px) {
 	#profile {

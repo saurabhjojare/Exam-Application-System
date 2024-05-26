@@ -52,13 +52,6 @@ if (studentData.isEmpty()) {
                     href='deleteStudent?id=<%=student[0]%>'><button class="btn btn-danger">Delete</button></a>
                 </td>
             </tr>
-            <tr class="empty-row" style="border: 0px solid #fff;">
-                <td colspan="2"></td>
-            </tr>
-            <tr class="empty-row" style="border: 0px solid #fff;">
-                <td colspan="2"></td>
-            </tr>
-
         </tbody>
     </table>
 <%

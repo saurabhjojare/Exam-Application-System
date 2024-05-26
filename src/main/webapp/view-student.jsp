@@ -15,6 +15,14 @@ List<String[]> results = examService.getAllResults();
 <title>View Student</title>
 <link rel="stylesheet" type="text/css" href="css/viewResult.css">
 <link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+
+<style>
+@media ( max-width : 992px) {
+	.marginBottom {
+		margin-bottom: 35px;
+	}
+}
+</style>
 </head>
 <body>
 
