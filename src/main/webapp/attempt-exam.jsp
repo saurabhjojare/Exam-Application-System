@@ -21,6 +21,7 @@ if (NoExamMessage != null) {
 <link rel="stylesheet" type="text/css" href="css/CustomColor.css">
 </head>
 <body>
+
 	<div id="toast-container"></div>
 
 	<%@ include file="navbar.jsp"%>
@@ -28,17 +29,16 @@ if (NoExamMessage != null) {
 	<!-- Body -->
 
 	<main>
-		<section class="py-5 text-center">
+		<section class="mt-4 text-center">
 			<div class="container-sm">
 
 				<%-- 				<span class="lead" style="display:none;">Hello, <strong><%=username%></strong></span> --%>
-				<h1>Attempt Exam</h1>
+				<h2>Select Your Schedule</h2>
 				 <% if (NoExamMessage != null && NoExamMessage.trim().length() > 0) { %>
     <p id = "message"><%= NoExamMessage %></p>
 <% } %>
 
-				<p class="lead">Please select the exam and schedule before
-					starting.</p>
+				<p class="lead">Please select your exam and schedule.</p>
 
 				<div class="attemptExam">
 					<!-- 				<form id="examForm" method="post" action="fetchallquestions"> -->
@@ -46,7 +46,7 @@ if (NoExamMessage != null) {
 
 
 					<div class="step active" id="step1">
-						<div class="mb-3">
+						<div class="mb-2">
 							<label for="examSelection" class="form-label">Select Exam</label>
 							<select class="form-select" id="examSelection"
 								name="examSelection">
@@ -59,7 +59,7 @@ if (NoExamMessage != null) {
 										out.println("<option value=\"" + exam.getId() + "\">" + exam.getName() + "</option>");
 									}
 								} else {
-									out.println("<option value=\"\">Exam not found</option>");
+									out.println("<option value=\"\">Exam not available</option>");
 								}
 								%>
 
@@ -67,7 +67,7 @@ if (NoExamMessage != null) {
 						</div>
 
 
-						<div class="mb-3">
+						<div class="mb-2">
 							<label for="scheduleSelection" class="form-label">Select
 								Schedule</label> <select class="form-select" id="scheduleSelection"
 								name="scheduleSelection">
@@ -78,7 +78,7 @@ if (NoExamMessage != null) {
 								<% 
 								} else {
 								%>
-								<option value="" disabled selected>Schedule not found</option>
+								<option value="" disabled selected>Schedule not available</option>
 								<%
 								} 
 								%>
@@ -87,7 +87,7 @@ if (NoExamMessage != null) {
 
 						<input type="hidden" id="scheduleId" name="scheduleId" value="">
 
-						<div class="mb-0">
+						<div class="mb-2">
 						
 							<label for="subjectSelection" class="form-label">Select
 								Subject</label> <select class="form-select" id="subjectSelection"
@@ -99,7 +99,7 @@ if (NoExamMessage != null) {
 								<% 
 								} else {
 								%>
-								<option value="" disabled selected>Subject not found</option>
+								<option value="" disabled selected>Subject not available</option>
 								<%
 								} 
 								%>
@@ -107,6 +107,24 @@ if (NoExamMessage != null) {
 							</select>
 						
 					
+						</div>
+						
+						<div class="mb-3">
+							<label for="timeSelection" class="form-label">Select Time</label>
+							<select class="form-select" id="timeSelection"
+								name="timeSelection">
+								<% 
+								if (q1list != null && !q1list.isEmpty()) {
+								%>
+								<option value="" disabled selected>Loading</option>
+								<% 
+								} else {
+								%>
+								<option value="" disabled selected>Time not available</option>
+								<%
+								} 
+								%>
+							</select>
 						</div>
 
 						<button type="button" class="btn btn-secondary mt-2 mb-3"
@@ -121,31 +139,16 @@ if (NoExamMessage != null) {
 
 					<div class="step" id="step2">
 
-						<div class="mb-3">
-							<label for="timeSelection" class="form-label">Select Time</label>
-							<select class="form-select" id="timeSelection"
-								name="timeSelection">
-								<% 
-								if (q1list != null && !q1list.isEmpty()) {
-								%>
-								<option value="" disabled selected>Loading</option>
-								<% 
-								} else {
-								%>
-								<option value="" disabled selected>Time not found</option>
-								<%
-								} 
-								%>
-							</select>
-						</div>
+						
 
 
 						<!-- 					</form> -->
 
 
-						<p style="width: 450px; margin: 0px auto;" class="mb-3">Please
+						<p class="mb-3">Please
 							ensure you have a stable internet connection and a quiet
 							environment before proceeding.</p>
+							
 							<button type="button" class="btn btn-secondary"
 							onclick="prevStep()">Back</button>
 						<a href="exam.jsp" class="btn btn-primary" id="startExamButton"
@@ -157,7 +160,7 @@ if (NoExamMessage != null) {
 	</div>
 
 
-
+				
 
 				<div class="modal fade" id="confirmationModal" tabindex="-1"
 					aria-labelledby="confirmationModalLabel" aria-hidden="true">
@@ -221,23 +224,32 @@ if (NoExamMessage != null) {
 	                subjectDropdown.add(option);
 	            });
 	        } else {
-	            subjectDropdown.add(new Option('Subject not found', ''));
+	            subjectDropdown.add(new Option('Subject not available', ''));
 	        }
 	    } else {
 	        console.error('Error fetching subjects');
 	    }
 	}
 
-	// Function to handle successful response for fetching schedules
 	function handleScheduleResponse(xhr) {
 	    if (xhr.status === 200) {
 	        var schedules = JSON.parse(xhr.responseText);
 	        var scheduleDropdown = document.getElementById('scheduleSelection');
-	        
+
+	        // Object to store schedule counts
+	        var scheduleCounts = {};
+
 	        scheduleDropdown.innerHTML = '';
 	        if (schedules.length > 0) {
 	            schedules.forEach(function(schedule) {
-	                var option = new Option(schedule.examDate, schedule.schid);
+	                // Increment count for each schedule
+	                scheduleCounts[schedule.examDate] = (scheduleCounts[schedule.examDate] || 0) + 1;
+
+	                // Create option element
+	                var optionText = schedule.examDate + (scheduleCounts[schedule.examDate] > 1 ? ' (' + scheduleCounts[schedule.examDate] + ')' : '');
+	                var option = new Option(optionText, schedule.schid);
+
+	                // Add option to dropdown
 	                scheduleDropdown.add(option);
 	            });
 	            // Automatically fetch subjects and times for the currently selected schedule
@@ -246,20 +258,21 @@ if (NoExamMessage != null) {
 	            fetchSubjects(selectedScheduleId);
 	            fetchTimes(selectedScheduleId);
 	        } else {
-	            scheduleDropdown.add(new Option('Schedules not found', ''));
+	            scheduleDropdown.add(new Option('Schedule not available', ''));
 	            // If no schedules available, clear subjects dropdown
 	            var subjectDropdown = document.getElementById('subjectSelection');
 	            subjectDropdown.innerHTML = '';
-	            subjectDropdown.add(new Option('Subject not found', ''));
+	            subjectDropdown.add(new Option('Subject not available', ''));
 	            // Clear times dropdown
 	            var timeDropdown = document.getElementById('timeSelection');
 	            timeDropdown.innerHTML = '';
-	            timeDropdown.add(new Option('Time not found', ''));
+	            timeDropdown.add(new Option('Time not available', ''));
 	        }
 	    } else {
 	        console.error('Error fetching schedules');
 	    }
 	}
+
 	
 
 	// Function to handle successful response for fetching times
@@ -289,7 +302,7 @@ if (NoExamMessage != null) {
 	                timeDropdown.add(option);
 	            });
 	        } else {
-	            timeDropdown.add(new Option('Time not found', ''));
+	            timeDropdown.add(new Option('Time not available', ''));
 	        }
 	    } else {
 	        console.error('Error fetching times');
@@ -421,6 +434,7 @@ if (NoExamMessage != null) {
 	    var currentDate = localDate.toISOString().split('T')[0];
 	    // Get the current time in hh:mm AM/PM format
 // 	    var currentTime = new Date().toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'});
+	    
 
 	    // Parse the selected date to yyyy-mm-dd format
 	    var selectedDateParts = selectedSchedule.split('-');
@@ -432,7 +446,7 @@ if (NoExamMessage != null) {
 		console.log("Current Time From Toast:", currentTime);
 		console.log('Start Time From Toast:', startTime);
         console.log('End Time From Toast:', endTime);
-	    
+         
 	    // Check if the selected date is before the current date or if the date is invalid
 	  if (selectedSchedule === currentDate && isCurrentTimeWithinRange(startTime, endTime, currentTime)) {
         // Encode subject name

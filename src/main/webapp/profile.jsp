@@ -23,14 +23,25 @@ if (listStudent != null && !listStudent.isEmpty()) {
 <title>Profile</title>
 <link rel="stylesheet" type="text/css" href="css/Profile.css">
 <link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+  <style>
+       
+        .centered-text {
+            display: inline-block; /* Make the text an inline-block element */
+            text-align: left; /* Align the text to the left within the inline-block */
+        }
+        
+        .hoverIcon:hover {
+            transform: translate3d(0, -.125rem, 0);
+        }
+    </style>
 </head>
 <body>
 	<%@ include file="navbar.jsp"%>
 
 	<!-- Body -->
-	<main class="d-flex align-items-center text-center mt-3 mb-3">
+	<main class="d-flex align-items-center mt-3 mb-3">
 		<div class="container jumbWidth">
-			<section class="text-center">
+			<section class="">
 				<div class="container">
 					<div
 						class="position-relative p-4 text-center text-muted bg-body border border-dashed rounded-5" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);">
@@ -46,7 +57,8 @@ if (listStudent != null && !listStudent.isEmpty()) {
 						<%
 						if (student != null) {
 						%>
-						<h1 class="text-body-emphasis mt-2 fw-light">Hi, <%=student.getName()%></h1>
+						<h1 class="text-body-emphasis mt-2 fw-light"><%=student.getName()%></h1>
+						<div class="centered-text">
 						<p class="h4 mt-3 fw-lighter">
 							<strong>Email: </strong><span class="text-lowercase"><%=student.getEmail()%></span>
 						</p>
@@ -56,12 +68,13 @@ if (listStudent != null && !listStudent.isEmpty()) {
 						<p class="h4 mx-auto mb-4 fw-lighter">
 							<strong>Contact: </strong><%=student.getContact()%>
 						</p>
+						</div>
 
 						<ul class="nav justify-content-center">
-							<li class="nav-item"><a class="nav-link text-primary-emphasis" href="select-subject.jsp">Add Subject</a></li>
-							<li class="nav-item"><a class="nav-link text-primary-emphasis" href="result.jsp">View Result</a></li>
-							<li class="nav-item"><a class="nav-link text-danger" href="editUser.jsp">Edit Profile</a></li>
-							<li class="nav-item"><a class="nav-link text-success" href="logout">Sign Out</a></li>
+							<li class="nav-item"><a class="nav-link text-primary-emphasis hoverIcon" href="select-subject.jsp">Add Subject</a></li>
+							<li class="nav-item"><a class="nav-link text-primary-emphasis hoverIcon" href="result.jsp">View Result</a></li>
+							<li class="nav-item"><a class="nav-link text-danger hoverIcon" href="editUser.jsp">Edit Profile</a></li>
+							<li class="nav-item"><a class="nav-link text-success hoverIcon" href="logout">Sign Out</a></li>
 						</ul>
 
 					

@@ -233,7 +233,6 @@ public class ExamRepositoryImpl extends DBConfig implements ExamRepository {
 	}
 
 
-
 	@Override
 	public boolean isSetSchedule(ExamModel model, String subName) {
 	    String examDate = null;

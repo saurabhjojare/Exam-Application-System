@@ -24,7 +24,7 @@
       
   <!-- Toggle Button -->
     <li class="nav-item mt-2">
-        <button class="nav-link toggle-btn" onclick="toggleOptions()">
+        <button class="nav-link toggle-btn" onclick="toggleOptions('additional-options')">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#toggle-icon"></use></svg>
             Admin Management
         </button>
@@ -55,7 +55,7 @@
                 
                   <!-- Toggle Button -->
     <li class="nav-item mt-2">
-        <button class="nav-link toggle-btn" onclick="toggleOptions2()">
+        <button class="nav-link toggle-btn" onclick="toggleOptions2('additional-options')">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#toggle-icon"></use></svg>
             Exam Management
         </button>
@@ -77,7 +77,7 @@
   
  <!-- Toggle Button -->
     <li class="nav-item mt-2">
-        <button class="nav-link toggle-btn" onclick="toggleOptions3()">
+        <button class="nav-link toggle-btn" onclick="toggleOptions3('additional-options')">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#toggle-icon"></use></svg>
             Question Management
         </button>
@@ -100,7 +100,7 @@
 
 <!-- Toggle Button -->
     <li class="nav-item mt-2">
-        <button class="nav-link toggle-btn" onclick="toggleOptions4()">
+        <button class="nav-link toggle-btn" onclick="toggleOptions4('additional-options')">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#toggle-icon"></use></svg>
             Schedule Management
         </button>
@@ -123,7 +123,7 @@
 
 <!-- Toggle Button -->
     <li class="nav-item mt-2">
-        <button class="nav-link toggle-btn" onclick="toggleOptions5()">
+        <button class="nav-link toggle-btn" onclick="toggleOptions5('additional-options')">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#toggle-icon"></use></svg>
             Subject Management
         </button>
@@ -146,7 +146,7 @@
 
 <!-- Toggle Button -->
     <li class="nav-item mt-2">
-        <button class="nav-link toggle-btn" onclick="toggleOptions6()">
+        <button class="nav-link toggle-btn" onclick="toggleOptions6('additional-options')">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#toggle-icon"></use></svg>
             Student Management
         </button>
@@ -182,6 +182,9 @@
     
 <script>
     function toggleOptions() {
+        // Close all toggle options
+        closeAllToggleOptions();
+
         var additionalOptions = document.getElementById("additional-options");
         var additionalOptions1 = document.getElementById("additional-options-1");
         var additionalOptions2 = document.getElementById("additional-options-2");
@@ -212,6 +215,8 @@
 </script>
 <script>
     function toggleOptions2() { 
+    	// Close all toggle options
+        closeAllToggleOptions();
         var additionalOptions = document.getElementById("additional-options2");
         var additionalOptions1 = document.getElementById("additional-options2-1");
         var toggleButton = document.querySelector(".toggle-btn");
@@ -239,6 +244,8 @@
 
 <script>
     function toggleOptions3() {
+    	// Close all toggle options
+        closeAllToggleOptions();
         var additionalOptions = document.getElementById("additional-options3");
         var additionalOptions1 = document.getElementById("additional-options3-1");
         var toggleButton = document.querySelector(".toggle-btn");
@@ -266,6 +273,8 @@
 
 <script>
     function toggleOptions4() {
+    	// Close all toggle options
+        closeAllToggleOptions();
         var additionalOptions = document.getElementById("additional-options4");
         var additionalOptions1 = document.getElementById("additional-options4-1");
         var toggleButton = document.querySelector(".toggle-btn");
@@ -293,6 +302,8 @@
 
 <script>
     function toggleOptions5() {
+    	// Close all toggle options
+        closeAllToggleOptions();
         var additionalOptions = document.getElementById("additional-options5");
         var additionalOptions1 = document.getElementById("additional-options5-1");
         var toggleButton = document.querySelector(".toggle-btn");
@@ -320,6 +331,8 @@
 
 <script>
     function toggleOptions6() {
+    	// Close all toggle options
+        closeAllToggleOptions();
         var additionalOptions = document.getElementById("additional-options6");
         var additionalOptions1 = document.getElementById("additional-options6-1");
         var toggleButton = document.querySelector(".toggle-btn");
@@ -343,6 +356,22 @@
         }
     }
     
+</script>
+<script>
+function closeAllToggleOptions() {
+    var toggleButtons = document.querySelectorAll(".toggle-btn");
+    var additionalOptions = document.querySelectorAll("[id^='additional-options']");
+
+    // Close all toggle options and remove the active class from toggle buttons
+    toggleButtons.forEach(function(button) {
+        button.classList.remove("active");
+    });
+
+    additionalOptions.forEach(function(option) {
+        option.style.display = "none";
+    });
+}
+
 </script>
 
     

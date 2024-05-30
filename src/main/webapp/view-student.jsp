@@ -19,7 +19,7 @@ List<String[]> results = examService.getAllResults();
 <style>
 @media ( max-width : 992px) {
 	.marginBottom {
-		margin-bottom: 35px;
+		margin-bottom: 50px;
 	}
 }
 </style>
