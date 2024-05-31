@@ -522,6 +522,105 @@ public class ExamRepositoryImpl extends DBConfig implements ExamRepository {
 				return false;
 			}
 		}
-	
-	
+	  
+	  public List<String[]> fetchResultByCourse(int courseId) {
+		    List<String[]> data = new ArrayList<>();
+		    PreparedStatement stmt = null;
+		    ResultSet rs = null;
+		    
+		    try {
+		        // SQL query to fetch the required data
+		        String query = "SELECT s.name AS student_name, s.email, s.contact, s.username, e.examname, sub.subjectname, ser.obtainedpercentage, ser.status, sch.date " +
+		                       "FROM student s " +
+		                       "JOIN studentExamRelation ser ON s.stid = ser.stid " +
+		                       "JOIN schedule sch ON ser.schid = sch.schid " +
+		                       "JOIN exam e ON sch.examid = e.examid " +
+		                       "JOIN subject sub ON sch.sid = sub.sid " +
+		                       "WHERE sub.sid = ?";
+		        
+		        // Prepare the statement with the query
+		        stmt = conn.prepareStatement(query);
+		        stmt.setInt(1, courseId); // Set the courseId parameter
+		        
+		        // Execute the query
+		        rs = stmt.executeQuery();
+		        
+		        // Process the result set
+		        while (rs.next()) {
+		            String[] row = {
+		                rs.getString("student_name"),
+		                rs.getString("email"),
+		                rs.getString("contact"),
+		                rs.getString("username"),
+		                rs.getString("examname"),
+		                rs.getString("subjectname"),
+		                String.valueOf(rs.getDouble("obtainedpercentage")),
+		                String.valueOf(rs.getDouble("status")),
+		                rs.getString("date")
+		            };
+		            data.add(row);
+		        }
+		        
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		        try {
+		            // Close the resources
+		            if (rs != null) rs.close();
+		            if (stmt != null) stmt.close();
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		        }
+		    }
+		    
+		    return data;
+		}
+	  
+	  public List<String[]> fetchScheduleBySid(int courseId) {
+		    List<String[]> data = new ArrayList<>();
+		    PreparedStatement stmt = null;
+		    ResultSet rs = null;
+
+		    try {
+		        // SQL query to fetch the required data
+		        String query = "SELECT e.examname, s.date, s.starttime, s.endtime, sub.subjectname, s.schid " +
+		                       "FROM schedule s " +
+		                       "JOIN subject sub ON s.sid = sub.sid " +
+		                       "JOIN exam e ON s.examid = e.examid " +
+		                       "WHERE s.sid = ?";
+		        
+		        // Prepare the statement with the query
+		        stmt = conn.prepareStatement(query);
+		        stmt.setInt(1, courseId); // Set the sid parameter
+		        
+		        // Execute the query
+		        rs = stmt.executeQuery();
+		        
+		        // Process the result set
+		        while (rs.next()) {
+		            String[] row = {
+		                rs.getString("examname"),
+		                rs.getString("date"),
+		                rs.getString("starttime"),
+		                rs.getString("endtime"),
+		                rs.getString("subjectname"),
+		                String.valueOf(rs.getInt("schid"))
+		            };
+		            data.add(row);
+		        }
+		        
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		        try {
+		            // Close the resources
+		            if (rs != null) rs.close();
+		            if (stmt != null) stmt.close();
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		        }
+		    }
+		    
+		    return data;
+		}
 }

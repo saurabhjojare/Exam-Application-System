@@ -4,7 +4,6 @@
 
 <%
 ExamService examService = new ExamServiceImpl();
-List<String[]> results = examService.getAllResults();
 %>
 
 <!doctype html>
@@ -15,110 +14,72 @@ List<String[]> results = examService.getAllResults();
 <title>View Result</title>
 <link rel="stylesheet" type="text/css" href="css/viewResult.css">
 <link rel="stylesheet" type="text/css" href="css/CustomColor.css">
-
 </head>
 <body>
 
-	<div class="">
-		<div class="d-flex">
-			<div class="sidebar">
-				<%@ include file="sidebar.jsp"%>
-			</div>
-			<!-- Main Content Area -->
-			<div class="flex-grow-1 view-padding text-center marginBottom">
-				<h3 class="display-6 mt-2">Result Details</h3>
+<div class="">
+    <div class="d-flex">
+        <div class="sidebar">
+            <%@ include file="sidebar.jsp"%>
+        </div>
+        <!-- Main Content Area -->
+        <div class="flex-grow-1 view-padding text-center marginBottom">
+            <h3 class="display-6 mt-2">Result Details</h3>
 
+            <div class="d-flex justify-content-center mb-3">
+                <div class="input-group" style="width: 400px;">
+                    <input type="text" class="form-control" id="searchInput"
+                        placeholder="Search Result" aria-label="Search result"
+                        aria-describedby="button-addon2"
+                        onkeyup="searchByName(this.value)" disabled>
+                </div>
+            </div>
+            
+            <div class="mb-3 fw-light">
+                <span>Please note: In order to delete a student's result, you must first delete the student record.</span>
+            </div>
+            
+            <div class="d-flex justify-content-center">
+                <div class="input-group" style="width: 400px;">
+                    <select id="courseSelect" class="form-select mb-4" aria-label="select" onchange="fetchStudentsByCourse()">
+                        <%
+                        StudentService fetchDataObj = new StudentServiceImpl(); 
+                        List<String[]> courseData = fetchDataObj.fetchCourses(); 
+                        for (String[] course : courseData) {
+                        %>
+                        <option value="<%=course[0]%>"><%=course[1]%></option>
+                        <%
+                        }
+                        %>
+                    </select>
+                </div>
+            </div>
+            
+            <div id="studentTableBody"></div>
+        </div>
+    </div>
+    <div class="bottom-navbar">
+        <%@ include file="navbar-bottom.jsp"%>
+    </div>
+    
+    <script>
+        function fetchStudentsByCourse() {
+            var courseId = document.getElementById('courseSelect').value;
 
-				<div class="d-flex justify-content-center mb-3">
-					<div class="input-group" style="width: 400px;">
-						<input type="text" class="form-control" id="searchInput"
-							placeholder="Search Result" aria-label="Search result"
-							aria-describedby="button-addon2"
-							onkeyup="searchByName(this.value)" disabled>
-							
-					</div>
-					
-				</div>
-				<div class="mb-3 fw-light">
-				<span >Please note: In order to delete a student's result, you must first delete the student record.</span>
-				</div>
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'fetchResultByCourse.jsp?courseId=' + courseId, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById('studentTableBody').innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
 
-				<table class="table table-bordered" id="resultsTable">
-					<thead>
-					</thead>
-					<tbody id="resultsBody">
-						<%
-						if (results.isEmpty()) {
-						%>
-						<tr>
-							<td colspan="2" style="text-align: center;">No results
-								found.</td>
-						</tr>
-						<%
-						} else {
-						%>
-						<%
-						for (String[] result : results) {
-						%>
-						<tr>
-							<td class="key" style="padding: 15px">#</td>
-							<td class="value" style="padding: 15px">1</td>
-						</tr>
-
-						<tr>
-							<td class="key" style="padding-left: 15px">Student Name</td>
-							<td class="value" style="padding-right: 15px"><%=result[0]%></td>
-						</tr>
-
-						<tr>
-							<td class="key" style="padding-left: 15px">Exam Name</td>
-							<td class="value" style="padding-right: 15px"><%=result[1]%></td>
-						</tr>
-
-						<tr>
-							<td class="key" style="padding-left: 15px">Subject Name</td>
-							<td class="value" style="padding-right: 15px"><%=result[2]%></td>
-						</tr>
-						<tr>
-							<td class="key" style="padding-left: 15px">Exam Date</td>
-							<td class="value" style="padding-right: 15px"><%=result[3]%></td>
-						</tr>
-						<tr>
-							<td class="key" style="padding-left: 15px">Marks</td>
-							<%
-							double obtainedPercentage = Double.parseDouble(result[4]);
-							String formattedPercentage = String.format("%.2f", obtainedPercentage);
-							%>
-							<td class="value" style="padding-right: 15px"><%=formattedPercentage%>
-								%</td>
-						</tr>
-						<tr>
-							<td class="key" style="padding-left: 15px">Status</td>
-							<%
-							double status = Double.parseDouble(result[5]);
-							String statusText = (status == 1.0) ? "Pass" : "Fail";
-							%>
-							<td class="value" style="padding-right: 15px"><%=statusText%></td>
-					
-						<tr class="empty-row" style = "border:0px solid #fff;">
-							<td colspan="2"></td>
-						</tr>
-						<%
-						}
-						%>
-						<%
-						}
-						%>
-					</tbody>
-				</table>
-
-			</div>
-			<div></div>
-		</div>
-	</div>
-	<div class="bottom-navbar">
-		<%@ include file="navbar-bottom.jsp"%>
-	</div>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchStudentsByCourse();
+        });
+    </script>
 
 </body>
 </html>

@@ -21,5 +21,9 @@ public interface StudentRepository {
 	 boolean isStudentEnrolledInSubject(String studentName, String subjectName);
 	 
 	 public boolean loginStudent(String username, String password);
+	 
+	 public List<String[]> fetchStudentsWithoutSubjects();
+	 
+	 public List<String[]> fetchSubjectsByStudentUsername(String username);
 
 }

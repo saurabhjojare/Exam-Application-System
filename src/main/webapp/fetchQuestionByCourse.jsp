@@ -65,6 +65,7 @@ if (studentData.isEmpty()) {
         </tbody>
     </table>
 <%
+count++;
     }
 }
 %>

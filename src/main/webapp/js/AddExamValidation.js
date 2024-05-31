@@ -6,8 +6,8 @@ const examNameInput = document.getElementById('examName');
 		const totalMarksWarning = document.getElementById('TotalWarningMsg');
 		const passingMarksWarning = document.getElementById('PassingWarningMsg');
 
-		const examNamePattern = /^[A-Za-z0-9 ]+$/;
-		const numberPattern = /^\d+$/;
+		const examNamePattern = /^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/? ]{1,35}$/;
+		const numberPattern = /^\d{1,4}(\.\d{1,2})?$/;
 
 		examNameInput.addEventListener('input', function() {
 			const examName = examNameInput.value.trim();

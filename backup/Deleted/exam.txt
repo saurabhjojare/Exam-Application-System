@@ -1,0 +1,104 @@
+CREATE TABLE `admin` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `fullName` varchar(200) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `contact` varchar(50) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `role` varchar(50) DEFAULT NULL,
+  `department` varchar(50) DEFAULT NULL,
+  `permissions` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`fullName`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+CREATE TABLE `exam` (
+  `examid` int NOT NULL AUTO_INCREMENT,
+  `examname` varchar(200) NOT NULL,
+  `totalmarks` int NOT NULL,
+  `passingmarks` int NOT NULL,
+  PRIMARY KEY (`examid`),
+  UNIQUE KEY `examname` (`examname`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `question` (
+  `qid` int NOT NULL AUTO_INCREMENT,
+  `question` varchar(400) NOT NULL,
+  `op1` varchar(200) NOT NULL,
+  `op2` varchar(200) NOT NULL,
+  `op3` varchar(200) NOT NULL,
+  `op4` varchar(200) NOT NULL,
+  `answer` int NOT NULL,
+  PRIMARY KEY (`qid`),
+  UNIQUE KEY `question` (`question`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+
+CREATE TABLE `schedule` (
+  `schid` int NOT NULL AUTO_INCREMENT,
+  `examid` int DEFAULT NULL,
+  `date` date NOT NULL,
+  `starttime` time NOT NULL,
+  `endtime` time NOT NULL,
+  `sid` int DEFAULT NULL,
+  PRIMARY KEY (`schid`),
+  KEY `examid` (`examid`),
+  KEY `fk_schedule_subject` (`sid`),
+  CONSTRAINT `fk_schedule_subject` FOREIGN KEY (`sid`) REFERENCES `subject` (`sid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `schedule_ibfk_1` FOREIGN KEY (`examid`) REFERENCES `exam` (`examid`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `student` (
+  `stid` int NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `contact` varchar(200) NOT NULL,
+  `username` varchar(200) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  PRIMARY KEY (`stid`),
+  UNIQUE KEY `name` (`name`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `contact` (`contact`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `password` (`password`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `studentexamrelation` (
+  `stid` int DEFAULT NULL,
+  `schid` int DEFAULT NULL,
+  `obtainedpercentage` decimal(5,2) NOT NULL DEFAULT '0.00',
+  `status` decimal(5,2) DEFAULT '0.00',
+  KEY `stid` (`stid`),
+  KEY `schid` (`schid`),
+  CONSTRAINT `studentexamrelation_ibfk_1` FOREIGN KEY (`stid`) REFERENCES `student` (`stid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `studentexamrelation_ibfk_2` FOREIGN KEY (`schid`) REFERENCES `schedule` (`schid`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `studentsubjectjoin` (
+  `stid` int DEFAULT NULL,
+  `sid` int DEFAULT NULL,
+  KEY `stid` (`stid`),
+  KEY `sid` (`sid`),
+  CONSTRAINT `studentsubjectjoin_ibfk_1` FOREIGN KEY (`stid`) REFERENCES `student` (`stid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `studentsubjectjoin_ibfk_2` FOREIGN KEY (`sid`) REFERENCES `subject` (`sid`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `subject` (
+  `sid` int NOT NULL AUTO_INCREMENT,
+  `subjectname` varchar(200) NOT NULL,
+  PRIMARY KEY (`sid`),
+  UNIQUE KEY `subjectname` (`subjectname`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `subjectquestionjoin` (
+  `qid` int DEFAULT NULL,
+  `sid` int DEFAULT NULL,
+  KEY `qid` (`qid`),
+  KEY `sid` (`sid`),
+  CONSTRAINT `subjectquestionjoin_ibfk_1` FOREIGN KEY (`qid`) REFERENCES `question` (`qid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `subjectquestionjoin_ibfk_2` FOREIGN KEY (`sid`) REFERENCES `subject` (`sid`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

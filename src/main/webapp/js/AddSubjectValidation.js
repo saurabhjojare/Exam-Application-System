@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             // Check if subject name contains only alphanumeric characters and spaces in between
-            var alphanumericRegex = /^[A-Za-z0-9]+(?: [A-Za-z0-9]+)*$/;
+			var alphanumericRegex = /^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{1,75}(?: [A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{1,75})*$/;
             if (!alphanumericRegex.test(subjectName)) {
                 document.getElementById('SubjectWarningMsg').textContent = 'Subject name can only contain alphanumeric characters and spaces in between';
                 return false;

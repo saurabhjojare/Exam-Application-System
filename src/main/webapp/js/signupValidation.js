@@ -2,7 +2,7 @@
 function validateFullName() {
   var fullNameInput = document.getElementById('fullName').value.trim();
   var fullNameWarningMsg = document.getElementById('fullNameWarningMsg');
-  var isValid = /^[A-Za-z]+(?:\s+[A-Za-z]+)+$/.test(fullNameInput);
+  var isValid = /^[A-Za-z\s]{1,255}$/.test(fullNameInput);
 
   if (fullNameInput === '') {
     fullNameWarningMsg.textContent = ''; // Clear the warning message if input is empty
@@ -35,7 +35,7 @@ function validatePasswordMatch() {
 function validatePassword() {
   var password = document.getElementById('password').value.trim();
   var passwordWarningMsg = document.getElementById('passwordWarningMsg1'); // Updated ID
-  var isValid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,})/.test(password);
+  var isValid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,35})/.test(password);
 
   if (password === '') {
     passwordWarningMsg.textContent = ''; // Clear the warning message if input is empty

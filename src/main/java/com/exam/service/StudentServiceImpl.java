@@ -55,6 +55,18 @@ public class StudentServiceImpl implements StudentService{
 		// TODO Auto-generated method stub
 		return this.studRepo.loginStudent(username, password);
 	}
+
+	@Override
+	public List<String[]> fetchStudentsWithoutSubjects() {
+		// TODO Auto-generated method stub
+		return this.studRepo.fetchStudentsWithoutSubjects();
+	}
+
+	@Override
+	public List<String[]> fetchSubjectsByStudentUsername(String username) {
+		// TODO Auto-generated method stub
+		return this.studRepo.fetchSubjectsByStudentUsername(username);
+	}
 	
 	
 

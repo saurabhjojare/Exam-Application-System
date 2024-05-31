@@ -13,7 +13,7 @@
 <body>
     <div class="d-flex">
         <!-- Sidebar -->
-        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark sidebar" style="width: 280px;">
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark sidebar" style="width: 280px;box-shadow: 10px 0 20px 5px rgba(0, 0, 0, 0.1);">
         <div class="sidebar-content">
             <a href="profile-page.jsp" class="d-flex align-items-center mb-md-0 me-md-auto text-white text-decoration-none">
                 <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>

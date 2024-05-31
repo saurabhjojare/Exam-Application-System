@@ -2,7 +2,8 @@
 function validateFullName() {
   var fullNameInput = document.getElementById('fullName').value.trim();
   var fullNameWarningMsg = document.getElementById('fullNameWarningMsg');
-  var isValid = /^[A-Za-z]+(?:\s+[A-Za-z]+)+$/.test(fullNameInput);
+	var isValid = /^[A-Za-z\s]{1,255}$/.test(fullNameInput);
+
   
   if (fullNameInput === '') {
     fullNameWarningMsg.textContent = ''; // Clear the warning message if input is empty
@@ -16,7 +17,7 @@ function validateFullName() {
 function validateUsername() {
   var usernameInput = document.getElementById('username').value.trim();
   var usernameWarningMsg = document.getElementById('usernameWarningMsg');
-  var isValid = /^[a-z]+$/.test(usernameInput); // Regular expression to allow letters, numbers, and underscores
+  var isValid = /^[a-z0-9_]{1,255}$/i.test(usernameInput); // Regular expression to allow letters, numbers, and underscores
 
   if (usernameInput === '') {
      usernameWarningMsg.textContent = ''; // Clear the warning message if input is empty
@@ -32,7 +33,7 @@ function validateUsername() {
 function validatePassword() {
   var password = document.getElementById('signupPassword').value;
   var passwordWarningMsg = document.getElementById('passwordWarningMsg1'); // Updated ID
-  var isValid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,})/.test(password);
+  var isValid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,255})/.test(password);
 
   if (password === '') {
     passwordWarningMsg.textContent = ''; // Clear the warning message if input is empty
@@ -62,7 +63,7 @@ function validateContact() {
 function validateEmail() {
   var email = document.getElementById('email').value.trim();
   var emailWarningMsg = document.getElementById('emailWarningMsg');
-  var isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  var isValid = /^[^\s@]{1,255}@[^\s@]+\.[^\s@]+$/.test(email);
 
   if (email === '') {
     emailWarningMsg.textContent = ''; // Clear the warning message if input is empty

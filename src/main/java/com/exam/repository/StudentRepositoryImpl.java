@@ -242,6 +242,78 @@ public class StudentRepositoryImpl extends DBConfig implements StudentRepository
 	        }
 	    }
 	    
+	    
+	    public List<String[]> fetchStudentsWithoutSubjects() {
+	        List<String[]> studentsWithoutSubjects = new ArrayList<>();
+	        PreparedStatement stmt = null;
+	        ResultSet rs = null;
+
+	        try {
+	            String query = "SELECT * " +
+	                           "FROM student " +
+	                           "LEFT JOIN studentsubjectjoin ON student.stid = studentsubjectjoin.stid " +
+	                           "WHERE studentsubjectjoin.stid IS NULL";
+	            stmt = conn.prepareStatement(query);
+	            rs = stmt.executeQuery();
+
+	            while (rs.next()) {
+	                String[] studentData = new String[6]; // Assuming 6 fields in the student table
+	                studentData[0] = String.valueOf(rs.getInt("stid"));
+	                studentData[1] = rs.getString("name");
+	                studentData[2] = rs.getString("email");
+	                studentData[3] = rs.getString("contact");
+	                studentData[4] = rs.getString("username");
+	                studentData[5] = rs.getString("password");
+	                studentsWithoutSubjects.add(studentData);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace(); // Consider using a logging framework
+	        } finally {
+	            try {
+	                if (rs != null) rs.close();
+	                if (stmt != null) stmt.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace(); // Consider using a logging framework
+	            }
+	        }
+
+	        return studentsWithoutSubjects;
+	    }
+	    
+	    public List<String[]> fetchSubjectsByStudentUsername(String username) {
+	        List<String[]> subjects = new ArrayList<>();
+	        PreparedStatement stmt = null;
+	        ResultSet rs = null;
+
+	        try {
+	            String query = "SELECT subject.sid, subject.subjectname " +
+	                           "FROM student " +
+	                           "JOIN studentsubjectjoin ON student.stid = studentsubjectjoin.stid " +
+	                           "JOIN subject ON studentsubjectjoin.sid = subject.sid " +
+	                           "WHERE student.username = ?";
+	            stmt = conn.prepareStatement(query);
+	            stmt.setString(1, username);
+	            rs = stmt.executeQuery();
+
+	            while (rs.next()) {
+	                String[] subjectData = new String[2]; // Assuming 2 fields in the subject table
+	                subjectData[0] = String.valueOf(rs.getInt("sid"));
+	                subjectData[1] = rs.getString("subjectname");
+	                subjects.add(subjectData);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace(); // Consider using a logging framework
+	        } finally {
+	            try {
+	                if (rs != null) rs.close();
+	                if (stmt != null) stmt.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace(); // Consider using a logging framework
+	            }
+	        }
+
+	        return subjects;
+	    }
 
 
 }

@@ -121,7 +121,7 @@ display: block;
 			<div class="d-flex justify-content-center mb-3">
 				<div class="input-group" style="width: 400px;">
 					<input type="text" class="form-control" placeholder="Search Result"
-						aria-label="Search result" aria-describedby="button-addon2">
+						aria-label="Search result" aria-describedby="button-addon2" disabled>
 					<!--         <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button> -->
 				</div>
 			</div>

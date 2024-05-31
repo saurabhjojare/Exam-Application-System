@@ -10,7 +10,7 @@ const questionNameInput = document.getElementById('questionName');
 		const option3Warning = document.getElementById('Option3WarningMsg');
 		const option4Warning = document.getElementById('Option4WarningMsg');
 
-		const textPattern = /^[A-Za-z0-9 ]+$/;
+		const textPattern = /^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/? ]{1,400}$/;
 
 		questionNameInput.addEventListener('input', function() {
 			const questionName = questionNameInput.value.trim();

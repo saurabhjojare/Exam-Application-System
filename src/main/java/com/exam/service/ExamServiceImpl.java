@@ -149,5 +149,17 @@ public class ExamServiceImpl implements ExamService {
 		return examRepo.isDeleteScheduleById(id);
 	}
 
+	@Override
+	public List<String[]> fetchResultByCourse(int courseId) {
+		// TODO Auto-generated method stub
+		return examRepo.fetchResultByCourse(courseId);
+	}
+
+	@Override
+	public List<String[]> fetchScheduleBySid(int courseId) {
+		// TODO Auto-generated method stub
+		return examRepo.fetchScheduleBySid(courseId);
+	}
+
 
 }

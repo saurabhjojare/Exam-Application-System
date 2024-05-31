@@ -27,7 +27,7 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 			<%@ include file="navbar-bottom.jsp"%>
 		</div>
 		<!-- Main Content Area -->
-		<div class="flex-grow-1 view-padding text-center display-6" style = "height:100vh; overflow:auto">
+		<div class="flex-grow-1 view-padding text-center display-6" style = "height:100vh; overflow:auto;">
 			<div class = "mt-3 mb-4">
 			<span class="display-6">Exam Application System </span>
 			<p class="lead text-center mt-3">Welcome, Administrator</p>
@@ -45,7 +45,7 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 				if (admin != null) {
 				%>
 				<div class ="mb-1">
-				<span class="display-6" style="font-size: 28px;">Hello, <small
+				<span class="display-6" style="font-size: 28px;">Name: <small
 					class="text-body-secondary"><%=admin.getfullName()%></small></span><br>
 				</div>
 				<div class ="mb-1">
@@ -87,11 +87,8 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 						onclick="location.href='update-admin-details.jsp'" disabled>Update
 						Details</button>
 				</div>
-
 			</div>
-
 		</div>
-		<div></div>
 	</div>
 
 </body>

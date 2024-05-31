@@ -424,59 +424,47 @@ if (NoExamMessage != null) {
 	    var selectedExamId = document.getElementById('examSelection').value;
 	    var selectedExamName = document.getElementById('examSelection').options[document.getElementById('examSelection').selectedIndex].text;
 	    var selectedScheduleId = document.getElementById('scheduleSelection').value;
-	    var selectedSchedule = document.getElementById('scheduleSelection').options[document.getElementById('scheduleSelection').selectedIndex].text;
+	    var selectedScheduleText = document.getElementById('scheduleSelection').options[document.getElementById('scheduleSelection').selectedIndex].text;
 	    var selectedSubject = document.getElementById('subjectSelection').options[document.getElementById('subjectSelection').selectedIndex].text;
 	    var selectedTime = document.getElementById('timeSelection').value;
-		
+
 	    const now = new Date();
 	    const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
-	    // Get the current date in yyyy-mm-dd format
 	    var currentDate = localDate.toISOString().split('T')[0];
-	    // Get the current time in hh:mm AM/PM format
-// 	    var currentTime = new Date().toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'});
-	    
 
-	    // Parse the selected date to yyyy-mm-dd format
-	    var selectedDateParts = selectedSchedule.split('-');
-	    var selectedDate = selectedDateParts[0] + '-' + selectedDateParts[1].padStart(2, '0') + '-' + selectedDateParts[2].padStart(2, '0');
-	
-// 	    var timeParts = selectedTime.split(' - ');
-// 	    var startTime2 = timeParts[0];
-// 	    var endTime2 = timeParts[1];
-		console.log("Current Time From Toast:", currentTime);
-		console.log('Start Time From Toast:', startTime);
-        console.log('End Time From Toast:', endTime);
-         
-	    // Check if the selected date is before the current date or if the date is invalid
-	  if (selectedSchedule === currentDate && isCurrentTimeWithinRange(startTime, endTime, currentTime)) {
-        // Encode subject name
-        var encodedSubject = encodeURIComponent(selectedSubject);
-        // Redirect to the exam page with necessary parameters
-        var url = 'exam.jsp?examId=' + selectedExamId + 
-          '&scheduleId=' + selectedScheduleId + 
-          '&date=' + selectedSchedule + 
-          '&subname=' + encodedSubject + 
-          '&ename=' + encodeURIComponent(selectedExamName) + 
-          '&time=' + selectedTime;
-        window.open(url, '_blank'); 
-     // Close the modal
-        var modal = document.getElementById('confirmationModal');
-        var bootstrapModal = bootstrap.Modal.getInstance(modal);
-        bootstrapModal.hide();
-        window.close();
-    } else {
-        var errorMessage = '';
-        if (selectedSchedule !== currentDate) {
-        	console.log("Selected Date"+selectedSchedule);
-        	console.log("Current Date"+currentDate);
-            errorMessage = 'This exam schedule is not for today';
-        } else {
-            errorMessage = 'The exam is not available at the current time';
-        }
-        // Show toast message
-        showToast(errorMessage);
-    }
+	    // Extracting date part from the selected schedule ignoring the counter
+	    var selectedSchedule = selectedScheduleText.split(' ')[0];
+
+	    console.log("Current Time From Toast:", currentTime);
+	    console.log('Start Time From Toast:', startTime);
+	    console.log('End Time From Toast:', endTime);
+
+	    if (selectedSchedule === currentDate && isCurrentTimeWithinRange(startTime, endTime, currentTime)) {
+	        var encodedSubject = encodeURIComponent(selectedSubject);
+	        var url = 'exam.jsp?examId=' + selectedExamId + 
+	          '&scheduleId=' + selectedScheduleId + 
+	          '&date=' + selectedSchedule + 
+	          '&subname=' + encodedSubject + 
+	          '&ename=' + encodeURIComponent(selectedExamName) + 
+	          '&time=' + selectedTime;
+	        window.open(url, '_blank'); 
+	        var modal = document.getElementById('confirmationModal');
+	        var bootstrapModal = bootstrap.Modal.getInstance(modal);
+	        bootstrapModal.hide();
+	        window.close();
+	    } else {
+	        var errorMessage = '';
+	        if (selectedSchedule !== currentDate) {
+	            console.log("Selected Date"+selectedSchedule);
+	            console.log("Current Date"+currentDate);
+	            errorMessage = 'This exam schedule is not for today';
+	        } else {
+	            errorMessage = 'The exam is not available at the current time';
+	        }
+	        showToast(errorMessage);
+	    }
 	});
+
 
 
 	document.addEventListener('DOMContentLoaded', function () {

@@ -51,6 +51,7 @@ List<String[]> results = examService.getAllResults();
 				<div class="input-group" style="width: 400px;">
 					<select id="courseSelect" class="form-select mb-4"
 						aria-label="select" onchange="fetchStudentsByCourse()">
+						<option value="Unselected" id = "Unselected">Student Unassigned to Subject</option>
 						<%
 						StudentService fetchDataObj = new StudentServiceImpl(); 
 						List<String[]> courseData = fetchDataObj.fetchCourses(); 
@@ -60,9 +61,11 @@ List<String[]> results = examService.getAllResults();
 						<%
 						}
 						%>
+						
 					</select>
 				</div>
 			</div>
+			
 
 			<div id="studentTableBody">
 			</div>
@@ -70,12 +73,42 @@ List<String[]> results = examService.getAllResults();
 	</div>
 
 
-
 	<div class="bottom-navbar">
 		<%@ include file="navbar-bottom.jsp"%>
 	</div>
 	
-	<script src="js/fetchStudentsByCourse.js"></script>
-	
+<!-- 	<script src="js/fetchStudentsByCourse.js"></script> -->
+<script>
+function fetchStudentsByCourse() {
+    var courseId = document.getElementById('courseSelect').value;
+
+    if (courseId === "Unselected") {
+        // If "Not Having Subjects" is selected, fetch students without subjects
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'fetchStudentsWithoutSub.jsp', true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById('studentTableBody').innerHTML = xhr.responseText;
+            }
+        };
+        xhr.send();
+    } else {
+        // Fetch students by selected course
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'fetchStudentsByCourse.jsp?courseId=' + courseId, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById('studentTableBody').innerHTML = xhr.responseText;
+            }
+        };
+        xhr.send();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    fetchStudentsByCourse();
+});
+</script>
+		
 </body>
 </html>

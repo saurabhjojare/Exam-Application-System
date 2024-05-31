@@ -29,98 +29,50 @@
 					</div>
 				</div>
 
-				<table class="table table-bordered">
-					<thead>
-
-					</thead>
-					<tbody>
-						<tr>
+				<div class="d-flex justify-content-center">
+					<div class="input-group" style="width: 400px;">
+						<select id="courseSelect" class="form-select mb-4"
+							aria-label="select" onchange="fetchStudentsByCourse()">
 							<%
-							SubjectService subjectService = new SubjectServiceImpl();
-							SubjectRepository subjectRepository = new SubjectRepositoryImpl();
-							List<ScheduleModel> listSchedule = subjectService.getAllSchedule();
-							if (listSchedule != null) {
-								int count = 1;
-								int totalSubject = listSchedule.size();
-								for (ScheduleModel schedule : listSchedule) {
+							StudentService fetchDataObj = new StudentServiceImpl();
+							List<String[]> courseData = fetchDataObj.fetchCourses();
+							for (String[] course : courseData) {
 							%>
-							<td class="key" style="padding: 15px">#</td>
-							<td class="value" style="padding: 15px"><%=count++%></td>
-						</tr>
+							<option value="<%=course[0]%>"><%=course[1]%></option>
+							<%
+							}
+							%>
+						</select>
+					</div>
+				</div>
 
-						<tr>
-							<td class="key" style="padding-left: 15px">Subject Name</td>
-							<td class="value" style="padding-right: 15px">
-								<%
-								String subjectName = subjectRepository.getSubjectNameBySchid(schedule.getSchid());
-								if (subjectName != null) {
-									out.print(subjectName);
-								} else {
-									out.print("Subject not found"); 
-								}
-								%>
-							</td>
-						</tr>
-			
-						<tr>
-							<td class="key" style="padding-left: 15px">Exam</td>
-							<td class="value" style="padding-right: 15px">
-								<%
-								ExamService ExamService = new ExamServiceImpl();
-								ExamRepository examRepository = new ExamRepositoryImpl();
-								String examName = examRepository.getExamNameByExamId(schedule.getExamid());
-								if (examName != null) {
-									out.print(examName);
-								} else {
-									out.print("Exam not found"); 
-								}
-								%>
-							</td>
-						</tr>
-						<tr>
-							<td class="key" style="padding-left: 15px">Date</td>
-							<td class="value" style="padding-right: 15px"><%=schedule.getExamDate()%></td>
-						</tr>
-						<tr>
-							<td class="key" style="padding-left: 15px">Start Time</td>
-							<td class="value" style="padding-right: 15px"><%=schedule.getStartTime()%></td>
-						</tr>
-						<tr>
-							<td class="key" style="padding-left: 15px">End Time</td>
-							<td class="value" style="padding-right: 15px"><%=schedule.getEndTime()%></td>
-						</tr>
-
-
-
-						<tr>
-							<td class="key" style="padding-left: 15px">Edit</td>
-							<td>
-								<button class="btn btn-primary" disabled>Update</button> <a
-								href='deleteSchedule?id=<%=schedule.getSchid()%>' class="btn btn-danger">Delete</a>
-							</td>
-						</tr>
-						<%
-						if (count <= totalSubject) { 
-						%>
-						<tr class="empty-row">
-							<td colspan="2"></td>
-						</tr>
-						<%
-						} 
-						}  
-						} else {
-						out.println("<tr><td colspan='2'>No schedule found.</td></tr>");
-						}
-						%>
-					</tbody>
-				</table>
+				<div id="studentTableBody"></div>
+				<div></div>
 			</div>
-			<div></div>
 		</div>
-	</div>
-	<div class="bottom-navbar">
-		<%@ include file="navbar-bottom.jsp"%>
-	</div>
+		</div>
 
+		<div class="bottom-navbar">
+			<%@ include file="navbar-bottom.jsp"%>
+		</div>
+		
+		<script>
+        function fetchStudentsByCourse() {
+            var courseId = document.getElementById('courseSelect').value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'fetchScheduleByCourse.jsp?courseId=' + courseId, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById('studentTableBody').innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchStudentsByCourse();
+        });
+    </script>
 </body>
 </html>

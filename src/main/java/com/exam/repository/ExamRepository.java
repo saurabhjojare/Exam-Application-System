@@ -42,4 +42,8 @@ public interface ExamRepository {
 	public boolean isDeleteExamById(int id);
 	
 	public boolean isDeleteScheduleById(int id);
+	
+	public List<String[]> fetchResultByCourse(int courseId);
+	
+	public List<String[]> fetchScheduleBySid(int courseId);
 }
