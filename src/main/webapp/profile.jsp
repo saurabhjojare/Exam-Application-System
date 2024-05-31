@@ -107,7 +107,7 @@ if (listStudent != null && !listStudent.isEmpty()) {
 								class="nav-link text-primary-emphasis hoverIcon"
 								href="result.jsp">View Result</a></li>
 							<li class="nav-item"><a
-								class="nav-link text-danger hoverIcon" href="editUser.jsp">Edit
+								class="nav-link text-danger hoverIcon" href="editUser.jsp?stid=<%=student.getStid()%>">Edit
 									Profile</a></li>
 							<li class="nav-item"><a
 								class="nav-link text-success hoverIcon" href="logout">Sign

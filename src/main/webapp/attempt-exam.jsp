@@ -15,7 +15,7 @@ if (NoExamMessage != null) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Attempt Exam</title>
+<title>Select Schedule</title>
 <link rel="stylesheet" type="text/css" href="css/attemptExam.css">
 <link rel="stylesheet" type="text/css" href="css/nextStep.css">
 <link rel="stylesheet" type="text/css" href="css/CustomColor.css">

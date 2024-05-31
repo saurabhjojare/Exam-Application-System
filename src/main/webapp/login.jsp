@@ -54,7 +54,7 @@
 							Don't have an account? <a href="sign-up.jsp">Sign Up</a>
 						</div>
 						<div class="login-link mt-2">Trouble logging in?
-						<a href="#">Forgot Password</a>
+						<a href="userForgotPassword.jsp">Forgot Password</a>
 						</div>
 						  <!-- Include hidden inputs for both student and admin -->
     <input type="hidden" name="userType" value="student">

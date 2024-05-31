@@ -24,4 +24,9 @@ public interface StudentService {
 	 public List<String[]> fetchStudentsWithoutSubjects();
 	 
 	 public List<String[]> fetchSubjectsByStudentUsername(String username);
+	 
+	 public boolean updateStudentByStid(StudentModel student);
+	 
+	 public List<Object[]> searchResultByUserInput(String userInput);
+
 }

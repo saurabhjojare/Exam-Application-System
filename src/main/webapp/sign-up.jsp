@@ -18,7 +18,7 @@
 
 	<!-- Body -->
 	<main>
-		<section class="py-5">
+		<section class="py-4">
 			<div class="loginWidth">
 				<div class="container-sm">
 					<h1 class="display-4 text-center" >Sign Up</h1>
@@ -51,7 +51,9 @@
 
 						
 						</div>
-						<button type="button" class="btn btn-primary mt-3" onclick="nextStep()">Next</button>
+						<button type="button" class="btn btn-secondary mt-3"
+								onclick="window.location.href='login.jsp';">Back</button>
+						<button type="button" class="btn btn-primary mt-3" onclick="nextStep()" style="float:right;">Next</button>
 						
 						</div>
 						<div class="step" id="step2">

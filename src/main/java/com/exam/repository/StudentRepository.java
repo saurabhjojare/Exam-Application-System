@@ -25,5 +25,8 @@ public interface StudentRepository {
 	 public List<String[]> fetchStudentsWithoutSubjects();
 	 
 	 public List<String[]> fetchSubjectsByStudentUsername(String username);
-
+	 
+	 public boolean updateStudentByStid(int stid, String name, String email, String contact, String username, String password);
+	 
+	 public List<Object[]> searchResultByUserInput(String userInput);
 }

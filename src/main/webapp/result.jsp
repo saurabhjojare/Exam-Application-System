@@ -43,21 +43,21 @@ display: block;
 	<main class="result-content TableDesk">
 
 		<section class="container-sm pt-5 text-center">
-			<!-- 			<p class="fw-light h3"> -->
-			<!-- 				Hi, -->
-			<%-- 				<%=username%></p> --%>
+	
 			<h1 class="fw-light">Exam Results</h1>
 
 			<p>Here's a summary of your performance:</p>
 			<div class="d-flex justify-content-center mb-3">
 				<div class="input-group" style="width: 400px;">
-					<input type="text" class="form-control" placeholder="Search Result"
-						aria-label="Search result" aria-describedby="button-addon2" disabled>
+					<input type="text" id="searchInput2" class="form-control" placeholder="Search Result"
+						aria-label="Search result" aria-describedby="button-addon2" onkeyup="searchStudents2()">
 					<!--         <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button> -->
 				</div>
 			</div>
+			
+			   <div id="searchResults2"></div>
 
-			<table class="table table-hover">
+			<table id="resultsTable2" class="table table-hover">
 				<thead>
 					<tr>
 						<th scope="col">#</th>
@@ -109,88 +109,141 @@ display: block;
 	</main>
 	
 	
-	<main class=" TableMob">
+	<main class="TableMob">
+    <section class="container-fluid pt-5 text-center">
+        <h1 class="fw-light">Exam Results</h1>
+        <p>Here's a summary of your performance:</p>
+        <div class="d-flex justify-content-center mb-3">
+            <div class="input-group" style="width: 400px;">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search Result"
+                       aria-label="Search result" aria-describedby="button-addon2" onkeyup="searchStudents()">
+                <!--         <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button> -->
+            </div>
+        </div>
 
-		<section class="container-fluid pt-5 text-center">
-			<!-- 			<p class="fw-light h3"> -->
-			<!-- 				Hi, -->
-			<%-- 				<%=username%></p> --%>
-			<h1 class="fw-light">Exam Results</h1>
+        <div id="searchResults"></div>
 
-			<p>Here's a summary of your performance:</p>
-			<div class="d-flex justify-content-center mb-3">
-				<div class="input-group" style="width: 400px;">
-					<input type="text" class="form-control" placeholder="Search Result"
-						aria-label="Search result" aria-describedby="button-addon2" disabled>
-					<!--         <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button> -->
-				</div>
-			</div>
+        <table id="resultsTable" class="table table-bordered">
+            <thead>
+                <!-- Table headers can be added here -->
+            </thead>
+            <tbody>
+                <%
+                if (results.isEmpty()) {
+                %>
+                <tr>
+                    <td colspan="6" style="border: none;">
+                        <div style="display: flex; justify-content: center; align-items: center;">
+                            No results found.
+                        </div>
+                    </td>
+                </tr>
+                <%
+                } else {
+                %>
+                <%
+                for (String[] result : results) {
+                    String status = result[3].equals("1.0") ? "Pass" : "Fail";
+                %>
+                <tr>
+                    <td scope="col">#</td>
+                    <td scope="col"><%=count2++%></td>
+                </tr>
+                <tr>
+                    <td scope="col">Exam</td>
+                    <td scope="col"><%=result[0]%></td>
+                </tr>
+                <tr>
+                    <td scope="col">Subject</td>
+                    <td scope="col"><%=result[1]%></td>
+                </tr>
+                <tr>
+                    <td scope="col">Exam Date</td>
+                    <td scope="col"><%=result[4]%></td>
+                </tr>
+                <tr>
+                    <td scope="col">Marks</td>
+                    <td scope="col"><%=result[2]%></td>
+                </tr>
+                <tr>
+                    <td scope="col">Status</td>
+                    <td scope="col"><%=status%></td>
+                </tr>
+                <tr class="empty-row" style="border:0px solid #fff;">
+                    <td colspan="2"></td>
+                </tr>
+                <%
+                }
+                %>
+                <%
+                }
+                %>
+            </tbody>
+        </table>
+    </section>
+</main>
 
-			<table class="table table-bordered">
-				<thead>
-					
-				</thead>
-				<tbody>
-					<%
-					if (results.isEmpty()) {
-					%>
-					<tr>
-						<td colspan="6" style="border: none;">
-							<div
-								style="display: flex; justify-content: center; align-items: center;">
-								No results found.</div>
-						</td>
-					</tr>
-
-					<%
-					} else {
-					%>
-					<%
-					for (String[] result : results) {
-						String status = result[3].equals("1.0") ? "Pass" : "Fail";
-					%>
-					<tr>
-						<td scope="col">#</td>
-						<td scope="col"><%=count2++%></td>
-					</tr>
-					<tr>
-						<td scope="col">Exam</td>
-						<td scope="col"><%=result[0]%></td>
-					</tr>
-					<tr>
-						<td scope="col">Subject</td>
-						<td scope="col"><%=result[1]%></td>
-					</tr>
-					<tr>
-						<td scope="col">Exam Date</td>
-						<td scope="col"><%=result[4]%></td>
-					</tr>
-					<tr>
-						<td scope="col">Marks</td>
-						<td scope="col"><%=result[2]%></td>
-					</tr>
-					<tr>
-						<td scope="col">Status</td>
-						<td scope="col"><%=status%></td>
-					</tr>
-					<tr class="empty-row" style = "border:0px solid #fff;">
-							<td colspan="2"></td>
-					</tr>
-
-					<%
-					}
-					%>
-					<%
-					}
-					%>
-				</tbody>
-			</table>
-
-
-		</section>
-	</main>
 
 	<%@ include file="footer.jsp"%>
+	
+	<script>
+    function searchStudents() {
+        var userInput = document.getElementById("searchInput").value;
+        
+        // Check if the search input is empty
+        if (userInput.trim() === '') {
+            // Clear the search results and show the table
+            document.getElementById("searchResults").innerHTML = '';
+            document.getElementById("resultsTable").style.display = 'table';
+            return;
+        }
+        
+        // Hide the table
+        document.getElementById("resultsTable").style.display = 'none';
+        
+        // Make AJAX call
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "SearchResultForStudent.jsp?userInput=" + userInput, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // Update DOM with response
+                document.getElementById("searchResults").innerHTML = xhr.responseText;
+            }
+        };
+        xhr.send();
+    }
+</script>
+
+<script>
+    function searchStudents2() {
+        var userInput = document.getElementById("searchInput2").value;
+        
+        // Check if the search input is empty
+        if (userInput.trim() === '') {
+            // Clear the search results and show the table
+            document.getElementById("searchResults2").innerHTML = '';
+            document.getElementById("resultsTable2").style.display = 'table';
+            return;
+        }
+        
+        // Hide the table
+        document.getElementById("resultsTable2").style.display = 'none';
+        
+        // Make AJAX call
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "SearchResultForStudent.jsp?userInput=" + userInput, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // Update DOM with response
+                document.getElementById("searchResults2").innerHTML = xhr.responseText;
+            }
+        };
+        xhr.send();
+    }
+</script>
+
+
+	
 
 </body>
 </html>

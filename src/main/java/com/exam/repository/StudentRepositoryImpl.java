@@ -314,6 +314,77 @@ public class StudentRepositoryImpl extends DBConfig implements StudentRepository
 
 	        return subjects;
 	    }
+	    
+	    public boolean updateStudentByStid(int stid, String name, String email, String contact, String username, String password) {
+	        PreparedStatement stmt = null;
+
+	        try {
+	            String query = "UPDATE student SET name = ?, email = ?, contact = ?, username = ?, password = ? WHERE stid = ?";
+	            stmt = conn.prepareStatement(query);
+	            stmt.setString(1, name);
+	            stmt.setString(2, email);
+	            stmt.setString(3, contact);
+	            stmt.setString(4, username);
+	            stmt.setString(5, password);
+	            stmt.setInt(6, stid);
+
+	            int rowsAffected = stmt.executeUpdate();
+	            return rowsAffected > 0;
+	        } catch (SQLException e) {
+	            e.printStackTrace(); // Consider using a logging framework
+	            return false;
+	        } finally {
+	            try {
+	                if (stmt != null) stmt.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace(); // Consider using a logging framework
+	            }
+	        }
+	    }
+	    
+	    public List<Object[]> searchResultByUserInput(String userInput) {
+	        List<Object[]> resultList = new ArrayList<>();
+	        PreparedStatement stmt = null;
+	        ResultSet rs = null;
+
+	        try {
+	            String query = "SELECT e.examname, s.subjectname, sc.date, ser.obtainedpercentage, ser.status " +
+	                           "FROM schedule sc " +
+	                           "INNER JOIN exam e ON sc.examid = e.examid " +
+	                           "INNER JOIN subject s ON sc.sid = s.sid " +
+	                           "LEFT JOIN studentexamrelation ser ON sc.schid = ser.schid " +
+	                           "WHERE sc.date LIKE ? " +
+	                           "OR e.examname LIKE ? " +
+	                           "OR s.subjectname LIKE ? " +
+	                           "ORDER BY sc.date";
+	            stmt = conn.prepareStatement(query);
+	            stmt.setString(1, "%" + userInput + "%");
+	            stmt.setString(2, "%" + userInput + "%");
+	            stmt.setString(3, "%" + userInput + "%");
+	            rs = stmt.executeQuery();
+
+	            while (rs.next()) {
+	                Object[] row = new Object[5]; // Assuming 5 columns are returned in the query
+	                row[0] = rs.getString("examname");
+	                row[1] = rs.getString("subjectname");
+	                row[2] = rs.getDate("date");
+	                row[3] = rs.getDouble("obtainedpercentage");
+	                row[4] = rs.getDouble("status");
+	                resultList.add(row);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace(); // Consider using a logging framework
+	        } finally {
+	            try {
+	                if (rs != null) rs.close();
+	                if (stmt != null) stmt.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace(); // Consider using a logging framework
+	            }
+	        }
+
+	        return resultList;
+	    }
 
 
 }

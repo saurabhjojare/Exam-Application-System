@@ -67,7 +67,23 @@ public class StudentServiceImpl implements StudentService{
 		// TODO Auto-generated method stub
 		return this.studRepo.fetchSubjectsByStudentUsername(username);
 	}
-	
-	
 
+	@Override
+	public boolean updateStudentByStid(StudentModel student) {
+		 return studRepo.updateStudentByStid(
+		            student.getStid(),
+		            student.getName(),
+		            student.getEmail(),
+		            student.getContact(),
+		            student.getUsername(),
+		            student.getPassword()
+		    );
+
+	}
+
+	@Override
+	public List<Object[]> searchResultByUserInput(String userInput) {
+		// TODO Auto-generated method stub
+		return this.studRepo.searchResultByUserInput(userInput);
+	}
 }
