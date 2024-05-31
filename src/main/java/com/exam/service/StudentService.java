@@ -28,5 +28,7 @@ public interface StudentService {
 	 public boolean updateStudentByStid(StudentModel student);
 	 
 	 public List<Object[]> searchResultByUserInput(String userInput);
+	 
+	 public boolean isStudentExamRecordExists(String username, int schid);
 
 }

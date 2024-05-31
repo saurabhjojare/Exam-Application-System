@@ -29,4 +29,6 @@ public interface StudentRepository {
 	 public boolean updateStudentByStid(int stid, String name, String email, String contact, String username, String password);
 	 
 	 public List<Object[]> searchResultByUserInput(String userInput);
+	 
+	 public boolean isStudentExamRecordExists(String username, int schid);
 }

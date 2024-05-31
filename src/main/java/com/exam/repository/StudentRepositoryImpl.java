@@ -385,6 +385,39 @@ public class StudentRepositoryImpl extends DBConfig implements StudentRepository
 
 	        return resultList;
 	    }
+	    
+	    @Override
+	    public boolean isStudentExamRecordExists(String username, int schid) {
+	        PreparedStatement stmt = null;
+	        ResultSet rs = null;
+
+	        try {
+	            stmt = conn.prepareStatement("SELECT student.username, studentexamrelation.stid, studentexamrelation.schid " +
+	                                         "FROM student " +
+	                                         "JOIN studentexamrelation ON student.stid = studentexamrelation.stid " +
+	                                         "WHERE student.username = ? AND studentexamrelation.schid = ?");
+	            stmt.setString(1, username);
+	            stmt.setInt(2, schid);
+	            rs = stmt.executeQuery();
+	            
+	            // If there is at least one row in the result set, return true
+	            return rs.next();
+	        } catch (SQLException e) {
+	            e.printStackTrace(); // Consider using a logging framework
+	        } finally {
+	            try {
+	                if (rs != null) rs.close();
+	                if (stmt != null) stmt.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace(); // Consider using a logging framework
+	            }
+	        }
+
+	        // If an exception occurred or no rows were found, return false
+	        return false;
+	    }
+
+
 
 
 }

@@ -86,4 +86,12 @@ public class StudentServiceImpl implements StudentService{
 		// TODO Auto-generated method stub
 		return this.studRepo.searchResultByUserInput(userInput);
 	}
+
+	@Override
+	public boolean isStudentExamRecordExists(String username, int schid) {
+		// TODO Auto-generated method stub
+		return this.studRepo.isStudentExamRecordExists(username, schid);
+	}
+
+
 }

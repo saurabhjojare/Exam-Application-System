@@ -30,10 +30,14 @@ try {
 	System.out.println(SubjectName);
     boolean isEnrolled = studentRepository.isStudentEnrolledInSubject(username.trim(), SubjectName.trim().toLowerCase());
     System.out.println(isEnrolled);
+    boolean isExamGive  = studentRepository.isStudentExamRecordExists(username.trim(), Integer.parseInt(scheduleId));
+    System.out.println(isExamGive);
 
     if (!isEnrolled) {
         request.getRequestDispatcher("select-subject.jsp").forward(request, response);
-    } else {
+    } else if(isExamGive) {
+    	request.getRequestDispatcher("examGiven.jsp").forward(request, response);
+	}  else {
 %> 
 
 <!DOCTYPE html>

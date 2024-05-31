@@ -28,7 +28,7 @@ List<Object[]> studentData = fetchDataObj2.searchResultByUserInput(userInput);
 %>
 
 <% if (studentData.isEmpty()) { %>
-    <div>No students available for this course.</div>
+    <div>No result available.</div>
 <% } else { %>
     <% int counter = 1; %>
     <% for (Object[] student : studentData) { 
