@@ -177,5 +177,66 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository {
 			return false;
 		}
 	}
+    
+ // Method to fetch department names from admin table and return as a list of strings
+    @Override
+    public List<String> getAdminDepartments() {
+        List<String> adminDepartments = new ArrayList<>();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
+        try {
+            String query = "SELECT DISTINCT department FROM admin";
+            stmt = conn.prepareStatement(query);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                adminDepartments.add(rs.getString("department"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return adminDepartments;
+    }
+    
+    @Override
+    public List<AdminModel> getAdminsByDepartment(String department) {
+        List<AdminModel> admins = new ArrayList<>();
+        String query = "SELECT * FROM admin WHERE department = ?";
+
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, department);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    AdminModel admin = new AdminModel();
+                    admin.setId(rs.getInt("id"));
+                    admin.setfullName(rs.getString("fullName"));
+                    admin.setPassword(rs.getString("password"));
+                    admin.setContact(rs.getString("contact"));
+                    admin.setEmail(rs.getString("email"));
+                    admin.setRole(rs.getString("role"));
+                    admin.setDepartment(rs.getString("department"));
+                    admin.setPermissions(rs.getString("permissions"));
+                    admins.add(admin);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Consider logging the exception
+        }
+
+        return admins;
+    }
 }

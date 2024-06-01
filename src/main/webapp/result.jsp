@@ -22,6 +22,22 @@ int count2 = 1;
 display: none;
 }
 
+.table-container {
+    max-height: 300px; /* Adjust the height as needed */
+    overflow-y: scroll;
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+.table-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.table-container {
+    scrollbar-width: none;
+}
+
+
 @media (max-width: 800.98px) { 
 .TableDesk{
 display: none;
@@ -30,6 +46,22 @@ display: none;
 .TableMob{
 display: block;
 }
+
+.table-container {
+    max-height: 350px; /* Adjust the height as needed */
+    overflow-y: scroll;
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+.table-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.table-container {
+    scrollbar-width: none;
+}
+
  }
 
 </style>
@@ -54,9 +86,11 @@ display: block;
 					<!--         <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button> -->
 				</div>
 			</div>
-			
+			<div class="table-container">
 			   <div id="searchResults2"></div>
-
+			</div>
+			<div class="table-container">
+			
 			<table id="resultsTable2" class="table table-hover">
 				<thead>
 					<tr>
@@ -103,6 +137,7 @@ display: block;
 					%>
 				</tbody>
 			</table>
+			</div>
 
 
 		</section>
@@ -122,7 +157,7 @@ display: block;
         </div>
 
         <div id="searchResults"></div>
-
+		<div class="table-container">
         <table id="resultsTable" class="table table-bordered">
             <thead>
                 <!-- Table headers can be added here -->
@@ -180,6 +215,7 @@ display: block;
                 %>
             </tbody>
         </table>
+        </div>
     </section>
 </main>
 

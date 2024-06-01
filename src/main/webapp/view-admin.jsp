@@ -1,11 +1,12 @@
-<%@ include file="existingSession.jsp"%>
-<%@ include file="common-resources.jsp"%>
+<%@ include file="existingSession.jsp" %>
+<%@ include file="common-resources.jsp" %>
 
 <%
-AdminService adminService = (AdminService) request.getServletContext().getAttribute("adminService");
+AdminRepository adminRepository = new AdminRepositoryImpl();
+AdminService adminService = new AdminServiceImpl(adminRepository);
 
 List<AdminModel> admins = Optional.ofNullable(adminService).map(service -> service.getAllAdmins())
-		.orElse(Collections.emptyList());
+        .orElse(Collections.emptyList());
 AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 %>
 
@@ -20,97 +21,63 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 </head>
 <body>
 
-	<div class="d-flex">
-		<div class="sidebar">
-			<%@ include file="sidebar.jsp"%>
-		</div>
-		<!-- Main Content Area -->
-		<div class="flex-grow-1 view-padding text-center marginBottom">
-			<h3 class="display-6 mt-2">Admin Details</h3>
+    <div class="d-flex">
+        <div class="sidebar">
+            <%@ include file="sidebar.jsp" %>
+        </div>
+        <!-- Main Content Area -->
+        <div class="flex-grow-1 view-padding text-center marginBottom">
+            <h3 class="display-6 mt-2">Admin Details</h3>
 
-			<div class="d-flex justify-content-center mb-3">
-				<div class="input-group" style="width: 400px;">
-					<input type="text" class="form-control" id="searchInput"
-						placeholder="Search Result" aria-label="Search result"
-						aria-describedby="button-addon2"
-						onkeyup="searchByName(this.value)" disabled>
-					<!-- <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button> -->
-				</div>
-			</div>
+            <div class="d-flex justify-content-center mb-3">
+                <div class="input-group" style="width: 400px;">
+                    <input type="text" class="form-control" id="searchInput"
+                        placeholder="Search Result" aria-label="Search result"
+                        aria-describedby="button-addon2"
+                        onkeyup="searchByName(this.value)" disabled>
+                </div>
+            </div>
 
-			<table class="table table-bordered" id="resultsTable">
-				<thead>
-				</thead>
-				<tbody id="resultsBody">
-					<%
-					if (admin == null) {
-					%>
-					<tr>
-						<td colspan="2" style="text-align: center;">No admin found.</td>
-					</tr>
-					<%
-					} else {
-					%>
-					<%
-					int count = 1;
-					for (AdminModel admin2 : admins) {
-					%>
-					<tr>
-						<td class="key" style="padding: 15px">#</td>
-						<td class="value" style="padding: 15px"><%=count%></td>
-					</tr>
+            <div class="d-flex justify-content-center">
+                <div class="input-group" style="width: 400px;">
+                    <select id="courseSelect" class="form-select mb-4"
+                        aria-label="select" onchange="fetchAdminsByDepartment()">
+                        <%
+                        List<String> courseData = adminService.getAdminDepartments();
+                        for (String course : courseData) {
+                        %>
+                        <option value="<%= course %>"><%= course %></option>
+                        <%
+                        }
+                        %>
+                    </select>
+                </div>
+            </div>
+            
+            <div id="adminTableBody"></div>
+        </div>
+    </div>
+    <div class="bottom-navbar">
+        <%@ include file="navbar-bottom.jsp" %>
+    </div>
+    
+    <script>
+        function fetchAdminsByDepartment() {
+            var courseId = document.getElementById('courseSelect').value;
 
-					<tr>
-						<td class="key" style="padding-left: 15px">Full Name</td>
-						<td class="value" style="padding-right: 15px"><%=admin2.getfullName()%></td>
-					</tr>
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'fetchAdminByDepartment.jsp?courseId=' + courseId, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById('adminTableBody').innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
 
-					<tr>
-						<td class="key" style="padding-left: 15px">Contact</td>
-						<td class="value" style="padding-right: 15px"><%=admin2.getContact()%></td>
-					</tr>
-
-					<tr>
-						<td class="key" style="padding-left: 15px">Email</td>
-						<td class="value" style="padding-right: 15px"><%=admin2.getEmail()%></td>
-					</tr>
-					<tr>
-						<td class="key" style="padding-left: 15px">Role</td>
-						<td class="value" style="padding-right: 15px"><%=admin2.getRole()%></td>
-					</tr>
-					<tr>
-						<td class="key" style="padding-left: 15px">Department</td>
-						<td class="value" style="padding-right: 15px"><%=admin2.getDepartment()%></td>
-					</tr>
-					<tr>
-						<td class="key" style="padding-left: 15px">Permissions</td>
-						<td class="value" style="padding-right: 15px"><%=admin2.getPermissions()%></td>
-					</tr>
-					<tr>
-						<td class="key" style="padding-left: 15px">Edit</td>
-						<td>
-							<button class="btn btn-primary" disabled>Update</button> <a
-							href='deleteAdmin?id=<%=admin2.getId()%>'><button
-									class="btn btn-danger">Delete</button></a>
-						</td>
-					</tr>
-					<tr class="empty-row" style="border: 0px solid #fff;">
-						<td colspan="2"></td>
-					</tr>
-					<%
-					count++;
-					}
-					%>
-
-					<%
-					}
-					%>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<div class="bottom-navbar">
-		<%@ include file="navbar-bottom.jsp"%>
-	</div>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchAdminsByDepartment();
+        });
+    </script>
 </body>
 </html>

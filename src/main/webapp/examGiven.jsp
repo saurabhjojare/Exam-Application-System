@@ -12,18 +12,15 @@
 <body >
 		<%@ include file="navbar.jsp"%>
 
-		<!-- Body -->
-		<main class="d-flex align-items-center text-center">
-		<div class = "container">
-			<section class="py-5 text-center">
-				<div class="container">
-					<h1 class="display-6">This exam has already been attempted.</h1>
-					<h5 class ="h5 fw-light mt-3">View your result <a href="result.jsp" class="text-decoration-none">here</a></h5>
+		<div class="container d-flex justify-content-center align-items-center vh-100">
+        <main class="align-items-center text-center">
+            <section>
+                <h1 class="display-6">This exam has already been attempted.</h1>
+                <h5 class="h5 fw-light mt-3">View your result <a href="result.jsp" class="text-decoration-none">here</a></h5>
+            </section>
+        </main>
+    </div>
 
-				</div>
-			</section>
-		</div>
-		</main>
 		
 		<%@ include file="footer.jsp"%>
 

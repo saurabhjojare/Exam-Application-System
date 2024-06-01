@@ -44,4 +44,18 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return adminRepository.isDeleteAdminById(id);
 	}
+
+	@Override
+	public List<String> getAdminDepartments() {
+		// TODO Auto-generated method stub
+		return adminRepository.getAdminDepartments();
+	}
+
+	@Override
+	public List<AdminModel> getAdminsByDepartment(String department) {
+		// TODO Auto-generated method stub
+		return adminRepository.getAdminsByDepartment(department);
+	}
+
+
 }

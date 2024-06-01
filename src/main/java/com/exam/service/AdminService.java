@@ -10,4 +10,6 @@ public interface AdminService {
 	public List<AdminModel> getAdminsByUsername(String email);
 	public List<AdminModel> getAllAdmins();
 	public boolean isDeleteAdminById(int id);
+	List<AdminModel> getAdminsByDepartment(String department);
+	public List<String> getAdminDepartments();
 }

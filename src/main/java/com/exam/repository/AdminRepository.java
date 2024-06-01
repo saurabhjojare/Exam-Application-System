@@ -15,4 +15,8 @@ public interface AdminRepository {
 	public List<AdminModel> getAllAdmins();
 	
 	public boolean isDeleteAdminById(int id);
+	
+	public List<String> getAdminDepartments();
+	
+    List<AdminModel> getAdminsByDepartment(String department);
 }

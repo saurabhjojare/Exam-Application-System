@@ -31,12 +31,11 @@ if (listStudent != null && !listStudent.isEmpty()) {
 	width: 40%;
 }
 
-@media (max-width: 967.98px) { 
-.widthEdit {
-	width: 95%;
+@media ( max-width : 967.98px) {
+	.widthEdit {
+		width: 95%;
+	}
 }
- }
-
 </style>
 </head>
 <body>
@@ -51,46 +50,55 @@ if (listStudent != null && !listStudent.isEmpty()) {
 						<h1 class="display-6">Edit Profile</h1>
 
 						<form name='form' action='updateStudent' method='Post'>
-						<%
+							<%
 							if (student != null) {
-						%>
-						    <input type="hidden" name="stid" value="<%=student.getStid()%>">
-						
+							%>
+							<input type="hidden" name="stid" value="<%=student.getStid()%>">
+
 							<div class="mb-3">
 								<label for="username" class="form-label">Username</label> <input
 									type="text" name="username" class="form-control" id="username"
-									placeholder="Enter your username" value="<%=student.getUsername()%>" autocomplete="off">
-								<span class = "text-muted" id="usernameWarningMsg"></span>
-									
+									placeholder="Enter your username"
+									value="<%=student.getUsername()%>" autocomplete="off">
+								<span class="text-muted" id="usernameWarningMsg"></span>
+
 							</div>
 							<div class="mb-3">
 								<label for="name" class="form-label">Full Name</label> <input
 									type="text" name="name" class="form-control" id="fullName"
-									placeholder="Enter your name" value="<%=student.getName()%>" autocomplete="off">
-									<span class = "text-muted" id="fullNameWarningMsg"></span>
-									
+									placeholder="Enter your name" value="<%=student.getName()%>"
+									autocomplete="off"> <span class="text-muted"
+									id="fullNameWarningMsg"></span>
+
 							</div>
 							<div class="mb-3">
 								<label for="email" class="form-label">Email</label> <input
 									type="text" name="email" class="form-control" id="email"
-									placeholder="Enter your email" value="<%=student.getEmail()%>" autocomplete="off">
-								<span class = "text-muted" id="emailWarningMsg"></span>
-								
+									placeholder="Enter your email" value="<%=student.getEmail()%>"
+									autocomplete="off"> <span class="text-muted"
+									id="emailWarningMsg"></span>
+
 							</div>
 							<div class="mb-3">
 								<label for="contact" class="form-label">Contact</label> <input
 									type="text" name="contact" class="form-control" id="contact"
-									placeholder="Enter your contact" value="<%=student.getContact()%>" autocomplete="off">
-								<span class = "text-muted" id="contactWarningMsg"></span>
-								
+									placeholder="Enter your contact"
+									value="<%=student.getContact()%>" autocomplete="off"> <span
+									class="text-muted" id="contactWarningMsg"></span>
+
 							</div>
 							<div class="mb-3">
-								<label for="password" class="form-label">Password</label> <input
-									type="password" name="password" class="form-control" id="signupPassword"
-									placeholder="Enter your username" value="<%=student.getPassword()%>" autocomplete="off">
-								<span class = "text-muted" id="passwordWarningMsg1"></span>
-								
+								<label for="password" class="form-label">Password</label>
+								<div class="input-group">
+									<input type="password" name="password" class="form-control"
+										id="signupPassword" placeholder="Enter your password"
+										value="<%=student.getPassword()%>" autocomplete="off">
+									<button class="btn btn-outline-secondary" type="button"
+										id="showPasswordBtn"> <i class="bi bi-eye-slash"></i></button>
+								</div>
+								<span class="text-muted" id="passwordWarningMsg1"></span>
 							</div>
+
 							<%
 							} else {
 							%>
@@ -101,7 +109,7 @@ if (listStudent != null && !listStudent.isEmpty()) {
 							<button type="button" class="btn btn-secondary"
 								onclick="window.location.href='profile.jsp';">Back</button>
 							<button type="submit" value="Submit" class="btn btn-primary">Update</button>
-							
+
 						</form>
 					</div>
 				</section>
@@ -110,7 +118,25 @@ if (listStudent != null && !listStudent.isEmpty()) {
 	</main>
 
 	<%@ include file="footer.jsp"%>
-	<script src="js/userSignupValidation.js"></script>	
+	<script src="js/userSignupValidation.js"></script>
+	<script>
+    document.getElementById('showPasswordBtn').addEventListener('click', function() {
+        var passwordInput = document.getElementById('signupPassword');
+        var icon = this.querySelector('i');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('bi-eye-slash');
+            icon.classList.add('bi-eye');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('bi-eye');
+            icon.classList.add('bi-eye-slash');
+        }
+    });
+</script>
+
+
 
 </body>
 </html>

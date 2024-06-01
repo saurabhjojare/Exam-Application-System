@@ -16,7 +16,7 @@
 <%-- 	 <span class="text-white userName"><%=username%></span> --%>
 <!--      <span id="countdown"></span> -->
 	 <% } %>
-	 <% if(currentPage.equals("/profile.jsp")  || currentPage.equals("/select-subject.jsp") || currentPage.equals("/attempt-exam.jsp") || currentPage.equals("/exam-complete.jsp") || currentPage.equals("/result.jsp")  || currentPage.equals("/examSubmitFailed.jsp") || currentPage.equals("/error.jsp")  || currentPage.equals("/contact.jsp") || currentPage.equals("/helpdesk.jsp") || currentPage.equals("/editUser.jsp")) { %>
+	 <% if(currentPage.equals("/profile.jsp")  || currentPage.equals("/select-subject.jsp") || currentPage.equals("/attempt-exam.jsp") || currentPage.equals("/exam-complete.jsp") || currentPage.equals("/result.jsp")  || currentPage.equals("/examSubmitFailed.jsp") || currentPage.equals("/error.jsp")  || currentPage.equals("/contact.jsp") || currentPage.equals("/helpdesk.jsp") || currentPage.equals("/editUser.jsp") || currentPage.equals("/examGiven.jsp")) { %>
 	 <div class = "profileName">
      <span class ="text-white"><a href="profile.jsp" class="text-decoration-none text-white">Home</a></span>
      </div>
@@ -50,7 +50,7 @@
 					</li>
 				<% } %>
 				
-				<% if(currentPage.equals("/exam.jsp") || currentPage.equals("/attempt-exam.jsp") || currentPage.equals("/result.jsp") || currentPage.equals("/select-subject.jsp") || currentPage.equals("/examSubmitFailed.jsp") || currentPage.equals("/editUser.jsp")) { %>
+				<% if(currentPage.equals("/exam.jsp") || currentPage.equals("/attempt-exam.jsp") || currentPage.equals("/result.jsp") || currentPage.equals("/select-subject.jsp") || currentPage.equals("/examSubmitFailed.jsp") || currentPage.equals("/editUser.jsp") || currentPage.equals("/examGiven.jsp")) { %>
 					<li class="nav-item">
 						<a class="nav-link text-white" href="logout" style = "white-space: nowrap;">Sign Out</a>
 						
