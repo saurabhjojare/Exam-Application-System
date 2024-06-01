@@ -31,13 +31,14 @@ ExamService examService = new ExamServiceImpl();
                     <input type="text" class="form-control" id="searchInput"
                         placeholder="Search Result" aria-label="Search result"
                         aria-describedby="button-addon2"
-                        onkeyup="searchByName(this.value)" disabled>
+                        onkeyup="searchStudentsResult()">
                 </div>
             </div>
             
             <div class="mb-3 fw-light">
                 <span>Please note: In order to delete a student's result, you must first delete the student record.</span>
             </div>
+    
             
             <div class="d-flex justify-content-center">
                 <div class="input-group" style="width: 400px;">
@@ -54,7 +55,7 @@ ExamService examService = new ExamServiceImpl();
                     </select>
                 </div>
             </div>
-            
+            <div id="searchResults"></div>
             <div id="studentTableBody"></div>
         </div>
     </div>
@@ -63,23 +64,66 @@ ExamService examService = new ExamServiceImpl();
     </div>
     
     <script>
-        function fetchStudentsByCourse() {
-            var courseId = document.getElementById('courseSelect').value;
+    function fetchStudentsByCourse() {
+        // Clear search input
+        document.getElementById('searchInput').value = '';
+        
+        // Clear search results
+        document.getElementById('searchResults').innerHTML = '';
+        
+        var courseId = document.getElementById('courseSelect').value;
 
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'fetchResultByCourse.jsp?courseId=' + courseId, true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById('studentTableBody').innerHTML = xhr.responseText;
-                }
-            };
-            xhr.send();
-        }
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'fetchResultByCourse.jsp?courseId=' + courseId, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                document.getElementById('studentTableBody').innerHTML = xhr.responseText;
+                
+                // Always trigger search after receiving response
+                searchStudentsResult();
+            }
+        };
+        xhr.send();
+    }
+
+
 
         document.addEventListener('DOMContentLoaded', function() {
             fetchStudentsByCourse();
         });
     </script>
+    
+    <script>
+    function searchStudentsResult() {
+        var userInput = document.getElementById("searchInput").value;
+        var selectedOption = document.getElementById("courseSelect").options[document.getElementById("courseSelect").selectedIndex].text; // Get the text of the selected option
+        
+        // Check if the search input is empty
+        if (userInput.trim() === '') {
+            // Clear the search results and show the table
+            document.getElementById("searchResults").innerHTML = '';
+            document.getElementById("resultsTable").style.display = 'table';
+            return;
+        }
+        
+        // Hide the table
+        document.getElementById("resultsTable").style.display = 'none';
+        
+        // Make AJAX call
+        var xhr = new XMLHttpRequest();
+        var url = "SearchStudentResult.jsp?userInput=" + encodeURIComponent(userInput) + "&courseSelect=" + encodeURIComponent(selectedOption);
+        
+        xhr.open("GET", url, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // Update DOM with response
+                document.getElementById("searchResults").innerHTML = xhr.responseText;
+            }
+        };
+        xhr.send();
+    }
+</script>
+
 
 </body>
 </html>

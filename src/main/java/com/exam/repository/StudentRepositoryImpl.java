@@ -416,6 +416,53 @@ public class StudentRepositoryImpl extends DBConfig implements StudentRepository
 	        // If an exception occurred or no rows were found, return false
 	        return false;
 	    }
+	    
+	    public List<Object[]> searchStudentInfoByNamePattern(String namePattern) {
+	        List<Object[]> resultList = new ArrayList<>();
+	        PreparedStatement stmt = null;
+	        ResultSet rs = null;
+
+	        try {
+	            String query = "SELECT s.name AS student_name, s.email AS student_email, s.contact AS student_contact, " +
+	                           "e.examname AS exam_name, sub.subjectname AS subject_name, " +
+	                           "ser.obtainedpercentage AS obtained_marks, ser.status AS status, " +
+	                           "sc.date AS schedule_date " +
+	                           "FROM student s " +
+	                           "JOIN studentexamrelation ser ON s.stid = ser.stid " +
+	                           "JOIN schedule sc ON ser.schid = sc.schid " +
+	                           "JOIN exam e ON sc.examid = e.examid " +
+	                           "JOIN subject sub ON sc.sid = sub.sid " +
+	                           "WHERE s.name LIKE ?";
+	            stmt = conn.prepareStatement(query);
+	            stmt.setString(1, "%" + namePattern + "%");
+	            rs = stmt.executeQuery();
+
+	            while (rs.next()) {
+	                Object[] row = new Object[8]; // Assuming 8 columns are returned in the query
+	                row[0] = rs.getString("student_name");
+	                row[1] = rs.getString("student_email");
+	                row[2] = rs.getString("student_contact");
+	                row[3] = rs.getString("exam_name");
+	                row[4] = rs.getString("subject_name");
+	                row[5] = rs.getDouble("obtained_marks");
+	                row[6] = rs.getDouble("status");
+	                row[7] = rs.getDate("schedule_date");
+	                resultList.add(row);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace(); // Consider using a logging framework
+	        } finally {
+	            try {
+	                if (rs != null) rs.close();
+	                if (stmt != null) stmt.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace(); // Consider using a logging framework
+	            }
+	        }
+
+	        return resultList;
+	    }
+
 
 
 

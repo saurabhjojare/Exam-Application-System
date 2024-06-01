@@ -30,5 +30,7 @@ public interface StudentService {
 	 public List<Object[]> searchResultByUserInput(String userInput);
 	 
 	 public boolean isStudentExamRecordExists(String username, int schid);
+	 
+	 public List<Object[]> searchStudentInfoByNamePattern(String namePattern);
 
 }

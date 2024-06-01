@@ -93,5 +93,11 @@ public class StudentServiceImpl implements StudentService{
 		return this.studRepo.isStudentExamRecordExists(username, schid);
 	}
 
+	@Override
+	public List<Object[]> searchStudentInfoByNamePattern(String namePattern) {
+		// TODO Auto-generated method stub
+		return this.studRepo.searchStudentInfoByNamePattern(namePattern);
+	}
+
 
 }
