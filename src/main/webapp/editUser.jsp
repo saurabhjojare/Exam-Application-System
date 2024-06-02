@@ -136,7 +136,20 @@ if (listStudent != null && !listStudent.isEmpty()) {
     });
 </script>
 
-
+<script>
+$(document).ready(function() {
+	  $('#signupForm').submit(function(e) {
+	    // Perform all validations before submitting the form
+	    var isValid = validateFullName() && validatePassword() && validateContact() && validateEmail() && validateUsername();
+	    
+	    if (!isValid) {
+	      // Prevent form submission if any validation fails
+	      e.preventDefault();
+	      console.log('Form submission prevented due to validation errors.');
+	    }
+	  });
+	});
+</script>
 
 </body>
 </html>
