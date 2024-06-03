@@ -1,5 +1,5 @@
 <%@ include file="userSession.jsp"%>
-<%@ include file="common-resources.jsp"%>
+<%@ include file="commonResources.jsp"%>
 
 <%
 // Retrieve URL parameters with default values
@@ -41,8 +41,8 @@ String result = totalScore >= 60 ? "Pass" : "Fail";
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Result</title>
-<link rel="stylesheet" type="text/css" href="css/Result.css">
-<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+<link rel="stylesheet" type="text/css" href="css/result.css">
+<link rel="stylesheet" type="text/css" href="css/customColor.css">
 </head>
 <body>
 

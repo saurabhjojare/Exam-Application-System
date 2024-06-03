@@ -1,5 +1,5 @@
 <%@ include file="existingSession.jsp" %>
-<%@ include file="common-resources.jsp" %>
+<%@ include file="commonResources.jsp" %>
 
 <%
 // Retrieve the AdminService instance from the servlet context
@@ -16,7 +16,7 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Admin Profile</title>
 <link rel="stylesheet" type="text/css" href="css/profilePage.css">
-<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+<link rel="stylesheet" type="text/css" href="css/customColor.css">
 </head>
 <body>
 	<div class="d-flex">

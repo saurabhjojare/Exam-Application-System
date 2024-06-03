@@ -1,4 +1,4 @@
-<%@ include file="common-resources.jsp" %>
+<%@ include file="commonResources.jsp" %>
 <%@ include file="userSession.jsp" %>
 
 <!doctype html>
@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Error</title>
-	<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+	<link rel="stylesheet" type="text/css" href="css/customColor.css">
 </head>
 <body >
 		<%@ include file="navbar.jsp"%>

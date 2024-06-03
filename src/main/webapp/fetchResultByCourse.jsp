@@ -13,7 +13,7 @@ List<String[]> resultData = fetchDataObj2.fetchResultByCourse(courseId);
 
 if (resultData.isEmpty()) {
 %>
-<div>No result available for this course.</div>
+<div>No result available for this subject.</div>
 <%
 } else {
 int counter = 1;

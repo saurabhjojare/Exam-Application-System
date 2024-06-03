@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/admininfo")
-public class AdminInfoController extends HttpServlet {
+public class AdminInfo extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private AdminRepository adminRepository;
 

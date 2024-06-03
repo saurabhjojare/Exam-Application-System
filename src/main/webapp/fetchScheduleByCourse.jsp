@@ -56,14 +56,7 @@
 							<tr class="empty-row" style = "border:0px solid #fff;">
 							<td colspan="2"></td>
 					</tr>
-<!--                         <tr> -->
-<%--                             <td><%= row[0] %></td> --%>
-<%--                             <td><%= row[1] %></td> --%>
-<%--                             <td><%= row[2] %></td> --%>
-<%--                             <td><%= row[3] %></td> --%>
-<%--                             <td><%= row[4] %></td> --%>
-<%--                             <td><%= row[5] %></td> --%>
-<!--                         </tr> -->
+
                     <%
                      count++;
                         }
@@ -73,12 +66,12 @@
 <%
         } else {
 %>
-            <p>No schedules found for the selected course.</p>
+            <p>No schedules found for the selected subject.</p>
 <%
         }
     } else {
 %>
-        <p>Invalid course ID.</p>
+        <p>No subject found.</p>
 <%
     }
 %>

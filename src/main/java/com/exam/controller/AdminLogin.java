@@ -12,12 +12,12 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/adminlogin")
-public class AdminLoginController extends HttpServlet {
+public class AdminLogin extends HttpServlet {
 
     private AdminService adminService;
 
     // Initialize the AdminService in the constructor
-    public AdminLoginController() {
+    public AdminLogin() {
         this.adminService = new AdminServiceImpl(new AdminRepositoryImpl());
     }
 

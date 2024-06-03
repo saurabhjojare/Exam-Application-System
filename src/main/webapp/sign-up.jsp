@@ -1,4 +1,4 @@
-<%@ include file="common-resources.jsp" %>
+<%@ include file="commonResources.jsp" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,7 +7,7 @@
 <title>Sign Up</title>
 <link rel="stylesheet" type="text/css" href="css/signUp.css">
 <link rel="stylesheet" type="text/css" href="css/nextStep.css">
-<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+<link rel="stylesheet" type="text/css" href="css/customColor.css">
 
 </head>
 <body>

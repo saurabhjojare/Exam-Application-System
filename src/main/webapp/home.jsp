@@ -1,4 +1,4 @@
-<%@ include file="common-resources.jsp" %>
+<%@ include file="commonResources.jsp" %>
 
 <!doctype html>
 <html lang="en">
@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Home</title>
-	<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+	<link rel="stylesheet" type="text/css" href="css/customColor.css">
 </head>
 <body >
 		<%@ include file="navbar.jsp"%>

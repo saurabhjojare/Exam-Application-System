@@ -1,4 +1,4 @@
-<%@ include file="common-resources.jsp" %>
+<%@ include file="commonResources.jsp" %>
 <%@ include file="userSession.jsp" %>
 <%@ page import="java.net.URLEncoder" %>
 <%@ page import="java.util.*" %>
@@ -36,7 +36,7 @@ try {
     if (!isEnrolled) {
         request.getRequestDispatcher("select-subject.jsp").forward(request, response);
     } else if(isExamGive) {
-    	request.getRequestDispatcher("examGiven.jsp").forward(request, response);
+    	request.getRequestDispatcher("exam-given.jsp").forward(request, response);
 	}  else {
 %> 
 
@@ -46,8 +46,8 @@ try {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Exam</title>
-<link rel="stylesheet" type="text/css" href="css/Exam.css">
-<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+<link rel="stylesheet" type="text/css" href="css/exam.css">
+<link rel="stylesheet" type="text/css" href="css/customColor.css">
 
 <script>
 function showQuestion(index) {
@@ -191,7 +191,7 @@ function showQuestion(index) {
 </script>
 
 <script src="js/SubmitExam.js"></script>
-<script src="js/CopyPaste.js"></script>
+<script src="js/copyPaste.js"></script>
 <script>
 $(document).ready(function() {
     var correctCounter = 0;

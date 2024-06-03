@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 
 @WebServlet("/importQuestion")
 @MultipartConfig
-public class ImportQuestionController extends HttpServlet {
+public class ImportQuestion extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

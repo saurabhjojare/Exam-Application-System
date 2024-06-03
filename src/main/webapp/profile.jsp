@@ -1,4 +1,4 @@
-<%@ include file="common-resources.jsp"%>
+<%@ include file="commonResources.jsp"%>
 <%@ include file="userSession.jsp"%>
 
 <%@ page import="java.util.List"%>
@@ -21,8 +21,8 @@ if (listStudent != null && !listStudent.isEmpty()) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Profile</title>
-<link rel="stylesheet" type="text/css" href="css/Profile.css">
-<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+<link rel="stylesheet" type="text/css" href="css/profile.css">
+<link rel="stylesheet" type="text/css" href="css/customColor.css">
 <style>
 .centered-text {
 	display: inline-block; /* Make the text an inline-block element */
@@ -107,7 +107,7 @@ if (listStudent != null && !listStudent.isEmpty()) {
 								class="nav-link text-primary-emphasis hoverIcon"
 								href="result.jsp">View Result</a></li>
 							<li class="nav-item"><a
-								class="nav-link text-danger hoverIcon" href="editUser.jsp?stid=<%=student.getStid()%>">Edit
+								class="nav-link text-danger hoverIcon" href="edit-user.jsp?stid=<%=student.getStid()%>">Edit
 									Profile</a></li>
 							<li class="nav-item"><a
 								class="nav-link text-success hoverIcon" href="logout">Sign

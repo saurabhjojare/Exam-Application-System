@@ -1,5 +1,5 @@
 <%@ include file="existingSession.jsp" %>
-<%@ include file="common-resources.jsp" %>
+<%@ include file="commonResources.jsp" %>
 
 <%
 AdminRepository adminRepository = new AdminRepositoryImpl();
@@ -17,7 +17,7 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>View Admin</title>
 <link rel="stylesheet" type="text/css" href="css/viewAdmin.css">
-<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+<link rel="stylesheet" type="text/css" href="css/customColor.css">
 </head>
 <body>
 
@@ -42,6 +42,8 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
                 <div class="input-group" style="width: 400px;">
                     <select id="courseSelect" class="form-select mb-4"
                         aria-label="select" onchange="fetchAdminsByDepartment()">
+                        <option value="" selected disabled>Select a department</option>
+                        
                         <%
                         List<String> courseData = adminService.getAdminDepartments();
                         for (String course : courseData) {
@@ -64,6 +66,8 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
     <script>
         function fetchAdminsByDepartment() {
             var courseId = document.getElementById('courseSelect').value;
+            
+         
 
             var xhr = new XMLHttpRequest();
             xhr.open('GET', 'fetchAdminByDepartment.jsp?courseId=' + courseId, true);

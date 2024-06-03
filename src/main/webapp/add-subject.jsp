@@ -1,5 +1,5 @@
 <%@ include file="existingSession.jsp" %>
-<%@ include file="common-resources.jsp" %>
+<%@ include file="commonResources.jsp" %>
 
 <!doctype html>
 <html lang="en">
@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Add Subject</title>
 <link rel="stylesheet" type="text/css" href="css/addSubject.css">
-<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+<link rel="stylesheet" type="text/css" href="css/customColor.css">
 </head>
 <body>
 
@@ -51,6 +51,6 @@
 	</div>
 		
 		<script src="js/hideMessge.js"></script>
-		<script src="js/AddSubjectValidation.js"></script>
+		<script src="js/addSubjectValidation.js"></script>
 </body>
 </html>

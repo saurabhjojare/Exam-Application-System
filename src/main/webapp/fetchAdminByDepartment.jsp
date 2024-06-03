@@ -72,7 +72,7 @@
         }
     } else {
 %>
-        <p>Invalid department.</p>
+        <p>No department selected.</p>
 <%
     }
 %>

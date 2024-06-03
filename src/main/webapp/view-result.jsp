@@ -1,5 +1,5 @@
 <%-- <%@ include file="existingSession.jsp" %> --%>
-<%@ include file="common-resources.jsp" %>
+<%@ include file="commonResources.jsp" %>
 
 
 <%
@@ -13,7 +13,7 @@ ExamService examService = new ExamServiceImpl();
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>View Result</title>
 <link rel="stylesheet" type="text/css" href="css/viewResult.css">
-<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+<link rel="stylesheet" type="text/css" href="css/customColor.css">
 </head>
 <body>
 
@@ -43,6 +43,8 @@ ExamService examService = new ExamServiceImpl();
             <div class="d-flex justify-content-center">
                 <div class="input-group" style="width: 400px;">
                     <select id="courseSelect" class="form-select mb-4" aria-label="select" onchange="fetchStudentsByCourse()">
+                            <option value="" selected disabled>Select a subject</option>
+                        
                         <%
                         StudentService fetchDataObj = new StudentServiceImpl(); 
                         List<String[]> courseData = fetchDataObj.fetchCourses(); 
@@ -64,34 +66,40 @@ ExamService examService = new ExamServiceImpl();
     </div>
     
     <script>
-    function fetchStudentsByCourse() {
-        // Clear search input
-        document.getElementById('searchInput').value = '';
-        
-        // Clear search results
-        document.getElementById('searchResults').innerHTML = '';
-        
-        var courseId = document.getElementById('courseSelect').value;
+function fetchStudentsByCourse() {
+    // Clear search input
+    document.getElementById('searchInput').value = '';
+    
+    // Clear search results
+    document.getElementById('searchResults').innerHTML = '';
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'fetchResultByCourse.jsp?courseId=' + courseId, true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4) {
-                document.getElementById('studentTableBody').innerHTML = xhr.responseText;
-                
-                // Always trigger search after receiving response
-                searchStudentsResult();
-            }
-        };
-        xhr.send();
+    var courseSelect = document.getElementById('courseSelect');
+    var courseId = courseSelect.value;
+
+    // Check if any course is selected
+    if (courseId === "") {
+        document.getElementById('studentTableBody').innerHTML = 'No subject selected.';
+        return;
     }
 
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'fetchResultByCourse.jsp?courseId=' + courseId, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+            document.getElementById('studentTableBody').innerHTML = xhr.responseText;
+            
+            // Always trigger search after receiving response
+            searchStudentsResult();
+        }
+    };
+    xhr.send();
+}
 
+document.addEventListener('DOMContentLoaded', function() {
+    fetchStudentsByCourse();
+});
+</script>
 
-        document.addEventListener('DOMContentLoaded', function() {
-            fetchStudentsByCourse();
-        });
-    </script>
     
     <script>
     function searchStudentsResult() {

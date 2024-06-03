@@ -1,4 +1,4 @@
-<%@ include file="common-resources.jsp"%>
+<%@ include file="commonResources.jsp"%>
 <%@ include file="existingSession.jsp"%>
 
 <!doctype html>
@@ -9,7 +9,7 @@
 <title>Add Admin</title>
 <link rel="stylesheet" type="text/css" href="css/addAdmin.css">
 <link rel="stylesheet" type="text/css" href="css/nextStep.css">
-<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+<link rel="stylesheet" type="text/css" href="css/customColor.css">
 
 </head>
 <body>

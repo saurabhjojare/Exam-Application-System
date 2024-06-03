@@ -1,16 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page import="java.util.List"%>
-<%@ page import="com.exam.service.SubjectService"%>
-<%@ page import="com.exam.service.SubjectServiceImpl"%>
+<%@ include file="commonResources.jsp"%>
 <%@ include file="userSession.jsp"%>
-<%@ include file="common-resources.jsp"%>
+
 <%
 SubjectService subjectService = new SubjectServiceImpl();
 List<String> listSubject = subjectService.getAllSubjects();
 
 String message = (String) session.getAttribute("message");
 session.removeAttribute("message");
+
+
+//Check if the message is "Subject Assigned" and redirect if true
+if (message != null && message.equals("<span class=\"text-success\">Subject Assigned</span>")) {
+ response.sendRedirect("attempt-exam.jsp");
+}
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +21,7 @@ session.removeAttribute("message");
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Select Subject</title>
 <link rel="stylesheet" type="text/css" href="css/selectSubject.css">
-<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+<link rel="stylesheet" type="text/css" href="css/customColor.css">
 </head>
 <body>
 

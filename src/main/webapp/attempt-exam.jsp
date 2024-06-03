@@ -1,4 +1,4 @@
-<%@ include file="common-resources.jsp"%>
+<%@ include file="commonResources.jsp"%>
 <%@ include file="userSession.jsp"%>
 <%@ page import="java.net.URLDecoder" %>
 
@@ -18,7 +18,7 @@ if (NoExamMessage != null) {
 <title>Select Schedule</title>
 <link rel="stylesheet" type="text/css" href="css/attemptExam.css">
 <link rel="stylesheet" type="text/css" href="css/nextStep.css">
-<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+<link rel="stylesheet" type="text/css" href="css/customColor.css">
 </head>
 <body>
 
@@ -128,7 +128,7 @@ if (NoExamMessage != null) {
 						</div>
 
 						<button type="button" class="btn btn-secondary mt-2 mb-3"
-							onclick="window.history.back();" style="float: inline-start;">Back</button>
+							onclick="window.location.href='profile.jsp';" style="float: inline-start;">Back</button>
 						<button type="button" class="btn btn-primary mt-2 mb-3"
 							onclick="nextStep()" style="float: inline-end;">Next</button>
 						
@@ -457,7 +457,7 @@ if (NoExamMessage != null) {
 	        if (selectedSchedule !== currentDate) {
 	            console.log("Selected Date"+selectedSchedule);
 	            console.log("Current Date"+currentDate);
-	            errorMessage = 'This exam schedule is not for today';
+	            errorMessage = 'No exams are scheduled for today.';
 	        } else {
 	            errorMessage = 'The exam is not available at the current time';
 	        }

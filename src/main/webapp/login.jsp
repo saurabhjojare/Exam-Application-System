@@ -1,4 +1,4 @@
-<%@ include file="common-resources.jsp"%>
+<%@ include file="commonResources.jsp"%>
 
 <!doctype html>
 <html lang="en">
@@ -6,8 +6,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Login</title>
-<link rel="stylesheet" type="text/css" href="css/Login.css">
-<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+<link rel="stylesheet" type="text/css" href="css/login.css">
+<link rel="stylesheet" type="text/css" href="css/customColor.css">
 </head>
 <body>
 
@@ -57,7 +57,7 @@
 							Don't have an account? <a href="sign-up.jsp">Sign Up</a>
 						</div>
 						<div class="login-link mt-2">
-							Trouble logging in? <a href="userForgotPassword.jsp">Forgot
+							Trouble logging in? <a href="forgot-password.jsp">Forgot
 								Password</a>
 						</div>
 						<!-- Include hidden inputs for both student and admin -->

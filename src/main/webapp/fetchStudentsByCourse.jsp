@@ -16,7 +16,7 @@ List<String[]> studentData = fetchDataObj2.fetchStudentsByCourse(courseId);
 
 if (studentData.isEmpty()) {
 %>
-    <div>No students available for this course.</div>
+    <div>No students available for this subject.</div>
 <%
 } else {
     for (String[] student : studentData) {

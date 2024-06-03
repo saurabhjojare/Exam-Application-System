@@ -14,12 +14,12 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/adminsignup")
-public class AdminSignupController extends HttpServlet {
+public class AdminSignup extends HttpServlet {
 
     private AdminService adminService;
 
     // Initialize the AdminService in the constructor
-    public AdminSignupController() {
+    public AdminSignup() {
         this.adminService = new AdminServiceImpl(new AdminRepositoryImpl());
     }
 

@@ -1,5 +1,5 @@
 <%@ include file="existingSession.jsp"%>
-<%@ include file="common-resources.jsp"%>
+<%@ include file="commonResources.jsp"%>
 
 
 <%
@@ -14,7 +14,7 @@ List<String[]> results = examService.getAllResults();
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>View Student</title>
 <link rel="stylesheet" type="text/css" href="css/viewResult.css">
-<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+<link rel="stylesheet" type="text/css" href="css/customColor.css">
 
 <style>
 @media ( max-width : 992px) {
@@ -51,7 +51,7 @@ List<String[]> results = examService.getAllResults();
 				<div class="input-group" style="width: 400px;">
 					<select id="courseSelect" class="form-select mb-4"
 						aria-label="select" onchange="fetchStudentsByCourse()">
-						<option value="Unselected" id = "Unselected">Student Unassigned to Subject</option>
+						<option value="Unselected" id = "Unselected">No Subject Assigned</option>
 						<%
 						StudentService fetchDataObj = new StudentServiceImpl(); 
 						List<String[]> courseData = fetchDataObj.fetchCourses(); 
@@ -85,7 +85,7 @@ function fetchStudentsByCourse() {
     if (courseId === "Unselected") {
         // If "Not Having Subjects" is selected, fetch students without subjects
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'fetchStudentsWithoutSub.jsp', true);
+        xhr.open('GET', 'fetchStudentsWithoutSubject.jsp', true);
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 document.getElementById('studentTableBody').innerHTML = xhr.responseText;

@@ -1,4 +1,4 @@
-<%@ include file="common-resources.jsp"%>
+<%@ include file="commonResources.jsp"%>
 
 <!doctype html>
 <html lang="en">
@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>404</title>
 
-<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+<link rel="stylesheet" type="text/css" href="css/customColor.css">
 <style>
 html, body {
 	height: 100%;

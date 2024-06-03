@@ -1,5 +1,5 @@
 <%@ include file="existingSession.jsp" %>
-<%@ include file="common-resources.jsp" %>
+<%@ include file="commonResources.jsp" %>
 
 
 <!doctype html>
@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>View Question</title>
 <link rel="stylesheet" type="text/css" href="css/viewQuestion.css">
-<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+<link rel="stylesheet" type="text/css" href="css/customColor.css">
 </head>
 <body>
 	
@@ -36,6 +36,7 @@
 				<div class="input-group" style="width: 400px;">
 					<select id="courseSelect" class="form-select mb-4"
 						aria-label="select" onchange="fetchStudentsByCourse()">
+						 <option value="" selected disabled>Select a subject</option>
 						<%
 						StudentService fetchDataObj = new StudentServiceImpl(); 
 						List<String[]> courseData = fetchDataObj.fetchCourses(); 
@@ -63,6 +64,11 @@
 	<script>
 	function fetchStudentsByCourse() {
 		var courseId = document.getElementById('courseSelect').value;
+		// Check if any course is selected
+	    if (courseId === "") {
+	        document.getElementById('studentTableBody').innerHTML = 'No subject selected.';
+	        return;
+	    }
 
 		var xhr = new XMLHttpRequest();
 		xhr.open('GET', 'fetchQuestionByCourse.jsp?courseId=' + courseId,

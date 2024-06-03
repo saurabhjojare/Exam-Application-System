@@ -1,5 +1,5 @@
 <%@ include file="existingSession.jsp"%>
-<%@ include file="common-resources.jsp"%>
+<%@ include file="commonResources.jsp"%>
 
 <!doctype html>
 <html lang="en">
@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>View Exam</title>
 <link rel="stylesheet" type="text/css" href="css/viewExam.css">
-<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+<link rel="stylesheet" type="text/css" href="css/customColor.css">
 </head>
 <body>
 
@@ -25,25 +25,28 @@
 				<div class="d-flex justify-content-center mb-3">
 					<div class="input-group" style="width: 400px;">
 						<input type="text" class="form-control" placeholder="Search Exam"
-							aria-label="Search exams" aria-describedby="button-addon2" disabled>
+							aria-label="Search exams" aria-describedby="button-addon2"
+							disabled>
 						<!--         <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button> -->
 					</div>
 				</div>
 
 
+				<%
+				ExamService examService = new ExamServiceImpl();
+				ExamRepository examRepository = new ExamRepositoryImpl();
+				List<ExamModel> examList = examService.getAllExam();
+				int count = 1;
+				int totalExams = (examList != null) ? examList.size() : 0;
+
+				if (totalExams > 0) {
+				%>
 				<table class="table table-bordered">
 					<thead>
 					</thead>
 					<tbody>
 						<%
-						ExamService examService = new ExamServiceImpl();
-						ExamRepository examRepository = new ExamRepositoryImpl();
-						List<ExamModel> examList = examService.getAllExam();
-						int count = 1;
-						int totalExams = (examList != null) ? examList.size() : 0;
-
-						if (totalExams > 0) { 
-							for (ExamModel exam : examList) {
+						for (ExamModel exam : examList) {
 						%>
 						<tr>
 							<td class="key" style="padding: 15px">#</td>
@@ -68,24 +71,21 @@
 								href='deleteExam?id=<%=exam.getId()%>' class="btn btn-danger">Delete</a>
 							</td>
 						</tr>
-
 						<tr class="empty-row" style="border: 0px solid #fff;">
 							<td colspan="2"></td>
 						</tr>
 						<%
-						} 
-						} else { 
-						%>
-						<tr>
-							<td colspan="2">No exams found.</td>
-						</tr>
-						<%
-						} 
+						}
 						%>
 					</tbody>
 				</table>
-
-
+				<%
+				} else {
+				%>
+				<p>No exams found.</p>
+				<%
+				}
+				%>
 
 			</div>
 			<div></div>

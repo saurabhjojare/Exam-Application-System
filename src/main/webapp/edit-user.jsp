@@ -1,4 +1,4 @@
-<%@ include file="common-resources.jsp"%>
+<%@ include file="commonResources.jsp"%>
 <%@ include file="userSession.jsp"%>
 
 <%@ page import="java.util.List"%>
@@ -21,7 +21,7 @@ if (listStudent != null && !listStudent.isEmpty()) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Edit Profile</title>
-<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+<link rel="stylesheet" type="text/css" href="css/customColor.css">
 <style>
 .form-label {
 	float: left;
@@ -55,20 +55,21 @@ if (listStudent != null && !listStudent.isEmpty()) {
 							%>
 							<input type="hidden" name="stid" value="<%=student.getStid()%>">
 
-							<div class="mb-3">
-								<label for="username" class="form-label">Username</label> <input
-									type="text" name="username" class="form-control" id="username"
-									placeholder="Enter your username"
-									value="<%=student.getUsername()%>" autocomplete="off">
-								<span class="text-muted" id="usernameWarningMsg"></span>
-
-							</div>
+							
 							<div class="mb-3">
 								<label for="name" class="form-label">Full Name</label> <input
 									type="text" name="name" class="form-control" id="fullName"
 									placeholder="Enter your name" value="<%=student.getName()%>"
 									autocomplete="off"> <span class="text-muted"
 									id="fullNameWarningMsg"></span>
+
+							</div>
+							<div class="mb-3">
+								<label for="username" class="form-label">Username</label> <input
+									type="text" name="username" class="form-control" id="username"
+									placeholder="Enter your username"
+									value="<%=student.getUsername()%>" autocomplete="off">
+								<span class="text-muted" id="usernameWarningMsg"></span>
 
 							</div>
 							<div class="mb-3">

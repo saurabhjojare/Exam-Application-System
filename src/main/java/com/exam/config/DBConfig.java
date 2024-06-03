@@ -14,7 +14,8 @@ public class DBConfig {
     public DBConfig() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ExamApplicationSystem", "root", "root");
+           //conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ExamApplicationSystem", "root", "root");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/smprowor_examapplicationsystem", "smprowor_saurabh", "ViT^O5=yk?.B");
             ensureAdminUserExists();
         } catch (Exception ex) {
             System.out.print(ex);
@@ -26,7 +27,7 @@ public class DBConfig {
         String insertQuery = "INSERT INTO admin (fullName, password, contact, email, role, department, permissions) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         String fullName = "Saurabh Jojare";
-        String password = "Saurabh@123";
+        String password = "Saurabh@9898";
         String contact = "+917083900700";
         String email = "saurabh.jojare@gmail.com";
         String role = "Administrator";

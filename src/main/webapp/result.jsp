@@ -1,5 +1,5 @@
 <%@ include file="userSession.jsp"%>
-<%@ include file="common-resources.jsp"%>
+<%@ include file="commonResources.jsp"%>
 
 
 <%
@@ -15,8 +15,8 @@ int count2 = 1;
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Result</title>
-<link rel="stylesheet" type="text/css" href="css/Result.css">
-<link rel="stylesheet" type="text/css" href="css/CustomColor.css">
+<link rel="stylesheet" type="text/css" href="css/result.css">
+<link rel="stylesheet" type="text/css" href="css/customColor.css">
 <style>
 .TableMob {
 	display: none;
@@ -90,12 +90,12 @@ int count2 = 1;
 				<table id="resultsTable2" class="table table-hover">
 					<thead>
 						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Exam Name</th>
-							<th scope="col">Subject</th>
-							<th scope="col">Exam Date</th>
-							<th scope="col">Marks</th>
-							<th scope="col">Status</th>
+							<th class ="fw-light">#</th>
+							<th class ="fw-light">Exam Name</th>
+							<th class ="fw-light">Subject</th>
+							<th class ="fw-light">Exam Date</th>
+							<th class ="fw-light">Marks</th>
+							<th class ="fw-light">Status</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -106,7 +106,7 @@ int count2 = 1;
 							<td colspan="6" style="border: none;">
 								<div
 									style="display: flex; justify-content: center; align-items: center;">
-									No results found.</div>
+									No result found.</div>
 							</td>
 						</tr>
 
@@ -164,11 +164,12 @@ int count2 = 1;
 						<%
 						if (results.isEmpty()) {
 						%>
-						<tr>
+						<tr style="border-top: none; border-bottom: none;">
 							<td colspan="6" style="border: none;">
 								<div
 									style="display: flex; justify-content: center; align-items: center;">
-									No results found.</div>
+									No result found.
+								</div>
 							</td>
 						</tr>
 						<%

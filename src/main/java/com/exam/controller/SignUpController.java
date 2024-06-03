@@ -53,7 +53,7 @@ public class SignUpController extends HttpServlet {
 	    // Check if the result is true or false
 	    if (result) {
 	    	// If the addition failed, set an appropriate message and forward to sign-up.jsp
-	        String message = "<span class=\"text-success\">Welcome aboard!</span>";
+	        String message = "<span class=\"text-success\">Welcome Aboard</span>";
 	        request.setAttribute("message", message);
 	        request.getRequestDispatcher("login.jsp").forward(request, response);
 	    } else {

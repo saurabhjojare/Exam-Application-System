@@ -16,7 +16,7 @@ import com.exam.service.ExamService;
 import com.exam.service.ExamServiceImpl;
 
 @WebServlet("/addexam")
-public class AddExamController extends HttpServlet {
+public class AddExam extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

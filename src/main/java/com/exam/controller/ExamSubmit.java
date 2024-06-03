@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet("/submitExam")
-public class ExamSubmitServlet extends HttpServlet {
+public class ExamSubmit extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,18 +47,9 @@ public class ExamSubmitServlet extends HttpServlet {
         if(insertionResult) {
             request.getRequestDispatcher("exam-complete.jsp").forward(request, response);
         } else {
-        	request.getRequestDispatcher("examSubmitFailed.jsp").forward(request, response);
+        	request.getRequestDispatcher("exam-submit-failed.jsp").forward(request, response);
         }
 
-//        out.println("<html><body>");
-//        out.println("<h1>Exam Submission Result</h1>");
-//        out.println("<p>Schedule ID: " + scheduleId + "</p>");
-//        out.println("<p>Username: " + username + "</p>");
-//        out.println("<p>Student ID: " + stid + "</p>");
-//        out.println("<p>Percentage: " + percentage + "</p>");
-//        out.println("<p>Pass/Fail: " + passOrFail + "</p>");
-//        out.println("<p>Pass/Fail: " + StudentPassOrFail + "</p>");
-//        out.println("</body></html>");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

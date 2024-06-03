@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/fetchTime")
-public class FetchTimeController extends HttpServlet {
+public class FetchTime extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     private final ExamService examService = new ExamServiceImpl();
