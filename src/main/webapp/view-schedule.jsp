@@ -18,7 +18,8 @@
 		<!-- Main Content Area -->
 		<div class="flex-grow-1 view-padding text-center">
 			<div class="marginBottom">
-				<h3 class="display-6 mt-2">Schedule Details</h3>
+			<h1 class="display-6 mt-3">QuizConnect</h1>
+				<h3 class="fw-light h3 mt-2">Schedule Details</h3>
 
 				<div class="d-flex justify-content-center mb-3">
 					<div class="input-group" style="width: 400px;">

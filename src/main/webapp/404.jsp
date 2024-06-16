@@ -97,7 +97,7 @@ main {
 			</section>
 		</div>
 	</main>
-	<div class="position-absolute bottom-0 start-50 translate-middle-x">
+	<div class="">
 		<%@ include file="footer.jsp"%>
 	</div>
 

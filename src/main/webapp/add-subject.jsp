@@ -1,6 +1,14 @@
 <%@ include file="existingSession.jsp" %>
 <%@ include file="commonResources.jsp" %>
 
+
+<%
+													
+	AdminService adminService = (AdminService) request.getServletContext().getAttribute("adminService");
+	// Fetch limited access status using the service method
+	boolean isLimitedAccess = adminService.isLimitedAccessByEmail(username);
+%>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -22,11 +30,12 @@
 		<section class="py-3 text-center">
 			<div class="loginWidth">
 				<div class="container-sm">
-					<h1 class="display-6">Add Subject</h1>
+				<h1 class="display-6">QuizConnect</h1>
+					<h1 class="fw-light h3 mt-2">Add Subject</h1>
 					<div class="animate__animated animate__shakeX">
 					<span id="message">${message}</span>
 					</div>
-					<p class="lead">Please enter the details for the new subject.</p>
+<!-- 					<p class="lead">Please enter the details for the new subject.</p> -->
 					<form name='form' action='addsubject' method='POST'>
 						<div class="mb-3">
 							<label for="subjectName" class="form-label">Subject Name</label>
@@ -36,7 +45,20 @@
 								
 						</div>
 						<div class = "marginBottom">
+						<% 
+                                                    if (!isLimitedAccess) { 
+                                                    %>
 						<button type="submit" class="btn btn-primary">Add Subject</button>
+						   <% 
+                                                    } 
+                                                    %>
+                                                    	<% 
+                                                    if (isLimitedAccess) { 
+                                                    %>
+						<button class="btn btn-primary" disabled>Cannot Add Subject</button>
+						   <% 
+                                                    } 
+                                                    %>
 						</div>
 					</form>
 				</div>

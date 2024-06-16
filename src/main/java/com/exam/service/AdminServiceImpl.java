@@ -57,5 +57,13 @@ public class AdminServiceImpl implements AdminService {
 		return adminRepository.getAdminsByDepartment(department);
 	}
 
-
+	@Override
+	public boolean updateAdminById(int id, AdminModel admin) {
+		// TODO Auto-generated method stub
+		return adminRepository.updateAdminById(id, admin);
+	}
+	
+	 public boolean isLimitedAccessByEmail(String email) {
+		 return adminRepository.isLimitedAccessByEmail(email);
+	 }
 }

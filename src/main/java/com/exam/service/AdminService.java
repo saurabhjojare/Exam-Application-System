@@ -12,4 +12,6 @@ public interface AdminService {
 	public boolean isDeleteAdminById(int id);
 	List<AdminModel> getAdminsByDepartment(String department);
 	public List<String> getAdminDepartments();
+	boolean updateAdminById(int id, AdminModel admin); 
+	public boolean isLimitedAccessByEmail(String email);
 }

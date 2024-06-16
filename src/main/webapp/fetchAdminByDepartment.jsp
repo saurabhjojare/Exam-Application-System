@@ -4,13 +4,17 @@
 <%@ page import="com.exam.model.AdminModel" %>
 <%@ page import="com.exam.repository.AdminRepository" %>
 <%@ page import="com.exam.repository.AdminRepositoryImpl" %>
+<%@ include file="existingSession.jsp"%>
 
 <%
     String department = request.getParameter("courseId");
+	
 
     if (department != null && !department.isEmpty()) {
-        AdminRepository adminRepository = new AdminRepositoryImpl();
-        AdminService adminService = new AdminServiceImpl(adminRepository);
+    	AdminRepository adminRepository = new AdminRepositoryImpl();
+    	AdminService adminService = new AdminServiceImpl(adminRepository);
+    	boolean isLimitedAccess = adminService.isLimitedAccessByEmail(username);
+     
         List<AdminModel> adminList = adminService.getAdminsByDepartment(department);
 
         if (adminList != null && !adminList.isEmpty()) {
@@ -48,6 +52,13 @@
                         <td class="key" style="padding-left: 15px">Department</td>
                         <td class="value" style="padding-right: 15px"><%= admin.getDepartment() %></td>
                     </tr>
+                     <tr>
+                        <td class="key" style="padding-left: 15px">Permission</td>
+                        <td class="value" style="padding-right: 15px"><%= admin.getPermissions() %></td>
+                    </tr>
+                    <% 
+                                                    if (!isLimitedAccess) { 
+                    %>
                     <tr>
                         <td class="key" style="padding-left: 15px">Edit</td>
                         <td>
@@ -55,6 +66,9 @@
                             <a href='deleteAdmin?id=<%= admin.getId() %>' class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
+                    	   <% 
+                              } 
+                             %>
                     <tr class="empty-row" style="border:0px solid #fff;">
                         <td colspan="2"></td>
                     </tr>

@@ -38,7 +38,7 @@
 						<div class="mb-3">
 							<label for="contact" class="form-label">Contact Number</label> <input
 								type="tel" class="form-control" id="contact" name="contact"
-								placeholder="Enter your contact number" autocomplete="off" required>
+								placeholder="Enter your contact number" autocomplete="off" value="+91" required>
 								<span class = "text-muted" id="contactWarningMsg"></span>
 
 						</div>

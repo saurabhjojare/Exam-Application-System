@@ -29,7 +29,7 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 		<!-- Main Content Area -->
 		<div class="flex-grow-1 view-padding text-center display-6" style = "height:100vh; overflow:auto;">
 			<div class = "mt-3 mb-4">
-			<span class="display-6">Exam Application System </span>
+			<span class="display-6">QuizConnect</span>
 			<p class="lead text-center mt-3">Welcome, Administrator</p>
 			
 			</div>
@@ -84,7 +84,7 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 				%>
 				<div class="marginBottom">
 					<button type="button" class="btn btn-primary mt-3 marginBottom"
-						onclick="location.href='update-admin-details.jsp'" disabled>Update
+						onclick="location.href='update-admin.jsp'">Update
 						Details</button>
 				</div>
 			</div>

@@ -1,6 +1,13 @@
 <%@ include file="existingSession.jsp"%>
 <%@ include file="commonResources.jsp"%>
 
+<%
+													
+	AdminService adminService = (AdminService) request.getServletContext().getAttribute("adminService");
+	// Fetch limited access status using the service method
+	boolean isLimitedAccess = adminService.isLimitedAccessByEmail(username);
+%>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,7 +27,9 @@
 		<!-- Main Content Area -->
 		<div class="flex-grow-1 view-padding text-center">
 			<div class="marginBottom">
-				<h1 class="display-6 mt-2">Exam Details</h1>
+				<h1 class="display-6 mt-3">QuizConnect</h1>
+			
+				<h1 class="fw-light h3 mt-2">Exam Details</h1>
 
 				<div class="d-flex justify-content-center mb-3">
 					<div class="input-group" style="width: 400px;">
@@ -64,6 +73,9 @@
 							<td class="key" style="padding-left: 15px">Passing Marks</td>
 							<td class="value" style="padding-right: 15px"><%=exam.getPassingMarks()%></td>
 						</tr>
+						<% 
+                                                    if (!isLimitedAccess) { 
+                                                    %>
 						<tr>
 							<td class="key" style="padding-left: 15px">Edit</td>
 							<td>
@@ -71,6 +83,9 @@
 								href='deleteExam?id=<%=exam.getId()%>' class="btn btn-danger">Delete</a>
 							</td>
 						</tr>
+						   <% 
+                               } 
+                               %>
 						<tr class="empty-row" style="border: 0px solid #fff;">
 							<td colspan="2"></td>
 						</tr>

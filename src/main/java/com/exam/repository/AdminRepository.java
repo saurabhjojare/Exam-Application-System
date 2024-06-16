@@ -19,4 +19,10 @@ public interface AdminRepository {
 	public List<String> getAdminDepartments();
 	
     List<AdminModel> getAdminsByDepartment(String department);
+    
+    boolean updateAdminById(int id, AdminModel admin); 
+    
+    boolean isLimitedAccessByEmail(String email);
+
+
 }

@@ -1,8 +1,15 @@
-<%@ page import="com.exam.service.StudentService, com.exam.service.StudentServiceImpl" %>
+<%@ page import="com.exam.service.*" %>
 <%@ page import="com.exam.model.StudentModel" %>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="existingSession.jsp"%>
+<%
+													
+	AdminService adminService = (AdminService) request.getServletContext().getAttribute("adminService");
+	// Fetch limited access status using the service method
+	boolean isLimitedAccess = adminService.isLimitedAccessByEmail(username);
+%>
 	<%
     // Fetch unselected students using the service layer
     StudentService studentService = new StudentServiceImpl();
@@ -37,12 +44,19 @@
                 <td class="key" style="padding-left: 15px">Username</td>
                 <td class="value" style="padding-right: 15px"><%= student[4] %></td>
             </tr>
+            <% 
+                                                    if (!isLimitedAccess) { 
+                                                    %>
             <tr>
                 <td class="key" style="padding-left: 15px">Edit</td>
                 <td>
                     <button class="btn btn-primary" disabled>Update</button> <a
                     href='deleteStudent?id=<%=student[0]%>'><button class="btn btn-danger">Delete</button></a>
                 </td>
+                   <% 
+                                                    } 
+                                                    %>
+                                                    
                 <tr class="empty-row" style = "border:0px solid #fff;">
 				<td colspan="2"></td>
             </tr>

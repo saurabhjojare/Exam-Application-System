@@ -1,6 +1,13 @@
 <%@ page import="java.sql.*, java.util.*" %>
-<%@ page import="com.exam.service.ExamService"%>
-<%@ page import="com.exam.service.ExamServiceImpl"%>
+<%@ page import="com.exam.service.*"%>
+<%@ include file="existingSession.jsp"%>
+
+<%
+													
+	AdminService adminService = (AdminService) request.getServletContext().getAttribute("adminService");
+	// Fetch limited access status using the service method
+	boolean isLimitedAccess = adminService.isLimitedAccessByEmail(username);
+%>
 
 <%
     String courseId = request.getParameter("courseId");
@@ -46,16 +53,22 @@
 							<td class="value" style="padding-right: 15px"><%= row[3] %></td>
 							
 					</tr>
-					
+					<% 
+                                                    if (!isLimitedAccess) { 
+                                                    %>
 					<tr>
 							<td class="key" style="padding-left: 15px">Edit</td>
 							<td>
 								<button class="btn btn-primary" disabled>Update</button> <a
 								href='deleteSchedule?id=<%= row[5] %>' class="btn btn-danger">Delete</a>
 							</td>
+							<% 
+                                                    } 
+                                                    %>
 							<tr class="empty-row" style = "border:0px solid #fff;">
 							<td colspan="2"></td>
 					</tr>
+						   
 
                     <%
                      count++;

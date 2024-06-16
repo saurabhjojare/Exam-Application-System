@@ -5,8 +5,15 @@
 <%@ page import="java.util.Collections"%>
 <%@ page import="java.util.stream.Collectors"%>
 <%@ page import="java.util.Map"%>
-<%@ page import="com.exam.service.StudentService"%>
-<%@ page import="com.exam.service.StudentServiceImpl"%>
+<%@ page import="com.exam.service.*"%>
+<%@ include file="existingSession.jsp"%>
+
+<%
+													
+	AdminService adminService = (AdminService) request.getServletContext().getAttribute("adminService");
+	// Fetch limited access status using the service method
+	boolean isLimitedAccess = adminService.isLimitedAccessByEmail(username);
+%>
 
 <%
 int courseId = Integer.parseInt(request.getParameter("courseId"));
@@ -44,6 +51,9 @@ if (studentData.isEmpty()) {
                 <td class="key" style="padding-left: 15px">Username</td>
                 <td class="value" style="padding-right: 15px"><%=student[4]%></td>
             </tr>
+            <% 
+                                                    if (!isLimitedAccess) { 
+                                                    %>
             <tr>
                 <td class="key" style="padding-left: 15px">Edit</td>
                 <td>
@@ -51,6 +61,9 @@ if (studentData.isEmpty()) {
                     href='deleteStudent?id=<%=student[0]%>'><button class="btn btn-danger">Delete</button></a>
                 </td>
             </tr>
+              <% 
+                                                    } 
+                                                    %>
         </tbody>
     </table>
 <%

@@ -5,6 +5,8 @@
 AdminRepository adminRepository = new AdminRepositoryImpl();
 AdminService adminService = new AdminServiceImpl(adminRepository);
 
+boolean isLimitedAccess = adminService.isLimitedAccessByEmail(username);
+
 List<AdminModel> admins = Optional.ofNullable(adminService).map(service -> service.getAllAdmins())
         .orElse(Collections.emptyList());
 AdminModel admin = admins.isEmpty() ? null : admins.get(0);
@@ -27,7 +29,9 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
         </div>
         <!-- Main Content Area -->
         <div class="flex-grow-1 view-padding text-center marginBottom">
-            <h3 class="display-6 mt-2">Admin Details</h3>
+        					<h1 class="display-6 text-center mt-3">QuizConnect</h1>
+        
+            <h3 class="fw-light h3 mt-2">Admin Details</h3>
 
             <div class="d-flex justify-content-center mb-3">
                 <div class="input-group" style="width: 400px;">

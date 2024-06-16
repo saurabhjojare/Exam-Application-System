@@ -1,6 +1,13 @@
 <%@ include file="existingSession.jsp"%>
 <%@ include file="commonResources.jsp"%>
 
+<%
+													
+	AdminService adminService = (AdminService) request.getServletContext().getAttribute("adminService");
+	// Fetch limited access status using the service method
+	boolean isLimitedAccess = adminService.isLimitedAccessByEmail(username);
+%>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,7 +26,9 @@
 		<!-- Main Content Area -->
 		<div class="flex-grow-1 view-padding text-center">
 			<div class="marginBottom">
-				<h3 class="display-6 mt-2">Subject Details</h3>
+							<h1 class="display-6 mt-3">QuizConnect</h1>
+			
+				<h3 class="fw-light h3 mt-2">Subject Details</h3>
 
 				<div class="d-flex justify-content-center mb-3">
 					<div class="input-group" style="width: 400px;">
@@ -54,7 +63,9 @@
 							<td class="key" style="padding-left: 15px">Subject</td>
 							<td class="value" style="padding-right: 15px"><%=subjectName%></td>
 						</tr>
-
+<% 
+                                                    if (!isLimitedAccess) { 
+                                                    %>
 						<tr>
 							<td class="key" style="padding-left: 15px">Edit</td>
 							<td>
@@ -62,6 +73,9 @@
 								href='deleteSubject?id=<%=sid%>' class="btn btn-danger">Delete</a>
 							</td>
 						</tr>
+						   <% 
+                                                    } 
+                                                    %>
 						<%
 						if (count <= totalSubject) {
 						%>

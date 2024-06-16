@@ -1,5 +1,11 @@
 <%@ include file="existingSession.jsp"%>
 <%@ include file="commonResources.jsp"%>
+<%
+													
+	AdminService adminService = (AdminService) request.getServletContext().getAttribute("adminService");
+	// Fetch limited access status using the service method
+	boolean isLimitedAccess = adminService.isLimitedAccessByEmail(username);
+%>
 
 <!doctype html>
 <html lang="en">
@@ -22,11 +28,12 @@
 				<section class="py-3 text-center">
 					<div class="loginWidth">
 						<div class="container-sm">
-							<h1 class="display-6">New Exam</h1>
+							<h1 class="display-6">QuizConnect</h1>
+							<h1 class="fw-light h3">Add Exam</h1>
 							<div class="animate__animated animate__shakeX">
 								<span id="message">${message}</span>
 							</div>
-							<p class="lead">Enter details for the new exam.</p>
+<!-- 							<p class="lead">Enter details for the new exam.</p> -->
 							<form name='form' action='addexam' method='POST' id="newExamForm">
 								<div class="mb-3">
 									<label for="examName" class="form-label">Exam Name</label> 
@@ -47,7 +54,20 @@
 									<div class="text-start fw-light" id="PassingWarningMsg"></div>
 								</div>
 								<div class="marginBottom">
+								<% 
+                                                    if (!isLimitedAccess) { 
+                                 %>
 									<button type="submit" class="btn btn-primary">Create Exam</button>
+									   <% 
+                                       } 
+                                       %>
+                                       <% 
+                                                    if (isLimitedAccess) { 
+                                 %>
+									<button class="btn btn-primary" disabled>Cannot Create Exam</button>
+									   <% 
+                                       } 
+                                       %>
 								</div>
 							</form>
 						</div>

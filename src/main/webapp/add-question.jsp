@@ -1,6 +1,13 @@
 <%@ include file="existingSession.jsp"%>
 <%@ include file="commonResources.jsp"%>
 
+<%
+													
+	AdminService adminService = (AdminService) request.getServletContext().getAttribute("adminService");
+	// Fetch limited access status using the service method
+	boolean isLimitedAccess = adminService.isLimitedAccessByEmail(username);
+%>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,12 +32,14 @@
 					<div class="loginWidth">
 
 						<div class="container-sm">
-							<h1 class="display-6">Add Question</h1>
+							<h1 class="display-6">QuizConnect</h1>
+						
+							<h1 class="fw-light h3 mt-2">Add Question</h1>
 							<div class="animate__animated animate__shakeX">
 							<span id="message">${message}</span>
 							</div>
-							<p class="lead">Please enter the details for the new
-								question.</p>
+<!-- 							<p class="lead">Please enter the details for the new -->
+<!-- 								question.</p> -->
 							<form name='form' action='addquestion' method='POST'>
 
 								<div class="step active" id="step1">
@@ -93,13 +102,13 @@
 										<label for="subjectName" class="form-label">Subject
 											Name</label> <select id="subjectName" class="form-control"
 											name="subjectName">
-											<option value="" required>Select Subject</option>
+											<option value="" selected disabled>Select Subject</option>
 											<%
 											SubjectService sv = new SubjectServiceImpl();
 											List<String> subjects = sv.getAllSubjects();
 											if (subjects != null && !subjects.isEmpty()) {
 												for (String subject : subjects) {
-													out.println("<option value=\"" + subject + "\">" + subject + "</option>");
+													out.println("<option value=\"" + subject + "\" required>" + subject + "</option>");
 												}
 											} else {
 												out.println("<option value=\"\">No subjects found</option>");
@@ -108,8 +117,22 @@
 										</select>
 									</div>
 									<div class="marginBottom">
+									<% 
+                                                    if (!isLimitedAccess) { 
+                                                    %>
 										<button id="submitButton" type="submit"
 											class="btn btn-primary">Add Question</button>
+											  <% 
+                                                    } 
+                                                    %>
+                                                    <% 
+                                                    if (isLimitedAccess) { 
+                                                    %>
+										<button id="submitButton"
+											class="btn btn-primary" disabled>Cannot Add Question</button>
+											  <% 
+                                                    } 
+                                                    %>
 										<!-- Button for importing bulk questions -->
 										<input type="file" id="fileInput" accept=".csv"
 											style="display: none;">

@@ -1,6 +1,13 @@
 <%@ include file="existingSession.jsp" %>
 <%@ include file="commonResources.jsp" %>
 
+<%
+													
+	AdminService adminService = (AdminService) request.getServletContext().getAttribute("adminService");
+	// Fetch limited access status using the service method
+	boolean isLimitedAccess = adminService.isLimitedAccessByEmail(username);
+%>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -46,11 +53,13 @@
 		<section class="py-3 text-center">
 			<div class="loginWidth marginBottom">
 				<div class="container-sm">
-					<h1 class="display-6">Create Exam Schedule</h1>
+					<h1 class="display-6">QuizConnect</h1>
+				
+					<h1 class="fw-light h3 mt-2">Create Schedule</h1>
 					<div class="animate__animated animate__shakeX">
 					<span id="message">${message}</span>
 					</div>
-					<p class="lead">Schedule a new exam.</p>
+<!-- 					<p class="lead">Schedule a new schedule.</p> -->
 					<form name='form' action='addschedule' method='POST' id="examScheduleForm" onsubmit="return validateForm()">
 						<div class="step active" id="step1">
 						<div class="mb-3">
@@ -107,9 +116,22 @@
 						</div>
 						<div class = "marginBottom">
 						          <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
-						
+						<% 
+                                                    if (!isLimitedAccess) { 
+                                                    %>
 						<button type="submit" class="btn btn-primary">Create
 							Schedule</button>
+							   <% 
+                                                    } 
+                                                    %>
+                         <% 
+                                                    if (isLimitedAccess) { 
+                                                    %>
+						<button class="btn btn-primary" disabled>Cannot Create
+							Schedule</button>
+							   <% 
+                                                    } 
+                                                    %>
 							</div>
 							</div>
 					</form>
