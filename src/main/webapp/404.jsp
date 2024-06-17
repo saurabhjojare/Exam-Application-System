@@ -91,7 +91,9 @@ main {
 					<p class="lead">Sorry, the page you are looking for does not
 						exist.</p>
 					<p>
-						Go back to <a href="index.jsp" class="text-decoration-none">home</a>.
+						Go back to <a href="/Exam-Application-System/index.jsp" class="text-decoration-none">home</a>.
+<!-- 				    Go back to <a href="https://bytebridgegroup.tech/home.jsp" class="text-decoration-none">home</a>. -->
+						
 					</p>
 				</div>
 			</section>
