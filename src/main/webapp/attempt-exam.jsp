@@ -20,7 +20,7 @@ if (NoExamMessage != null) {
 <link rel="stylesheet" type="text/css" href="css/nextStep.css">
 <link rel="stylesheet" type="text/css" href="css/customColor.css">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 	<div id="toast-container"></div>
 
@@ -28,7 +28,7 @@ if (NoExamMessage != null) {
 
 	<!-- Body -->
 
-	<main>
+	<main class = "d-flex flex-grow-1 align-items-center justify-content-center">
 		<section class="mt-4 text-center">
 			<div class="container-sm">
 

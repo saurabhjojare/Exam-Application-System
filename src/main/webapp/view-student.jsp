@@ -40,7 +40,7 @@ List<String[]> results = examService.getAllResults();
 			<div class="d-flex justify-content-center mb-3">
 				<div class="input-group" style="width: 400px;">
 					<input type="text" class="form-control" id="searchInput"
-						placeholder="Search Result" aria-label="Search result"
+						placeholder="Search Student" aria-label="Search result"
 						aria-describedby="button-addon2"
 						onkeyup="searchByName(this.value)" disabled>
 					<!-- <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button> -->

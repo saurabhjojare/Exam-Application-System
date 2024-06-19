@@ -20,7 +20,7 @@
         if (adminList != null && !adminList.isEmpty()) {
             int count = 1;
 %>      
-            <table class="table table-bordered">
+            <table class="table table-bordered table-rounded">
                 <thead>
                     <!-- Assuming your table has headers -->
                 </thead>

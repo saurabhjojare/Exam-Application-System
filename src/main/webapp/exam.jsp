@@ -63,13 +63,13 @@ function showQuestion(index) {
 
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 <div id="divSpan">
     <span> <%@ include file="navbar.jsp"%> </span>
 </div>
 <span class="text-center pt-3 lead" style="font-size:19px;">Time Left: <span id="timeLeft"></span></span>
-<main>
+<main class = "d-flex flex-grow-1 align-items-center justify-content-center">
     <section class="container-sm py-3" id="examWidth">
         <span id="correctAnswerSpan" style="display: none;"></span>
         <span id="correctCount" style="display: none;"></span>

@@ -19,16 +19,16 @@ public class DBConfig {
         config.setJdbcUrl("jdbc:mysql://localhost:3306/ExamApplicationSystem");
         config.setUsername("root");
         config.setPassword("root");
-        // config.setJdbcUrl("jdbc:mysql://localhost:3306/smprowor_examapplicationsystem");
-        // config.setUsername("smprowor_saurabh");
-        // config.setPassword("ViT^O5=yk?.B");
+         //config.setJdbcUrl("jdbc:mysql://localhost:3306/smprowor_examapplicationsystem");
+         //config.setUsername("smprowor_saurabh");
+         //config.setPassword("ViT^O5=yk?.B");
         config.setDriverClassName("com.mysql.cj.jdbc.Driver");
         config.setMaximumPoolSize(250);
         config.setMinimumIdle(25);
         config.setConnectionTimeout(30000); // 30 seconds
         config.setIdleTimeout(600000);      // 10 minutes
         config.setMaxLifetime(1800000);     // 30 minutes
-        config.setLeakDetectionThreshold(60000); // 2 seconds
+        config.setLeakDetectionThreshold(60000); // 60 seconds
 
         dataSource = new HikariDataSource(config);
     }

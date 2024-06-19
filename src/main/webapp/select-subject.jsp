@@ -23,10 +23,10 @@ if (message != null && message.equals("<span class=\"text-success\">Subject Assi
 <link rel="stylesheet" type="text/css" href="css/selectSubject.css">
 <link rel="stylesheet" type="text/css" href="css/customColor.css">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 	<%@ include file="navbar.jsp"%>
-	<main>
+	<main class = "d-flex flex-grow-1 align-items-center justify-content-center">
 		<section class="py-5">
 			<div class="loginWidth">
 				<div class="container-sm">

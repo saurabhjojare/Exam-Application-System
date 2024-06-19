@@ -28,16 +28,16 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 		</div>
 		<!-- Main Content Area -->
 		<div class="flex-grow-1 view-padding text-center display-6" style = "height:100vh; overflow:auto;">
-			<div class = "mt-3 mb-4">
+			<div class = "mt-3 mb-3">
 			<span class="display-6">QuizConnect</span>
-			<p class="lead text-center mt-3">Welcome, Administrator</p>
-			
+			<p class="lead text-center mt-2">Welcome, Administrator</p>
+			<h3 class="fw-light h3">Admin Details</h3>
 			</div>
-			<div class="text-start">
+			
+			<div class="justify-content-center align-items-center" style = "display: inline-block; text-align: justify;">
 
 
-				<p class="h3 lead" style="font-size: 22px; font-weight: normal;">Admin
-					Details</p>
+				
 				<!-- 				<a href="admininfo" id="myLink" style ="font-size:25px; text-decoration: none;">View Admin Details</a><br> -->
 
 

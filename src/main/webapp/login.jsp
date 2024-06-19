@@ -9,16 +9,15 @@
 <link rel="stylesheet" type="text/css" href="css/login.css">
 <link rel="stylesheet" type="text/css" href="css/customColor.css">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 	<%
 	request.setAttribute("showNavbarBrand", true);
 	%>
 	<%@ include file="navbar.jsp"%>
 
-	<!-- Body -->
-	<main>
-		<section class="py-5 text-center">
+	<main class = "d-flex flex-grow-1 align-items-center justify-content-center">
+		<section class="py-5 align-items-center text-center">
 			<div class="loginWidth">
 				<div class="container-sm">
 					<h1 class="display-4">Login</h1>
@@ -33,7 +32,7 @@
 						<div class="mb-3">
 							<label for="username" class="form-label">Username</label> <input
 								type="text" name="username" class="form-control" id="username"
-								placeholder="Enter your username" autocomplete="off">
+								placeholder="Enter your username" autocomplete="off" required>
 						</div>
 						
 						<div class="mb-3">
@@ -41,7 +40,7 @@
 							<div class="input-group">
 								<input type="password" name="password" class="form-control"
 									id="password" placeholder="Enter your password"
-									autocomplete="off">
+									autocomplete="off" required>
 								<button class="btn btn-outline-secondary" type="button"
 									id="togglePassword">
 									<i class="bi bi-eye-slash"></i>

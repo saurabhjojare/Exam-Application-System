@@ -18,11 +18,10 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
 <link rel="stylesheet" type="text/css" href="css/customColor.css">
 <style>
 @media (min-width: 1200px) { 
-.formWidth {
-    width: 45%;
-} 
+    .formWidth {
+        width: 50%;
+    } 
 }
-
 </style>
 </head>
 <body>
@@ -36,36 +35,37 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
     <div class="flex-grow-1 view-padding text-center display-6" style="height: 100vh; overflow: auto;">
         <div class="mt-3 mb-4">
             <span class="display-6">QuizConnect</span>
-            <p class="lead text-center mt-3">Welcome, Administrator</p>
+            <p class="lead text-center mt-2">Welcome, Administrator</p>
+             <h3 class="fw-light h3">Update Details</h3>
         </div>
-        <div class="text-start">
-            <p class="h3 lead" style="font-size: 22px; font-weight: normal;">Update Details</p>
+        <div class="d-flex justify-content-center align-items-center">
             <div class="formWidth">
-                <form name='form' action='updateAdmin' method='Post' onsubmit="return validateForm()">
+               
+                <form name='form' action='updateAdmin' method='Post' onsubmit="return validateForm()" style = "width:80%; margin:0px auto">
                     <%
                     if (admin != null) {
                     %>
                     <input type="hidden" name="stid" value="<%= admin.getId() %>">
                     <div class="mb-3">
-                        <label for="name" class="form-label lead">Name</label>
+                        <label for="name" class="form-label lead" style = "float: inline-start;">Name</label>
                         <input type="text" name="name" class="form-control" id="fullName"
                                placeholder="Enter your name" value="<%= admin.getfullName() %>" autocomplete="off">
                         <span class="fw-light h6" id="fullNameWarningMsg"></span>
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label lead">Email</label>
+                        <label for="email" class="form-label lead" style = "float: inline-start;">Email</label>
                         <input type="text" name="email" class="form-control" id="email"
                                placeholder="Enter your email" value="<%= admin.getEmail() %>" autocomplete="off">
-                        <span class="fw-light h6fw-light h6" id="emailWarningMsg"></span>
+                        <span class="fw-light h6" id="emailWarningMsg"></span>
                     </div>
                     <div class="mb-3">
-                        <label for="contact" class="form-label lead">Contact</label>
+                        <label for="contact" class="form-label lead" style = "float: inline-start;">Contact</label>
                         <input type="text" name="contact" class="form-control" id="contact"
                                placeholder="Enter your contact" value="<%= admin.getContact() %>" autocomplete="off">
                         <span class="fw-light h6" id="contactWarningMsg"></span>
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label lead">Password</label>
+                        <label for="password" class="form-label lead" style = "float: inline-start;">Password</label>
                         <div class="input-group">
                             <input type="password" name="password" class="form-control"
                                    id="signupPassword" placeholder="Enter new password" autocomplete="off">

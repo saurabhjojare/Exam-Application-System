@@ -10,14 +10,14 @@
 <link rel="stylesheet" type="text/css" href="css/customColor.css">
 
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 	<%
 	request.setAttribute("showNavbarBrand", true);
 	%>
 	<%@ include file="navbar.jsp"%>
 
 	<!-- Body -->
-	<main>
+	<main class = "d-flex flex-grow-1 align-items-center justify-content-center">
 		<section class="py-4">
 			<div class="loginWidth">
 				<div class="container-sm">

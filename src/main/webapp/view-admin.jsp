@@ -36,7 +36,7 @@ AdminModel admin = admins.isEmpty() ? null : admins.get(0);
             <div class="d-flex justify-content-center mb-3">
                 <div class="input-group" style="width: 400px;">
                     <input type="text" class="form-control" id="searchInput"
-                        placeholder="Search Result" aria-label="Search result"
+                        placeholder="Search Admin" aria-label="Search result"
                         aria-describedby="button-addon2"
                         onkeyup="searchByName(this.value)" disabled>
                 </div>

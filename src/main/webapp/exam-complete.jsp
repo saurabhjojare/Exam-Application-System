@@ -44,20 +44,20 @@ String result = totalScore >= 60 ? "Pass" : "Fail";
 <link rel="stylesheet" type="text/css" href="css/result.css">
 <link rel="stylesheet" type="text/css" href="css/customColor.css">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 	<%@ include file="navbar.jsp"%>
 
 	<!-- Body -->
-	<main class="result-content mt-2">
-		<section class="container-sm py-5 text-center mt-5">
+	<main class="result-content d-flex flex-grow-1 align-items-center justify-content-center">
+		<section class="container-sm text-center">
 		<span class ="h3 fw-light">
 				Hi,
 				<%=username%>
 			</span>
-			<h1 class = "fw-light mt-3">Your exam is complete</h1>
+			<h1 class = "fw-light">Your exam is complete</h1>
 			
-			<h5 class ="h5 fw-light mt-3">View your result <a href="result.jsp" class="text-decoration-none">here</a></h5>
+			<h5 class ="h5 fw-light">View your result <a href="result.jsp" class="text-decoration-none">here</a></h5>
 			<ul class="list-group">
 	
 			</ul>
