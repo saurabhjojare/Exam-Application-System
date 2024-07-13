@@ -32,5 +32,7 @@ public interface StudentService {
 	 public boolean isStudentExamRecordExists(String username, int schid);
 	 
 	 public List<Object[]> searchStudentInfoByNamePattern(String namePattern);
+	 
+	 public List<StudentModel> getAllSecreteUser();
 
 }

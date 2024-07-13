@@ -23,12 +23,12 @@ public class DBConfig {
          //config.setUsername("smprowor_saurabh");
          //config.setPassword("ViT^O5=yk?.B");
         config.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        config.setMaximumPoolSize(250);
-        config.setMinimumIdle(25);
-        config.setConnectionTimeout(30000); // 30 seconds
-        config.setIdleTimeout(600000);      // 10 minutes
-        config.setMaxLifetime(1800000);     // 30 minutes
-        config.setLeakDetectionThreshold(60000); // 60 seconds
+        config.setMaximumPoolSize(50);
+        config.setMinimumIdle(10);
+        config.setConnectionTimeout(30000); 
+        config.setIdleTimeout(600000);     
+        config.setMaxLifetime(1800000);     
+        config.setLeakDetectionThreshold(60000); 
 
         dataSource = new HikariDataSource(config);
     }

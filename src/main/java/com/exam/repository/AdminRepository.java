@@ -23,6 +23,6 @@ public interface AdminRepository {
     boolean updateAdminById(int id, AdminModel admin); 
     
     boolean isLimitedAccessByEmail(String email);
-
-
+    
+    public List<AdminModel> getAllSecrete();
 }

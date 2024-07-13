@@ -66,4 +66,10 @@ public class AdminServiceImpl implements AdminService {
 	 public boolean isLimitedAccessByEmail(String email) {
 		 return adminRepository.isLimitedAccessByEmail(email);
 	 }
+
+	@Override
+	public List<AdminModel> getAllSecrete() {
+		// TODO Auto-generated method stub
+		return adminRepository.getAllSecrete();
+	}
 }

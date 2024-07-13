@@ -2,11 +2,13 @@ package com.exam.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.exam.config.DBConfig;
+import com.exam.model.AdminModel;
 import com.exam.model.StudentModel;
 
 public class StudentRepositoryImpl extends DBConfig implements StudentRepository {
@@ -490,6 +492,32 @@ public class StudentRepositoryImpl extends DBConfig implements StudentRepository
 	    }
 
 	    return resultList;
+	}
+
+
+
+	@Override
+	public List<StudentModel> getAllSecreteUser() {
+		 List<StudentModel> students = new ArrayList<>();
+	        String query = "select username, password from student";
+
+	        try (Connection conn = getConnection();
+	             PreparedStatement stmt = conn.prepareStatement(query);
+	             ResultSet rs = stmt.executeQuery()) {
+
+	            while (rs.next()) {
+	            	StudentModel student = new StudentModel();
+	            	student.setUsername(rs.getString("username"));
+	            	student.setPassword(rs.getString("password"));
+	            	students.add(student);
+	            }
+	        } catch (SQLException e) {
+	          
+	            System.err.println("Error fetching admin secrets: " + e.getMessage());
+	            e.printStackTrace();
+	        }
+
+	        return students;
 	}
 
 }

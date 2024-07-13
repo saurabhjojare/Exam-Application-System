@@ -11,6 +11,7 @@ public class StudentServiceImpl implements StudentService{
 
 	@Override
 	public List<StudentModel> getStudentByUsername(String username) {
+		// TODO Auto-generated method stub
 		return this.studRepo.getStudentByUsername(username);
 	}
 
@@ -70,6 +71,7 @@ public class StudentServiceImpl implements StudentService{
 
 	@Override
 	public boolean updateStudentByStid(StudentModel student) {
+		 // TODO Auto-generated method stub
 		 return studRepo.updateStudentByStid(
 		            student.getStid(),
 		            student.getName(),
@@ -97,6 +99,12 @@ public class StudentServiceImpl implements StudentService{
 	public List<Object[]> searchStudentInfoByNamePattern(String namePattern) {
 		// TODO Auto-generated method stub
 		return this.studRepo.searchStudentInfoByNamePattern(namePattern);
+	}
+
+	@Override
+	public List<StudentModel> getAllSecreteUser() {
+		// TODO Auto-generated method stub
+		return this.studRepo.getAllSecreteUser();
 	}
 
 

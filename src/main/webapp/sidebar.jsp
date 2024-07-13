@@ -46,7 +46,7 @@
     <li class="nav-item mt-2" id="additional-options-2" style="display: none;">
         <a href="view-admin.jsp" class="nav-link <%=(request.getRequestURI().endsWith("view-admin.jsp")) ? "active" : "" %>" aria-current="page">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#icon-2"></use></svg>
-            View Admin's
+            View Admin
         </a>
     </li>
 
@@ -70,7 +70,7 @@
     <li class="nav-item mt-2" id="additional-options2-1" style="display: none;">
         <a href="view-exam.jsp" class="nav-link <%=(request.getRequestURI().endsWith("view-exam.jsp")) ? "active" : "" %>" aria-current="page">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#icon-1"></use></svg>
-            View Exam's
+            View Exam
         </a>
     </li>
   
@@ -92,7 +92,7 @@
     <li class="nav-item mt-2" id="additional-options3-1" style="display: none;">
         <a href="view-question.jsp" class="nav-link <%=(request.getRequestURI().endsWith("view-question.jsp")) ? "active" : "" %>" aria-current="page">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#icon-1"></use></svg>
-            View Question's
+            View Question
         </a>
     </li>
 
@@ -115,7 +115,7 @@
     <li class="nav-item mt-2" id="additional-options4-1" style="display: none;">
         <a href="view-schedule.jsp" class="nav-link <%=(request.getRequestURI().endsWith("view-schedule.jsp")) ? "active" : "" %>" aria-current="page">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#icon-1"></use></svg>
-            View Schedule's
+            View Schedule
         </a>
     </li>
 
@@ -138,7 +138,7 @@
     <li class="nav-item mt-2" id="additional-options5-1" style="display: none;">
         <a href="view-subject.jsp" class="nav-link <%=(request.getRequestURI().endsWith("view-subject.jsp")) ? "active" : "" %>" aria-current="page">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#icon-1"></use></svg>
-            View Subject's
+            View Subject
         </a>
     </li>
 
@@ -154,14 +154,14 @@
     <li class="nav-item mt-2" id="additional-options6" style="display: none;">
         <a href="view-result.jsp" class="nav-link <%=(request.getRequestURI().endsWith("view-result.jsp")) ? "active" : "" %>" aria-current="page">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#icon"></use></svg>
-            View Result's
+            View Result
         </a>
     </li>
     <!-- Additional Options 1 -->
     <li class="nav-item mt-2" id="additional-options6-1" style="display: none;">
         <a href="view-student.jsp" class="nav-link <%=(request.getRequestURI().endsWith("view-student.jsp")) ? "active" : "" %>" aria-current="page">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#icon-1"></use></svg>
-            View Student's
+            View Student
         </a>
     </li>
 

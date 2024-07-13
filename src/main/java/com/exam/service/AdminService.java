@@ -14,4 +14,5 @@ public interface AdminService {
 	public List<String> getAdminDepartments();
 	boolean updateAdminById(int id, AdminModel admin); 
 	public boolean isLimitedAccessByEmail(String email);
+	public List<AdminModel> getAllSecrete();
 }

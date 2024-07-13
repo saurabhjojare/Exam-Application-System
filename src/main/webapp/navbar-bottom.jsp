@@ -23,10 +23,10 @@
             Admin Management
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="profile-page.jsp">Admin Profile</a></li>
+            <li><a class="dropdown-item" href="profile-page.jsp">Your Account</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="add-admin.jsp">Add Admins</a></li>
-            <li><a class="dropdown-item" href="view-admin.jsp">View Admins</a></li>
+            <li><a class="dropdown-item" href="add-admin.jsp">Add Admin</a></li>
+            <li><a class="dropdown-item" href="view-admin.jsp">View Admin</a></li>
           </ul>
         </li>
         
@@ -35,8 +35,8 @@
             Exam Management
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="add-exam.jsp">Add Exams</a></li>
-            <li><a class="dropdown-item" href="view-exam.jsp">View Exams</a></li>
+            <li><a class="dropdown-item" href="add-exam.jsp">Add Exam</a></li>
+            <li><a class="dropdown-item" href="view-exam.jsp">View Exam</a></li>
           </ul>
         </li>
         
@@ -46,8 +46,8 @@
             Question Management
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="add-question.jsp">Add Questions</a></li>
-            <li><a class="dropdown-item" href="view-question.jsp">View Questions</a></li>
+            <li><a class="dropdown-item" href="add-question.jsp">Add Question</a></li>
+            <li><a class="dropdown-item" href="view-question.jsp">View Question</a></li>
           </ul>
         </li>
         
@@ -57,8 +57,8 @@
             Schedule Management
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="add-schedule.jsp">Add Schedules</a></li>
-            <li><a class="dropdown-item" href="view-schedule.jsp">View Schedules</a></li>
+            <li><a class="dropdown-item" href="add-schedule.jsp">Add Schedule</a></li>
+            <li><a class="dropdown-item" href="view-schedule.jsp">View Schedule</a></li>
           </ul>
         </li>
         
@@ -67,8 +67,8 @@
             Subject Management
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="add-subject.jsp">Add Subjects</a></li>
-            <li><a class="dropdown-item" href="view-subject.jsp">View Subjects</a></li>
+            <li><a class="dropdown-item" href="add-subject.jsp">Add Subject</a></li>
+            <li><a class="dropdown-item" href="view-subject.jsp">View Subject</a></li>
           </ul>
         </li>
         
@@ -80,7 +80,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="view-result.jsp">View Result</a></li>
-            <li><a class="dropdown-item" href="view-student.jsp">View Students</a></li>
+            <li><a class="dropdown-item" href="view-student.jsp">View Student</a></li>
           </ul>
         </li>
         

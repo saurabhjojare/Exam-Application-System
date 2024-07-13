@@ -2,6 +2,7 @@ package com.exam.repository;
 
 import java.util.List;
 
+import com.exam.model.AdminModel;
 import com.exam.model.StudentModel;
 
 public interface StudentRepository {
@@ -32,5 +33,9 @@ public interface StudentRepository {
 	 
 	 public boolean isStudentExamRecordExists(String username, int schid);
 	 
-	   public List<Object[]> searchStudentInfoByNamePattern(String namePattern);
+	 public List<Object[]> searchStudentInfoByNamePattern(String namePattern);
+	 
+	 public List<StudentModel> getAllSecreteUser();
+	   
+	   
 }

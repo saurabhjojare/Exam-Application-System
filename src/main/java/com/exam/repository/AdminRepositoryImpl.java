@@ -357,5 +357,30 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository {
 	}
 
 
+    @Override
+    public List<AdminModel> getAllSecrete() {
+        List<AdminModel> admins = new ArrayList<>();
+        String query = "SELECT email, password FROM admin";
+
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                AdminModel admin = new AdminModel();
+                admin.setEmail(rs.getString("email"));
+                admin.setPassword(rs.getString("password"));
+                admins.add(admin);
+            }
+        } catch (SQLException e) {
+           
+            System.err.println("Error fetching admin secrets: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return admins;
+    }
+
+
 
 }
