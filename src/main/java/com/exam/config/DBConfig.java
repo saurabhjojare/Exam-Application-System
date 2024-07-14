@@ -19,9 +19,9 @@ public class DBConfig {
         config.setJdbcUrl("jdbc:mysql://localhost:3306/ExamApplicationSystem");
         config.setUsername("root");
         config.setPassword("root");
-         //config.setJdbcUrl("jdbc:mysql://localhost:3306/smprowor_examapplicationsystem");
-         //config.setUsername("smprowor_saurabh");
-         //config.setPassword("ViT^O5=yk?.B");
+        // config.setJdbcUrl("jdbc:mysql://localhost:3306/smprowor_examapplicationsystem");
+        // config.setUsername("smprowor_saurabh");
+        // config.setPassword("ViT^O5=yk?.B");
         config.setDriverClassName("com.mysql.cj.jdbc.Driver");
         config.setMaximumPoolSize(50);
         config.setMinimumIdle(10);

@@ -1,12 +1,19 @@
 <%@ include file="userSession.jsp"%>
 <%@ include file="commonResources.jsp"%>
 
+<%@ page import="java.util.Collections" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 
 <%
 ExamService examService = new ExamServiceImpl();
 List<String[]> results = examService.getResult(username);
 int count = 1;
 int count2 = 1;
+
+// Reverse the results list
+List<String[]> resultsReversed = new ArrayList<>(results);
+Collections.reverse(resultsReversed);
 %>
 
 <!doctype html>
@@ -79,7 +86,6 @@ int count2 = 1;
 					<input type="text" id="searchInput2" class="form-control"
 						placeholder="Search Result" aria-label="Search result"
 						aria-describedby="button-addon2" onkeyup="searchStudents2()">
-					<!--         <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button> -->
 				</div>
 			</div>
 			<div class="table-container">
@@ -100,12 +106,11 @@ int count2 = 1;
 					</thead>
 					<tbody>
 						<%
-						if (results.isEmpty()) {
+						if (resultsReversed.isEmpty()) {
 						%>
 						<tr>
 							<td colspan="6" style="border: none;">
-								<div
-									style="display: flex; justify-content: center; align-items: center;">
+								<div style="display: flex; justify-content: center; align-items: center;">
 									No result found.</div>
 							</td>
 						</tr>
@@ -114,7 +119,7 @@ int count2 = 1;
 						} else {
 						%>
 						<%
-						for (String[] result : results) {
+						for (String[] result : resultsReversed) {
 							String status = result[3].equals("1.0") ? "Pass" : "Fail";
 						%>
 						<tr>
@@ -123,8 +128,7 @@ int count2 = 1;
 							<td><%=result[1]%></td>
 							<td><%=result[4]%></td>
 							<td><%=String.format("%.2f%%", Double.parseDouble(result[2].toString()))%></td>
-							<td
-								class="<%=(status.equals("Pass")) ? "text-success" : "text-danger"%>"><%=status%></td>
+							<td class="<%=(status.equals("Pass")) ? "text-success" : "text-danger"%>"><%=status%></td>
 						</tr>
 						<%
 						}
@@ -150,7 +154,6 @@ int count2 = 1;
 					<input type="text" id="searchInput" class="form-control"
 						placeholder="Search Result" aria-label="Search result"
 						aria-describedby="button-addon2" onkeyup="searchStudents()">
-					<!--         <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button> -->
 				</div>
 			</div>
 
@@ -158,16 +161,14 @@ int count2 = 1;
 			<div class="table-container">
 				<table id="resultsTable" class="table table-bordered">
 					<thead>
-						<!-- Table headers can be added here -->
 					</thead>
 					<tbody>
 						<%
-						if (results.isEmpty()) {
+						if (resultsReversed.isEmpty()) {
 						%>
 						<tr style="border-top: none; border-bottom: none;">
 							<td colspan="6" style="border: none;">
-								<div
-									style="display: flex; justify-content: center; align-items: center;">
+								<div style="display: flex; justify-content: center; align-items: center;">
 									No result found.
 								</div>
 							</td>
@@ -176,7 +177,7 @@ int count2 = 1;
 						} else {
 						%>
 						<%
-						for (String[] result : results) {
+						for (String[] result : resultsReversed) {
 							String status = result[3].equals("1.0") ? "Pass" : "Fail";
 						%>
 						<tr>
@@ -281,9 +282,5 @@ int count2 = 1;
 			xhr.send();
 		}
 	</script>
-
-
-
-
 </body>
 </html>
