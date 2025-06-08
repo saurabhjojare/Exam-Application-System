@@ -1,34 +1,122 @@
-# Eclipse specific files
+# =========================
+# IDE-specific files
+# =========================
+
+# VS Code
+.vscode/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+
+# Eclipse
 .classpath
 .project
 .settings/
 .recommenders/
 .apt_generated/
 
-# Maven generated files
+# Atom
+.atom/
+*.atom
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# =========================
+# Maven/Gradle build output
+# =========================
+
+# Maven
 **/target/
 **/pom.xml.lock
 
-# Compiled class files
-**.class
+# Gradle
+.gradle/
+build/
+**/build/
 
-# Logs
-**/logs/*
+# =========================
+# Java & Web artifacts
+# =========================
 
-# Tomcat/Jetty tmp files
-**/work/*
-**/tomcat-work/*
+# Compiled Java classes
+*.class
 
-# Generated JSP files (if using JSP compiler)
+# JSP-generated Java files (e.g., Tomcat)
 **/jsp/*.java
 
-# Text editor backups
+# Servlet/JSP containers (Tomcat, Jetty)
+**/work/
+**/tomcat-work/
+**/logs/*
+**/temp/
+
+# Java server logs
+*.log
+
+# Application-specific
+db.properties
+*.war
+*.ear
+
+# =========================
+# Test and coverage
+# =========================
+
+# Test reports
+**/test-output/
+**/surefire-reports/
+**/coverage/
+**/jacoco.exec
+**/cobertura.ser
+
+# =========================
+# Editor/OS/Tools temp files
+# =========================
+
+# Backup and swap files
 *.bak
 *.swp
+*.swo
+*~
 
-# Database connection settings
-db.properties
+# macOS system files
+.DS_Store
 
-# Test coverage reports
-**/coverage/*
-/build/
+# Windows thumbnail/cache
+Thumbs.db
+ehthumbs.db
+
+# Linux/Unix system files
+*.pid
+
+# =========================
+# User-generated or temp
+# =========================
+
+# Ignore user secrets or personal config
+*.env
+.env.*
+*.local
+*.user
+
+# Ignore archive & compressed files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Ignore IntelliJ run configs (if not needed)
+*.run.xml
