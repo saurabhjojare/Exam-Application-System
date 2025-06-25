@@ -16,11 +16,11 @@ An advanced online exam application system designed to streamline the examinatio
 - View exam results to track performance and progress  
 
 ## Tech Stack
-- **Frontend**: HTML, CSS (Bootstrap), JavaScript
-- **Backend**: Java, Servlet
-- **Server-side Rendering**: Java JavaServer Pages
-- **Database**: MySQL
-- **Authentication**: HttpSession
+**Frontend**: HTML, CSS (Bootstrap), JavaScript  
+**Backend**: Java, Servlet  
+**Server-side Rendering**: Java JavaServer Pages  
+**Database**: MySQL  
+**Authentication**: HttpSession  
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
