@@ -5,18 +5,15 @@ An advanced online exam application system designed to streamline the examinatio
 
 ## Features
 
-### Admin Dashboard
-- **Add New Admin**: Administrators can easily add new administrators to manage the system.
-- **Schedule Exam**: Set up exam schedules with specific dates, times, and subjects.
-- **Add Questions**: Easily add questions to the question bank for upcoming exams.
-- **View Students**: Administrators can view student profiles and their performance subject-wise.
-- **View Results**: Access detailed subject-wise results of exams.
-
-### User Module
-- **View User Profile**: Users can view and update their profiles, ensuring accurate information.
-- **Attempt Exam by Given Schedule**: Users can participate in exams based on the scheduled timings.
-- **Select Subjects**: Choose subjects for exams based on their preferences.
-- **View Result**: Access exam results to gauge performance and progress.
+- Add new administrators to manage the system  
+- Schedule exams with specific dates, times, and subjects  
+- Add questions to the question bank for upcoming exams  
+- View student profiles and their subject-wise performance  
+- Access detailed subject-wise exam results  
+- View and update user profiles to ensure accurate information  
+- Participate in exams based on scheduled timings  
+- Choose preferred subjects for exams  
+- View exam results to track performance and progress  
 
 ## Technologies Used
 - **Frontend**: HTML, CSS (Bootstrap), JavaScript
