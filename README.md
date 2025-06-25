@@ -8,8 +8,8 @@ An advanced online exam application system designed to streamline the examinatio
 - **Add New Admin**: Administrators can easily add new administrators to manage the system.
 - **Schedule Exam**: Set up exam schedules with specific dates, times, and subjects.
 - **Add Questions**: Easily add questions to the question bank for upcoming exams.
-- **View Student Subjectwise**: Administrators can view student profiles and their performance subject-wise.
-- **View Result Subjectwise**: Access detailed subject-wise results of exams.
+- **View Students**: Administrators can view student profiles and their performance subject-wise.
+- **View Results**: Access detailed subject-wise results of exams.
 
 ### User Module
 - **View User Profile**: Users can view and update their profiles, ensuring accurate information.
