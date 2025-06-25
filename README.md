@@ -1,4 +1,4 @@
-# QuizConnect - Exam Application System
+# QuizConnect
 
 An advanced online exam application system designed to streamline the examination process for both administrators and users. With a robust admin dashboard and user module, the platform offers a seamless experience for managing exams, questions, user profiles, and results.
 
