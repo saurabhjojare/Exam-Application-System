@@ -15,7 +15,7 @@ An advanced online exam application system designed to streamline the examinatio
 - Choose preferred subjects for exams  
 - View exam results to track performance and progress  
 
-## Technologies Used
+## Tech Stack
 - **Frontend**: HTML, CSS (Bootstrap), JavaScript
 - **Backend**: Java, Servlet
 - **Server-side Rendering**: Java JavaServer Pages
